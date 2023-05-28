@@ -1,0 +1,2 @@
+export const SET_STORAGE_STATUS = 'SET_STORAGE_STATUS';
+export const SET_USER_THEMES = 'SET_USER_THEMES';
