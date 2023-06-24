@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"ניווט לדף הבית"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"ניווט למעלה"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"עוד אפשרויות"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"סיום"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"הצגת הכול"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"בחירת אפליקציה"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"כבוי"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"מופעל"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+‎"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"מחיקה"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"Enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"רווח"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"תפריט+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"חיפוש…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"מחיקת השאילתה"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"שאילתת חיפוש"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"חיפוש"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"שליחת שאילתה"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"חיפוש קולי"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"שיתוף עם"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"שיתוף עם <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"כיווץ"</string>
+    <string msgid="2523291102206661146" name="common_google_play_services_enable_button">הפעל</string>
+    <string msgid="227660514972886228" name="common_google_play_services_enable_text">‏האפליקציה %1$s לא תפעל אם לא תפעיל את שירותי Google Play.</string>
+    <string msgid="5122002158466380389" name="common_google_play_services_enable_title">‏הפעל את שירותי Google Play</string>
+    <string msgid="7153882981874058840" name="common_google_play_services_install_button">התקן</string>
+    <string name="common_google_play_services_install_text">‏האפליקציה %1$s לא תפעל ללא שירותי Google Play, שאינם מותקנים במכשיר.</string>
+    <string msgid="7215213145546190223" name="common_google_play_services_install_title">‏קבל את שירותי Google Play</string>
+    <string name="common_google_play_services_notification_channel_name">‏זמינות של שירותי Google Play</string>
+    <string name="common_google_play_services_notification_ticker">‏שגיאה בשירותי Google Play</string>
+    <string name="common_google_play_services_unknown_issue">‏%1$s נתקלה בבעיה בשירותי Google Play. נסה שוב.</string>
+    <string name="common_google_play_services_unsupported_text">‏%1$s לא תפעל ללא שירותי Google Play, שאינם נתמכים במכשיר שלך.</string>
+    <string msgid="6556509956452265614" name="common_google_play_services_update_button">עדכון</string>
+    <string msgid="9053896323427875356" name="common_google_play_services_update_text">‏%1$s לא יפעל אם לא תעדכן את שירותי Google Play.</string>
+    <string msgid="6006316683626838685" name="common_google_play_services_update_title">‏עדכון שירותי Google Play</string>
+    <string name="common_google_play_services_updating_text">‏האפליקציה %1$s לא תפעל ללא שירותי Google Play, שמתעדכנים כרגע.</string>
+    <string name="common_google_play_services_wear_update_text">‏דרושה גרסה חדשה של שירותי Google Play. הגרסה תתעדכן בעצמה תוך זמן קצר.</string>
+    <string name="common_open_on_phone">פתח בטלפון</string>
+    <string name="common_signin_button_text">כניסה</string>
+    <string name="common_signin_button_text_long">‏היכנס באמצעות Google</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"הקישור הועתק ללוח"</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"להעתקת הקישור"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"פתיחה בדפדפן"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"לשיתוף הקישור"</string>
+    <string msgid="4657191930956702614" name="lb_control_display_fast_forward_multiplier">"‎%1$dX‎‎"</string>
+    <string msgid="4597148235912710942" name="lb_control_display_rewind_multiplier">"‎%1$dX‎‎"</string>
+    <string msgid="893619591225519922" name="lb_guidedaction_continue_title">"המשך"</string>
+    <string msgid="3330958750346333890" name="lb_guidedaction_finish_title">"סיום"</string>
+    <string msgid="3228326776757666747" name="lb_media_player_error">"‏קוד שגיאה %1$d‏ של MediaPlayer ועוד %2$d"</string>
+    <string msgid="8084428500709675515" name="lb_navigation_menu_contentDescription">"תפריט ניווט"</string>
+    <string msgid="2394451791544864917" name="lb_onboarding_accessibility_next">"הבא"</string>
+    <string msgid="5549711907371161292" name="lb_onboarding_get_started">"קדימה, לעבודה"</string>
+    <string msgid="8691966842977635128" name="lb_playback_controls_closed_captioning_disable">"השבתת כתוביות"</string>
+    <string msgid="2346334170216706076" name="lb_playback_controls_closed_captioning_enable">"הפעלת כתוביות"</string>
+    <string msgid="740570111678243493" name="lb_playback_controls_fast_forward">"הרצה קדימה"</string>
+    <string msgid="5734614175721471329" name="lb_playback_controls_fast_forward_multiplier">"‏הרצה קדימה של %1$dX"</string>
+    <string msgid="5859666950961624736" name="lb_playback_controls_hidden">"‏פקדי המדיה מוסתרים. יש להקיש על ה-d-pad כדי להציג אותם"</string>
+    <string msgid="1209119371486219736" name="lb_playback_controls_high_quality_disable">"השבתת איכות גבוהה"</string>
+    <string msgid="3057698527166674705" name="lb_playback_controls_high_quality_enable">"הפעלת איכות גבוהה"</string>
+    <string msgid="8730341244454469032" name="lb_playback_controls_more_actions">"פעולות נוספות"</string>
+    <string msgid="917331776961802657" name="lb_playback_controls_pause">"השהיה"</string>
+    <string msgid="5770668162543767702" name="lb_playback_controls_picture_in_picture">"מעבר למצב תמונה בתוך תמונה"</string>
+    <string msgid="7088090604803481121" name="lb_playback_controls_play">"הפעלה"</string>
+    <string msgid="8429099206716245199" name="lb_playback_controls_repeat_all">"חזרה על הכל"</string>
+    <string msgid="1614290959784265209" name="lb_playback_controls_repeat_none">"אל תחזור על כלום"</string>
+    <string msgid="676658705837320560" name="lb_playback_controls_repeat_one">"חזרה על פריט אחד"</string>
+    <string msgid="2866333981131020771" name="lb_playback_controls_rewind">"הרצה אחורה"</string>
+    <string msgid="6038956370475252734" name="lb_playback_controls_rewind_multiplier">"‏הרצה אחורה של %1$dX"</string>
+    <string msgid="8690223891515602822" name="lb_playback_controls_shown">"פקדי המדיה מוצגים"</string>
+    <string msgid="6793109999253893369" name="lb_playback_controls_shuffle_disable">"השבתת ערבוב"</string>
+    <string msgid="5151681938752704485" name="lb_playback_controls_shuffle_enable">"הפעלת ערבוב"</string>
+    <string msgid="8117512422682146745" name="lb_playback_controls_skip_next">"דילוג אל הפריט הבא"</string>
+    <string msgid="3481218248309447059" name="lb_playback_controls_skip_previous">"דילוג אל הפריט הקודם"</string>
+    <string msgid="3544533410444618518" name="lb_playback_controls_thumb_down">"ביטול בחירה בסימון \'לא אהבתי\'"</string>
+    <string msgid="8475278766138652105" name="lb_playback_controls_thumb_down_outline">"בחירה בסימון \'לא אהבתי\'"</string>
+    <string msgid="3458671378107738666" name="lb_playback_controls_thumb_up">"ביטול בחירה בסימון \'אהבתי\'"</string>
+    <string msgid="1385865732502550659" name="lb_playback_controls_thumb_up_outline">"בחירה בסימון \'אהבתי\'"</string>
+    <string msgid="1471121602610716654" name="lb_playback_time_separator">"/"</string>
+    <string msgid="5700349211583074131" name="lb_search_bar_hint">"חיפוש"</string>
+    <string msgid="5926531297066387462" name="lb_search_bar_hint_speech">"יש לדבר בקול כדי לחפש"</string>
+    <string msgid="4826526877249029043" name="lb_search_bar_hint_with_title">"חיפוש של <ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g>"</string>
+    <string msgid="6032250334706920550" name="lb_search_bar_hint_with_title_speech">"יש לדבר כדי לחפש <ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g>"</string>
+    <string msgid="1301877238242752863" name="orb_search_action">"פעולת חיפוש"</string>
+    <string name="ply_cancel_survey_message">צר לנו לראות שאתה מבטל את המנוי שלך. אנא עזרו לנו לשפר את השירות שלנו על ידי מתן סיבות לביטול:</string>
+    <string name="ply_cancel_survey_reason_1">לדעתי המנוי יקר מדי</string>
+    <string name="ply_cancel_survey_reason_2">מצאתי אפליקציה יותר טובה</string>
+    <string name="ply_cancel_survey_reason_3">אני לא צריך יותר את השירות הזה</string>
+    <string name="ply_cancel_survey_reason_4">אני לא משתמש מספיק בשירות הזה</string>
+    <string name="ply_cancel_survey_reason_5">ההחלטה שלי קשורה לבעיות טכניות</string>
+    <string name="ply_cancel_survey_reason_6">אחר</string>
+    <string name="ply_cancel_survey_reason_7">אני לא מעוניין לענות</string>
+    <string name="ply_cancel_survey_title">מדוע ברצונך לבטל את המנוי שלך?</string>
+    <string name="ply_configuration_error">שגיאה בתצורה</string>
+    <string name="ply_in_app_absent_receipt">הקבלה לא נמצאה. שחזרו את הרכישות כדי לנסות שוב.</string>
+    <string name="ply_in_app_already_being_purchased_error">רכישה של מוצר זה כבר מתבצעת</string>
+    <string name="ply_in_app_already_being_restored_error">שחזור רכישה כבר בעיצומו</string>
+    <string name="ply_in_app_already_subscribed_error">אתה כבר לקוח של השירותים המקוונים שלנו!</string>
+    <string name="ply_in_app_client_invalid_error">אינך מורשה לבצע פעולה זו.</string>
+    <string name="ply_in_app_cloud_permission_error">סירבת להעניק גישה לשירות זה.</string>
+    <string name="ply_in_app_cloud_service_revoked_error">לא ביטלת את הגישה לשירות זה.</string>
+    <string name="ply_in_app_error_pending">התשלום שלך נמצא בתהליך. הרכישה שלך תאושר אוטומטית כאשר התשלום שלך בוצע.</string>
+    <string name="ply_in_app_login_button">כבר רשום? התחבר.</string>
+    <string name="ply_in_app_network_error">החיבור לרשת נכשל</string>
+    <string name="ply_in_app_no_product_found_error">לא מצליח למצוא את המוצר.</string>
+    <string name="ply_in_app_parsing_error">לא ניתן לטפל בתגובת השרת</string>
+    <string name="ply_in_app_partial_restore_partial_with_errors">הפריטים הבאים שוחזרו: %s השגיאות הבאות זוהו %s</string>
+    <string name="ply_in_app_payment_cancelled_error">בקשתכם בוטלה</string>
+    <string name="ply_in_app_payment_invalid_error">מזהה הרכישה לא תקין.</string>
+    <string name="ply_in_app_payment_not_allowed_error">לא ניתן לרכוש במכשיר זה.</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_many">%d ימים</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_one">יום 1</string>
+    <string name="ply_in_app_period_day_plural_rule_many">%d ימים</string>
+    <string name="ply_in_app_period_day_plural_rule_none">יום</string>
+    <string name="ply_in_app_period_day_plural_rule_one">יום</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_many">%d חודשים</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_one">חודש 1</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_six">%d חודשים</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_three">%d חודשים</string>
+    <string name="ply_in_app_period_month_plural_rule_many">%d חודשים</string>
+    <string name="ply_in_app_period_month_plural_rule_none">חודש</string>
+    <string name="ply_in_app_period_month_plural_rule_one">חודש</string>
+    <string name="ply_in_app_period_month_plural_rule_six">סמסטר</string>
+    <string name="ply_in_app_period_month_plural_rule_three">רבעון</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_many">%d שבועות</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_one">שבוע 1</string>
+    <string name="ply_in_app_period_week_plural_rule_many">%d שבועות</string>
+    <string name="ply_in_app_period_week_plural_rule_none">שבוע</string>
+    <string name="ply_in_app_period_week_plural_rule_one">שבוע</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_many">%d שנים</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_one">שנה 1</string>
+    <string name="ply_in_app_period_year_plural_rule_many">%d שנים</string>
+    <string name="ply_in_app_period_year_plural_rule_none">שנה</string>
+    <string name="ply_in_app_period_year_plural_rule_one">שנה</string>
+    <string name="ply_in_app_product_not_available_error">המוצר אינו זמין ב-App Store שלך</string>
+    <string name="ply_in_app_psd2_required">הרכישה שלך תהיה פעילה לאחר שהתשלום יאושר על ידי הבנק שלך. אם אתה נתקל בבעיות, שחזר את הרכישות שלך.</string>
+    <string name="ply_in_app_restore_button">שחזר את הרכישות שלך</string>
+    <string name="ply_in_app_restore_status_errors">השחזור נכשל בעקבות השגיאות הבאות:</string>
+    <string name="ply_in_app_restore_status_nothing">לא נמצאו רכישות</string>
+    <string name="ply_in_app_unknown_error">שגיאה לא ידועה</string>
+    <string name="ply_in_app_validation_failed">אישור קבלה אינו אפשרי.</string>
+    <string name="ply_in_app_validation_timed_out">אימות הרכישה שלך לוקח קצת יותר זמן מהרגיל. אנא חזור מאוחר יותר.</string>
+    <string name="ply_modal_alert_default_error_button">אישור</string>
+    <string name="ply_modal_alert_default_error_title">שגיאה</string>
+    <string name="ply_modal_alert_in_app_deferred_button">אישור</string>
+    <string name="ply_modal_alert_in_app_deferred_content">תודה!  עדיין לא ניתן היה להשלים את הרכישה שלך והיא דורשת אימות חיצוני.  לאחר השלמת האימות, תוכל ליהנות מהרכישה שלך.</string>
+    <string name="ply_modal_alert_in_app_deferred_title">מחכה לאישור</string>
+    <string name="ply_modal_alert_in_app_error_button">אישור</string>
+    <string name="ply_modal_alert_in_app_error_title">שגיאה</string>
+    <string name="ply_modal_alert_in_app_restoration_error_title">שגיאה</string>
+    <string name="ply_modal_alert_in_app_restore_status_success_content">הרכישות שוחזרו</string>
+    <string name="ply_modal_alert_in_app_success_button">יצאנו לדרך</string>
+    <string name="ply_modal_alert_in_app_success_content">הרכישה שלך אומתה בהצלחה.  עכשיו אפשר ליהנות.</string>
+    <string name="ply_modal_alert_in_app_success_title">מדהים!</string>
+    <string name="ply_modal_alert_in_app_success_unauthentified_content"> הרכישה שלך פעילה.  היכנס או הירשם כדי ליהנות מהמנוי שלך במכשירים אחרים!</string>
+    <string name="ply_modal_alert_in_app_successfull_restore_message_title">השחזור הושלם</string>
+    <string name="ply_modal_change_plan_different_store_cancel_button">בטל</string>
+    <string name="ply_modal_change_plan_different_store_content">כבר קיים מנוי עם %s.    בטל את המנוי שלך כדי למנוע מי חיוב כפול.    האם אתה רוצה להמשיך?</string>
+    <string name="ply_modal_change_plan_different_store_continue_button">המשך</string>
+    <string name="ply_modal_change_plan_different_store_title">אזהרה!</string>
+    <string name="ply_modal_downgrade_button">מובן תודה!</string>
+    <string name="ply_modal_downgrade_description">שינוי התוכנית שלך אומת ויהיה פעיל בתום תקופת המנוי הנוכחית בתאריך</string>
+    <string name="ply_modal_downgrade_title">מזל טוב</string>
+    <string name="ply_modal_huawei_not_logged_button">אישור</string>
+    <string name="ply_modal_huawei_not_logged_description">התחבר לחשבון Huawei שלך ב-Huawei App Gallery</string>
+    <string name="ply_modal_huawei_not_logged_title">חשבון Huawei לא נמצא</string>
+    <string name="ply_powered_by_purchasely">נתמך על ידי Purchasely</string>
+    <string name="ply_price_free">חינם</string>
+    <string name="ply_promo_code_button">קוד קופון?</string>
+    <string name="ply_subscription_cancel_pattern">תאריך תפוגה: %s</string>
+    <string name="ply_subscription_detail_group_title">המנוי שלכם</string>
+    <string name="ply_subscription_plans_group_title">אופציות</string>
+    <string name="ply_subscription_renew_pattern">מועד חיוב הבא: %s</string>
+    <string name="ply_subscription_title">שנה את המנוי שלך</string>
+    <string name="ply_subscription_unsubscribe_button">בטל את המנוי</string>
+    <string name="ply_subscription_unsubscribe_change_plan_not_available_google">מנוי זה לא נעשה מ-App Store.</string>
+    <string name="ply_subscriptions_active_group_title">פעיל</string>
+    <string name="ply_subscriptions_empty_message">כרגע אין לך מנוי פעיל</string>
+    <string name="ply_subscriptions_title">המנויים שלי</string>
+    <string name="ply_unsubscribe_amazon_button">אישור</string>
+    <string name="ply_unsubscribe_amazon_content">עבור אל amazon.com. בדוק אם אתה מחובר לחשבון הנכון. עבור לדף החשבון שלך. בחר את המנוי שברצונך לבטל. לאחר מכן בטל מנוי.</string>
+    <string name="ply_unsubscribe_amazon_title">בטל מנוי</string>
+    <string name="ply_unsubscribe_apple_button">אישור</string>
+    <string name="ply_unsubscribe_apple_content">פתח את ההגדרות.   הקש על השם שלך.   הקש על מינויים.   הקש על המנוי שברצונך לנהל.   הקש על בטל מנוי.</string>
+    <string name="ply_unsubscribe_apple_title">בטל מנוי</string>
+    <string name="ply_unsubscribe_google_button">אישור</string>
+    <string name="ply_unsubscribe_google_content">עבור אל play.google.com. בדוק אם אתה מחובר לחשבון Google הנכון. עבור אל המנויים שלך. בחר את המנוי שברצונך לבטל. לחץ על נהל ולאחר מכן על בטל מנוי.</string>
+    <string name="ply_unsubscribe_google_title">ביטול מנוי</string>
+    <string name="ply_untracked_event">האירוע לא טופל</string>
+    <string name="ply_webview_qr_or_url">סרוק את קוד ה-QR למעלה או בקר בכתובת:</string>
+    <string name="ply_webview_url">עבור אל ה-URL הבאה באמצעות הדפדפן שלך:</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"חיפוש"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>

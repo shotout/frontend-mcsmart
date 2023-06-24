@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Navigera hem"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Navigera uppåt"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Fler alternativ"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Klar"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Visa alla"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Välj en app"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"AV"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"PÅ"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt + "</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl + "</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"delete"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"retur"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Funktion + "</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta + "</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Skift + "</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"blanksteg"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Symbol + "</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Meny + "</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Sök …"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Ta bort frågan"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Sökfråga"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Sök"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Skicka fråga"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Röstsökning"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Dela med"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Dela med <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Komprimera"</string>
+    <string msgid="2523291102206661146" name="common_google_play_services_enable_button">Aktivera</string>
+    <string msgid="227660514972886228" name="common_google_play_services_enable_text">%1$s fungerar inte om du inte aktiverar Google Play-tjänster.</string>
+    <string msgid="5122002158466380389" name="common_google_play_services_enable_title">Aktivera Google Play-tjänster</string>
+    <string msgid="7153882981874058840" name="common_google_play_services_install_button">Installera</string>
+    <string name="common_google_play_services_install_text">%1$s kan inte köras utan Google Play-tjänsterna, som saknas på enheten.</string>
+    <string msgid="7215213145546190223" name="common_google_play_services_install_title">Hämta Google Play-tjänster</string>
+    <string name="common_google_play_services_notification_channel_name">Tillgänglighet för Google Plays tjänster</string>
+    <string name="common_google_play_services_notification_ticker">Fel på Google Play-tjänster</string>
+    <string name="common_google_play_services_unknown_issue">Det har uppstått ett fel mellan %1$s och Google Play-tjänsterna. Försök igen.</string>
+    <string name="common_google_play_services_unsupported_text">%1$s fungerar inte utan Google Play-tjänsterna, som inte stöds på enheten.</string>
+    <string msgid="6556509956452265614" name="common_google_play_services_update_button">Uppdatera</string>
+    <string msgid="9053896323427875356" name="common_google_play_services_update_text">%1$s kan inte köras om du inte uppdaterar Google Play-tjänsterna.</string>
+    <string msgid="6006316683626838685" name="common_google_play_services_update_title">Uppdatera Google Play-tjänster</string>
+    <string name="common_google_play_services_updating_text">%1$s kan inte köras utan Google Play-tjänster, och dessa uppdateras för närvarande.</string>
+    <string name="common_google_play_services_wear_update_text">En ny version av Google Play-tjänster krävs. Den uppdateras automatiskt inom kort.</string>
+    <string name="common_open_on_phone">Öppna på mobilen</string>
+    <string name="common_signin_button_text">Logga in</string>
+    <string name="common_signin_button_text_long">Logga in med Google</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"Länk kopierad till Urklipp"</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Kopiera länk"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Öppna i webbläsaren"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Dela länk"</string>
+    <string msgid="4657191930956702614" name="lb_control_display_fast_forward_multiplier">"%1$dX"</string>
+    <string msgid="4597148235912710942" name="lb_control_display_rewind_multiplier">"%1$dX"</string>
+    <string msgid="893619591225519922" name="lb_guidedaction_continue_title">"Fortsätt"</string>
+    <string msgid="3330958750346333890" name="lb_guidedaction_finish_title">"Slutför"</string>
+    <string msgid="3228326776757666747" name="lb_media_player_error">"Felkod %1$d för MediaPlayer, extra %2$d"</string>
+    <string msgid="8084428500709675515" name="lb_navigation_menu_contentDescription">"Navigeringsmeny"</string>
+    <string msgid="2394451791544864917" name="lb_onboarding_accessibility_next">"Nästa"</string>
+    <string msgid="5549711907371161292" name="lb_onboarding_get_started">"KOM IGÅNG"</string>
+    <string msgid="8691966842977635128" name="lb_playback_controls_closed_captioning_disable">"Inaktivera textning"</string>
+    <string msgid="2346334170216706076" name="lb_playback_controls_closed_captioning_enable">"Aktivera textning"</string>
+    <string msgid="740570111678243493" name="lb_playback_controls_fast_forward">"Snabbspola framåt"</string>
+    <string msgid="5734614175721471329" name="lb_playback_controls_fast_forward_multiplier">"Spola framåt %1$dX"</string>
+    <string msgid="5859666950961624736" name="lb_playback_controls_hidden">"Mediakontrollerna är dolda och visas om du trycker på styrkorset"</string>
+    <string msgid="1209119371486219736" name="lb_playback_controls_high_quality_disable">"Inaktivera hög kvalitet"</string>
+    <string msgid="3057698527166674705" name="lb_playback_controls_high_quality_enable">"Aktivera hög kvalitet"</string>
+    <string msgid="8730341244454469032" name="lb_playback_controls_more_actions">"Fler åtgärder"</string>
+    <string msgid="917331776961802657" name="lb_playback_controls_pause">"Pausa"</string>
+    <string msgid="5770668162543767702" name="lb_playback_controls_picture_in_picture">"Aktivera läget Bild-i-bild"</string>
+    <string msgid="7088090604803481121" name="lb_playback_controls_play">"Spela upp"</string>
+    <string msgid="8429099206716245199" name="lb_playback_controls_repeat_all">"Upprepa alla"</string>
+    <string msgid="1614290959784265209" name="lb_playback_controls_repeat_none">"Upprepa inga"</string>
+    <string msgid="676658705837320560" name="lb_playback_controls_repeat_one">"Upprepa en"</string>
+    <string msgid="2866333981131020771" name="lb_playback_controls_rewind">"Spola tillbaka"</string>
+    <string msgid="6038956370475252734" name="lb_playback_controls_rewind_multiplier">"Spola tillbaka %1$dX"</string>
+    <string msgid="8690223891515602822" name="lb_playback_controls_shown">"Mediakontrollerna visas"</string>
+    <string msgid="6793109999253893369" name="lb_playback_controls_shuffle_disable">"Blanda inte spår"</string>
+    <string msgid="5151681938752704485" name="lb_playback_controls_shuffle_enable">"Blanda spår"</string>
+    <string msgid="8117512422682146745" name="lb_playback_controls_skip_next">"Hoppa till nästa"</string>
+    <string msgid="3481218248309447059" name="lb_playback_controls_skip_previous">"Hoppa till föregående"</string>
+    <string msgid="3544533410444618518" name="lb_playback_controls_thumb_down">"Avmarkera tummen ned"</string>
+    <string msgid="8475278766138652105" name="lb_playback_controls_thumb_down_outline">"Markera tummen ned"</string>
+    <string msgid="3458671378107738666" name="lb_playback_controls_thumb_up">"Avmarkera tummen upp"</string>
+    <string msgid="1385865732502550659" name="lb_playback_controls_thumb_up_outline">"Markera tummen upp"</string>
+    <string msgid="1471121602610716654" name="lb_playback_time_separator">"/"</string>
+    <string msgid="5700349211583074131" name="lb_search_bar_hint">"Sök"</string>
+    <string msgid="5926531297066387462" name="lb_search_bar_hint_speech">"Säg det du söker efter"</string>
+    <string msgid="4826526877249029043" name="lb_search_bar_hint_with_title">"Sök: <ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g>"</string>
+    <string msgid="6032250334706920550" name="lb_search_bar_hint_with_title_speech">"Tala för att söka: <ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g>"</string>
+    <string msgid="1301877238242752863" name="orb_search_action">"Sökåtgärd"</string>
+    <string name="ply_cancel_survey_message">Vi beklagar att du avbryter din prenumeration. Hjälp oss gärna förbättra vår tjänst genom att ange varför du avslutat prenumerationen:</string>
+    <string name="ply_cancel_survey_reason_1">Jag tycker prenumerationen är för dyr</string>
+    <string name="ply_cancel_survey_reason_2">Jag har hittat en bättre applikation</string>
+    <string name="ply_cancel_survey_reason_3">Jag behöver inte längre tjänsten</string>
+    <string name="ply_cancel_survey_reason_4">Jag använder inte tjänsten tillräckligt mycket</string>
+    <string name="ply_cancel_survey_reason_5">Mitt beslut gäller tekniska problem</string>
+    <string name="ply_cancel_survey_reason_6">Övrigt</string>
+    <string name="ply_cancel_survey_reason_7">Jag vill inte svara</string>
+    <string name="ply_cancel_survey_title">Vill du avbryta din prenumeration?</string>
+    <string name="ply_configuration_error">Configuration error</string>
+    <string name="ply_in_app_absent_receipt">Kvittot hittades inte. Försök igen genom att återställa köpet.</string>
+    <string name="ply_in_app_already_being_purchased_error">Köpet av den här produkten pågår redan</string>
+    <string name="ply_in_app_already_being_restored_error">Köpet håller redan på att återställas</string>
+    <string name="ply_in_app_already_subscribed_error">Du är redan kund hos våra onlinetjänster!</string>
+    <string name="ply_in_app_client_invalid_error">Du är inte behörig att utföra den här åtgärden.</string>
+    <string name="ply_in_app_cloud_permission_error">Du nekade att bevilja åtkomst till den här tjänsten.</string>
+    <string name="ply_in_app_cloud_service_revoked_error">Du har inte återkallat åtkomsten till den här tjänsten.</string>
+    <string name="ply_in_app_error_pending">Your payment is being processed.  Your purchase will be validated automatically when your payment has been made.</string>
+    <string name="ply_in_app_login_button">Prenumererar du redan? Logga in.</string>
+    <string name="ply_in_app_network_error">Nätverksanslutningen kunde inte upprättas</string>
+    <string name="ply_in_app_no_product_found_error">Det gick inte att hitta produkten.</string>
+    <string name="ply_in_app_parsing_error">Kan inte hantera serversvaret</string>
+    <string name="ply_in_app_partial_restore_partial_with_errors">Följande artiklar har återställts:  %1$s Följande fel har identifierats  %2$s</string>
+    <string name="ply_in_app_payment_cancelled_error">Din förfrågan avbröts</string>
+    <string name="ply_in_app_payment_invalid_error">Inköps-ID:t är ogiltigt.</string>
+    <string name="ply_in_app_payment_not_allowed_error">Det gick inte att köpa på den här enheten.</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_many">%d dagar</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_one">1 dag</string>
+    <string name="ply_in_app_period_day_plural_rule_many">%d dagar</string>
+    <string name="ply_in_app_period_day_plural_rule_none">dag</string>
+    <string name="ply_in_app_period_day_plural_rule_one">dag</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_many">%d månader</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_one">1 månad</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_six">%d månader</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_three">%d månader</string>
+    <string name="ply_in_app_period_month_plural_rule_many">%d månader</string>
+    <string name="ply_in_app_period_month_plural_rule_none">månad</string>
+    <string name="ply_in_app_period_month_plural_rule_one">månad</string>
+    <string name="ply_in_app_period_month_plural_rule_six">termin</string>
+    <string name="ply_in_app_period_month_plural_rule_three">fjärdedel</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_many">%d veckor</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_one">1 vecka</string>
+    <string name="ply_in_app_period_week_plural_rule_many">%d veckor</string>
+    <string name="ply_in_app_period_week_plural_rule_none">vecka</string>
+    <string name="ply_in_app_period_week_plural_rule_one">vecka</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_many">%d år</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_one">1 år</string>
+    <string name="ply_in_app_period_year_plural_rule_many">%d år</string>
+    <string name="ply_in_app_period_year_plural_rule_none">år</string>
+    <string name="ply_in_app_period_year_plural_rule_one">år</string>
+    <string name="ply_in_app_product_not_available_error">Produkten finns inte din App Store</string>
+    <string name="ply_in_app_psd2_required">Ditt köp blir aktivt så snart din bank har bekräftat betalningen. Återställ dina köp om du får problem.</string>
+    <string name="ply_in_app_restore_button">Återställ dina köp</string>
+    <string name="ply_in_app_restore_status_errors">Återställningen kunde inte genomföras och gav följande fel:</string>
+    <string name="ply_in_app_restore_status_nothing">Inga köp hittades</string>
+    <string name="ply_in_app_unknown_error">Okänt fel</string>
+    <string name="ply_in_app_validation_failed">Det gick inte att bekräfta kvittot.</string>
+    <string name="ply_in_app_validation_timed_out">Bekräftelsen på ditt köp tar lite längre tid än vanligt. Kom tillbaka senare.</string>
+    <string name="ply_modal_alert_default_error_button">Ok</string>
+    <string name="ply_modal_alert_default_error_title">Fel</string>
+    <string name="ply_modal_alert_in_app_deferred_button">Ok</string>
+    <string name="ply_modal_alert_in_app_deferred_content">Thank you! Your purchase couldn\'t be completed yet and requires an external validation. Once the validation is completed you will be able to enjoy your purchase.</string>
+    <string name="ply_modal_alert_in_app_deferred_title">Väntar på godkännande</string>
+    <string name="ply_modal_alert_in_app_error_button">Ok</string>
+    <string name="ply_modal_alert_in_app_error_title">Fel</string>
+    <string name="ply_modal_alert_in_app_restoration_error_title">Fel</string>
+    <string name="ply_modal_alert_in_app_restore_status_success_content">Köpen har återställts</string>
+    <string name="ply_modal_alert_in_app_success_button">Nu kör vi!</string>
+    <string name="ply_modal_alert_in_app_success_content">Ditt köp har bekräftats. Nu kan du utnyttja det.</string>
+    <string name="ply_modal_alert_in_app_success_title">Toppen!</string>
+    <string name="ply_modal_alert_in_app_success_unauthentified_content">Ditt köp är aktivt. Logga in eller registrera dig för att få tillgång till din prenumeration på andra enheter!</string>
+    <string name="ply_modal_alert_in_app_successfull_restore_message_title">Återställningen har slutförts</string>
+    <string name="ply_modal_change_plan_different_store_cancel_button">Avbryt</string>
+    <string name="ply_modal_change_plan_different_store_content">Du har redan en prenumeration hos %s.  Avbryt din prenumeration så du inte faktureras två gånger.  Vill du fortsätta?</string>
+    <string name="ply_modal_change_plan_different_store_continue_button">Fortsätt</string>
+    <string name="ply_modal_change_plan_different_store_title">Försiktigt!</string>
+    <string name="ply_modal_downgrade_button">Jag förstår!</string>
+    <string name="ply_modal_downgrade_description">Din ändrade plan har bekräftats och blir aktiv vid slutet av den aktuella prenumerationsperioden den</string>
+    <string name="ply_modal_downgrade_title">Grattis</string>
+    <string name="ply_modal_huawei_not_logged_button">Ok</string>
+    <string name="ply_modal_huawei_not_logged_description">Logga in på ditt Huawei-konto i Huawei AppGallery</string>
+    <string name="ply_modal_huawei_not_logged_title">Huawei-kontot hittades inte</string>
+    <string name="ply_powered_by_purchasely">Powered by Purchasely</string>
+    <string name="ply_price_free">gratis</string>
+    <string name="ply_promo_code_button">Kampanjkod?</string>
+    <string name="ply_subscription_cancel_pattern">Förfallodatum: %s</string>
+    <string name="ply_subscription_detail_group_title">Din prenumeration</string>
+    <string name="ply_subscription_plans_group_title">Alternativ</string>
+    <string name="ply_subscription_renew_pattern">Nästa debiteringsdatum: %s</string>
+    <string name="ply_subscription_title">Ändra din prenumeration</string>
+    <string name="ply_subscription_unsubscribe_button">Avbryt prenumerationen</string>
+    <string name="ply_subscription_unsubscribe_change_plan_not_available_google">Den här prenumerationen gjordes inte via App Store.</string>
+    <string name="ply_subscriptions_active_group_title">Aktiv</string>
+    <string name="ply_subscriptions_empty_message">Du har för närvarande ingen aktiv prenumeration</string>
+    <string name="ply_subscriptions_title">Mina prenumerationer</string>
+    <string name="ply_unsubscribe_amazon_button">Ok</string>
+    <string name="ply_unsubscribe_amazon_content">Go to amazon.com. Check if you’re signed in to the correct Amazon Account. Go to your Account page. Click on Other Subscriptions in the Memberships and subscriptions section Select the subscription you want to cancel. Then Cancel Subscription.</string>
+    <string name="ply_unsubscribe_amazon_title">Cancel a subscription</string>
+    <string name="ply_unsubscribe_apple_button">Ok</string>
+    <string name="ply_unsubscribe_apple_content">Öppna appen Inställningar.    Tryck på ditt namn.   Tryck på prenumerationer.   Tryck på den prenumeration du vill hantera.   Tryck på Avbryt prenumeration.</string>
+    <string name="ply_unsubscribe_apple_title">Säga upp en prenumeration</string>
+    <string name="ply_unsubscribe_google_button">Ok</string>
+    <string name="ply_unsubscribe_google_content">Besök play.google.com.   Kontrollera att du är inloggad på rätt Google-konto.   Klicka på Mina prenumerationer uppe till vänster.   Välj den prenumeration du vill säga upp.   Klicka på Hantera följt av Säg upp prenumerationen.</string>
+    <string name="ply_unsubscribe_google_title">Säga upp en prenumeration</string>
+    <string name="ply_untracked_event">Evenemang ej hanterat</string>
+    <string name="ply_webview_qr_or_url">Skanna QR-koden ovan eller gå till:</string>
+    <string name="ply_webview_url">Gå till följande URL med din webbläsare:</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Sök"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">36341333468-02h5i830quu519uo3g8v9uuapk964e14.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">36341333468</string>
+    <string name="google_api_key" translatable="false">AIzaSyCkdIRtK9yVNwrzW1L62DqZ7g7FD0GeLoE</string>
+    <string name="google_app_id" translatable="false">1:36341333468:android:997398ad596185de95e319</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCkdIRtK9yVNwrzW1L62DqZ7g7FD0GeLoE</string>
+    <string name="google_storage_bucket" translatable="false">mcsmart-c1013.appspot.com</string>
+    <string name="project_id" translatable="false">mcsmart-c1013</string>
+</resources>

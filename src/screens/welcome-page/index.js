@@ -1,10 +1,11 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, Platform, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {navigate} from '../../shared/navigationRef';
 import styles from './styles';
 import states from './states';
 import Button from '../../components/button';
+import {askTrackingPermission} from '../../helpers/eventTracking';
 
 const bgImage = require('../../assets/images/welcome_banner.png');
 
@@ -27,6 +28,9 @@ function WelcomePage() {
           label="Get started"
           onPress={() => {
             navigate('Register');
+            if (Platform.OS === 'ios') {
+              askTrackingPermission();
+            }
           }}
         />
       </View>

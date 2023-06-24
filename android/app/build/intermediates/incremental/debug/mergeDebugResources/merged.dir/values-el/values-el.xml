@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Πλοήγηση στην αρχική σελίδα"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Πλοήγηση προς τα επάνω"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Περισσότερες επιλογές"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Τέλος"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Εμφάνιση όλων"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Επιλέξτε μια εφαρμογή"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"ΑΠΕΝΕΡΓΟΠΟΙΗΣΗ"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"ΕΝΕΡΓΟΠΟΙΗΣΗ"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"delete"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"διάστημα"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Αναζήτηση…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Διαγραφή ερωτήματος"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Ερώτημα αναζήτησης"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Αναζήτηση"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Υποβολή ερωτήματος"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Φωνητική αναζήτηση"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Κοινοποίηση σε"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Κοινοποίηση στην εφαρμογή <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Σύμπτυξη"</string>
+    <string msgid="2523291102206661146" name="common_google_play_services_enable_button">Ενεργοποίηση</string>
+    <string msgid="227660514972886228" name="common_google_play_services_enable_text">Η εφαρμογή %1$s δεν θα λειτουργήσει εάν δεν έχετε ενεργοποιήσει τις υπηρεσίες Google Play.</string>
+    <string msgid="5122002158466380389" name="common_google_play_services_enable_title">Ενεργοποίηση υπηρεσιών Google Play</string>
+    <string msgid="7153882981874058840" name="common_google_play_services_install_button">Εγκατάσταση</string>
+    <string name="common_google_play_services_install_text">Η εφαρμογή %1$s δεν μπορεί να εκτελεστεί χωρίς τις υπηρεσίες Google Play, οι οποίες λείπουν από τη συσκευή σας.</string>
+    <string msgid="7215213145546190223" name="common_google_play_services_install_title">Λήψη υπηρεσιών Google Play</string>
+    <string name="common_google_play_services_notification_channel_name">Διαθεσιμότητα υπηρεσιών Google Play</string>
+    <string name="common_google_play_services_notification_ticker">Σφάλμα Υπηρεσιών Google Play</string>
+    <string name="common_google_play_services_unknown_issue">Η εφαρμογή %1$s αντιμετωπίζει κάποιο πρόβλημα με τις υπηρεσίες Google Play. Προσπαθήστε ξανά.</string>
+    <string name="common_google_play_services_unsupported_text">Η εφαρμογή %1$s δεν θα εκτελεστεί χωρίς τις υπηρεσίες Google Play, οι οποίες δεν υποστηρίζονται από τη συσκευή σας.</string>
+    <string msgid="6556509956452265614" name="common_google_play_services_update_button">Ενημέρωση</string>
+    <string msgid="9053896323427875356" name="common_google_play_services_update_text">Η εφαρμογή %1$s θα εκτελεστεί αφού ενημερώσετε τις Υπηρεσίες Google Play.</string>
+    <string msgid="6006316683626838685" name="common_google_play_services_update_title">Ενημέρωση υπηρεσιών Google Play</string>
+    <string name="common_google_play_services_updating_text">Η εφαρμογή %1$s δεν θα εκτελεστεί χωρίς τις υπηρεσίες Google Play, οι οποίες ενημερώνονται αυτήν τη στιγμή.</string>
+    <string name="common_google_play_services_wear_update_text">Απαιτείται νέα έκδοση των υπηρεσιών Google Play. Θα ενημερωθεί σύντομα.</string>
+    <string name="common_open_on_phone">Άνοιγμα σε τηλέφωνο</string>
+    <string name="common_signin_button_text">Σύνδεση</string>
+    <string name="common_signin_button_text_long">Συνδεθείτε με το Google</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"Ο σύνδεσμος αντιγράφηκε στο πρόχειρο"</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Αντιγραφή συνδέσμου"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Άνοιγμα σε πρόγραμμα περιήγησης"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Κοινοποίηση συνδέσμου"</string>
+    <string msgid="4657191930956702614" name="lb_control_display_fast_forward_multiplier">"%1$dX"</string>
+    <string msgid="4597148235912710942" name="lb_control_display_rewind_multiplier">"%1$dX"</string>
+    <string msgid="893619591225519922" name="lb_guidedaction_continue_title">"Συνέχεια"</string>
+    <string msgid="3330958750346333890" name="lb_guidedaction_finish_title">"Τέλος"</string>
+    <string msgid="3228326776757666747" name="lb_media_player_error">"Κωδικός σφάλματος MediaPlayer %1$d επιπλέον %2$d"</string>
+    <string msgid="8084428500709675515" name="lb_navigation_menu_contentDescription">"Μενού πλοήγησης"</string>
+    <string msgid="2394451791544864917" name="lb_onboarding_accessibility_next">"Επόμενη"</string>
+    <string msgid="5549711907371161292" name="lb_onboarding_get_started">"ΕΝΑΡΞΗ"</string>
+    <string msgid="8691966842977635128" name="lb_playback_controls_closed_captioning_disable">"Απενεργοποίηση υποτίτλων"</string>
+    <string msgid="2346334170216706076" name="lb_playback_controls_closed_captioning_enable">"Ενεργοποίηση υποτίτλων"</string>
+    <string msgid="740570111678243493" name="lb_playback_controls_fast_forward">"Γρήγορη προώθηση"</string>
+    <string msgid="5734614175721471329" name="lb_playback_controls_fast_forward_multiplier">"Γρήγορη προώθηση %1$dX"</string>
+    <string msgid="5859666950961624736" name="lb_playback_controls_hidden">"Απόκρυψη στοιχείων ελέγχου μέσων, πιέστε το d-pad για εμφάνιση"</string>
+    <string msgid="1209119371486219736" name="lb_playback_controls_high_quality_disable">"Απενεργοποίηση υψηλής ποιότητας"</string>
+    <string msgid="3057698527166674705" name="lb_playback_controls_high_quality_enable">"Ενεργοποίηση υψηλής ποιότητας"</string>
+    <string msgid="8730341244454469032" name="lb_playback_controls_more_actions">"Περισσότερες ενέργειες"</string>
+    <string msgid="917331776961802657" name="lb_playback_controls_pause">"Παύση"</string>
+    <string msgid="5770668162543767702" name="lb_playback_controls_picture_in_picture">"Εισαγωγή εικόνας στη λειτουργία παράθεσης εικόνων"</string>
+    <string msgid="7088090604803481121" name="lb_playback_controls_play">"Αναπαραγωγή"</string>
+    <string msgid="8429099206716245199" name="lb_playback_controls_repeat_all">"Επανάληψη όλων"</string>
+    <string msgid="1614290959784265209" name="lb_playback_controls_repeat_none">"Καμία επανάληψη"</string>
+    <string msgid="676658705837320560" name="lb_playback_controls_repeat_one">"Επανάληψη ενός στοιχείου"</string>
+    <string msgid="2866333981131020771" name="lb_playback_controls_rewind">"Επαναφορά"</string>
+    <string msgid="6038956370475252734" name="lb_playback_controls_rewind_multiplier">"Επαναφορά %1$dX"</string>
+    <string msgid="8690223891515602822" name="lb_playback_controls_shown">"Εμφάνιση στοιχείων ελέγχου μέσων"</string>
+    <string msgid="6793109999253893369" name="lb_playback_controls_shuffle_disable">"Απενεργοποίηση τυχαίας αναπαραγωγής"</string>
+    <string msgid="5151681938752704485" name="lb_playback_controls_shuffle_enable">"Ενεργοποίηση τυχαίας αναπαραγωγής"</string>
+    <string msgid="8117512422682146745" name="lb_playback_controls_skip_next">"Παράβλεψη επόμενου"</string>
+    <string msgid="3481218248309447059" name="lb_playback_controls_skip_previous">"Παράβλεψη προηγούμενου"</string>
+    <string msgid="3544533410444618518" name="lb_playback_controls_thumb_down">"Αποεπιλογή αξιολόγησης \"Δεν εγκρίνω\""</string>
+    <string msgid="8475278766138652105" name="lb_playback_controls_thumb_down_outline">"Επιλογή αξιολόγησης \"Δεν εγκρίνω\""</string>
+    <string msgid="3458671378107738666" name="lb_playback_controls_thumb_up">"Αποεπιλογή αξιολόγησης \"Μου αρέσουν\""</string>
+    <string msgid="1385865732502550659" name="lb_playback_controls_thumb_up_outline">"Επιλογή αξιολόγησης \"Μου αρέσουν\""</string>
+    <string msgid="1471121602610716654" name="lb_playback_time_separator">"/"</string>
+    <string msgid="5700349211583074131" name="lb_search_bar_hint">"Αναζήτηση"</string>
+    <string msgid="5926531297066387462" name="lb_search_bar_hint_speech">"Μιλήστε για να αναζητήσετε"</string>
+    <string msgid="4826526877249029043" name="lb_search_bar_hint_with_title">"Αναζήτηση <ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g>"</string>
+    <string msgid="6032250334706920550" name="lb_search_bar_hint_with_title_speech">"Μιλήστε για να αναζητήσετε σε <ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g>"</string>
+    <string msgid="1301877238242752863" name="orb_search_action">"Ενέργεια αναζήτησης"</string>
+    <string name="ply_cancel_survey_message">Λυπούμαστε πολύ που ακυρώνετε τη συνδρομή σας. Βοηθήστε μας να βελτιώσουμε τις υπηρεσίες μας εξηγώντας μας τους λόγους ακύρωσης της συνδρομής σας:</string>
+    <string name="ply_cancel_survey_reason_1">Βρίσκω τη συνδρομή πολύ ακριβή</string>
+    <string name="ply_cancel_survey_reason_2">Βρήκα καλύτερη εφαρμογή</string>
+    <string name="ply_cancel_survey_reason_3">Δεν χρειάζομαι πλέον αυτή την υπηρεσία</string>
+    <string name="ply_cancel_survey_reason_4">Δεν χρησιμοποιώ συχνά την υπηρεσία αυτή</string>
+    <string name="ply_cancel_survey_reason_5">Η απόφαση μου σχετίζεται με τεχνικά ζητήματα</string>
+    <string name="ply_cancel_survey_reason_6">Άλλο</string>
+    <string name="ply_cancel_survey_reason_7">Δεν θέλω να απαντήσω</string>
+    <string name="ply_cancel_survey_title">Για ποιον λόγο θέλετε να ακυρώσετε τη συνδρομή σας;</string>
+    <string name="ply_configuration_error">Configuration error</string>
+    <string name="ply_in_app_absent_receipt">Η απόδειξη δεν βρέθηκε. Δοκιμάστε ξανά ανακτώντας την αγορά.</string>
+    <string name="ply_in_app_already_being_purchased_error">Η αγορά αυτού του προϊόντος είναι ήδη σε εξέλιξη</string>
+    <string name="ply_in_app_already_being_restored_error">Η ανάκτηση της αγοράς είναι ήδη σε εξέλιξη</string>
+    <string name="ply_in_app_already_subscribed_error">Είστε ήδη πελάτης των online υπηρεσιών μας!</string>
+    <string name="ply_in_app_client_invalid_error">Δεν μπορείτε να προβείτε σε αυτή την ενέργεια.</string>
+    <string name="ply_in_app_cloud_permission_error">Δεν επιτρέψατε την πρόσβαση σε αυτή τη συσκευή.</string>
+    <string name="ply_in_app_cloud_service_revoked_error">Δεν έχετε ανακαλέσει την πρόσβαση σε αυτή την υπηρεσία.</string>
+    <string name="ply_in_app_error_pending">Your payment is being processed.  Your purchase will be validated automatically when your payment has been made.</string>
+    <string name="ply_in_app_login_button">Έχετε ήδη εγγραφεί; Εγγραφή.</string>
+    <string name="ply_in_app_network_error">Η σύνδεση στο δίκτυο απέτυχε</string>
+    <string name="ply_in_app_no_product_found_error">Δεν είναι δυνατή η εύρεση αυτού του προϊόντος.</string>
+    <string name="ply_in_app_parsing_error">Δεν ήταν δυνατός ο χειρισμός της απόκρισης διακομιστή</string>
+    <string name="ply_in_app_partial_restore_partial_with_errors">Τα παρακάτω στοιχεία ανακτήθηκαν:  %1$s Τα παρακάτω σφάλματα ταυτοποιήθηκαν  %2$s</string>
+    <string name="ply_in_app_payment_cancelled_error">Το αίτημά σας ακυρώθηκε</string>
+    <string name="ply_in_app_payment_invalid_error">Το αναγνωριστικό αγοράς είναι άκυρο.</string>
+    <string name="ply_in_app_payment_not_allowed_error">Δεν μπορείτε να προβείτε σε αγορά μέσω αυτής της συσκευής.</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_many">%d ημέρες</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_one">1 ημέρα</string>
+    <string name="ply_in_app_period_day_plural_rule_many">%d ημέρες</string>
+    <string name="ply_in_app_period_day_plural_rule_none">ημέρα</string>
+    <string name="ply_in_app_period_day_plural_rule_one">ημέρα</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_many">%d μήνες</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_one">1 μήνας</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_six">%d μήνες</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_three">%d μήνες</string>
+    <string name="ply_in_app_period_month_plural_rule_many">%d μήνες</string>
+    <string name="ply_in_app_period_month_plural_rule_none">μήνας</string>
+    <string name="ply_in_app_period_month_plural_rule_one">μήνας</string>
+    <string name="ply_in_app_period_month_plural_rule_six">εξάμηνο</string>
+    <string name="ply_in_app_period_month_plural_rule_three">τρίμηνο</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_many">%d εβδομάδες</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_one">1 εβδομάδα</string>
+    <string name="ply_in_app_period_week_plural_rule_many">%d εβδομάδες</string>
+    <string name="ply_in_app_period_week_plural_rule_none">εβδομάδα</string>
+    <string name="ply_in_app_period_week_plural_rule_one">εβδομάδα</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_many">%d έτη</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_one">1 έτος</string>
+    <string name="ply_in_app_period_year_plural_rule_many">%d έτη</string>
+    <string name="ply_in_app_period_year_plural_rule_none">έτος</string>
+    <string name="ply_in_app_period_year_plural_rule_one">έτος</string>
+    <string name="ply_in_app_product_not_available_error">Μη διαθέσιμο προϊόν στο App Store σας</string>
+    <string name="ply_in_app_psd2_required">Η αγορά σας θα είναι ενεργή, μόλις η πληρωμή σας επικυρωθεί από την τράπεζά σας. Αν αντιμετωπίζετε πρόβλημα, επαναφέρετε τις αγορές σας.</string>
+    <string name="ply_in_app_restore_button">Επαναφορά των αγορών σας</string>
+    <string name="ply_in_app_restore_status_errors">Η ανάκτηση απέτυχε με τα παρακάτω σφάλματα:</string>
+    <string name="ply_in_app_restore_status_nothing">Δεν βρέθηκε καμία αγορά</string>
+    <string name="ply_in_app_unknown_error">Άγνωστο σφάλμα</string>
+    <string name="ply_in_app_validation_failed">Η επιβεβαίωση λήψης είναι αδύνατη.</string>
+    <string name="ply_in_app_validation_timed_out">Η επικύρωση της αγοράς σας θα διαρκέσει περισσότερο χρόνο από ό,τι συνήθως. Επιστρέψτε αργότερα.</string>
+    <string name="ply_modal_alert_default_error_button">ΟΚ</string>
+    <string name="ply_modal_alert_default_error_title">Σφάλμα</string>
+    <string name="ply_modal_alert_in_app_deferred_button">ΟΚ</string>
+    <string name="ply_modal_alert_in_app_deferred_content">Thank you! Your purchase couldn\'t be completed yet and requires an external validation. Once the validation is completed you will be able to enjoy your purchase.</string>
+    <string name="ply_modal_alert_in_app_deferred_title">Αναμονή για έγκριση</string>
+    <string name="ply_modal_alert_in_app_error_button">Οκ</string>
+    <string name="ply_modal_alert_in_app_error_title">Σφάλμα</string>
+    <string name="ply_modal_alert_in_app_restoration_error_title">Σφάλμα</string>
+    <string name="ply_modal_alert_in_app_restore_status_success_content">Οι αγορές ανακτήθηκαν</string>
+    <string name="ply_modal_alert_in_app_success_button">Ξεκινήστε!</string>
+    <string name="ply_modal_alert_in_app_success_content">Η αγορά σας πραγματοποιήθηκε επιτυχώς. Μπορείτε τώρα να την απολαύσετε.</string>
+    <string name="ply_modal_alert_in_app_success_title">Τέλεια!</string>
+    <string name="ply_modal_alert_in_app_success_unauthentified_content">Η αγορά σας είναι ενεργή. Συνδεθείτε ή εγγραφείτε για να απολαύσετε τη συνδρομή σας σε άλλες συσκευές!</string>
+    <string name="ply_modal_alert_in_app_successfull_restore_message_title">Η ανάκτηση ολοκληρώθηκε</string>
+    <string name="ply_modal_change_plan_different_store_cancel_button">Ακύρωση</string>
+    <string name="ply_modal_change_plan_different_store_content">Έχετε ήδη μια συνδρομή στο %s.  Ακυρώστε τη συνδρομή σας για να αποφύγετε διπλή χρέωση.  Θέλετε να συνεχίσετε;</string>
+    <string name="ply_modal_change_plan_different_store_continue_button">Συνέχεια</string>
+    <string name="ply_modal_change_plan_different_store_title">Προσοχή!</string>
+    <string name="ply_modal_downgrade_button">Εντάξει!</string>
+    <string name="ply_modal_downgrade_description">Η αλλαγή στο πρόγραμμά σας έχει επικυρωθεί και θα είναι ενεργή στο τέλος της τρέχουσας περιόδου συνδρομής στις</string>
+    <string name="ply_modal_downgrade_title">Συγχαρητήρια</string>
+    <string name="ply_modal_huawei_not_logged_button">ΟΚ</string>
+    <string name="ply_modal_huawei_not_logged_description">Συνδεθείτε στον λογαριασμό σας Huawei στη συλλογή εφαρμογών της Huawei</string>
+    <string name="ply_modal_huawei_not_logged_title">Δεν βρέθηκε λογαριασμός Huawei</string>
+    <string name="ply_powered_by_purchasely">Powered by Purchasely</string>
+    <string name="ply_price_free">δωρεάν</string>
+    <string name="ply_promo_code_button">Προωθητικός κωδικός;</string>
+    <string name="ply_subscription_cancel_pattern">Ημερομηνία λήξης: %s</string>
+    <string name="ply_subscription_detail_group_title">Η συνδρομή σας</string>
+    <string name="ply_subscription_plans_group_title">Επιλογές</string>
+    <string name="ply_subscription_renew_pattern">Επόμενη ημερομηνία χρέωσης: %s</string>
+    <string name="ply_subscription_title">Τροποποίηση της συνδρομής σας</string>
+    <string name="ply_subscription_unsubscribe_button">Ακύρωση συνδρομής</string>
+    <string name="ply_subscription_unsubscribe_change_plan_not_available_google">Αυτή η συνδρομή δεν πραγματοποιήθηκε από το App Store.</string>
+    <string name="ply_subscriptions_active_group_title">Ενεργή</string>
+    <string name="ply_subscriptions_empty_message">Επί του παρόντος δεν έχετε ενεργή συνδρομή</string>
+    <string name="ply_subscriptions_title">Οι συνδρομές μου</string>
+    <string name="ply_unsubscribe_amazon_button">Ok</string>
+    <string name="ply_unsubscribe_amazon_content">Go to amazon.com. Check if you’re signed in to the correct Amazon Account. Go to your Account page. Click on Other Subscriptions in the Memberships and subscriptions section Select the subscription you want to cancel. Then Cancel Subscription.</string>
+    <string name="ply_unsubscribe_amazon_title">Cancel a subscription</string>
+    <string name="ply_unsubscribe_apple_button">Οκ</string>
+    <string name="ply_unsubscribe_apple_content">Ανοίξτε την εφαρμογή Ρυθμίσεις.   Πατήστε το όνομά σας.   Πατήστε «Συνδρομές».   Πατήστε τη συνδρομή που θέλετε να διαχειριστείτε.   Πατήστε «Ακύρωση συνδρομής».</string>
+    <string name="ply_unsubscribe_apple_title">Ακύρωση συνδρομής</string>
+    <string name="ply_unsubscribe_google_button">Οκ</string>
+    <string name="ply_unsubscribe_google_content">Μεταβείτε στη διεύθυνση play.google.com.   Ελέγξτε εάν έχετε συνδεθεί στον σωστό Λογαριασμό Google.   Στα αριστερά, κάντε κλικ στην επιλογή Οι συνδρομές μου.   Επιλέξτε τη συνδρομή που θέλετε να ακυρώσετε.   Κάντε κλικ στη Διαχείριση και μετά Ακύρωση συνδρομής.</string>
+    <string name="ply_unsubscribe_google_title">Ακύρωση συνδρομής</string>
+    <string name="ply_untracked_event">Δεν έγινε χειρισμός του συμβάντος</string>
+    <string name="ply_webview_qr_or_url">Σαρώστε τον κωδικό QR σας παραπάνω ή επισκεφθείτε:</string>
+    <string name="ply_webview_url">Μεταβείτε στην ακόλουθη διεύθυνση URL με το πρόγραμμα περιήγησής σας:</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Αναζήτηση"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>

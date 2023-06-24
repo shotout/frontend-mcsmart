@@ -38,6 +38,10 @@
       "sha1": "0cd0d0e17561fad5254d00dfc406e0662495de09"
     },
     {
+      "path": "src/assets/fonts/ChakraPetch-Medium.ttf",
+      "sha1": "47c2adf99cc286e5e2c8394185f0738878c5c504"
+    },
+    {
       "path": "src/assets/fonts/DeliusSwashCaps-Regular.ttf",
       "sha1": "f162a8e2fd50219b68deaf18a8750c527560ef41"
     },
@@ -60,6 +64,10 @@
     {
       "path": "src/assets/fonts/Fondamento-Regular.ttf",
       "sha1": "72f3bc87c12cf6923df928237b9e2fa0970dceea"
+    },
+    {
+      "path": "src/assets/fonts/FrankRuhlLibre-Medium.ttf",
+      "sha1": "39f1b07a2e5f6e138d66425ca6885820f8f3fa6b"
     },
     {
       "path": "src/assets/fonts/Gaegu-Regular.ttf",
@@ -146,6 +154,10 @@
       "sha1": "5e5fc620063840e5434fe57d990ef978d479139b"
     },
     {
+      "path": "src/assets/fonts/LibreBaskerville-Bold.ttf",
+      "sha1": "f8081cbeceb2e69fdffca2348b2c9e0933cd52b5"
+    },
+    {
       "path": "src/assets/fonts/Lobster-Regular.ttf",
       "sha1": "120c751cd7a77174037c2409ab883ef7efc5edbb"
     },
@@ -206,8 +218,24 @@
       "sha1": "498c73c1c9ba334f4764af03435adc02ef3c5100"
     },
     {
+      "path": "src/assets/fonts/Prata-Regular.ttf",
+      "sha1": "49a1d8d14e5c861637d89cce31a2dfdad14666ff"
+    },
+    {
       "path": "src/assets/fonts/Rowdies-Regular.ttf",
       "sha1": "2f7b1ab72139c78cfe7abbd49fab9b1bebf44d57"
+    },
+    {
+      "path": "src/assets/fonts/RussoOne-Regular.ttf",
+      "sha1": "4a12533ad9ee3d6c83da4ac659d78ef9fb702ab4"
+    },
+    {
+      "path": "src/assets/fonts/Signika-Bold.ttf",
+      "sha1": "47b6cb15326ce129b720fa4fa58a068271911ee1"
+    },
+    {
+      "path": "src/assets/fonts/Tinos-Bold.ttf",
+      "sha1": "64455f4b98381db03451edc117ae28192a1fd487"
     },
     {
       "path": "src/assets/fonts/YesevaOne-Regular.ttf",

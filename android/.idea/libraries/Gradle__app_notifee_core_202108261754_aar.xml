@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: app.notifee:core:202108261754@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a266f23aa32ecc884705d0327bef365c/transformed/jetified-core-202108261754/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a266f23aa32ecc884705d0327bef365c/transformed/jetified-core-202108261754/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a266f23aa32ecc884705d0327bef365c/transformed/jetified-core-202108261754/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,6 +1,7 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {colors, fonts, sizing} from '../../../shared/styling';
+import {isIphoneXorAbove} from '../../../shared/devices';
 
 export default StyleSheet.create({
   ctnRoot: {
@@ -61,7 +62,11 @@ export default StyleSheet.create({
     paddingBottom: moderateScale(90),
   },
   ctnGoalsInput: {
-    paddingTop: moderateScale(40),
+    paddingTop:
+      Platform.OS === 'ios' && !isIphoneXorAbove()
+        ? moderateScale(0)
+        : moderateScale(40),
+    // backgroundColor: 'red',
   },
   ctnWelcome: {
     backgroundColor: colors.yellow,
@@ -128,7 +133,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'red',
     position: 'absolute',
-    bottom: moderateScale(10),
+    bottom: moderateScale(-4),
     width: '100%',
   },
   ctnDot: {
@@ -153,6 +158,13 @@ export default StyleSheet.create({
   },
   ctnImg: {
     position: 'absolute',
-    paddingBottom: moderateScale(30),
+    bottom: moderateScale(50),
+    alignSelf: 'center',
+  },
+  ctnText: {
+    minHeight:
+      Platform.OS === 'ios' && !isIphoneXorAbove()
+        ? moderateScale(80)
+        : moderateScale(120),
   },
 });

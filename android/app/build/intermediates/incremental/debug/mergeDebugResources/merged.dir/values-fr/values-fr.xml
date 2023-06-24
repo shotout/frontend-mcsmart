@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Revenir à l\'accueil"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Revenir en haut de la page"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Autres options"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"OK"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Tout afficher"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Sélectionner une application"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"NON"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"OUI"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"supprimer"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"entrée"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Fonction+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Méta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Maj+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"espace"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Rechercher…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Effacer la requête"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Requête de recherche"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Rechercher"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Envoyer la requête"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Recherche vocale"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Partager avec"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Partager avec <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Réduire"</string>
+    <string msgid="2523291102206661146" name="common_google_play_services_enable_button">Activer</string>
+    <string msgid="227660514972886228" name="common_google_play_services_enable_text">%1$s ne fonctionnera pas tant que vous n\'aurez pas activé les services Google Play.</string>
+    <string msgid="5122002158466380389" name="common_google_play_services_enable_title">Activer les services Google Play</string>
+    <string msgid="7153882981874058840" name="common_google_play_services_install_button">Installer</string>
+    <string name="common_google_play_services_install_text">%1$s ne fonctionnera pas sans les services Google Play, qui ne sont pas installés sur votre appareil.</string>
+    <string msgid="7215213145546190223" name="common_google_play_services_install_title">Installer les services Google Play</string>
+    <string name="common_google_play_services_notification_channel_name">Disponibilité des services Google Play</string>
+    <string name="common_google_play_services_notification_ticker">Erreur liée aux services Google Play</string>
+    <string name="common_google_play_services_unknown_issue">L\'application %1$s rencontre des problèmes avec les services Google Play. Veuillez réessayer.</string>
+    <string name="common_google_play_services_unsupported_text">%1$s ne fonctionnera pas sans les services Google Play, qui ne sont pas compatibles avec votre appareil.</string>
+    <string msgid="6556509956452265614" name="common_google_play_services_update_button">Mettre à jour</string>
+    <string msgid="9053896323427875356" name="common_google_play_services_update_text">%1$s ne fonctionnera pas tant que vous n\'aurez pas mis à jour les services Google Play.</string>
+    <string msgid="6006316683626838685" name="common_google_play_services_update_title">Mettre à jour les services Google Play</string>
+    <string name="common_google_play_services_updating_text">%1$s ne fonctionnera pas sans les services Google Play, qui sont en cours de mise à jour.</string>
+    <string name="common_google_play_services_wear_update_text">La nouvelle version des services Google Play est nécessaire. Elle sera bientôt installée automatiquement.</string>
+    <string name="common_open_on_phone">Ouvrir sur le téléphone</string>
+    <string name="common_signin_button_text">Se connecter</string>
+    <string name="common_signin_button_text_long">Se connecter avec Google</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"Lien copié dans le presse-papiers"</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Copier le lien"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Ouvrir dans un navigateur"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Partager le lien"</string>
+    <string msgid="4657191930956702614" name="lb_control_display_fast_forward_multiplier">"%1$dX"</string>
+    <string msgid="4597148235912710942" name="lb_control_display_rewind_multiplier">"%1$dX"</string>
+    <string msgid="893619591225519922" name="lb_guidedaction_continue_title">"Continuer"</string>
+    <string msgid="3330958750346333890" name="lb_guidedaction_finish_title">"Terminer"</string>
+    <string msgid="3228326776757666747" name="lb_media_player_error">"Code d\'erreur MediaPlayer %1$d extra %2$d"</string>
+    <string msgid="8084428500709675515" name="lb_navigation_menu_contentDescription">"Menu de navigation"</string>
+    <string msgid="2394451791544864917" name="lb_onboarding_accessibility_next">"Suivante"</string>
+    <string msgid="5549711907371161292" name="lb_onboarding_get_started">"COMMENCER"</string>
+    <string msgid="8691966842977635128" name="lb_playback_controls_closed_captioning_disable">"Désactiver les sous-titres"</string>
+    <string msgid="2346334170216706076" name="lb_playback_controls_closed_captioning_enable">"Activer les sous-titres"</string>
+    <string msgid="740570111678243493" name="lb_playback_controls_fast_forward">"Avance rapide"</string>
+    <string msgid="5734614175721471329" name="lb_playback_controls_fast_forward_multiplier">"Avance rapide de %1$dX"</string>
+    <string msgid="5859666950961624736" name="lb_playback_controls_hidden">"Les commandes multimédias sont masquées. Appuyez sur le pavé directionnel pour les afficher"</string>
+    <string msgid="1209119371486219736" name="lb_playback_controls_high_quality_disable">"Désactiver la haute qualité"</string>
+    <string msgid="3057698527166674705" name="lb_playback_controls_high_quality_enable">"Activer la haute qualité"</string>
+    <string msgid="8730341244454469032" name="lb_playback_controls_more_actions">"Autres actions"</string>
+    <string msgid="917331776961802657" name="lb_playback_controls_pause">"Pause"</string>
+    <string msgid="5770668162543767702" name="lb_playback_controls_picture_in_picture">"Activer le mode Picture-in-picture"</string>
+    <string msgid="7088090604803481121" name="lb_playback_controls_play">"Lecture"</string>
+    <string msgid="8429099206716245199" name="lb_playback_controls_repeat_all">"Tout lire en boucle"</string>
+    <string msgid="1614290959784265209" name="lb_playback_controls_repeat_none">"Ne rien lire en boucle"</string>
+    <string msgid="676658705837320560" name="lb_playback_controls_repeat_one">"Lire en boucle un élément"</string>
+    <string msgid="2866333981131020771" name="lb_playback_controls_rewind">"Retour arrière"</string>
+    <string msgid="6038956370475252734" name="lb_playback_controls_rewind_multiplier">"Retour arrière de %1$dX"</string>
+    <string msgid="8690223891515602822" name="lb_playback_controls_shown">"Les commandes multimédias sont affichées"</string>
+    <string msgid="6793109999253893369" name="lb_playback_controls_shuffle_disable">"Désactiver la lecture en mode aléatoire"</string>
+    <string msgid="5151681938752704485" name="lb_playback_controls_shuffle_enable">"Activer la lecture en mode aléatoire"</string>
+    <string msgid="8117512422682146745" name="lb_playback_controls_skip_next">"Ignorer l\'élément suivant"</string>
+    <string msgid="3481218248309447059" name="lb_playback_controls_skip_previous">"Ignorer l\'élément précédent"</string>
+    <string msgid="3544533410444618518" name="lb_playback_controls_thumb_down">"Annuler Je n\'aime pas"</string>
+    <string msgid="8475278766138652105" name="lb_playback_controls_thumb_down_outline">"Sélectionner Je n\'aime pas"</string>
+    <string msgid="3458671378107738666" name="lb_playback_controls_thumb_up">"Annuler J\'aime"</string>
+    <string msgid="1385865732502550659" name="lb_playback_controls_thumb_up_outline">"Sélectionner J\'aime"</string>
+    <string msgid="1471121602610716654" name="lb_playback_time_separator">"/"</string>
+    <string msgid="5700349211583074131" name="lb_search_bar_hint">"Rechercher"</string>
+    <string msgid="5926531297066387462" name="lb_search_bar_hint_speech">"Énoncez votre recherche"</string>
+    <string msgid="4826526877249029043" name="lb_search_bar_hint_with_title">"Rechercher dans <ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g>"</string>
+    <string msgid="6032250334706920550" name="lb_search_bar_hint_with_title_speech">"Énoncez votre recherche dans <ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g>"</string>
+    <string msgid="1301877238242752863" name="orb_search_action">"Commande de recherche"</string>
+    <string name="ply_cancel_survey_message">Avant d\'annuler, dites-nous pourquoi. Ceci nous aidera à améliorer notre produit et mieux répondre à vos attentes.</string>
+    <string name="ply_cancel_survey_reason_1">Je trouve l\'abonnement trop cher</string>
+    <string name="ply_cancel_survey_reason_2">J\'ai trouvé une meilleure application</string>
+    <string name="ply_cancel_survey_reason_3">Je n\'ai plus besoin de ce service</string>
+    <string name="ply_cancel_survey_reason_4">Je n\'utilise pas assez ce service</string>
+    <string name="ply_cancel_survey_reason_5">Ma décision est liée à des problèmes techniques</string>
+    <string name="ply_cancel_survey_reason_6">Autre</string>
+    <string name="ply_cancel_survey_reason_7">Je ne souhaite pas répondre</string>
+    <string name="ply_cancel_survey_title">Pour quelle raison annulez-vous votre abonnement ?</string>
+    <string name="ply_configuration_error">Erreur de configuration</string>
+    <string name="ply_in_app_absent_receipt">Reçu non trouvé. Restaurez vos achats et réessayez.</string>
+    <string name="ply_in_app_already_being_purchased_error">Un achat est déjà en cours sur ce produit.</string>
+    <string name="ply_in_app_already_being_restored_error">Une restauration des achats est déjà en cours</string>
+    <string name="ply_in_app_already_subscribed_error">Vous êtes déjà client de notre offre numérique !</string>
+    <string name="ply_in_app_client_invalid_error">Vous n’êtes pas autorisé à effectuer cette action.</string>
+    <string name="ply_in_app_cloud_permission_error">Vous n’avez pas autorisé l’accès à ce service.</string>
+    <string name="ply_in_app_cloud_service_revoked_error">Vous n’avez pas révoqué l’accès à ce service.</string>
+    <string name="ply_in_app_error_pending">Votre paiment est en cours de traitement.  Votre achat sera validé automatiquement lorsque le paiement sera effectué.</string>
+    <string name="ply_in_app_login_button">Déjà client ? Connectez-vous !</string>
+    <string name="ply_in_app_network_error">La connexion réseau a échoué</string>
+    <string name="ply_in_app_no_product_found_error">Impossible de trouver le produit.</string>
+    <string name="ply_in_app_parsing_error">Impossible d\'interpréter la réponse du serveur.</string>
+    <string name="ply_in_app_partial_restore_partial_with_errors">Les éléments suivants ont été restaurés : %1$s Les erreurs suivantes ont été identifiées : %2$s</string>
+    <string name="ply_in_app_payment_cancelled_error">La demande a été annulée.</string>
+    <string name="ply_in_app_payment_invalid_error">L’identifiant d’achat est invalide.</string>
+    <string name="ply_in_app_payment_not_allowed_error">Vous ne pouvez pas effectuer d’achat avec cet appareil.</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_many">%d jours</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_one">1 jour</string>
+    <string name="ply_in_app_period_day_plural_rule_many">%d jours</string>
+    <string name="ply_in_app_period_day_plural_rule_none">jour</string>
+    <string name="ply_in_app_period_day_plural_rule_one">jour</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_many">%d mois</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_one">1 mois</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_six">%d mois</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_three">%d mois</string>
+    <string name="ply_in_app_period_month_plural_rule_many">%d mois</string>
+    <string name="ply_in_app_period_month_plural_rule_none">mois</string>
+    <string name="ply_in_app_period_month_plural_rule_one">mois</string>
+    <string name="ply_in_app_period_month_plural_rule_six">semestre</string>
+    <string name="ply_in_app_period_month_plural_rule_three">trimestre</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_many">%d semaines</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_one">1 semaine</string>
+    <string name="ply_in_app_period_week_plural_rule_many">%d semaines</string>
+    <string name="ply_in_app_period_week_plural_rule_none">semaine</string>
+    <string name="ply_in_app_period_week_plural_rule_one">semaine</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_many">%d ans</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_one">1 an</string>
+    <string name="ply_in_app_period_year_plural_rule_many">%d ans</string>
+    <string name="ply_in_app_period_year_plural_rule_none">an</string>
+    <string name="ply_in_app_period_year_plural_rule_one">an</string>
+    <string name="ply_in_app_product_not_available_error">Ce produit n’est pas en vente dans votre App Store.</string>
+    <string name="ply_in_app_psd2_required">Votre achat sera actif une fois qu\'il aura été validé par votre banque. Si vous avez le moindre problème, restaurez vos achats.</string>
+    <string name="ply_in_app_restore_button">Restaurez vos achats</string>
+    <string name="ply_in_app_restore_status_errors">La restauration a échouée avec les erreurs suivantes :</string>
+    <string name="ply_in_app_restore_status_nothing">Aucun achat n’a été trouvé</string>
+    <string name="ply_in_app_unknown_error">Erreur inconnue</string>
+    <string name="ply_in_app_validation_failed">Validation du reçu impossible.</string>
+    <string name="ply_in_app_validation_timed_out">L\'achat a été pris en compte mais la validation prend un peu plus de temps que prévu. Revenez un peu plus tard.</string>
+    <string name="ply_modal_alert_default_error_button">Ok</string>
+    <string name="ply_modal_alert_default_error_title">Erreur</string>
+    <string name="ply_modal_alert_in_app_deferred_button">Ok</string>
+    <string name="ply_modal_alert_in_app_deferred_content">Merci ! Votre achat n\'est pas encore actif, il doit être validé par l\'adminstrateur de votre groupe Famille. Une demande vient de leur être envoyée. Une fois cette validation faite vous pourrez profiter de votre achat.</string>
+    <string name="ply_modal_alert_in_app_deferred_title">En attente de validation</string>
+    <string name="ply_modal_alert_in_app_error_button">Ok</string>
+    <string name="ply_modal_alert_in_app_error_title">Erreur</string>
+    <string name="ply_modal_alert_in_app_restoration_error_title">Erreur</string>
+    <string name="ply_modal_alert_in_app_restore_status_success_content">Vos achats ont été restaurés</string>
+    <string name="ply_modal_alert_in_app_success_button">C\'est parti !</string>
+    <string name="ply_modal_alert_in_app_success_content">Votre achat a été validé avec succès. Vous pouvez dès à présent en profiter.</string>
+    <string name="ply_modal_alert_in_app_success_title">Super !</string>
+    <string name="ply_modal_alert_in_app_success_unauthentified_content">Votre achat a été validé avec succès. Pour profiter de votre abonnement sur tous vos appareils, identifiez vous avec votre compte ou créez en un nouveau.</string>
+    <string name="ply_modal_alert_in_app_successfull_restore_message_title">Restauration terminée</string>
+    <string name="ply_modal_change_plan_different_store_cancel_button">Annuler</string>
+    <string name="ply_modal_change_plan_different_store_content">Vous disposez déjà d\'un abonnement souscrit sur %s.  Résiliez votre abonnement pour éviter d\'être facturé deux fois.  Voulez-vous continuer ?</string>
+    <string name="ply_modal_change_plan_different_store_continue_button">Continuer</string>
+    <string name="ply_modal_change_plan_different_store_title">Attention</string>
+    <string name="ply_modal_downgrade_button">J\'ai compris</string>
+    <string name="ply_modal_downgrade_description">Votre changement de plan a bien été pris en compte mais ne deviendra effectif qu\'à l\'issue de la période en cours, à savoir le</string>
+    <string name="ply_modal_downgrade_title">Félicitations !</string>
+    <string name="ply_modal_huawei_not_logged_button">Ok</string>
+    <string name="ply_modal_huawei_not_logged_description">Merci de vous connecter à votre compte Huawei dans l\'application App Gallery</string>
+    <string name="ply_modal_huawei_not_logged_title">Compte Huawei inconnu</string>
+    <string name="ply_powered_by_purchasely">Powered by Purchasely</string>
+    <string name="ply_price_free">gratuit</string>
+    <string name="ply_promo_code_button">Code promo ?</string>
+    <string name="ply_subscription_cancel_pattern">Expire le %s</string>
+    <string name="ply_subscription_detail_group_title">Votre abonnement</string>
+    <string name="ply_subscription_plans_group_title">Options</string>
+    <string name="ply_subscription_renew_pattern">Renouv. le %s</string>
+    <string name="ply_subscription_title">Modifier l\'abonnement</string>
+    <string name="ply_subscription_unsubscribe_button">Annuler l\'abonnement</string>
+    <string name="ply_subscription_unsubscribe_change_plan_not_available_google">Cet abonnement a été souscrit par un autre biais que l\'App Store.</string>
+    <string name="ply_subscriptions_active_group_title">Active</string>
+    <string name="ply_subscriptions_empty_message">Vous n’avez actuellement aucun abonnement actif</string>
+    <string name="ply_subscriptions_title">Mes abonnements</string>
+    <string name="ply_unsubscribe_amazon_button">Ok</string>
+    <string name="ply_unsubscribe_amazon_content">Go to amazon.com. Check if you’re signed in to the correct Amazon Account. Go to your Account page. Click on Other Subscriptions in the Memberships and subscriptions section Select the subscription you want to cancel. Then Cancel Subscription.</string>
+    <string name="ply_unsubscribe_amazon_title">Annuler un abonnement</string>
+    <string name="ply_unsubscribe_apple_button">Ok</string>
+    <string name="ply_unsubscribe_apple_content">Ouvrez l’app Réglages.   Touchez votre nom.   Touchez Abonnements.   Touchez l’abonnement à gérer.   Touchez Annuler l’abonnement.</string>
+    <string name="ply_unsubscribe_apple_title">Annuler un abonnement</string>
+    <string name="ply_unsubscribe_google_button">Ok</string>
+    <string name="ply_unsubscribe_google_content">Accédez à play.google.com. Vérifiez que vous êtes connecté au bon compte Google. Sur la gauche, cliquez sur Mes abonnements. Appuyez sur l\'abonnement à annuler. Cliquez sur Gérer puis Annuler l\'abonnement.</string>
+    <string name="ply_unsubscribe_google_title">Annuler un abonnement</string>
+    <string name="ply_untracked_event">Event not handled</string>
+    <string name="ply_webview_qr_or_url">Scannez le code QR ci-dessus ou visitez :</string>
+    <string name="ply_webview_url">Rendez-vous sur la page suivante avec votre navigateur :</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Rechercher"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>

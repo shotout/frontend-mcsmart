@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {isIphoneXorAbove} from '../../shared/devices';
-import {colors, fonts} from '../../shared/styling';
+import {colors, fonts, sizing} from '../../shared/styling';
 
 export default StyleSheet.create({
   ctnRoot: {
@@ -27,7 +27,7 @@ export default StyleSheet.create({
   ctnIconCrown: {
     width: moderateScale(26),
     height: moderateScale(26),
-    marginLeft: moderateScale(6),
+    marginRight: moderateScale(6),
     resizeMode: 'contain',
   },
   btnWrapper: {
@@ -76,7 +76,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: moderateScale(113),
-    // backgroundColor: 'red'
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   btnRight: {
     width: moderateScale(48),
@@ -114,6 +115,8 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: moderateScale(18),
     marginTop: moderateScale(12),
+    paddingHorizontal: moderateScale(12),
+    lineHeight: moderateScale(24),
   },
   txtDescTutorial: {
     fontFamily: fonts.InterMedium,
@@ -121,10 +124,108 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: moderateScale(14),
     marginTop: moderateScale(12),
+    lineHeight: moderateScale(22),
   },
   ctnCenter: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  ctnLike: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.1)',
+  },
+  iconLikeWrap: {
+    width: moderateScale(60),
+    height: moderateScale(60),
+    resizeMode: 'contain',
+    alignSelf: 'center',
+  },
+  ctnViewShot: {
+    position: 'absolute',
+    width: '100%',
+    height: sizing.getWindowHeight(1),
+    top: sizing.getDimensionHeight(-100),
+  },
+  ctnSwipe: {
+    position: 'absolute',
+    width: '100%',
+    bottom: isIphoneXorAbove() ? moderateScale(120) : moderateScale(110),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  adjustBtmPremiumSwipe: {
+    bottom: moderateScale(70),
+  },
+  icnSwipe: {
+    width: moderateScale(22),
+    height: moderateScale(22),
+    resizeMode: 'contain',
+  },
+  txtSwipe: {
+    fontFamily: fonts.InterMedium,
+    color: '#B4B4B4',
+    fontSize: moderateScale(14),
+    marginBottom: moderateScale(6),
+  },
+  ctnSlideUp: {
+    position: 'absolute',
+    width: '100%',
+    // backgroundColor: 'red',
+    bottom: moderateScale(0),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ctnSlideDown: {
+    position: 'absolute',
+    width: '100%',
+    // backgroundColor: 'red',
+    bottom: moderateScale(0),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btnTutorialStyle: {
+    width: moderateScale(70),
+    height: moderateScale(84),
+    // backgroundColor: 'red',
+    alignSelf: 'center',
+  },
+  btnTutorialImageStyle: {
+    width: moderateScale(70),
+    height: moderateScale(124),
+    marginTop: -80,
+    marginBottom: moderateScale(20),
+    // backgroundColor: 'red',
+    alignSelf: 'center',
+  },
+  btnLottie: {
+    width: moderateScale(70),
+    height: moderateScale(94),
+    // backgroundColor: 'red',
+    alignSelf: 'center',
+  },
+  btnImgMore: {
+    width: moderateScale(200),
+    height: moderateScale(200),
+    // backgroundColor: 'red',
+    alignSelf: 'center',
+    resizeMode: 'contain',
+  },
+  ctnBtnTutorial: {
+    width: 400,
+    height: 200,
+    bottom: moderateScale(-40),
+    position: 'absolute',
+    alignSelf: 'center',
+  },
+  lottieClickTutorial: {
+    // backgroundColor: 'red',
+    width: 400,
+    height: 400,
+  },
+  ctnTutorialWrapper: {
+    position: 'relative',
   },
 });

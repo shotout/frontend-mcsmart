@@ -1,0 +1,28 @@
+{
+    "logs": [
+        {
+            "outputFile": "apps.mcsmart.app-mergeDebugResources-47:/values-v19/values-v19.xml",
+            "map": [
+                {
+                    "source": "/Users/nagi/.gradle/caches/transforms-3/18d0c018ed5d22e04278c1879e651741/transformed/leanback-1.1.0-rc02/res/values-v19/values-v19.xml",
+                    "from": {
+                        "startLines": "2,16",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,917",
+                        "endLines": "15,24",
+                        "endColumns": "12,12",
+                        "endOffsets": "912,1521"
+                    },
+                    "to": {
+                        "startLines": "2,16",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,871",
+                        "endLines": "15,24",
+                        "endColumns": "12,12",
+                        "endOffsets": "866,1475"
+                    }
+                }
+            ]
+        }
+    ]
+}

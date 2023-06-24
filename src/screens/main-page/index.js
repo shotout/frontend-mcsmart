@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {createRef, useEffect, useRef, useState} from 'react';
 import {
   FlatList,
   Text,
@@ -6,19 +6,29 @@ import {
   View,
   Image,
   TouchableWithoutFeedback,
+  Modal,
+  StatusBar,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import messaging from '@react-native-firebase/messaging';
 
 import AnimatedLottieView from 'lottie-react-native';
 import {createAnimatableComponent} from 'react-native-animatable';
 import {connect} from 'react-redux';
+import ViewShot from 'react-native-view-shot';
+import RNFS from 'react-native-fs';
+import {
+  PanGestureHandler,
+  State,
+  TapGestureHandler,
+} from 'react-native-gesture-handler';
 import styles from './styles';
-import {listFact} from '../../shared/static-data/listFact';
 import {sizing} from '../../shared/styling';
 import {useBackgroundQuotes} from '../../helpers/hook/useBackgroundQuotes';
 import QuotesContent from '../../components/quotes-content-fast-image';
 import states from './states';
 
+import PremiumRocket from '../../assets/svg/PremiumRocketWhite.svg';
 import IconCategories from '../../assets/svg/icon_categories.svg';
 import IconShare from '../../assets/svg/icon_share.svg';
 import IconSetting from '../../assets/svg/icon_setting.svg';
@@ -27,28 +37,106 @@ import IconLike from '../../assets/svg/icon_like.svg';
 import ThemeIcon from '../../assets/svg/theme_icon.svg';
 import ButtonIcon from '../../components/button-icon';
 import ModalTheme from '../../layout/main-page/modal-theme';
+import ModalSetting from '../../layout/main-page/modal-setting';
+import ModalShare from '../../layout/main-page/modal-share';
+import {handleRatingModal, isUserPremium} from '../../helpers/user';
+import {
+  changeAskRatingParameter,
+  changeQuoteLikeStatus,
+} from '../../store/defaultState/actions';
+import ModalCategories from '../../layout/main-page/modal-categories';
+import {
+  addPastQuotes,
+  dislikeQuotes,
+  getRatingStatus,
+} from '../../shared/request';
+import useLocalNotif from '../../shared/useLocalNotif';
+import ModalRating from '../../components/modal-rating';
+import {showModalPremium} from '../../shared/globalContent';
+import ModalRepeat from '../../components/modal-repeat';
 
 const ViewAnimation = createAnimatableComponent(View);
 
-const freebadgeIcon = require('../../assets/images/rocket_white.png');
 const doubleTap = require('../../assets/lottie/double_tap.json');
 const swipeupIcon = require('../../assets/lottie/swipe_up.json');
+const arrowBottom = require('../../assets/icons/arrow-bottom.png');
 
-function MainPage({userThemes}) {
+const learnMoreButton = require('../../assets/icons/tutorial/learn_more_button.json');
+const learnMoreClick = require('../../assets/icons/tutorial/learn_more_click_once.gif');
+const repeatButton = require('../../assets/icons/tutorial/repeat_button.json');
+const repeatClick = require('../../assets/icons/tutorial/repeat_click.json');
+
+const learnMoreClickLottie = require('../../assets/icons/tutorial/learn_more_click.json');
+
+function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
   const [isTutorial, setTutorial] = useState({
     visible: false,
     step: 1,
   });
   const [activeSlide, setActiveSlide] = useState(0);
-  const [themeUser] = useBackgroundQuotes(userThemes);
+  const themesId = userProfile.data?.themes[0]?.id;
+  const [themeUser] = useBackgroundQuotes(userProfile.data?.themes[0]);
   const [quoteLikeStatus, setQuoteLikeStatus] = useState(false);
+  const [captureUri, setCaptureUri] = useState(null);
+  const [showModalLike, setShowModalLike] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [modalRatingVisible, setModalRating] = useState(false);
+  const [modalRepeat, setModalRepeat] = useState(false);
+  const [scheduleTime] = useLocalNotif(userProfile);
+
+  const [runQuoteAnimation, setRunQuoteAnimation] = useState(false);
+  const [isUserHasScroll, setUserScrollQuotes] = useState(false);
+  const [isShowNextQuooteAnimation, setShowNextQuoteAnimation] =
+    useState(false);
+
   const refThemes = useRef();
+  const refSetting = createRef();
+  const refShare = createRef();
+  const captureRef = useRef();
+  const refCategory = createRef();
 
   const getActiveQuote = () => {
-    if (listFact.length > 0 && listFact[activeSlide]) {
-      return listFact[activeSlide];
+    if (quotes?.listData.length > 0 && quotes?.listData[activeSlide]) {
+      return quotes?.listData[activeSlide];
     }
     return null;
+  };
+
+  const handleScreenshot = () => {
+    captureRef.current.capture().then(uri => {
+      // setCaptureUri(`data:image/png;base64,${uri}`);
+      const uriArray = uri.split('/');
+      const nameToChange = uriArray[uriArray.length - 1];
+      const renamedURI = uri.replace(
+        nameToChange,
+        `McSmart - ${(quotes?.listData[activeSlide].title || '').substring(
+          0,
+          10,
+        )}.png`,
+      );
+      RNFS.copyFile(uri, renamedURI)
+        .then(async () => {
+          // await CameraRoll.save(renamedURI, {album: 'mooty', type: 'photo'});
+          setCaptureUri(renamedURI);
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+    });
+  };
+
+  const handleShare = () => {
+    refShare.current.show();
+    handleScreenshot();
+  };
+
+  const handleRatingStatus = async () => {
+    const res = await getRatingStatus();
+    if (res.data === false) {
+      handleRatingModal(() => {
+        setModalRating(true);
+      });
+    }
   };
 
   useEffect(() => {
@@ -62,10 +150,28 @@ function MainPage({userThemes}) {
       }
     };
     checkTutorial();
+    handleRatingStatus();
   }, []);
 
   useEffect(() => {
+    const handleAddPastQuotes = async currentSlideId => {
+      try {
+        if (
+          quotes.listData[currentSlideId] &&
+          quotes.listData[currentSlideId]?.id
+        ) {
+          await addPastQuotes(quotes.listData[currentSlideId].id);
+        }
+      } catch (err) {
+        console.log('Error add past quotes:', err);
+      }
+    };
     const activeQuote = getActiveQuote();
+    if (activeSlide > currentSlide) {
+      setCurrentSlide(activeSlide);
+      handleAddPastQuotes(currentSlide);
+    }
+
     let isLiked = false;
     if (activeQuote) {
       if (!activeQuote.like) {
@@ -83,17 +189,81 @@ function MainPage({userThemes}) {
     setQuoteLikeStatus(isLiked);
   }, [activeSlide]);
 
+  useEffect(() => {
+    if (runAnimationSlide && !isUserHasScroll && !isTutorial.visible) {
+      setTimeout(() => {
+        if (!isUserHasScroll) {
+          setShowNextQuoteAnimation(true);
+        }
+      }, 2000);
+      setTimeout(() => {
+        setRunQuoteAnimation(true);
+      }, 1800);
+    }
+  }, [runAnimationSlide, isUserHasScroll, isTutorial]);
+
+  const handleQuoteActive = () => {
+    if (quotes?.listData.length > 0) {
+      return quotes?.listData[activeSlide]?.title;
+    }
+    return null;
+  };
+
+  const handleIdQuoteActive = () => {
+    if (quotes?.listData.length > 0 && quotes?.listData[activeSlide]) {
+      return quotes?.listData[activeSlide].id;
+    }
+    return null;
+  };
+
+  const handleLike = async () => {
+    try {
+      setShowModalLike(true);
+      setQuoteLikeStatus(!quoteLikeStatus);
+      setTimeout(() => {
+        setShowModalLike(false);
+      }, 500);
+      const activeQuote = getActiveQuote();
+      let isLiked = false;
+      if (activeQuote) {
+        if (!activeQuote.like) {
+          isLiked = false;
+        }
+        if (activeQuote.like) {
+          if (activeQuote.like?.type) {
+            if (
+              activeQuote.like?.type === '1' ||
+              activeQuote.like?.type === 1
+            ) {
+              isLiked = true;
+            }
+          }
+        }
+      }
+      const payload = {
+        type: isLiked ? '2' : '1',
+      };
+      await dislikeQuotes(payload, activeQuote.id);
+      changeQuoteLikeStatus(activeQuote.id);
+    } catch (err) {
+      console.log('Error liked:', err);
+    }
+  };
+
   const onMomentoumScrollEnd = e => {
     const height = sizing.getDimensionHeight(1);
     const pageNumber = Math.min(
       Math.max(Math.floor(e.nativeEvent.contentOffset.y / height + 0.5) + 1, 0),
-      listFact?.length || 0,
+      quotes?.listData?.length || 0,
     );
     setActiveSlide(pageNumber - 1);
+    if (pageNumber - 1 !== activeSlide && !isUserHasScroll) {
+      setUserScrollQuotes(true);
+    }
   };
 
   const handleSkipTutorial = async () => {
-    if (isTutorial.step === 2) {
+    if (isTutorial.step === 4) {
       await AsyncStorage.setItem('isFinishTutorial', 'yes');
       setTutorial({
         visible: false,
@@ -106,27 +276,130 @@ function MainPage({userThemes}) {
       });
     }
   };
-  console.log('Check theme:', themeUser);
 
-  const renderFactItem = ({item, index}) => {
-    const getImageContent = themeUser.imgLocal;
+  const handleGesture = evt => {
+    const {nativeEvent} = evt;
+    if (nativeEvent.velocityX < -614) {
+      refThemes.current.show();
+    }
+  };
+
+  const onDoubleTap = event => {
+    if (!isUserHasScroll && event.nativeEvent.state === State.BEGAN) {
+      setUserScrollQuotes(true);
+    }
+    if (event.nativeEvent.state === State.ACTIVE) {
+      handleLike();
+    }
+  };
+
+  function renderArrowSwipe() {
+    if (
+      runAnimationSlide &&
+      !isUserHasScroll &&
+      !isTutorial.visible &&
+      isShowNextQuooteAnimation &&
+      animationCounter
+    ) {
+      return (
+        <ViewAnimation
+          animation="fadeIn"
+          duration={1000}
+          style={[
+            styles.ctnSwipe,
+            isUserPremium() && styles.adjustBtmPremiumSwipe,
+          ]}>
+          <ViewAnimation
+            animation="slideInUp"
+            duration={500}
+            style={styles.ctnSlideUp}>
+            <ViewAnimation
+              animation="slideOutDown"
+              duration={1000}
+              delay={1500}
+              style={styles.ctnSlideDown}>
+              <ViewAnimation
+                animation="fadeOut"
+                duration={200}
+                delay={1600}
+                onAnimationEnd={() => {
+                  setShowNextQuoteAnimation(false);
+                  setShowNextQuoteAnimation(true);
+                }}
+                style={styles.ctnSlideDown}>
+                <Text style={styles.txtSwipe}>Swipe to see next Quote</Text>
+                <Image source={arrowBottom} style={styles.icnSwipe} />
+              </ViewAnimation>
+            </ViewAnimation>
+          </ViewAnimation>
+        </ViewAnimation>
+      );
+    }
+    return null;
+  }
+
+  const renderFactItem = ({item, index, disableAnimation}) => {
+    const getImageContent = themeUser?.imgLocal;
+    const listWhiteYellowTrace = [2, 3];
     return (
       <QuotesContent
         item={item}
+        onPressRating={() => {
+          setModalRepeat(true);
+          setTimeout(() => {
+            setModalRepeat(false);
+          }, 1000);
+        }}
         themeUser={themeUser}
         source={getImageContent}
+        isYellowTrace={listWhiteYellowTrace.includes(themeUser.id)}
+        isActive={activeSlide === index}
+        index={index}
+        showButtonOption={!isTutorial.visible && !disableAnimation}
+        isAnimationStart={
+          !disableAnimation &&
+          runAnimationSlide &&
+          !isUserHasScroll &&
+          !isTutorial.visible &&
+          runQuoteAnimation
+        }
         // source={require(themeUser.urlLocal)}
       />
     );
   };
 
-  function renderFreeBadge() {
+  function renderWaterMark() {
+    if (isUserPremium()) {
+      return null;
+    }
     return (
-      <TouchableOpacity style={styles.ctnFreeBadge}>
-        <Text style={styles.txtFreeBadge}>Try it free!</Text>
-        <Image source={freebadgeIcon} style={styles.ctnIconCrown} />
-      </TouchableOpacity>
+      <View style={styles.ctnWatermark}>
+        <Text style={styles.txtWatermark}>McSmart App</Text>
+      </View>
     );
+  }
+
+  function renderScreenshot() {
+    if (quotes?.listData?.length > 0) {
+      return (
+        <ViewShot
+          style={styles.ctnViewShot}
+          ref={captureRef}
+          options={{
+            fileName: `McSmart${Date.now()}`,
+            format: 'png',
+            quality: 1.0,
+          }}>
+          {renderFactItem({
+            item: quotes?.listData[activeSlide],
+            index: activeSlide,
+            disableAnimation: true,
+          })}
+          {renderWaterMark()}
+        </ViewShot>
+      );
+    }
+    return null;
   }
 
   function renderButton() {
@@ -139,14 +412,15 @@ function MainPage({userThemes}) {
     };
     return (
       <View style={styles.btnWrapper}>
+        {renderArrowSwipe()}
         <View style={styles.subBottomWrapper}>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={handleShare}>
             <View style={[styles.ctnRounded, bgStyle]}>
               {/* {renderSharePopup()} */}
               <IconShare width="90%" height="90%" />
             </View>
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={handleLike}>
             <View style={[styles.ctnRounded, bgStyle]}>
               {quoteLikeStatus ? (
                 <IconLove width="80%" height="80%" />
@@ -166,7 +440,7 @@ function MainPage({userThemes}) {
               btnStyle={styles.btnCategories}
               txtStyle={styles.txtCategory}
               onPress={() => {
-                // refCategory.current.show();
+                refCategory.current.show();
               }}
             />
           </View>
@@ -186,7 +460,7 @@ function MainPage({userThemes}) {
               source={<IconSetting width="100%" height="100%" />}
               btnStyle={[styles.btnRight, styles.mgLeft]}
               onPress={() => {
-                // refSetting.current.show();
+                refSetting.current.show();
               }}
             />
           </View>
@@ -248,6 +522,93 @@ function MainPage({userThemes}) {
         </View>
       );
     }
+    if (isTutorial.step === 3) {
+      return (
+        <View style={styles.ctnRound}>
+          <ViewAnimation
+            animation="bounceIn"
+            duration={800}
+            style={styles.ctnCenter}>
+            <View style={styles.btnTutorialStyle}>
+              <AnimatedLottieView
+                source={repeatButton}
+                style={styles.btnLottie}
+                autoPlay
+                duration={3000}
+                loop={false}
+              />
+            </View>
+            <Text style={styles.txtTutorial}>
+              Tap this button to repeat the Fact tomorrow to make sure you
+              remember it.
+            </Text>
+            <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
+              <Text style={styles.txtDescTutorial}>
+                {'Tap anywhere to go\nto the next tutorial'}
+              </Text>
+            </ViewAnimation>
+          </ViewAnimation>
+        </View>
+      );
+    }
+    if (isTutorial.step === 4) {
+      return (
+        <View style={styles.ctnRound}>
+          <ViewAnimation
+            animation="bounceIn"
+            duration={800}
+            style={styles.ctnCenter}>
+            <View style={styles.btnTutorialStyle}>
+              <AnimatedLottieView
+                source={learnMoreButton}
+                style={styles.btnLottie}
+                autoPlay
+                duration={3000}
+                loop={false}
+              />
+            </View>
+            <Text style={styles.txtTutorial}>
+              To get more information on a Fact, tap this button.
+            </Text>
+            <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
+              <Text style={styles.txtDescTutorial}>
+                {'Tap anywhere to go\nto finish the tutorial'}
+              </Text>
+            </ViewAnimation>
+          </ViewAnimation>
+        </View>
+      );
+    }
+    return null;
+  }
+
+  function renderClickButtonTutorial() {
+    if (isTutorial.step === 3) {
+      return (
+        <View style={styles.ctnBtnTutorial}>
+          <AnimatedLottieView
+            source={repeatClick}
+            style={styles.lottieClickTutorial}
+            autoPlay
+            duration={3000}
+            loop={false}
+          />
+        </View>
+      );
+    }
+    if (isTutorial.step === 4) {
+      return (
+        <View style={styles.ctnBtnTutorial}>
+          <AnimatedLottieView
+            source={learnMoreClickLottie}
+            style={styles.lottieClickTutorial}
+            autoPlay
+            duration={3000}
+            loop={false}
+          />
+        </View>
+      );
+    }
     return null;
   }
 
@@ -255,35 +616,165 @@ function MainPage({userThemes}) {
     if (isTutorial.visible) {
       return (
         <TouchableWithoutFeedback onPress={handleSkipTutorial}>
-          <View style={styles.ctnTutorial}>{renderContentTutorial()}</View>
+          <View style={styles.ctnTutorial}>
+            <View style={styles.ctnTutorialWrapper}>
+              {renderClickButtonTutorial()}
+              {renderContentTutorial()}
+            </View>
+          </View>
         </TouchableWithoutFeedback>
       );
     }
     return null;
   }
 
+  function renderFreeBadge() {
+    if (isTutorial.visible || isUserPremium()) {
+      return null;
+    }
+    return (
+      <TouchableOpacity
+        style={styles.ctnFreeBadge}
+        onPress={() => {
+          showModalPremium();
+        }}>
+        <View style={styles.ctnIconCrown}>
+          <PremiumRocket width="100%" height="100%" />
+        </View>
+        <Text style={styles.txtFreeBadge}>Go Premium!</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  function renderModalLike() {
+    if (showModalLike === true) {
+      return (
+        <Modal
+          animationType="fade"
+          visible={showModalLike}
+          transparent
+          onDismiss={() => {
+            setShowModalLike(false);
+          }}>
+          <View style={styles.ctnLike}>
+            <View style={styles.iconLikeWrap}>
+              {quoteLikeStatus ? (
+                <IconLove width="100%" height="100%" />
+              ) : (
+                <IconLike width="100%" height="100%" />
+              )}
+            </View>
+          </View>
+        </Modal>
+      );
+    }
+    return null;
+  }
+
+  function renderFlatList() {
+    return (
+      <PanGestureHandler
+        onGestureEvent={handleGesture}
+        activeOffsetX={[-40, 40]}>
+        <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
+          <FlatList
+            style={styles.ctnRoot}
+            data={quotes?.listData || []}
+            pagingEnabled
+            onMomentumScrollEnd={onMomentoumScrollEnd}
+            scrollsToTop={false}
+            showsVerticalScrollIndicator={false}
+            // onEndReached={handleEndReach}
+            onEndReachedThreshold={0.9}
+            renderItem={renderFactItem}
+            keyExtractor={(item, index) => `${item.id} ${index}`}
+          />
+        </TapGestureHandler>
+      </PanGestureHandler>
+    );
+  }
+
+  const isDarkTheme = [
+    4, 9, 11, 14, 17, 17, 19, 6, 8, 22, 24, 7, 25, 26, 27, 29, 31, 32,
+  ].includes(themesId);
+
   return (
     <View style={styles.ctnRoot}>
-      <FlatList
-        style={styles.ctnRoot}
-        data={listFact || []}
-        pagingEnabled
-        onMomentumScrollEnd={onMomentoumScrollEnd}
-        scrollsToTop={false}
-        showsVerticalScrollIndicator={false}
-        // onEndReached={handleEndReach}
-        onEndReachedThreshold={0.9}
-        renderItem={renderFactItem}
-        keyExtractor={(item, index) => `${item.id} ${index}`}
+      <StatusBar
+        barStyle={isDarkTheme ? 'light-content' : 'dark-content'}
+        backgroundColor={isDarkTheme ? '#000' : '#fff'}
+        // hidden={statusbarStatus}
       />
+      {renderScreenshot()}
+      {renderFlatList()}
       {renderButton()}
       {renderFreeBadge()}
       {renderTutorial()}
-
+      {renderModalLike()}
       <ModalTheme
         contentRef={refThemes}
         onClose={() => {
           refThemes.current.hide();
+        }}
+      />
+
+      <ModalSetting
+        contentRef={c => {
+          if (c) {
+            refSetting.current = {
+              ...c,
+            };
+          }
+        }}
+        onClose={() => {
+          refSetting.current.hide();
+        }}
+      />
+
+      <ModalShare
+        contentRef={c => {
+          if (c) {
+            refShare.current = {
+              ...c,
+            };
+          }
+        }}
+        onClose={() => {
+          refShare.current.hide();
+        }}
+        captureUri={captureUri}
+        onPremium={() => {
+          refShare.current.hide();
+        }}
+        idQuote={handleIdQuoteActive()} // mengambil data id active
+        quoteText={handleQuoteActive()} // mengambil data title active
+      />
+
+      <ModalCategories
+        refPanel={refCategory}
+        contentRef={c => {
+          if (c) {
+            refCategory.current = {
+              ...c,
+            };
+          }
+        }}
+        onClose={() => {
+          refCategory.current.hide();
+        }}
+      />
+
+      <ModalRating
+        visible={modalRatingVisible}
+        handleClose={() => {
+          setModalRating(false);
+          changeAskRatingParameter();
+        }}
+      />
+      <ModalRepeat
+        isVisible={modalRepeat}
+        onClose={() => {
+          setModalRepeat(false);
         }}
       />
     </View>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Перейти на головну"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Перейти вгору"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Більше опцій"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Готово"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Показати всі"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Вибрати програму"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"ЗНИЖКА"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"УВІМК."</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"delete"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"пробіл"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Введіть пошуковий запит…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Очистити запит"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Пошуковий запит"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Пошук"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Наіслати запит"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Голосовий пошук"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Поділитися:"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Поділитися через додаток <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Згорнути"</string>
+    <string msgid="2523291102206661146" name="common_google_play_services_enable_button">Увімкнути</string>
+    <string msgid="227660514972886228" name="common_google_play_services_enable_text">Додаток %1$s не працюватиме, якщо не ввімкнути сервіси Google Play.</string>
+    <string msgid="5122002158466380389" name="common_google_play_services_enable_title">Увімкнути сервіси Google Play</string>
+    <string msgid="7153882981874058840" name="common_google_play_services_install_button">Установити</string>
+    <string name="common_google_play_services_install_text">Додаток %1$s не працюватиме без сервісів Google Play, яких немає на вашому пристрої.</string>
+    <string msgid="7215213145546190223" name="common_google_play_services_install_title">Установити сервіси Google Play</string>
+    <string name="common_google_play_services_notification_channel_name">Доступність сервісів Google Play</string>
+    <string name="common_google_play_services_notification_ticker">Помилка сервісів Google Play</string>
+    <string name="common_google_play_services_unknown_issue">У додатку %1$s виникла проблема із сервісами Google Play. Повторіть спробу.</string>
+    <string name="common_google_play_services_unsupported_text">Додаток %1$s не працюватиме без сервісів Google Play, які не підтримуються на вашому пристрої.</string>
+    <string msgid="6556509956452265614" name="common_google_play_services_update_button">Оновити</string>
+    <string msgid="9053896323427875356" name="common_google_play_services_update_text">Додаток %1$s не працюватиме, якщо не оновити сервіси Google Play.</string>
+    <string msgid="6006316683626838685" name="common_google_play_services_update_title">Оновіть сервіси Google Play</string>
+    <string name="common_google_play_services_updating_text">Додаток %1$s не працюватиме без сервісів Google Play, які зараз оновлюються.</string>
+    <string name="common_google_play_services_wear_update_text">Потрібна нова версія сервісів Google Play. Вони невдовзі оновляться.</string>
+    <string name="common_open_on_phone">Відкрити на телефоні</string>
+    <string name="common_signin_button_text">Увійти</string>
+    <string name="common_signin_button_text_long">Увійти в облік. запис Google</string>
+    <string msgid="4657191930956702614" name="lb_control_display_fast_forward_multiplier">"%1$dX"</string>
+    <string msgid="4597148235912710942" name="lb_control_display_rewind_multiplier">"%1$dX"</string>
+    <string msgid="893619591225519922" name="lb_guidedaction_continue_title">"Продовжити"</string>
+    <string msgid="3330958750346333890" name="lb_guidedaction_finish_title">"Готово"</string>
+    <string msgid="3228326776757666747" name="lb_media_player_error">"Код помилки MediaPlayer: %1$d extra %2$d"</string>
+    <string msgid="8084428500709675515" name="lb_navigation_menu_contentDescription">"Меню навігації"</string>
+    <string msgid="2394451791544864917" name="lb_onboarding_accessibility_next">"Далі"</string>
+    <string msgid="5549711907371161292" name="lb_onboarding_get_started">"ПОЧАТИ"</string>
+    <string msgid="8691966842977635128" name="lb_playback_controls_closed_captioning_disable">"Вимкнути субтитри"</string>
+    <string msgid="2346334170216706076" name="lb_playback_controls_closed_captioning_enable">"Увімкнути субтитри"</string>
+    <string msgid="740570111678243493" name="lb_playback_controls_fast_forward">"Перемотати вперед"</string>
+    <string msgid="5734614175721471329" name="lb_playback_controls_fast_forward_multiplier">"Перемотати вперед – %1$dX"</string>
+    <string msgid="5859666950961624736" name="lb_playback_controls_hidden">"Елементи керування медіа сховано. Натисніть цифрову панель, щоб показати їх"</string>
+    <string msgid="1209119371486219736" name="lb_playback_controls_high_quality_disable">"Вимкнути високу якість"</string>
+    <string msgid="3057698527166674705" name="lb_playback_controls_high_quality_enable">"Увімкнути високу якість"</string>
+    <string msgid="8730341244454469032" name="lb_playback_controls_more_actions">"Більше команд"</string>
+    <string msgid="917331776961802657" name="lb_playback_controls_pause">"Призупинити"</string>
+    <string msgid="5770668162543767702" name="lb_playback_controls_picture_in_picture">"Перейти в режим \"Картинка в картинці\""</string>
+    <string msgid="7088090604803481121" name="lb_playback_controls_play">"Відтворити"</string>
+    <string msgid="8429099206716245199" name="lb_playback_controls_repeat_all">"Повторити все"</string>
+    <string msgid="1614290959784265209" name="lb_playback_controls_repeat_none">"Не повторювати"</string>
+    <string msgid="676658705837320560" name="lb_playback_controls_repeat_one">"Повторити один елемент"</string>
+    <string msgid="2866333981131020771" name="lb_playback_controls_rewind">"Перемотати назад"</string>
+    <string msgid="6038956370475252734" name="lb_playback_controls_rewind_multiplier">"Перемотати назад – %1$dX"</string>
+    <string msgid="8690223891515602822" name="lb_playback_controls_shown">"Елементи керування медіа показано"</string>
+    <string msgid="6793109999253893369" name="lb_playback_controls_shuffle_disable">"Вимкнути перемішування"</string>
+    <string msgid="5151681938752704485" name="lb_playback_controls_shuffle_enable">"Увімкнути перемішування"</string>
+    <string msgid="8117512422682146745" name="lb_playback_controls_skip_next">"Пропустити наступний елемент"</string>
+    <string msgid="3481218248309447059" name="lb_playback_controls_skip_previous">"Пропустити попередній елемент"</string>
+    <string msgid="3544533410444618518" name="lb_playback_controls_thumb_down">"Не вибирати оцінку \"Не подобається\""</string>
+    <string msgid="8475278766138652105" name="lb_playback_controls_thumb_down_outline">"Вибрати оцінку \"Не подобається\""</string>
+    <string msgid="3458671378107738666" name="lb_playback_controls_thumb_up">"Не вибирати оцінку \"Подобається\""</string>
+    <string msgid="1385865732502550659" name="lb_playback_controls_thumb_up_outline">"Вибрати оцінку \"Подобається\""</string>
+    <string msgid="1471121602610716654" name="lb_playback_time_separator">"/"</string>
+    <string msgid="5700349211583074131" name="lb_search_bar_hint">"Пошук"</string>
+    <string msgid="5926531297066387462" name="lb_search_bar_hint_speech">"Продиктуйте пошуковий запит"</string>
+    <string msgid="4826526877249029043" name="lb_search_bar_hint_with_title">"Шукати: <ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g>"</string>
+    <string msgid="6032250334706920550" name="lb_search_bar_hint_with_title_speech">"Продиктуйте, щоб шукати: <ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g>"</string>
+    <string msgid="1301877238242752863" name="orb_search_action">"Команда пошуку"</string>
+    <string name="ply_cancel_survey_message">Нам дуже шкода, що Ви відміняєте підписку. Будь ласка, допоможіть нам покращити наші послуги уточнивши причини скасування підписки:</string>
+    <string name="ply_cancel_survey_reason_1">Я вважаю підписку занадто дорогою</string>
+    <string name="ply_cancel_survey_reason_2">Я знайшов(-ла) кращий додаток</string>
+    <string name="ply_cancel_survey_reason_3">Мені більше не потрібна ця послуга</string>
+    <string name="ply_cancel_survey_reason_4">Я недостатньо користуюся цією послугою</string>
+    <string name="ply_cancel_survey_reason_5">Моє рішення пов\'язане з технічними питаннями</string>
+    <string name="ply_cancel_survey_reason_6">Інше</string>
+    <string name="ply_cancel_survey_reason_7">Я не хочу відповідати</string>
+    <string name="ply_cancel_survey_title">Чому Ви хочете скасувати підписку?</string>
+    <string name="ply_configuration_error">Помилка налаштування</string>
+    <string name="ply_in_app_absent_receipt">Квитанцію не знайдено. Відновіть свої покупки, щоб спробувати ще раз.</string>
+    <string name="ply_in_app_already_being_purchased_error">Покупка для цього продукту вже обробляєтся</string>
+    <string name="ply_in_app_already_being_restored_error">Відновлення покупки вже триває</string>
+    <string name="ply_in_app_already_subscribed_error">Ви вже придбали наші онлайн-сервіси!</string>
+    <string name="ply_in_app_client_invalid_error">Ви не маєте доступу для виконання цієї дії.</string>
+    <string name="ply_in_app_cloud_permission_error">Ви відмовилися надавати доступ до цієї послуги.</string>
+    <string name="ply_in_app_cloud_service_revoked_error">Ви не скасували доступ до цієї послуги.</string>
+    <string name="ply_in_app_error_pending">Ваш платіж обробляється. При сплаті буде автоматично підтверджено вашу покупку.</string>
+    <string name="ply_in_app_login_button">Вже маєте підписку? Увійдіть.</string>
+    <string name="ply_in_app_network_error">Спроба з’ єднання з мережею зазнала невдачі</string>
+    <string name="ply_in_app_no_product_found_error">Не вдається знайти продукт.</string>
+    <string name="ply_in_app_parsing_error">Не вдалося обробити відповідь сервера</string>
+    <string name="ply_in_app_partial_restore_partial_with_errors">Наступні покупки були відновлені: %1$s Виявлено наступні помилки %2$s</string>
+    <string name="ply_in_app_payment_cancelled_error">Ваш запит було скасовано</string>
+    <string name="ply_in_app_payment_invalid_error">Неправильний ідентифікатор покупки.</string>
+    <string name="ply_in_app_payment_not_allowed_error">Неможливо придбати на цьому пристрої.</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_many">%d днів</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_one">1 день</string>
+    <string name="ply_in_app_period_day_plural_rule_many">%d днів</string>
+    <string name="ply_in_app_period_day_plural_rule_none">день</string>
+    <string name="ply_in_app_period_day_plural_rule_one">день</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_many">%d місяців</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_one">1 місяць</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_six">%d місяців</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_three">%d місяців</string>
+    <string name="ply_in_app_period_month_plural_rule_many">%d місяців</string>
+    <string name="ply_in_app_period_month_plural_rule_none">місяць</string>
+    <string name="ply_in_app_period_month_plural_rule_one">місяць</string>
+    <string name="ply_in_app_period_month_plural_rule_six">семестр</string>
+    <string name="ply_in_app_period_month_plural_rule_three">квартал</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_many">%d тижнів</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_one">1 тиждень</string>
+    <string name="ply_in_app_period_week_plural_rule_many">%d тижнів</string>
+    <string name="ply_in_app_period_week_plural_rule_none">тиждень</string>
+    <string name="ply_in_app_period_week_plural_rule_one">тиждень</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_many">%d років</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_one">1 рік</string>
+    <string name="ply_in_app_period_year_plural_rule_many">%d років</string>
+    <string name="ply_in_app_period_year_plural_rule_none">рік</string>
+    <string name="ply_in_app_period_year_plural_rule_one">рік</string>
+    <string name="ply_in_app_product_not_available_error">Продукт недоступний у Вашому App Store</string>
+    <string name="ply_in_app_psd2_required">Ваша покупка буде активною після підтвердження банком Вашого платежу. Якщо у вас виникли проблеми, відновіть свої покупки.</string>
+    <string name="ply_in_app_restore_button">Відновіть свої покупки</string>
+    <string name="ply_in_app_restore_status_errors">Відновлення покупки зазнало невдачі з такими помилками:</string>
+    <string name="ply_in_app_restore_status_nothing">Покупок не знайдено</string>
+    <string name="ply_in_app_unknown_error">Невідома помилка</string>
+    <string name="ply_in_app_validation_failed">Підтвердження квитанції неможливе.</string>
+    <string name="ply_in_app_validation_timed_out">Перевірка вашої покупки займає трохи більше часу, ніж зазвичай. Будь ласка, перевірте її статус пізніше.</string>
+    <string name="ply_modal_alert_default_error_button">Добре</string>
+    <string name="ply_modal_alert_default_error_title">Помилка</string>
+    <string name="ply_modal_alert_in_app_deferred_button">Добре</string>
+    <string name="ply_modal_alert_in_app_deferred_content">Дякуємо! Покупку не вдалося завершити і вона потребує зовнішньої перевірки. Після завершення перевірки Ви зможете насолодитися покупкою.</string>
+    <string name="ply_modal_alert_in_app_deferred_title">Очікування підтвердження</string>
+    <string name="ply_modal_alert_in_app_error_button">Добре</string>
+    <string name="ply_modal_alert_in_app_error_title">Помилка</string>
+    <string name="ply_modal_alert_in_app_restoration_error_title">Помилка</string>
+    <string name="ply_modal_alert_in_app_restore_status_success_content">Покупки відновлено</string>
+    <string name="ply_modal_alert_in_app_success_button">Почнімо</string>
+    <string name="ply_modal_alert_in_app_success_content">Ваша покупка пройшла перевірку. Тепер ви можете користуватися продуктом.</string>
+    <string name="ply_modal_alert_in_app_success_title">Чудово!</string>
+    <string name="ply_modal_alert_in_app_success_unauthentified_content">Ваша покупка активна. Увійдіть в систему або зареєструйтесь, щоб насолодитися підпискою на інших пристроях!</string>
+    <string name="ply_modal_alert_in_app_successfull_restore_message_title">Відновлення завершено</string>
+    <string name="ply_modal_change_plan_different_store_cancel_button">Скасувати</string>
+    <string name="ply_modal_change_plan_different_store_content">У вас вже є підписка в %s. Скасуйте підписку, щоб уникнути подвійного списання коштів. Ви хочете продовжити?</string>
+    <string name="ply_modal_change_plan_different_store_continue_button">Продовжити</string>
+    <string name="ply_modal_change_plan_different_store_title">Увага!</string>
+    <string name="ply_modal_downgrade_button">Зрозуміло!</string>
+    <string name="ply_modal_downgrade_description">Зміну Вашого тарифного плану було перевірено і він буде активований наприкінці терміну дії поточного періоду підписки </string>
+    <string name="ply_modal_downgrade_title">Вітаємо</string>
+    <string name="ply_modal_huawei_not_logged_button">Добре</string>
+    <string name="ply_modal_huawei_not_logged_description">Будь ласка, увійдіть до свого облікового запису Huawei в App Gallery</string>
+    <string name="ply_modal_huawei_not_logged_title">Облікового запису Huawei не знайдено</string>
+    <string name="ply_powered_by_purchasely">Працює на платформі Purchasely</string>
+    <string name="ply_price_free">безкоштовно</string>
+    <string name="ply_promo_code_button">Промо код?</string>
+    <string name="ply_subscription_cancel_pattern">Дата закінчення терміну дії: %s</string>
+    <string name="ply_subscription_detail_group_title">Ваша підписка</string>
+    <string name="ply_subscription_plans_group_title">Опції</string>
+    <string name="ply_subscription_renew_pattern">Наступна дата списання: %s</string>
+    <string name="ply_subscription_title">Змінити підписку</string>
+    <string name="ply_subscription_unsubscribe_button">Скасувати підписку</string>
+    <string name="ply_subscription_unsubscribe_change_plan_not_available_google">Ця підписка не була придбана в App Store.</string>
+    <string name="ply_subscriptions_active_group_title">Активна</string>
+    <string name="ply_subscriptions_empty_message">На даний момент Ви не маєте активної підписки</string>
+    <string name="ply_subscriptions_title">Мої підписки</string>
+    <string name="ply_unsubscribe_amazon_button">Добре</string>
+    <string name="ply_unsubscribe_amazon_content">Перейдіть до Amazon.com. Перевірте, чи Ви зайшли у правильний обліковий запис Amazon. Перейдіть на сторінку вашого облікового запису. Натисніть "Інші підписки" в розділі "Членство та підписки". Оберіть підписку, яку потрібно скасувати. Потім "Скасувати підписку".</string>
+    <string name="ply_unsubscribe_amazon_title">Скасувати підписку</string>
+    <string name="ply_unsubscribe_apple_button">Добре</string>
+    <string name="ply_unsubscribe_apple_content">Відкрийте додаток Налаштування. Оберіть своє ім\'я (Apple ID). Оберіть "Підписки". Оберіть підписку, якою Ви бажаєте керувати. Оберіть "Скасувати підписку".</string>
+    <string name="ply_unsubscribe_apple_title">Скасувати підписку</string>
+    <string name="ply_unsubscribe_google_button">Добре</string>
+    <string name="ply_unsubscribe_google_content">Перейдіть до play.google.com. Перевірте, чи Ви зайшли в правильний обліковий запис Google. Ліворуч оберіть пункт "Мої підписки". Оберіть підписку, яку потрібно скасувати. Натисніть кнопку "Керування", а потім "Скасувати підписку".</string>
+    <string name="ply_unsubscribe_google_title">Скасувати підписку</string>
+    <string name="ply_untracked_event">Подія не опрацьовуваєтся</string>
+    <string name="ply_webview_qr_or_url">Відкануйте QR-код вище або відвідайте:</string>
+    <string name="ply_webview_url">Перейдіть до наступної URL адреси за допомогою веб-браузера:</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Пошук"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>

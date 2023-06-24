@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Platform,
   Text,
@@ -6,13 +6,15 @@ import {
   View,
   KeyboardAvoidingView,
   Keyboard,
+  StatusBar,
 } from 'react-native';
 import {connect} from 'react-redux';
 import moment from 'moment';
 import notifee from '@notifee/react-native';
 import DeviceInfo from 'react-native-device-info';
-
+import messaging from '@react-native-firebase/messaging';
 import Lottie from 'lottie-react-native';
+import TimeZone from 'react-native-timezone';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {createAnimatableComponent} from 'react-native-animatable';
@@ -21,7 +23,12 @@ import Button from '../../components/button';
 import styles from './styles';
 import states from './states';
 import dispatcher from './dispatcher';
-import {openPrivacyPolicy, openTermsofUse} from '../../helpers/user';
+import {
+  handleSubscriptionStatus,
+  openPrivacyPolicy,
+  openTermsofUse,
+  reloadUserProfile,
+} from '../../helpers/user';
 import LoadingIndicator from '../../components/loading-indicator';
 import {isIphoneXorAbove} from '../../shared/devices';
 
@@ -38,20 +45,42 @@ import ChooseCommitment from '../../layout/register/choose-commitment';
 import Contract from '../../layout/register/contract';
 import {listTopic} from '../../shared/staticData';
 import {reset} from '../../shared/navigationRef';
+import {
+  checkDeviceRegister,
+  postRegister,
+  updateProfile,
+} from '../../shared/request';
+import {storeRegistrationData} from '../../store/defaultState/actions';
+import {sizing} from '../../shared/styling';
+import {
+  firstStepSelection,
+  forthStepSelection,
+  secondStepSelection,
+  thirdStepSelection,
+} from './categoriesArr';
+import {removeDuplicatesArray} from '../../helpers/arrayHandler';
 
 const Convetti = require('../../assets/lottie/hello.json');
 
 const AnimateAbleTouch = createAnimatableComponent(View);
 
-function Register({defaultData}) {
+function Register({
+  handleSetProfile,
+  fetchListQuote,
+  fetchCollection,
+  registerData,
+}) {
   const isIpad = DeviceInfo.getSystemName() === 'iPadOS' || Platform.isPad;
+  const [isInitial, setInitial] = useState(true);
   const [keyboardShow, setKeyboardShow] = useState(false);
   const [registerStep, setRegisterStep] = useState(1);
   const [substep, setSubstep] = useState('a');
   const [notificationStep, setNotificationStep] = useState(1);
   const [isLoading, setLoading] = useState(false);
+  const [isHasRegister, setHasRegister] = useState(false);
+  const [getFcmToken, setFcmToken] = useState(null);
   const [mutateForm, setMutateForm] = useState({
-    style: 1,
+    icon: 1,
     fcm_token: null,
     purchasely_id: null,
     device_id: null,
@@ -62,20 +91,181 @@ function Register({defaultData}) {
     start_at: moment(new Date(2018, 11, 24, 8, 0, 30, 0)).format(
       'YYYY-MM-DD HH:mm',
     ),
-    end_at: moment(new Date(2018, 11, 24, 21, 0, 30, 0)).format(
+    end_at: moment(new Date(2018, 11, 24, 20, 0, 30, 0)).format(
       'YYYY-MM-DD HH:mm',
     ),
-    often: 10,
+    often: 15,
+    selectedCategory: [],
+    impress_friends: '',
+    impress_business: '',
+    impress_children: '',
+    impress_members: '',
+    commit_goal: '12',
+
     selectedFeeling: [],
     causeFeeling: [],
-    selectedCategory: [],
-    // selectedCategory: defaultData.areas,
     isAnytime: null,
     specific_goal: null,
     important_change: null,
-    commit_goal: '12',
     is_impress: null,
   });
+
+  useEffect(() => {
+    const handleInitial = async () => {
+      setSubstep(registerData?.substep || substep);
+      setRegisterStep(registerData?.registerStep || registerStep);
+      setMutateForm(registerData?.mutateForm || mutateForm);
+      setFormValues(registerData?.values || values);
+      setHasRegister(registerData?.isHasRegister || isHasRegister);
+      setNotificationStep(registerData?.notificationStep || notificationStep);
+      setInitial(false);
+      if (
+        registerData &&
+        registerData.registerStep &&
+        registerData.registerStep === 7 &&
+        registerData.substep === 'a'
+      ) {
+        setTimeout(() => {
+          setSubstep('b');
+        }, 2300);
+      }
+      await AsyncStorage.removeItem('isFinishTutorial');
+    };
+
+    DeviceInfo.getUniqueId().then(async uniqueId => {
+      try {
+        setMutateForm({
+          ...mutateForm,
+          device_id: uniqueId,
+          // device_id: Date.now().toString(),
+          purchasely_id: null,
+        });
+      } catch (err) {
+        console.log('Err get device info:', err);
+      }
+    });
+    handleInitial();
+    setTimeout(async () => {
+      const fcmToken = await messaging().getToken();
+      console.log('Check fcmToken:', fcmToken);
+      setFcmToken(fcmToken);
+    }, 3000);
+  }, []);
+
+  useEffect(() => {
+    if (registerStep === 8) {
+      const getDeviceID = async () => {
+        try {
+          const timeZone = await TimeZone.getTimeZone();
+          const payload = {
+            ...mutateForm,
+            name: values.name,
+            anytime: values.isAnytime,
+            often: values.often,
+            start: moment(values.start_at).format('HH:mm'),
+            end: moment(values.end_at).format('HH:mm'),
+            gender: values.gender,
+            timezone: timeZone,
+
+            impress_friends: values.impress_friends,
+            impress_business: values.impress_business,
+            impress_children: values.impress_children,
+            impress_members: values.impress_members,
+            commit_goal: values.commit_goal,
+            // topics: values.selectedCategory,
+            fcm_token: getFcmToken,
+          };
+          const res = await checkDeviceRegister({
+            device_id: mutateForm.device_id,
+          });
+          setHasRegister(true);
+          handleSetProfile(res);
+          handleSubscriptionStatus(res.data.subscription);
+          fetchListQuote();
+          fetchCollection();
+          await updateProfile({
+            ...payload,
+            _method: 'PATCH',
+          });
+          setTimeout(() => {
+            reloadUserProfile();
+          }, 2000);
+          reset('MainPage', {isFromOnboarding: true});
+          AsyncStorage.setItem('isLogin', 'yes');
+        } catch (err) {
+          console.log('Device id not register');
+          handleSubmit(true);
+        }
+      };
+      getDeviceID();
+    }
+  }, [registerStep]);
+
+  useEffect(() => {
+    if (!isInitial) {
+      // storeRegistrationData(null);
+      storeRegistrationData({
+        substep,
+        registerStep,
+        mutateForm,
+        values,
+        isHasRegister,
+        notificationStep,
+      });
+    }
+  }, [
+    substep,
+    registerStep,
+    mutateForm,
+    values,
+    isHasRegister,
+    notificationStep,
+  ]);
+
+  const handleAfterRegister = async () => {
+    console.log('AFter register called');
+    await fetchListQuote();
+    await fetchCollection();
+    reset('MainPage', {isFromOnboarding: true});
+    AsyncStorage.setItem('isLogin', 'yes');
+    setLoading(false);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      setLoading(true);
+
+      const timeZone = await TimeZone.getTimeZone();
+      const payload = {
+        ...mutateForm,
+        name: values.name,
+        anytime: values.isAnytime,
+        often: values.often,
+        start: moment(values.start_at).format('HH:mm'),
+        end: moment(values.end_at).format('HH:mm'),
+        gender: values.gender,
+        timezone: timeZone,
+
+        impress_friends: values.impress_friends,
+        impress_business: values.impress_business,
+        impress_children: values.impress_children,
+        impress_members: values.impress_members,
+        commit_goal: values.commit_goal,
+        // topics: values.selectedCategory,
+        fcm_token: getFcmToken,
+      };
+      const res = await postRegister(payload);
+      handleSetProfile(res);
+      setHasRegister(true);
+      handleAfterRegister();
+      setTimeout(() => {
+        reloadUserProfile();
+      }, 2000);
+    } catch (err) {
+      console.log('Error register:', err);
+      setLoading(false);
+    }
+  };
 
   function getStatusDisable() {
     if (registerStep === 5 && !values.commit_goal) {
@@ -140,26 +330,26 @@ function Register({defaultData}) {
       }
     } else if (registerStep === 6) {
       // FOR WIDGET  CONDITION
-      if (notificationStep === 4) {
-        setRegisterStep(7);
-        setSubstep('a');
-        nextStepAnimate();
-      } else if (notificationStep === 3) {
-        setNotificationStep(4);
-      } else if (notificationStep === 2) {
-        const settings = await notifee.requestPermission();
-        setNotificationStep(3);
-      } else {
-        setNotificationStep(2);
-      }
-      // if (notificationStep === 2) {
-      //   const settings = await notifee.requestPermission();
-      //   setRegisterStep(8);
+      // if (notificationStep === 4) {
+      //   setRegisterStep(7);
       //   setSubstep('a');
       //   nextStepAnimate();
+      // } else if (notificationStep === 3) {
+      //   setNotificationStep(4);
+      // } else if (notificationStep === 2) {
+      //   const settings = await notifee.requestPermission();
+      //   setNotificationStep(3);
       // } else {
       //   setNotificationStep(2);
       // }
+      if (notificationStep === 2) {
+        const settings = await notifee.requestPermission();
+        setRegisterStep(7);
+        setSubstep('a');
+        nextStepAnimate();
+      } else {
+        setNotificationStep(2);
+      }
     } else if (registerStep === 5) {
       setRegisterStep(registerStep + 1);
       setSubstep('a');
@@ -174,8 +364,8 @@ function Register({defaultData}) {
         setRegisterStep(7);
       }
     } else if (registerStep === 7) {
-      reset('MainPage');
-      AsyncStorage.setItem('isLogin', 'yes');
+      console.log('NOTHING');
+      setRegisterStep(8);
     } else {
       setRegisterStep(registerStep + 1);
       setSubstep('a');
@@ -194,6 +384,18 @@ function Register({defaultData}) {
     }
   };
 
+  const handleSelectCategory = (stateName, value, categorySelected = []) => {
+    const listContent = removeDuplicatesArray([
+      ...values.selectedCategory,
+      ...categorySelected,
+    ]);
+    setFormValues({
+      ...values,
+      [stateName]: value,
+      selectedCategory: listContent,
+    });
+  };
+
   const handleSkipBtn = async () => {
     if (registerStep === 1) {
       if (substep === 'a') {
@@ -205,32 +407,33 @@ function Register({defaultData}) {
       }
     } else if (registerStep === 6) {
       handleChangeValue('isAnytime', 1);
+      setRegisterStep(7);
+      setSubstep('a');
+      nextStepAnimate();
 
       // FOR WIDGET  CONDITION
-      if (notificationStep === 4) {
-        setRegisterStep(7);
-        setSubstep('a');
-        nextStepAnimate();
-      } else if (notificationStep === 3) {
-        setNotificationStep(4);
-      } else if (notificationStep === 2) {
-        setNotificationStep(3);
-      } else {
-        setNotificationStep(2);
-      }
+      // if (notificationStep === 4) {
+      //   setRegisterStep(7);
+      //   setSubstep('a');
+      //   nextStepAnimate();
+      // } else if (notificationStep === 3) {
+      //   setNotificationStep(4);
+      // } else if (notificationStep === 2) {
+      //   setNotificationStep(3);
+      // } else {
+      //   setNotificationStep(2);
+      // }
     } else if (registerStep === 4) {
       setRegisterStep(registerStep + 1);
-      // handleChangeValue(
-      //   'selectedCategory',
-      //   defaultData.areas.map(item => item.id),
-      // );
+      handleChangeValue(
+        'selectedCategory',
+        listTopic.map(item => item.id),
+      );
     } else {
       setRegisterStep(registerStep + 1);
       setSubstep('a');
     }
   };
-
-  console.log('Check registerStep:', registerStep);
 
   function renderContent() {
     if (registerStep === 8) {
@@ -242,7 +445,7 @@ function Register({defaultData}) {
         <Contract
           values={values}
           substep={substep}
-          listCategory={listTopic}
+          listCategory={values.selectedCategory}
           onLongPress={handleContinueStep}
         />
       );
@@ -267,12 +470,35 @@ function Register({defaultData}) {
       );
     }
     if (registerStep === 4) {
+      // return (
+      //   <ContentTopic
+      //     name={values.name}
+      //     initialCategory={values.selectedCategory}
+      //     onSelect={value => {
+      //       handleChangeValue('selectedCategory', value);
+      //     }}
+      //   />
       return (
-        <ContentTopic
+        <ContentImpress
           name={values.name}
-          initialCategory={values.selectedCategory}
-          onSelect={value => {
-            handleChangeValue('selectedCategory', value);
+          substep={substep}
+          onPressGoals={value => {
+            if (substep === 'c') {
+              handleSelectCategory(
+                'impress_children',
+                value,
+                value === 'yes' ? thirdStepSelection : [],
+              );
+              setSubstep('d');
+            }
+            if (substep === 'd') {
+              handleSelectCategory(
+                'impress_members',
+                value,
+                value === 'yes' ? forthStepSelection : [],
+              );
+              setRegisterStep(registerStep + 1);
+            }
           }}
         />
       );
@@ -284,16 +510,20 @@ function Register({defaultData}) {
           substep={substep}
           onPressGoals={value => {
             if (substep === 'a') {
+              handleSelectCategory(
+                'impress_friends',
+                value,
+                value === 'yes' ? firstStepSelection : [],
+              );
               setSubstep('b');
             }
             if (substep === 'b') {
+              handleSelectCategory(
+                'impress_business',
+                value,
+                value === 'yes' ? secondStepSelection : [],
+              );
               setSubstep('c');
-            }
-            if (substep === 'c') {
-              setSubstep('d');
-            }
-            if (substep === 'd') {
-              handleChangeValue('is_impress', value);
               setRegisterStep(registerStep + 1);
             }
           }}
@@ -351,6 +581,7 @@ function Register({defaultData}) {
   function renderSkipButton() {
     if (
       registerStep === 3 ||
+      registerStep === 4 ||
       registerStep === 5 ||
       (registerStep === 6 && notificationStep !== 1)
     ) {
@@ -377,7 +608,7 @@ function Register({defaultData}) {
     if (registerStep === 8 || registerStep === 9 || registerStep === 7) {
       return null;
     }
-    if (registerStep === 3) {
+    if (registerStep === 3 || registerStep === 4) {
       return null;
     }
     if (registerStep === 2) {
@@ -422,6 +653,7 @@ function Register({defaultData}) {
             styles.btnContinue,
             notificationStep === 2 && registerStep === 7 && styles.noMgBtm,
           ]}
+          disableWhite
           label={getLabelDarkButton()}
           isDisable={getStatusDisable()}
           onPress={handleContinueStep}
@@ -455,7 +687,7 @@ function Register({defaultData}) {
     if (registerStep === 8 && substep === 'a') {
       return null;
     }
-    if (registerStep === 9) {
+    if (registerStep === 8) {
       return null;
     }
     return <HeaderStep currentStep={registerStep} />;
@@ -463,6 +695,11 @@ function Register({defaultData}) {
 
   return (
     <View style={styles.ctnRoot}>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="#000"
+        // hidden={statusbarStatus}
+      />
       {renderAnimation()}
       <KeyboardAvoidingView
         style={styles.flexOne}
@@ -480,8 +717,9 @@ function Register({defaultData}) {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.ctnScroll}
           scrollEnabled={
-            (!isIphoneXorAbove() && registerStep === 8) ||
-            (isIpad && registerStep !== 1)
+            (!isIphoneXorAbove() && registerStep === 7) ||
+            (isIpad && registerStep !== 1) ||
+            sizing.getWindowHeight(1) < 844
           }>
           {renderHeader()}
           {renderContent()}

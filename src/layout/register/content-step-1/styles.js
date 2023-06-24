@@ -72,13 +72,15 @@ export default StyleSheet.create({
     paddingHorizontal: moderateScale(0),
   },
   ctnYellow: {
-    backgroundColor: colors.yellow,
+    // backgroundColor: colors.yellow,
   },
   ctnImg: {
     position: 'absolute',
     width: sizing.getDimensionWidth(1),
     height: sizing.getWindowHeight(1),
-    backgroundColor: 'red',
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imgSuccess: {
     width: moderateScale(420),
@@ -101,7 +103,7 @@ export default StyleSheet.create({
     height: 200,
   },
   animationStyle: {
-    width: '100%',
-    height: '100%',
+    width: sizing.getDimensionWidth(1),
+    height: sizing.getWindowHeight(1),
   },
 });

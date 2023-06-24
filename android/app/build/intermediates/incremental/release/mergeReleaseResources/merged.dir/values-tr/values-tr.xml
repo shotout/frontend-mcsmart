@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Eve gidiş yolunu göster"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Yukarı git"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Diğer seçenekler"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Bitti"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Tümünü göster"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Bir uygulama seçin"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"KAPAT"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"AÇ"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"sil"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Üst Karakter+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"boşluk"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menü+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Ara…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Sorguyu temizle"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Arama sorgusu"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Ara"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Sorguyu gönder"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Sesli arama"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Şununla paylaş:"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"<ns1:g id="APPLICATION_NAME">%s</ns1:g> ile paylaş"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Daralt"</string>
+    <string msgid="2523291102206661146" name="common_google_play_services_enable_button">Etkinleştir</string>
+    <string msgid="227660514972886228" name="common_google_play_services_enable_text">Google Play hizmetlerini etkinleştirmezseniz %1$s çalışmaz.</string>
+    <string msgid="5122002158466380389" name="common_google_play_services_enable_title">Google Play hizmetlerini etkinleştirin</string>
+    <string msgid="7153882981874058840" name="common_google_play_services_install_button">Yükle</string>
+    <string name="common_google_play_services_install_text">%1$s, şu anda cihazınızda bulunmayan Google Play hizmetleri olmadan çalışmaz.</string>
+    <string msgid="7215213145546190223" name="common_google_play_services_install_title">Google Play hizmetlerini edinin</string>
+    <string name="common_google_play_services_notification_channel_name">Google Play hizmetlerinin kullanılabilirliği</string>
+    <string name="common_google_play_services_notification_ticker">Google Play Hizmetleri hatası</string>
+    <string name="common_google_play_services_unknown_issue">%1$s, Google Play hizmetleriyle ilgili sorun yaşıyor. Lütfen tekrar deneyin.</string>
+    <string name="common_google_play_services_unsupported_text">%1$s, Google Play hizmetleri olmadan çalışmaz ve bu hizmetler cihazınız tarafından desteklenmiyor.</string>
+    <string msgid="6556509956452265614" name="common_google_play_services_update_button">Güncelle</string>
+    <string msgid="9053896323427875356" name="common_google_play_services_update_text">Google Play hizmetlerini güncellemezseniz %1$s çalışmayacak.</string>
+    <string msgid="6006316683626838685" name="common_google_play_services_update_title">Google Play hizmetlerini güncelleyin</string>
+    <string name="common_google_play_services_updating_text">%1$s, şu anda güncellenmekte olan Google Play hizmetleri olmadan çalışmaz.</string>
+    <string name="common_google_play_services_wear_update_text">Google Play hizmetlerinin yeni sürümü gerekiyor. Kendisini kısa süre içinde güncelleyecektir.</string>
+    <string name="common_open_on_phone">Telefonda aç</string>
+    <string name="common_signin_button_text">Oturum aç</string>
+    <string name="common_signin_button_text_long">Google\'da oturum aç</string>
+    <string msgid="4657191930956702614" name="lb_control_display_fast_forward_multiplier">"%1$dX"</string>
+    <string msgid="4597148235912710942" name="lb_control_display_rewind_multiplier">"%1$dX"</string>
+    <string msgid="893619591225519922" name="lb_guidedaction_continue_title">"Devam"</string>
+    <string msgid="3330958750346333890" name="lb_guidedaction_finish_title">"Son"</string>
+    <string msgid="3228326776757666747" name="lb_media_player_error">"MediaPlayer hata kodu %1$d ekstra %2$d"</string>
+    <string msgid="8084428500709675515" name="lb_navigation_menu_contentDescription">"Gezinme menüsü"</string>
+    <string msgid="2394451791544864917" name="lb_onboarding_accessibility_next">"Sonraki"</string>
+    <string msgid="5549711907371161292" name="lb_onboarding_get_started">"BAŞLA"</string>
+    <string msgid="8691966842977635128" name="lb_playback_controls_closed_captioning_disable">"Altyazıları Devre Dışı Bırak"</string>
+    <string msgid="2346334170216706076" name="lb_playback_controls_closed_captioning_enable">"Altyazıları Etkinleştir"</string>
+    <string msgid="740570111678243493" name="lb_playback_controls_fast_forward">"İleri Sar"</string>
+    <string msgid="5734614175721471329" name="lb_playback_controls_fast_forward_multiplier">"%1$dX İleri Sar"</string>
+    <string msgid="5859666950961624736" name="lb_playback_controls_hidden">"Medya denetimleri gizli durumda. Görüntülemek için d-pad\'e basın."</string>
+    <string msgid="1209119371486219736" name="lb_playback_controls_high_quality_disable">"Yüksek Kalitede Oynatmayı Devre Dışı Bırak"</string>
+    <string msgid="3057698527166674705" name="lb_playback_controls_high_quality_enable">"Yüksek Kalitede Oynatmayı Etkinleştir"</string>
+    <string msgid="8730341244454469032" name="lb_playback_controls_more_actions">"Diğer İşlemler"</string>
+    <string msgid="917331776961802657" name="lb_playback_controls_pause">"Duraklat"</string>
+    <string msgid="5770668162543767702" name="lb_playback_controls_picture_in_picture">"Pencere İçinde Pencere Moduna Geç"</string>
+    <string msgid="7088090604803481121" name="lb_playback_controls_play">"Oynat"</string>
+    <string msgid="8429099206716245199" name="lb_playback_controls_repeat_all">"Tümünü Tekrarla"</string>
+    <string msgid="1614290959784265209" name="lb_playback_controls_repeat_none">"Hiçbirini Tekrarlama"</string>
+    <string msgid="676658705837320560" name="lb_playback_controls_repeat_one">"Birini Tekrarla"</string>
+    <string msgid="2866333981131020771" name="lb_playback_controls_rewind">"Geri Sar"</string>
+    <string msgid="6038956370475252734" name="lb_playback_controls_rewind_multiplier">"%1$dX Geri Sar"</string>
+    <string msgid="8690223891515602822" name="lb_playback_controls_shown">"Medya denetimleri gösteriliyor"</string>
+    <string msgid="6793109999253893369" name="lb_playback_controls_shuffle_disable">"Karıştırmayı Devre Dışı Bırak"</string>
+    <string msgid="5151681938752704485" name="lb_playback_controls_shuffle_enable">"Karıştırmayı Etkinleştir"</string>
+    <string msgid="8117512422682146745" name="lb_playback_controls_skip_next">"Sonrakine Atla"</string>
+    <string msgid="3481218248309447059" name="lb_playback_controls_skip_previous">"Öncekine Atla"</string>
+    <string msgid="3544533410444618518" name="lb_playback_controls_thumb_down">"Beğenmeme Seçimini Kaldır"</string>
+    <string msgid="8475278766138652105" name="lb_playback_controls_thumb_down_outline">"Beğenmemeyi Seç"</string>
+    <string msgid="3458671378107738666" name="lb_playback_controls_thumb_up">"Beğenme Seçimini Kaldır"</string>
+    <string msgid="1385865732502550659" name="lb_playback_controls_thumb_up_outline">"Beğenmeyi Seç"</string>
+    <string msgid="1471121602610716654" name="lb_playback_time_separator">"/"</string>
+    <string msgid="5700349211583074131" name="lb_search_bar_hint">"Arama yapın"</string>
+    <string msgid="5926531297066387462" name="lb_search_bar_hint_speech">"Arama yapmak için konuşun"</string>
+    <string msgid="4826526877249029043" name="lb_search_bar_hint_with_title">"<ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g> araması yapın"</string>
+    <string msgid="6032250334706920550" name="lb_search_bar_hint_with_title_speech">"<ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g> araması yapmak için konuşun"</string>
+    <string msgid="1301877238242752863" name="orb_search_action">"Arama İşlemi"</string>
+    <string name="ply_cancel_survey_message">Aboneliğinizi iptal ettiğinizi görmek bizi çok üzüyor. Lütfen iptal nedenlerinizi söyleyerek hizmetimizi geliştirmemize yardımcı olun:</string>
+    <string name="ply_cancel_survey_reason_1">Aboneliğin çok pahalı olduğunu düşünüyorum</string>
+    <string name="ply_cancel_survey_reason_2">Daha iyi bir uygulama buldum</string>
+    <string name="ply_cancel_survey_reason_3">Artık bu hizmete ihtiyacım yok</string>
+    <string name="ply_cancel_survey_reason_4">Bu hizmeti yeterince kullanmıyorum</string>
+    <string name="ply_cancel_survey_reason_5">Kararım teknik sorunlara dayanıyor</string>
+    <string name="ply_cancel_survey_reason_6">Diğer</string>
+    <string name="ply_cancel_survey_reason_7">Yanıt vermek istemiyorum</string>
+    <string name="ply_cancel_survey_title">Neden aboneliğinizi iptal etmek istiyorsunuz?</string>
+    <string name="ply_configuration_error">Configuration error</string>
+    <string name="ply_in_app_absent_receipt">Dekont bulunamadı. Alışverişi geri alarak yeniden deneyin.</string>
+    <string name="ply_in_app_already_being_purchased_error">Bu ürün alışverişi devam ediyor</string>
+    <string name="ply_in_app_already_being_restored_error">Alışveriş geri alma işlemi zaten devam ediyor</string>
+    <string name="ply_in_app_already_subscribed_error">Zaten çevrimiçi hizmetlerimizin müşterisisiniz.</string>
+    <string name="ply_in_app_client_invalid_error">Bu işlemi yapma yetkiniz yok.</string>
+    <string name="ply_in_app_cloud_permission_error">Bu hizmete erişiminiz reddedildi.</string>
+    <string name="ply_in_app_cloud_service_revoked_error">Bu hizmete erişiminizi iptal etmediniz.</string>
+    <string name="ply_in_app_error_pending">Your payment is being processed.  Your purchase will be validated automatically when your payment has been made.</string>
+    <string name="ply_in_app_login_button">Zaten üye misiniz? Oturum açın.</string>
+    <string name="ply_in_app_network_error">Ağ bağlantısı kurulamadı</string>
+    <string name="ply_in_app_no_product_found_error">Ürün bulunamadı.</string>
+    <string name="ply_in_app_parsing_error">Sunucu yanıtı işlenemedi</string>
+    <string name="ply_in_app_partial_restore_partial_with_errors">Aşağıdaki öğeler geri alındı:  %1$s Aşağıdaki hatalar tanımlandı  %2$s</string>
+    <string name="ply_in_app_payment_cancelled_error">Talebiniz iptal edildi</string>
+    <string name="ply_in_app_payment_invalid_error">Alışveriş ID’niz geçersiz.</string>
+    <string name="ply_in_app_payment_not_allowed_error">Bu cihazdan alışveriş yapılamıyor.</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_many">%d gün</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_one">1 gün</string>
+    <string name="ply_in_app_period_day_plural_rule_many">%d gün</string>
+    <string name="ply_in_app_period_day_plural_rule_none">gün</string>
+    <string name="ply_in_app_period_day_plural_rule_one">gün</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_many">%d ay</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_one">1 ay</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_six">%d ay</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_three">%d ay</string>
+    <string name="ply_in_app_period_month_plural_rule_many">%d ay</string>
+    <string name="ply_in_app_period_month_plural_rule_none">ay</string>
+    <string name="ply_in_app_period_month_plural_rule_one">ay</string>
+    <string name="ply_in_app_period_month_plural_rule_six">6 ay</string>
+    <string name="ply_in_app_period_month_plural_rule_three">3 ay</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_many">%d hafta</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_one">1 hafta</string>
+    <string name="ply_in_app_period_week_plural_rule_many">%d hafta</string>
+    <string name="ply_in_app_period_week_plural_rule_none">hafta</string>
+    <string name="ply_in_app_period_week_plural_rule_one">hafta</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_many">%d yıl</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_one">1 yıl</string>
+    <string name="ply_in_app_period_year_plural_rule_many">%d yıl</string>
+    <string name="ply_in_app_period_year_plural_rule_none">yıl</string>
+    <string name="ply_in_app_period_year_plural_rule_one">yıl</string>
+    <string name="ply_in_app_product_not_available_error">Ürün Uygulama Mağazanızda yok</string>
+    <string name="ply_in_app_psd2_required">Ödemeniz bankanız tarafından onaylandıktan sonra satın alımınız aktif olacak. Sorun yaşarsanız, satın alımlarınızı iade edin.</string>
+    <string name="ply_in_app_restore_button">Alışverişlerinizi geri yükleyin</string>
+    <string name="ply_in_app_restore_status_errors">Geri alma işlemi aşağıdaki hatalarla vererek başarısız oldu:</string>
+    <string name="ply_in_app_restore_status_nothing">Hiçbir alışveriş bulunamadı</string>
+    <string name="ply_in_app_unknown_error">Bilinmeyen hata</string>
+    <string name="ply_in_app_validation_failed">Dekontun onaylanması mümkün değil.</string>
+    <string name="ply_in_app_validation_timed_out">Satın alımınızın onaylanması normalden daha uzun sürüyor. Lütfen sitemize daha sonra tekrar gelin.</string>
+    <string name="ply_modal_alert_default_error_button">Tamam</string>
+    <string name="ply_modal_alert_default_error_title">Hata</string>
+    <string name="ply_modal_alert_in_app_deferred_button">Tamam</string>
+    <string name="ply_modal_alert_in_app_deferred_content">Thank you! Your purchase couldn\'t be completed yet and requires an external validation. Once the validation is completed you will be able to enjoy your purchase.</string>
+    <string name="ply_modal_alert_in_app_deferred_title">Onay bekleniyor</string>
+    <string name="ply_modal_alert_in_app_error_button">Tamam</string>
+    <string name="ply_modal_alert_in_app_error_title">Hata</string>
+    <string name="ply_modal_alert_in_app_restoration_error_title">Hata</string>
+    <string name="ply_modal_alert_in_app_restore_status_success_content">Alışverişler geri alındı</string>
+    <string name="ply_modal_alert_in_app_success_button">Haydi!</string>
+    <string name="ply_modal_alert_in_app_success_content">Alışverişiniz başarıyla onaylandı. Tadını çıkarın.</string>
+    <string name="ply_modal_alert_in_app_success_title">İnanılmaz!</string>
+    <string name="ply_modal_alert_in_app_success_unauthentified_content">Satın alımınız aktif. Aboneliğinizi başka cihazlarda da kullanmak için oturum açın veya kayıt olun!</string>
+    <string name="ply_modal_alert_in_app_successfull_restore_message_title">Geri alma işlemi tamamlandı</string>
+    <string name="ply_modal_change_plan_different_store_cancel_button">İptal</string>
+    <string name="ply_modal_change_plan_different_store_content">%s aboneliğiniz zaten var.  Çifte faturalamadan kaçınmak için aboneliğinizi iptal edin.  Devam etmek istiyor musunuz?</string>
+    <string name="ply_modal_change_plan_different_store_continue_button">Devam et</string>
+    <string name="ply_modal_change_plan_different_store_title">Dikkat!</string>
+    <string name="ply_modal_downgrade_button">Tamamdır!</string>
+    <string name="ply_modal_downgrade_description">Plan değişikliğiniz onaylandı ve güncel abonelik döneminin sonunda şu tarihte aktif olacak:</string>
+    <string name="ply_modal_downgrade_title">Tebrikler</string>
+    <string name="ply_modal_huawei_not_logged_button">Tamam</string>
+    <string name="ply_modal_huawei_not_logged_description">Lütfen Huawei AppGallery’de Huawei hesabınıza giriş yapın</string>
+    <string name="ply_modal_huawei_not_logged_title">Huawei hesabı bulunamadı</string>
+    <string name="ply_powered_by_purchasely">Powered by Purchasely</string>
+    <string name="ply_price_free">ücretsiz</string>
+    <string name="ply_promo_code_button">Promosyon kodu?</string>
+    <string name="ply_subscription_cancel_pattern">Abonelik son tarihi: %s</string>
+    <string name="ply_subscription_detail_group_title">Aboneliğiniz</string>
+    <string name="ply_subscription_plans_group_title">Seçenekler</string>
+    <string name="ply_subscription_renew_pattern">Sonraki faturalama tarihi: %s</string>
+    <string name="ply_subscription_title">Aboneliğinizi değiştirin</string>
+    <string name="ply_subscription_unsubscribe_button">Aboneliği iptal et</string>
+    <string name="ply_subscription_unsubscribe_change_plan_not_available_google">Bu abonelik App Store’dan yapılmamış.</string>
+    <string name="ply_subscriptions_active_group_title">Aktif</string>
+    <string name="ply_subscriptions_empty_message">Şu anda aktif aboneliğiniz yok</string>
+    <string name="ply_subscriptions_title">Aboneliklerim</string>
+    <string name="ply_unsubscribe_amazon_button">Ok</string>
+    <string name="ply_unsubscribe_amazon_content">Go to amazon.com. Check if you’re signed in to the correct Amazon Account. Go to your Account page. Click on Other Subscriptions in the Memberships and subscriptions section Select the subscription you want to cancel. Then Cancel Subscription.</string>
+    <string name="ply_unsubscribe_amazon_title">Cancel a subscription</string>
+    <string name="ply_unsubscribe_apple_button">Tamam</string>
+    <string name="ply_unsubscribe_apple_content">Ayarlar uygulamasını açın.   Adınıza dokunun.   Abonelikler\'e dokunun.   Yönetmek istediğiniz aboneliğe dokunun.   Aboneliği İptal Et\'e dokunun.</string>
+    <string name="ply_unsubscribe_apple_title">Aboneliği iptal etme</string>
+    <string name="ply_unsubscribe_google_button">Tamam</string>
+    <string name="ply_unsubscribe_google_content">play.google.com adresine gidin.   Doğru Google Hesabı\'nda oturum açıp açmadığınızı kontrol edin.   Sol tarafta Aboneliklerim\'i tıklayın.   İptal etmek istediğiniz aboneliği seçin.   Yönet ve sonra Aboneliği İptal Et\'i tıklayın.</string>
+    <string name="ply_unsubscribe_google_title">Aboneliği iptal etme</string>
+    <string name="ply_untracked_event">Olay işlenemedi</string>
+    <string name="ply_webview_qr_or_url">Yukarıdaki QR kodu tarayın veya şu adresi ziyaret edin:</string>
+    <string name="ply_webview_url">İnternet tarayıcınızda şu URL’ye gidin:</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Ara"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>
