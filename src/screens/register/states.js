@@ -1,1 +1,3 @@
-export default states => ({});
+export default states => ({
+  registerData: states.defaultState.registerData,
+});

@@ -35,6 +35,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
+    maxWidth: '80%',
     marginHorizontal: moderateScale(20),
     paddingVertical: moderateScale(15),
     paddingHorizontal: moderateScale(10),

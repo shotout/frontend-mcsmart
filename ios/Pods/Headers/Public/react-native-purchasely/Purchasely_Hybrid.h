@@ -1,0 +1,1 @@
+../../../../../node_modules/react-native-purchasely/ios/Classes/Hybrid/Purchasely_Hybrid.h

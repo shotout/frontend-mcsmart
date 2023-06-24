@@ -17,7 +17,11 @@ export default function ButtonOutline({
     if (isSelected) {
       return {backgroundColor: colors.yellow};
     }
-    return {};
+
+    return {
+      borderColor: colors.black,
+      borderWidth: 1,
+    };
   }
 
   function getTextColor() {
@@ -25,7 +29,9 @@ export default function ButtonOutline({
       return {color: colors.black};
     }
     if (defaultTextColor) {
-      return {color: defaultTextColor};
+      return {
+        color: defaultTextColor,
+      };
     }
     return {};
   }

@@ -6,7 +6,7 @@ import styles from './styles';
 
 const LoadingIndicator = ({
   size = 'large',
-  color = colors.white,
+  color = colors.yellow,
   fullscreen,
   stylesRoot,
 }) => (

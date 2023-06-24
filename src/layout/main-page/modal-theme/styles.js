@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {isIphoneXorAbove} from '../../../shared/devices';
-import {colors, fonts, sizing} from '../../../shared/styling';
+import {colors, fonts} from '../../../shared/styling';
 
 export default StyleSheet.create({
   mainModalStyle: {
@@ -10,16 +10,13 @@ export default StyleSheet.create({
   },
   ctnRoot: {
     flex: 1,
-    // backgroundColor: 'red',
-  },
-  ctnScroll: {
-    flexGrow: 1,
   },
   rowHeaderText: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: moderateScale(12),
     alignItems: 'center',
+    paddingHorizontal: moderateScale(20),
   },
   boldHeader: {
     color: colors.black,
@@ -38,7 +35,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
     elevation: 3,
-    padding: moderateScale(20),
+    paddingVertical: moderateScale(20),
     paddingTop: 0,
     borderRadius: moderateScale(20),
   },
@@ -59,7 +56,16 @@ export default StyleSheet.create({
     // right: moderateScale(20),
     // marginTop: moderateScale(40),
   },
-  ctnListTheme: {
-    paddingBottom: isIphoneXorAbove() ? moderateScale(78) : moderateScale(60),
+  ctnScroll: {
+    paddingBottom: isIphoneXorAbove() ? moderateScale(80) : moderateScale(60),
+    flexGrow: 1,
+  },
+  ctnBanner: {
+    paddingBottom: isIphoneXorAbove() ? 80 : 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: '#fff',
+    paddingTop: moderateScale(10),
   },
 });

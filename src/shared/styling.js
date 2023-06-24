@@ -21,6 +21,8 @@ export const colors = {
   placeholder: '#B8B8B8',
   yellow: '#FFD600',
   dark: 'rgba(0, 0, 0, 0.8)',
+  lightYellow: '#FFF0BB',
+  maroon: '#D32929',
 };
 
 export const fonts = {

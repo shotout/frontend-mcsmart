@@ -1,0 +1,26 @@
+{
+  "name": "react-native-purchasely",
+  "version": "2.7.0",
+  "summary": "Purchasely is a solution to ease the integration and boost your In-App Purchase & Subscriptions on the App Store, Google Play Store and Huawei App Gallery.",
+  "homepage": "https://github.com/Purchasely/Purchasely-ReactNative#readme",
+  "license": "MIT",
+  "authors": "Purchasely SAS",
+  "platforms": {
+    "ios": "11.0",
+    "tvos": "11.0"
+  },
+  "source": {
+    "git": "https://github.com/Purchasely/Purchasely-ReactNative.git",
+    "tag": "2.7.0"
+  },
+  "source_files": "ios/**/*.{h,m,mm,swift}",
+  "requires_arc": true,
+  "dependencies": {
+    "React-Core": [
+
+    ],
+    "Purchasely": [
+      "3.7.1"
+    ]
+  }
+}

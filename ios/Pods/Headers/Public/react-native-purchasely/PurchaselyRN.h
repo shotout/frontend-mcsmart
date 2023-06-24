@@ -1,0 +1,1 @@
+../../../../../node_modules/react-native-purchasely/ios/PurchaselyRN.h

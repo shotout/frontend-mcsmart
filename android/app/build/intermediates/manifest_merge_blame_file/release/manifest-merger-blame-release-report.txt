@@ -1,0 +1,775 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="apps.mcsmart"
+4    android:versionCode="4"
+5    android:versionName="1.0.1" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:3:5-67
+11-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:3:22-64
+12    <uses-permission android:name="com.android.vending.BILLING" />
+12-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:4:5-67
+12-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:4:22-64
+13    <uses-permission android:name="android.permission.WAKE_LOCK" />
+13-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:10:5-68
+13-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:10:22-65
+14    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+14-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:11:5-79
+14-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:11:22-76
+15    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+15-->[:react-native-fs] /Users/nagi/Documents/mfs-smart/node_modules/react-native-fs/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-81
+15-->[:react-native-fs] /Users/nagi/Documents/mfs-smart/node_modules/react-native-fs/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:22-78
+16
+17    <uses-feature
+17-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:9:5-11:36
+18        android:name="android.software.leanback"
+18-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:10:9-49
+19        android:required="false" />
+19-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:11:9-33
+20    <uses-feature
+20-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:12:5-14:36
+21        android:name="android.hardware.touchscreen"
+21-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:13:9-52
+22        android:required="false" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+22-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:14:9-33
+23    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+23-->[com.google.android.gms:play-services-iid:17.0.0] /Users/nagi/.gradle/caches/transforms-3/cd32ead7862d0deb5a2224aa0cdc0c99/transformed/jetified-play-services-iid-17.0.0/AndroidManifest.xml:23:5-82
+23-->[com.google.android.gms:play-services-iid:17.0.0] /Users/nagi/.gradle/caches/transforms-3/cd32ead7862d0deb5a2224aa0cdc0c99/transformed/jetified-play-services-iid-17.0.0/AndroidManifest.xml:23:22-79
+24    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+24-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:25:5-77
+24-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:25:22-74
+25    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+25-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:25:5-81
+25-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:25:22-78
+26    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+26-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:26:5-77
+26-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:26:22-74
+27    <uses-permission android:name="android.permission.VIBRATE" />
+27-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:13:5-66
+27-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:13:22-63
+28    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+28-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:16:5-81
+28-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:16:22-78
+29    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+29-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:17:5-79
+29-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:17:22-76
+30    <uses-permission
+30-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:18:5-20:38
+31        android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS"
+31-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:19:9-73
+32        android:maxSdkVersion="30" /> <!-- For Xiaomi devices to enable heads-up notifications as default (https://github.com/invertase/notifee/issues/296) -->
+32-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:20:9-35
+33    <uses-permission
+33-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:22:5-24:38
+34        android:name="android.permission.ACCESS_NOTIFICATION_POLICY"
+34-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:23:9-69
+35        android:minSdkVersion="23" />
+35-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:24:9-35
+36    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+36-->[com.android.installreferrer:installreferrer:1.1.2] /Users/nagi/.gradle/caches/transforms-3/5d5d493815345d938d5912e534bb7e44/transformed/jetified-installreferrer-1.1.2/AndroidManifest.xml:9:5-110
+36-->[com.android.installreferrer:installreferrer:1.1.2] /Users/nagi/.gradle/caches/transforms-3/5d5d493815345d938d5912e534bb7e44/transformed/jetified-installreferrer-1.1.2/AndroidManifest.xml:9:22-107
+37
+38    <application
+38-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:6:5-25:19
+39        android:name="apps.mcsmart.MainApplication"
+39-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:7:7-38
+40        android:allowBackup="false"
+40-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:11:7-34
+41        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+41-->[androidx.core:core:1.8.0] /Users/nagi/.gradle/caches/transforms-3/f27f97453b7473425fb16a1633aa7422/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
+42        android:icon="@mipmap/ic_launcher"
+42-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:9:7-41
+43        android:label="@string/app_name"
+43-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:8:7-39
+44        android:roundIcon="@mipmap/ic_launcher_round"
+44-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:10:7-52
+45        android:theme="@style/AppTheme" >
+45-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:12:7-38
+46        <activity
+46-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:13:7-24:18
+47            android:name="apps.mcsmart.MainActivity"
+47-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:14:9-37
+48            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+48-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:16:9-118
+49            android:exported="true"
+49-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:19:9-32
+50            android:label="@string/app_name"
+50-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:15:9-41
+51            android:launchMode="singleTask"
+51-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:17:9-40
+52            android:windowSoftInputMode="adjustResize" >
+52-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:18:9-51
+53            <intent-filter>
+53-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:20:9-23:25
+54                <action android:name="android.intent.action.MAIN" />
+54-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:21:13-65
+54-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:21:21-62
+55
+56                <category android:name="android.intent.category.LAUNCHER" />
+56-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:22:13-73
+56-->/Users/nagi/Documents/mfs-smart/android/app/src/main/AndroidManifest.xml:22:23-70
+57            </intent-filter>
+58        </activity>
+59
+60        <provider
+60-->[:notifee_react-native] /Users/nagi/Documents/mfs-smart/node_modules/@notifee/react-native/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-14:40
+61            android:name="io.invertase.notifee.NotifeeInitProvider"
+61-->[:notifee_react-native] /Users/nagi/Documents/mfs-smart/node_modules/@notifee/react-native/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-68
+62            android:authorities="apps.mcsmart.notifee-init-provider"
+62-->[:notifee_react-native] /Users/nagi/Documents/mfs-smart/node_modules/@notifee/react-native/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-73
+63            android:exported="false"
+63-->[:notifee_react-native] /Users/nagi/Documents/mfs-smart/node_modules/@notifee/react-native/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
+64            android:initOrder="-100" />
+64-->[:notifee_react-native] /Users/nagi/Documents/mfs-smart/node_modules/@notifee/react-native/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-37
+65
+66        <service
+66-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:14:9-16:40
+67            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingHeadlessService"
+67-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-103
+68            android:exported="false" />
+68-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:16:13-37
+69        <service
+69-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:17:9-23:19
+70            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingService"
+70-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:18:13-95
+71            android:exported="false" >
+71-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:19:13-37
+72            <intent-filter>
+72-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:20:13-22:29
+73                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+73-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:21:17-78
+73-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:21:25-75
+74            </intent-filter>
+75        </service>
+76
+77        <receiver
+77-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:25:9-32:20
+78            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingReceiver"
+78-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:26:13-96
+79            android:exported="true"
+79-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:27:13-36
+80            android:permission="com.google.android.c2dm.permission.SEND" >
+80-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:28:13-73
+81            <intent-filter>
+81-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:29:13-31:29
+82                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+82-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:30:17-81
+82-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:30:25-78
+83            </intent-filter>
+84        </receiver>
+85
+86        <meta-data
+86-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:34:9-36:36
+87            android:name="firebase_messaging_auto_init_enabled"
+87-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:35:13-64
+88            android:value="true" />
+88-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:36:13-33
+89        <meta-data
+89-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:37:9-39:32
+90            android:name="com.google.firebase.messaging.default_notification_channel_id"
+90-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:38:13-89
+91            android:value="" />
+91-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:39:13-29
+92        <meta-data
+92-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:40:9-42:47
+93            android:name="com.google.firebase.messaging.default_notification_color"
+93-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:41:13-84
+94            android:resource="@color/white" />
+94-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:42:13-44
+95        <meta-data
+95-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:11:9-13:36
+96            android:name="app_data_collection_default_enabled"
+96-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-63
+97            android:value="true" />
+97-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-33
+98
+99        <service
+99-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:15:9-23:19
+100            android:name="com.google.firebase.components.ComponentDiscoveryService"
+100-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:16:13-84
+101            android:directBootAware="true"
+101-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:17:13-43
+102            android:exported="false" >
+102-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:18:13-37
+103            <meta-data
+103-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:20:13-22:85
+104                android:name="com.google.firebase.components:io.invertase.firebase.app.ReactNativeFirebaseAppRegistrar"
+104-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:21:17-120
+105                android:value="com.google.firebase.components.ComponentRegistrar" />
+105-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:22:17-82
+106            <meta-data
+106-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:55:13-57:85
+107                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+107-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:56:17-119
+108                android:value="com.google.firebase.components.ComponentRegistrar" />
+108-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:57:17-82
+109            <meta-data
+109-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/nagi/.gradle/caches/transforms-3/ed548e7ba8d876ad310e2aeaa945d01f/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:27:13-29:85
+110                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+110-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/nagi/.gradle/caches/transforms-3/ed548e7ba8d876ad310e2aeaa945d01f/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:28:17-115
+111                android:value="com.google.firebase.components.ComponentRegistrar" />
+111-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/nagi/.gradle/caches/transforms-3/ed548e7ba8d876ad310e2aeaa945d01f/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:29:17-82
+112            <meta-data
+112-->[com.google.firebase:firebase-installations:17.1.3] /Users/nagi/.gradle/caches/transforms-3/0bf078e216bfeadc8f14e626fd08df81/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:17:13-19:85
+113                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+113-->[com.google.firebase:firebase-installations:17.1.3] /Users/nagi/.gradle/caches/transforms-3/0bf078e216bfeadc8f14e626fd08df81/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:18:17-127
+114                android:value="com.google.firebase.components.ComponentRegistrar" />
+114-->[com.google.firebase:firebase-installations:17.1.3] /Users/nagi/.gradle/caches/transforms-3/0bf078e216bfeadc8f14e626fd08df81/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:19:17-82
+115        </service>
+116
+117        <provider
+117-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:25:9-29:38
+118            android:name="io.invertase.firebase.app.ReactNativeFirebaseAppInitProvider"
+118-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:26:13-88
+119            android:authorities="apps.mcsmart.reactnativefirebaseappinitprovider"
+119-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:27:13-86
+120            android:exported="false"
+120-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:28:13-37
+121            android:initOrder="99" />
+121-->[:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:29:13-35
+122
+123        <activity
+123-->[:react-native-purchasely] /Users/nagi/Documents/mfs-smart/node_modules/react-native-purchasely/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-13:55
+124            android:name="com.reactnativepurchasely.PLYProductActivity"
+124-->[:react-native-purchasely] /Users/nagi/Documents/mfs-smart/node_modules/react-native-purchasely/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-72
+125            android:autoRemoveFromRecents="true"
+125-->[:react-native-purchasely] /Users/nagi/Documents/mfs-smart/node_modules/react-native-purchasely/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-49
+126            android:theme="@style/Theme.Purchasely" />
+126-->[:react-native-purchasely] /Users/nagi/Documents/mfs-smart/node_modules/react-native-purchasely/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-52
+127        <activity
+127-->[:react-native-purchasely] /Users/nagi/Documents/mfs-smart/node_modules/react-native-purchasely/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:14:9-16:55
+128            android:name="com.reactnativepurchasely.PLYSubscriptionsActivity"
+128-->[:react-native-purchasely] /Users/nagi/Documents/mfs-smart/node_modules/react-native-purchasely/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-78
+129            android:theme="@style/Theme.Purchasely" />
+129-->[:react-native-purchasely] /Users/nagi/Documents/mfs-smart/node_modules/react-native-purchasely/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:16:13-52
+130
+131        <provider
+131-->[:react-native-share] /Users/nagi/Documents/mfs-smart/node_modules/react-native-share/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-18:20
+132            android:name="cl.json.RNShareFileProvider"
+132-->[:react-native-share] /Users/nagi/Documents/mfs-smart/node_modules/react-native-share/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-55
+133            android:authorities="apps.mcsmart.rnshare.fileprovider"
+133-->[:react-native-share] /Users/nagi/Documents/mfs-smart/node_modules/react-native-share/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-72
+134            android:exported="false"
+134-->[:react-native-share] /Users/nagi/Documents/mfs-smart/node_modules/react-native-share/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
+135            android:grantUriPermissions="true" >
+135-->[:react-native-share] /Users/nagi/Documents/mfs-smart/node_modules/react-native-share/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-47
+136            <meta-data
+136-->[:react-native-share] /Users/nagi/Documents/mfs-smart/node_modules/react-native-share/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:64
+137                android:name="android.support.FILE_PROVIDER_PATHS"
+137-->[:react-native-share] /Users/nagi/Documents/mfs-smart/node_modules/react-native-share/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
+138                android:resource="@xml/share_download_paths" />
+138-->[:react-native-share] /Users/nagi/Documents/mfs-smart/node_modules/react-native-share/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-61
+139        </provider>
+140
+141        <activity
+141-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:19:9-21:72
+142            android:name="io.purchasely.views.PLYWebViewActivity"
+142-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:20:13-66
+143            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+143-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:21:13-69
+144        <activity android:name="io.purchasely.views.PLYTVLinkActivity" />
+144-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:22:9-74
+144-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:22:19-71
+145        <activity
+145-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:23:9-25:72
+146            android:name="io.purchasely.views.PLYActivity"
+146-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:24:13-59
+147            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+147-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:25:13-69
+148        <activity
+148-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:26:9-28:66
+149            android:name="io.purchasely.views.subscriptions.tv.PLYSubscriptionsActivity"
+149-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:27:13-89
+150            android:theme="@style/Theme.AppCompat.NoActionBar" />
+150-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:28:13-63
+151
+152        <uses-library
+152-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:30:9-32:40
+153            android:name="android.test.base"
+153-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:31:13-45
+154            android:required="false" />
+154-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:32:13-37
+155        <uses-library
+155-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:33:9-35:40
+156            android:name="android.test.mock"
+156-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:34:13-45
+157            android:required="false" />
+157-->[io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:35:13-37
+158
+159        <activity
+159-->[com.google.android.gms:play-services-auth:20.5.0] /Users/nagi/.gradle/caches/transforms-3/587672d03e39ced1eb7fc33a827df9a4/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:23:9-27:75
+160            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+160-->[com.google.android.gms:play-services-auth:20.5.0] /Users/nagi/.gradle/caches/transforms-3/587672d03e39ced1eb7fc33a827df9a4/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:24:13-93
+161            android:excludeFromRecents="true"
+161-->[com.google.android.gms:play-services-auth:20.5.0] /Users/nagi/.gradle/caches/transforms-3/587672d03e39ced1eb7fc33a827df9a4/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:25:13-46
+162            android:exported="false"
+162-->[com.google.android.gms:play-services-auth:20.5.0] /Users/nagi/.gradle/caches/transforms-3/587672d03e39ced1eb7fc33a827df9a4/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:26:13-37
+163            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+163-->[com.google.android.gms:play-services-auth:20.5.0] /Users/nagi/.gradle/caches/transforms-3/587672d03e39ced1eb7fc33a827df9a4/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:27:13-72
+164        <!--
+165            Service handling Google Sign-In user revocation. For apps that do not integrate with
+166            Google Sign-In, this service will never be started.
+167        -->
+168        <service
+168-->[com.google.android.gms:play-services-auth:20.5.0] /Users/nagi/.gradle/caches/transforms-3/587672d03e39ced1eb7fc33a827df9a4/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:33:9-37:51
+169            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+169-->[com.google.android.gms:play-services-auth:20.5.0] /Users/nagi/.gradle/caches/transforms-3/587672d03e39ced1eb7fc33a827df9a4/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:34:13-89
+170            android:exported="true"
+170-->[com.google.android.gms:play-services-auth:20.5.0] /Users/nagi/.gradle/caches/transforms-3/587672d03e39ced1eb7fc33a827df9a4/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:35:13-36
+171            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+171-->[com.google.android.gms:play-services-auth:20.5.0] /Users/nagi/.gradle/caches/transforms-3/587672d03e39ced1eb7fc33a827df9a4/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:36:13-107
+172            android:visibleToInstantApps="true" />
+172-->[com.google.android.gms:play-services-auth:20.5.0] /Users/nagi/.gradle/caches/transforms-3/587672d03e39ced1eb7fc33a827df9a4/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:37:13-48
+173
+174        <meta-data
+174-->[com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/nagi/.gradle/caches/transforms-3/ae817a8e5acf9a40426d6e06cd5ad63c/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:11:9-13:43
+175            android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
+175-->[com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/nagi/.gradle/caches/transforms-3/ae817a8e5acf9a40426d6e06cd5ad63c/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:12:13-84
+176            android:value="GlideModule" />
+176-->[com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/nagi/.gradle/caches/transforms-3/ae817a8e5acf9a40426d6e06cd5ad63c/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:13:13-40
+177
+178        <receiver
+178-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:31:9-38:20
+179            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+179-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:32:13-78
+180            android:exported="true"
+180-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:33:13-36
+181            android:permission="com.google.android.c2dm.permission.SEND" >
+181-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:34:13-73
+182            <intent-filter>
+182-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:29:13-31:29
+183                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+183-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:30:17-81
+183-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:30:25-78
+184            </intent-filter>
+185        </receiver>
+186        <!--
+187             FirebaseMessagingService performs security checks at runtime,
+188             but set to not exported to explicitly avoid allowing another app to call it.
+189        -->
+190        <service
+190-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:44:9-51:19
+191            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+191-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:45:13-82
+192            android:directBootAware="true"
+192-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:46:13-43
+193            android:exported="false" >
+193-->[com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:47:13-37
+194            <intent-filter android:priority="-500" >
+194-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:20:13-22:29
+195                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+195-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:21:17-78
+195-->[:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:21:25-75
+196            </intent-filter>
+197        </service>
+198
+199        <activity
+199-->[com.google.android.gms:play-services-base:18.0.1] /Users/nagi/.gradle/caches/transforms-3/1befe31ec23e216396d9b12195d614b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+200            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+200-->[com.google.android.gms:play-services-base:18.0.1] /Users/nagi/.gradle/caches/transforms-3/1befe31ec23e216396d9b12195d614b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+201            android:exported="false"
+201-->[com.google.android.gms:play-services-base:18.0.1] /Users/nagi/.gradle/caches/transforms-3/1befe31ec23e216396d9b12195d614b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+202            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+202-->[com.google.android.gms:play-services-base:18.0.1] /Users/nagi/.gradle/caches/transforms-3/1befe31ec23e216396d9b12195d614b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+203
+204        <provider
+204-->[com.google.firebase:firebase-common:20.3.2] /Users/nagi/.gradle/caches/transforms-3/b1f0fbb2efe8fe3be234193dd49bd930/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:25:9-30:39
+205            android:name="com.google.firebase.provider.FirebaseInitProvider"
+205-->[com.google.firebase:firebase-common:20.3.2] /Users/nagi/.gradle/caches/transforms-3/b1f0fbb2efe8fe3be234193dd49bd930/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:26:13-77
+206            android:authorities="apps.mcsmart.firebaseinitprovider"
+206-->[com.google.firebase:firebase-common:20.3.2] /Users/nagi/.gradle/caches/transforms-3/b1f0fbb2efe8fe3be234193dd49bd930/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:27:13-72
+207            android:directBootAware="true"
+207-->[com.google.firebase:firebase-common:20.3.2] /Users/nagi/.gradle/caches/transforms-3/b1f0fbb2efe8fe3be234193dd49bd930/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:28:13-43
+208            android:exported="false"
+208-->[com.google.firebase:firebase-common:20.3.2] /Users/nagi/.gradle/caches/transforms-3/b1f0fbb2efe8fe3be234193dd49bd930/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:29:13-37
+209            android:initOrder="100" />
+209-->[com.google.firebase:firebase-common:20.3.2] /Users/nagi/.gradle/caches/transforms-3/b1f0fbb2efe8fe3be234193dd49bd930/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:30:13-36
+210
+211        <meta-data
+211-->[com.google.android.gms:play-services-basement:18.2.0] /Users/nagi/.gradle/caches/transforms-3/2268c2549546c20716617df447afa24e/transformed/jetified-play-services-basement-18.2.0/AndroidManifest.xml:21:9-23:69
+212            android:name="com.google.android.gms.version"
+212-->[com.google.android.gms:play-services-basement:18.2.0] /Users/nagi/.gradle/caches/transforms-3/2268c2549546c20716617df447afa24e/transformed/jetified-play-services-basement-18.2.0/AndroidManifest.xml:22:13-58
+213            android:value="@integer/google_play_services_version" />
+213-->[com.google.android.gms:play-services-basement:18.2.0] /Users/nagi/.gradle/caches/transforms-3/2268c2549546c20716617df447afa24e/transformed/jetified-play-services-basement-18.2.0/AndroidManifest.xml:23:13-66
+214
+215        <provider
+215-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:29:9-37:20
+216            android:name="androidx.startup.InitializationProvider"
+216-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:30:13-67
+217            android:authorities="apps.mcsmart.androidx-startup"
+217-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:31:13-68
+218            android:exported="false" >
+218-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:32:13-37
+219            <meta-data
+219-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:34:13-36:52
+220                android:name="androidx.work.WorkManagerInitializer"
+220-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:35:17-68
+221                android:value="androidx.startup" />
+221-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:36:17-49
+222            <meta-data
+222-->[androidx.emoji2:emoji2:1.0.0] /Users/nagi/.gradle/caches/transforms-3/38495ac4abbc404a2aad907c0586dd39/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:31:13-33:52
+223                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+223-->[androidx.emoji2:emoji2:1.0.0] /Users/nagi/.gradle/caches/transforms-3/38495ac4abbc404a2aad907c0586dd39/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:32:17-75
+224                android:value="androidx.startup" />
+224-->[androidx.emoji2:emoji2:1.0.0] /Users/nagi/.gradle/caches/transforms-3/38495ac4abbc404a2aad907c0586dd39/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:33:17-49
+225            <meta-data
+225-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/nagi/.gradle/caches/transforms-3/3444ba5c663a767529ed6a23e8f01ca0/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:31:13-33:52
+226                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+226-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/nagi/.gradle/caches/transforms-3/3444ba5c663a767529ed6a23e8f01ca0/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:32:17-78
+227                android:value="androidx.startup" />
+227-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/nagi/.gradle/caches/transforms-3/3444ba5c663a767529ed6a23e8f01ca0/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:33:17-49
+228        </provider>
+229
+230        <service
+230-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:39:9-45:35
+231            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+231-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:40:13-88
+232            android:directBootAware="false"
+232-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:41:13-44
+233            android:enabled="@bool/enable_system_alarm_service_default"
+233-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:42:13-72
+234            android:exported="false" />
+234-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:43:13-37
+235        <service
+235-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:46:9-52:35
+236            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+236-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:47:13-84
+237            android:directBootAware="false"
+237-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:48:13-44
+238            android:enabled="@bool/enable_system_job_service_default"
+238-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:49:13-70
+239            android:exported="true"
+239-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:50:13-36
+240            android:permission="android.permission.BIND_JOB_SERVICE" />
+240-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:51:13-69
+241        <service
+241-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:53:9-59:35
+242            android:name="androidx.work.impl.foreground.SystemForegroundService"
+242-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:54:13-81
+243            android:directBootAware="false"
+243-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:55:13-44
+244            android:enabled="@bool/enable_system_foreground_service_default"
+244-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:56:13-77
+245            android:exported="false" />
+245-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:57:13-37
+246
+247        <receiver
+247-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:61:9-66:35
+248            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+248-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:62:13-88
+249            android:directBootAware="false"
+249-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:63:13-44
+250            android:enabled="true"
+250-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:64:13-35
+251            android:exported="false" />
+251-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:65:13-37
+252        <receiver
+252-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:67:9-77:20
+253            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+253-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:68:13-106
+254            android:directBootAware="false"
+254-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:69:13-44
+255            android:enabled="false"
+255-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:70:13-36
+256            android:exported="false" >
+256-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:71:13-37
+257            <intent-filter>
+257-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:73:13-76:29
+258                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+258-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:74:17-87
+258-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:74:25-84
+259                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+259-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:75:17-90
+259-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:75:25-87
+260            </intent-filter>
+261        </receiver>
+262        <receiver
+262-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:78:9-88:20
+263            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+263-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:79:13-104
+264            android:directBootAware="false"
+264-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:80:13-44
+265            android:enabled="false"
+265-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:81:13-36
+266            android:exported="false" >
+266-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:82:13-37
+267            <intent-filter>
+267-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:84:13-87:29
+268                <action android:name="android.intent.action.BATTERY_OKAY" />
+268-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:85:17-77
+268-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:85:25-74
+269                <action android:name="android.intent.action.BATTERY_LOW" />
+269-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:86:17-76
+269-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:86:25-73
+270            </intent-filter>
+271        </receiver>
+272        <receiver
+272-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:89:9-99:20
+273            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+273-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:90:13-104
+274            android:directBootAware="false"
+274-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:91:13-44
+275            android:enabled="false"
+275-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:92:13-36
+276            android:exported="false" >
+276-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:93:13-37
+277            <intent-filter>
+277-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:95:13-98:29
+278                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+278-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:96:17-83
+278-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:96:25-80
+279                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+279-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:97:17-82
+279-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:97:25-79
+280            </intent-filter>
+281        </receiver>
+282        <receiver
+282-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:100:9-109:20
+283            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+283-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:101:13-103
+284            android:directBootAware="false"
+284-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:102:13-44
+285            android:enabled="false"
+285-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:103:13-36
+286            android:exported="false" >
+286-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:104:13-37
+287            <intent-filter>
+287-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:106:13-108:29
+288                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+288-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:107:17-79
+288-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:107:25-76
+289            </intent-filter>
+290        </receiver>
+291        <receiver
+291-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:110:9-121:20
+292            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+292-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:111:13-88
+293            android:directBootAware="false"
+293-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:112:13-44
+294            android:enabled="false"
+294-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:113:13-36
+295            android:exported="false" >
+295-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:114:13-37
+296            <intent-filter>
+296-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:116:13-120:29
+297                <action android:name="android.intent.action.BOOT_COMPLETED" />
+297-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:117:17-79
+297-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:117:25-76
+298                <action android:name="android.intent.action.TIME_SET" />
+298-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:118:17-73
+298-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:118:25-70
+299                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+299-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:119:17-81
+299-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:119:25-78
+300            </intent-filter>
+301        </receiver>
+302        <receiver
+302-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:122:9-131:20
+303            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+303-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:123:13-99
+304            android:directBootAware="false"
+304-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:124:13-44
+305            android:enabled="@bool/enable_system_alarm_service_default"
+305-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:125:13-72
+306            android:exported="false" >
+306-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:126:13-37
+307            <intent-filter>
+307-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:128:13-130:29
+308                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+308-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:129:17-98
+308-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:129:25-95
+309            </intent-filter>
+310        </receiver>
+311        <receiver
+311-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:132:9-142:20
+312            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+312-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:133:13-78
+313            android:directBootAware="false"
+313-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:134:13-44
+314            android:enabled="true"
+314-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:135:13-35
+315            android:exported="true"
+315-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:136:13-36
+316            android:permission="android.permission.DUMP" >
+316-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:137:13-57
+317            <intent-filter>
+317-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:139:13-141:29
+318                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+318-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:140:17-88
+318-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:140:25-85
+319            </intent-filter>
+320        </receiver>
+321
+322        <service
+322-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/nagi/.gradle/caches/transforms-3/bde6ae17b69bdfa0dac27e5e9d18a271/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:28:9-34:19
+323            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+323-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/nagi/.gradle/caches/transforms-3/bde6ae17b69bdfa0dac27e5e9d18a271/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:29:13-103
+324            android:exported="false" >
+324-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/nagi/.gradle/caches/transforms-3/bde6ae17b69bdfa0dac27e5e9d18a271/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:30:13-37
+325            <meta-data
+325-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/nagi/.gradle/caches/transforms-3/bde6ae17b69bdfa0dac27e5e9d18a271/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:31:13-33:39
+326                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+326-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/nagi/.gradle/caches/transforms-3/bde6ae17b69bdfa0dac27e5e9d18a271/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:32:17-94
+327                android:value="cct" />
+327-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/nagi/.gradle/caches/transforms-3/bde6ae17b69bdfa0dac27e5e9d18a271/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:33:17-36
+328        </service>
+329        <service
+329-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/nagi/.gradle/caches/transforms-3/364bf46039ceb612ca474f9487fee93a/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:26:9-30:19
+330            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+330-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/nagi/.gradle/caches/transforms-3/364bf46039ceb612ca474f9487fee93a/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:27:13-117
+331            android:exported="false"
+331-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/nagi/.gradle/caches/transforms-3/364bf46039ceb612ca474f9487fee93a/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:28:13-37
+332            android:permission="android.permission.BIND_JOB_SERVICE" >
+332-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/nagi/.gradle/caches/transforms-3/364bf46039ceb612ca474f9487fee93a/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:29:13-69
+333        </service>
+334
+335        <receiver
+335-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/nagi/.gradle/caches/transforms-3/364bf46039ceb612ca474f9487fee93a/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:32:9-34:40
+336            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+336-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/nagi/.gradle/caches/transforms-3/364bf46039ceb612ca474f9487fee93a/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:33:13-132
+337            android:exported="false" />
+337-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/nagi/.gradle/caches/transforms-3/364bf46039ceb612ca474f9487fee93a/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:34:13-37
+338
+339        <service
+339-->[androidx.room:room-runtime:2.5.0] /Users/nagi/.gradle/caches/transforms-3/3828f0ed4a13ad4916fa11dff510709d/transformed/room-runtime-2.5.0/AndroidManifest.xml:24:9-28:63
+340            android:name="androidx.room.MultiInstanceInvalidationService"
+340-->[androidx.room:room-runtime:2.5.0] /Users/nagi/.gradle/caches/transforms-3/3828f0ed4a13ad4916fa11dff510709d/transformed/room-runtime-2.5.0/AndroidManifest.xml:25:13-74
+341            android:directBootAware="true"
+341-->[androidx.room:room-runtime:2.5.0] /Users/nagi/.gradle/caches/transforms-3/3828f0ed4a13ad4916fa11dff510709d/transformed/room-runtime-2.5.0/AndroidManifest.xml:26:13-43
+342            android:exported="false" /> <!-- Receiver Service -->
+342-->[androidx.room:room-runtime:2.5.0] /Users/nagi/.gradle/caches/transforms-3/3828f0ed4a13ad4916fa11dff510709d/transformed/room-runtime-2.5.0/AndroidManifest.xml:27:13-37
+343        <service
+343-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:29:9-31:40
+344            android:name="app.notifee.core.ReceiverService"
+344-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:30:13-60
+345            android:exported="false" />
+345-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:31:13-37
+346
+347        <activity
+347-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:33:9-39:75
+348            android:name="app.notifee.core.NotificationReceiverActivity"
+348-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:34:13-73
+349            android:excludeFromRecents="true"
+349-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:35:13-46
+350            android:exported="true"
+350-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:36:13-36
+351            android:noHistory="true"
+351-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:37:13-37
+352            android:taskAffinity=""
+352-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:38:13-36
+353            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- Foreground Service -->
+353-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:39:13-72
+354        <service
+354-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:42:9-44:40
+355            android:name="app.notifee.core.ForegroundService"
+355-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:43:13-62
+356            android:exported="false" />
+356-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:44:13-37
+357
+358        <receiver
+358-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:46:9-54:20
+359            android:name="app.notifee.core.RebootBroadcastReceiver"
+359-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:47:13-68
+360            android:exported="false" >
+360-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:48:13-37
+361            <intent-filter>
+361-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:49:13-53:29
+362                <action android:name="android.intent.action.BOOT_COMPLETED" />
+362-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:117:17-79
+362-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:117:25-76
+363                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+363-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:51:17-82
+363-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:51:25-79
+364                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+364-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:52:17-82
+364-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:52:25-79
+365            </intent-filter>
+366        </receiver>
+367        <receiver
+367-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:55:9-61:20
+368            android:name="app.notifee.core.AlarmPermissionBroadcastReceiver"
+368-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:56:13-77
+369            android:exported="true" >
+369-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:57:13-36
+370            <intent-filter>
+370-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:58:13-60:29
+371                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+371-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:59:17-107
+371-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:59:25-104
+372            </intent-filter>
+373        </receiver>
+374        <receiver
+374-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:62:9-70:20
+375            android:name="app.notifee.core.NotificationAlarmReceiver"
+375-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:63:13-70
+376            android:exported="false" >
+376-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:64:13-37
+377            <intent-filter>
+377-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:49:13-53:29
+378                <action android:name="android.intent.action.BOOT_COMPLETED" />
+378-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:117:17-79
+378-->[androidx.work:work-runtime:2.8.0] /Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/AndroidManifest.xml:117:25-76
+379                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+379-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:51:17-82
+379-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:51:25-79
+380                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+380-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:52:17-82
+380-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:52:25-79
+381            </intent-filter>
+382        </receiver> <!-- Broadcast Receiver -->
+383        <receiver
+383-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:73:9-81:20
+384            android:name="app.notifee.core.BlockStateBroadcastReceiver"
+384-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:74:13-72
+385            android:exported="false" >
+385-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:75:13-37
+386            <intent-filter>
+386-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:76:13-80:29
+387                <action android:name="android.app.action.APP_BLOCK_STATE_CHANGED" />
+387-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:77:17-85
+387-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:77:25-82
+388                <action android:name="android.app.action.NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED" />
+388-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:78:17-102
+388-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:78:25-99
+389                <action android:name="android.app.action.NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED" />
+389-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:79:17-108
+389-->[app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transforms-3/742dc500529637efcf91cb3682ef5e36/transformed/jetified-core-202108261754/AndroidManifest.xml:79:25-105
+390            </intent-filter>
+391        </receiver> <!-- The activities will be merged into the manifest of the hosting app. -->
+392        <activity
+392-->[com.google.android.play:core-common:2.0.2] /Users/nagi/.gradle/caches/transforms-3/e72ed1b008404837882f7069a2bb8eb7/transformed/jetified-core-common-2.0.2/AndroidManifest.xml:14:9-18:65
+393            android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity"
+393-->[com.google.android.play:core-common:2.0.2] /Users/nagi/.gradle/caches/transforms-3/e72ed1b008404837882f7069a2bb8eb7/transformed/jetified-core-common-2.0.2/AndroidManifest.xml:15:13-93
+394            android:exported="false"
+394-->[com.google.android.play:core-common:2.0.2] /Users/nagi/.gradle/caches/transforms-3/e72ed1b008404837882f7069a2bb8eb7/transformed/jetified-core-common-2.0.2/AndroidManifest.xml:16:13-37
+395            android:stateNotNeeded="true"
+395-->[com.google.android.play:core-common:2.0.2] /Users/nagi/.gradle/caches/transforms-3/e72ed1b008404837882f7069a2bb8eb7/transformed/jetified-core-common-2.0.2/AndroidManifest.xml:17:13-42
+396            android:theme="@style/Theme.PlayCore.Transparent" />
+396-->[com.google.android.play:core-common:2.0.2] /Users/nagi/.gradle/caches/transforms-3/e72ed1b008404837882f7069a2bb8eb7/transformed/jetified-core-common-2.0.2/AndroidManifest.xml:18:13-62
+397
+398        <meta-data
+398-->[com.android.billingclient:billing:4.1.0] /Users/nagi/.gradle/caches/transforms-3/42b46db980b250ec3617796cad286c43/transformed/jetified-billing-4.1.0/AndroidManifest.xml:13:9-15:37
+399            android:name="com.google.android.play.billingclient.version"
+399-->[com.android.billingclient:billing:4.1.0] /Users/nagi/.gradle/caches/transforms-3/42b46db980b250ec3617796cad286c43/transformed/jetified-billing-4.1.0/AndroidManifest.xml:14:13-73
+400            android:value="4.1.0" />
+400-->[com.android.billingclient:billing:4.1.0] /Users/nagi/.gradle/caches/transforms-3/42b46db980b250ec3617796cad286c43/transformed/jetified-billing-4.1.0/AndroidManifest.xml:15:13-34
+401
+402        <activity
+402-->[com.android.billingclient:billing:4.1.0] /Users/nagi/.gradle/caches/transforms-3/42b46db980b250ec3617796cad286c43/transformed/jetified-billing-4.1.0/AndroidManifest.xml:17:9-21:75
+403            android:name="com.android.billingclient.api.ProxyBillingActivity"
+403-->[com.android.billingclient:billing:4.1.0] /Users/nagi/.gradle/caches/transforms-3/42b46db980b250ec3617796cad286c43/transformed/jetified-billing-4.1.0/AndroidManifest.xml:18:13-78
+404            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+404-->[com.android.billingclient:billing:4.1.0] /Users/nagi/.gradle/caches/transforms-3/42b46db980b250ec3617796cad286c43/transformed/jetified-billing-4.1.0/AndroidManifest.xml:19:13-96
+405            android:exported="false"
+405-->[com.android.billingclient:billing:4.1.0] /Users/nagi/.gradle/caches/transforms-3/42b46db980b250ec3617796cad286c43/transformed/jetified-billing-4.1.0/AndroidManifest.xml:20:13-37
+406            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+406-->[com.android.billingclient:billing:4.1.0] /Users/nagi/.gradle/caches/transforms-3/42b46db980b250ec3617796cad286c43/transformed/jetified-billing-4.1.0/AndroidManifest.xml:21:13-72
+407    </application>
+408
+409</manifest>

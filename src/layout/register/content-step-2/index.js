@@ -41,7 +41,7 @@ export default function ContentStep2({selectedGender, handleSelect, name}) {
       <View style={styles.ctnWelcome}>
         <Text style={styles.txtWelcome}>{`${
           name ? `Hey ${name}` : 'Hey'
-        }, let’s personalize your Facts to\nmake them more useful for you!`}</Text>
+        }, let’s personalize your Facts to make them more useful for you!`}</Text>
       </View>
       {renderBanner()}
       {renderInput()}

@@ -89,9 +89,26 @@ export default function Contract({values, substep, onLongPress, listCategory}) {
     if (listCategoryText?.length === 1) {
       return listCategoryText.map(item => (
         <Text style={styles.txtBlue} key={item}>
-          {listCategory.find(ctn => ctn.id === item).name}
+          {item.name}
         </Text>
       ));
+    }
+    if (listCategoryText?.length > 5) {
+      return listCategoryText.slice(0, 6).map((item, index) => {
+        if (index === 5) {
+          return (
+            <Fragment key={item}>
+              {' '}
+              and <Text style={styles.txtBlue}>many more...</Text>
+            </Fragment>
+          );
+        }
+        return (
+          <Text key={item} style={styles.txtBlue}>{`${index !== 0 ? ', ' : ''}${
+            item.name
+          }`}</Text>
+        );
+      });
     }
     if (listCategoryText?.length > 1) {
       return listCategoryText.map((item, index) => {
@@ -108,7 +125,7 @@ export default function Contract({values, substep, onLongPress, listCategory}) {
         }
         return (
           <Text key={item} style={styles.txtBlue}>{`${index !== 0 ? ', ' : ''}${
-            listCategory.find(ctn => ctn.id === item).name
+            item.name
           }`}</Text>
         );
       });

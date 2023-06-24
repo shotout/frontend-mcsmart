@@ -17,20 +17,22 @@ import WelcomePage from '../welcome-page';
 import {navigationLinking} from '../../shared/navigationLinking';
 import Register from '../register';
 import MainPage from '../main-page';
+import {fetchInitialData} from '../../store/defaultState/actions';
 
 const Stack = createNativeStackNavigator();
 
-function Routes() {
+function Routes({registerData}) {
   const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
 
   useEffect(() => {
     const getInitial = async () => {
       const resLogin = await AsyncStorage.getItem('isLogin');
-      console.log('Check res resLogin', resLogin);
       if (resLogin === 'yes') {
         setLogin(true);
       }
+
+      fetchInitialData(resLogin === 'yes');
       setLoading(false);
     };
     getInitial();
@@ -40,6 +42,10 @@ function Routes() {
     if (isLogin) {
       return 'MainPage';
       // return 'NotificationTester';
+    }
+
+    if (registerData) {
+      return 'Register';
     }
     return 'WelcomePage';
   }

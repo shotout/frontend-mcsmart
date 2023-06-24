@@ -1,32 +1,36 @@
 import moment from 'moment';
 import {Linking} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import TimeZone from 'react-native-timezone';
+import {getUserProfile, updateProfile} from '../shared/request';
+import store from '../store/configure-store';
+import {handleSetProfile} from '../store/defaultState/actions';
+import {SUCCESS_FETCH_COLLECTION} from '../store/defaultState/types';
 
 export const dateToUnix = date => moment(date).unix();
 export const getFutureDate = (defaultDate, day) =>
   moment(defaultDate).add(day, 'days').format('YYYY-MM-DD');
 
 export const openPrivacyPolicy = () => {
-  Linking.openURL('https://mooti.app/privacy');
+  Linking.openURL('https://mcsmartapp.com/privacy');
 };
 
 export const openTermsofUse = () => {
-  Linking.openURL('https://mooti.app/terms');
+  Linking.openURL('https://mcsmartapp.com/terms');
 };
 
 export const openImprint = () => {
-  Linking.openURL('https://mooti.app/imprint');
+  Linking.openURL('https://mcsmartapp.com/imprint');
 };
 
-export const isUserPremium = () => {
+export const isUserPremium = () =>
   // const profile = store.getState().defaultState.userProfile;
   // const {type} = profile.data.subscription;
   // if (type === 1) {
   //   return false;
   // }
   // return true;
-  console.log('isUserPremium');
-  return false;
-};
+  true;
 
 export const handlePayment = async (vendorId, cb) => {
   console.log('handlePayment');
@@ -76,4 +80,161 @@ export const handlePayment = async (vendorId, cb) => {
   //     console.log('error payment:', err);
   //   }
   // });
+};
+
+export const createUniqueID = () =>
+  Date.now().toString(36) + Math.random().toString(36);
+
+export const reloadUserProfile = async () =>
+  new Promise(async resolve => {
+    const res = await getUserProfile();
+    const currentUserProfile = store.getState().defaultState.userProfile;
+    store.dispatch(
+      handleSetProfile({
+        ...currentUserProfile,
+        ...res,
+      }),
+    );
+    // if (res.data.subscription.type !== 5) {
+    //   if (currentUserProfile.data) {
+    //     if (currentUserProfile.data.subscription.type !== 1) {
+    //       if (res.data.subscription.type === 1) {
+    //         eventTracking(CANCEL_SUBSCRIBE_AFTER_TRIAL);
+    //       }
+    //       if (
+    //         currentUserProfile.data.subscription.type !==
+    //         res.data.subscription.type
+    //       ) {
+    //         if (res.data.subscription.type !== 1) {
+    //           eventTracking(SUBSCRIPTION_STARTED);
+    //           const objPurchase = JSON.parse(
+    //             res.data.subscription.purchasely_data,
+    //           );
+    //           if (objPurchase) {
+    //             revenueTracking(
+    //               objPurchase.plan_price_in_customer_currency,
+    //               objPurchase.customer_currency,
+    //             );
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    resolve(res.data);
+  });
+
+export const handleSubscriptionStatus = async (subscription = {}) => {
+  // const purchaseId = await Purchasely.getAnonymousUserId();
+  // if (subscription.type === 2 || subscription.type === 3) {
+  //   const trialDay = subscription.type === 2 ? 3 : 30;
+  //   const dateEndFreeTrial = getFutureDate(subscription.started, trialDay);
+  //   const nowaDay = moment().format('YYYY-MM-DD');
+  //   const objPurchase = JSON.parse(subscription.purchasely_data);
+  //   if (dateToUnix(dateEndFreeTrial) < dateToUnix(nowaDay)) {
+  //     await setSubcription({
+  //       subscription_type: 4,
+  //       purchasely_id: purchaseId,
+  //     });
+  //     await reloadUserProfile();
+  //     eventTracking(SUBSCRIPTION_STARTED);
+  //     if (objPurchase) {
+  //       revenueTracking(
+  //         objPurchase.plan_price_in_customer_currency,
+  //         objPurchase.customer_currency,
+  //       );
+  //     }
+  //   }
+  // }
+};
+
+export const setCollectionData = payload => {
+  store.dispatch({type: SUCCESS_FETCH_COLLECTION, payload});
+};
+
+export const handleBasicPaywall = async cbPaywall => {
+  // const profile = store.getState().defaultState.userProfile;
+  // const paywallType =
+  //   profile?.data?.notif_count && profile?.data?.notif_count > 2
+  //     ? 'offer_no_purchase_after_onboarding_paywall_2nd'
+  //     : 'offer_no_purchase_after_onboarding_paywall';
+  // console.log(
+  //   'CHECK BASIC PAYWALL paywallType:',
+  //   profile?.data?.notif_count,
+  //   paywallType,
+  // );
+  // await handlePayment(paywallType, cbPaywall);
+};
+
+export const isCompletedOnboarding = () => {
+  const profile = store.getState().defaultState.userProfile;
+  const {type} = profile.data.subscription;
+  if (type !== 5) {
+    return true;
+  }
+  return false;
+};
+
+export const iconNameToId = name => {
+  switch (name) {
+    case 'second':
+      return 2;
+    case 'third':
+      return 3;
+    case 'fourth':
+      return 4;
+    default:
+      return 1;
+  }
+};
+
+export const checkIsHasLogin = async () => {
+  const resLogin = await AsyncStorage.getItem('isLogin');
+  return resLogin === 'yes';
+};
+
+export const handleUpdateTimezone = async () => {
+  const profile = store.getState().defaultState.userProfile;
+  if (profile.token) {
+    const timeZone = await TimeZone.getTimeZone();
+    if (profile.data.schedule.timezone !== timeZone)
+      await updateProfile({
+        timezone: timeZone,
+        _method: 'PATCH',
+      });
+    setTimeout(() => {
+      reloadUserProfile();
+    }, 3000);
+  }
+};
+
+export const handleRatingModal = async cbSuccess => {
+  // await AsyncStorage.removeItem('openAppsCounter');
+  // await AsyncStorage.removeItem('skipRatingCount');
+  const isHasRating = store.getState().defaultState.haveBeenAskRating;
+  const openAppsCounter = await AsyncStorage.getItem('openAppsCounter');
+  const skipCounter = await AsyncStorage.getItem('skipRatingCount');
+  if (openAppsCounter) {
+    const currentTotalOpenApps = Number(openAppsCounter);
+    const skipCounterToNumber = skipCounter ? Number(skipCounter) : 0;
+    const currentDate = moment().format('YYYY-MM-DD');
+    if (currentTotalOpenApps % 3 === 0) {
+      if (
+        !skipCounterToNumber ||
+        skipCounterToNumber < 3 ||
+        (skipCounter >= 3 && currentDate === getFutureDate(isHasRating, 12))
+      ) {
+        if (typeof cbSuccess === 'function') {
+          cbSuccess();
+        }
+        if (skipCounter >= 3 && currentDate === getFutureDate(new Date(), 12)) {
+          await AsyncStorage.removeItem('skipRatingCount');
+        }
+      }
+    }
+    const counterToString = (currentTotalOpenApps + 1).toString();
+    await AsyncStorage.setItem('openAppsCounter', counterToString);
+  } else {
+    await AsyncStorage.setItem('openAppsCounter', '2');
+  }
 };

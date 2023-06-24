@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"瀏覽首頁"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"向上瀏覽"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"更多選項"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"完成"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"查看全部"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"選擇應用程式"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"關閉"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"開啟"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt +"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl +"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"Delete 鍵"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"Enter 鍵"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Fn +"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta +"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift +"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"空格鍵"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym +"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menu +"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"搜尋…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"清除查詢"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"搜尋查詢"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"搜尋"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"提交查詢"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"語音搜尋"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"分享對象"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"與「<ns1:g id="APPLICATION_NAME">%s</ns1:g>」分享"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"收合"</string>
+    <string msgid="2523291102206661146" name="common_google_play_services_enable_button">啟用</string>
+    <string msgid="227660514972886228" name="common_google_play_services_enable_text">您必須啟用 Google Play 服務，才能執行「%1$s」。</string>
+    <string msgid="5122002158466380389" name="common_google_play_services_enable_title">啟用 Google Play 服務</string>
+    <string msgid="7153882981874058840" name="common_google_play_services_install_button">安裝</string>
+    <string name="common_google_play_services_install_text">您的裝置並未安裝 Google Play 服務，因此無法執行「%1$s」。</string>
+    <string msgid="7215213145546190223" name="common_google_play_services_install_title">取得 Google Play 服務</string>
+    <string name="common_google_play_services_notification_channel_name">Google Play 服務可用性</string>
+    <string name="common_google_play_services_notification_ticker">Google Play 服務發生錯誤</string>
+    <string name="common_google_play_services_unknown_issue">「%1$s」無法存取 Google Play 服務，請再試一次。</string>
+    <string name="common_google_play_services_unsupported_text">您的裝置不支援 Google Play 服務，因此無法執行「%1$s」。</string>
+    <string msgid="6556509956452265614" name="common_google_play_services_update_button">更新</string>
+    <string msgid="9053896323427875356" name="common_google_play_services_update_text">您必須更新 Google Play 服務，才能執行「%1$s」。</string>
+    <string msgid="6006316683626838685" name="common_google_play_services_update_title">更新 Google Play 服務</string>
+    <string name="common_google_play_services_updating_text">執行「%1$s」所需的 Google Play 服務正在更新。</string>
+    <string name="common_google_play_services_wear_update_text">必須使用新版 Google Play 服務。該服務稍後就會自動更新。</string>
+    <string name="common_open_on_phone">在手機上開啟</string>
+    <string name="common_signin_button_text">登入</string>
+    <string name="common_signin_button_text_long">使用 Google 帳戶登入</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"已將連結複製到剪貼簿"</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"複製連結"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"在瀏覽器中開啟"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"分享連結"</string>
+    <string msgid="4657191930956702614" name="lb_control_display_fast_forward_multiplier">"%1$dX"</string>
+    <string msgid="4597148235912710942" name="lb_control_display_rewind_multiplier">"%1$dX"</string>
+    <string msgid="893619591225519922" name="lb_guidedaction_continue_title">"繼續"</string>
+    <string msgid="3330958750346333890" name="lb_guidedaction_finish_title">"完成"</string>
+    <string msgid="3228326776757666747" name="lb_media_player_error">"MediaPlayer 錯誤代碼：%1$d extra %2$d"</string>
+    <string msgid="8084428500709675515" name="lb_navigation_menu_contentDescription">"導覽選單"</string>
+    <string msgid="2394451791544864917" name="lb_onboarding_accessibility_next">"繼續"</string>
+    <string msgid="5549711907371161292" name="lb_onboarding_get_started">"開始使用"</string>
+    <string msgid="8691966842977635128" name="lb_playback_controls_closed_captioning_disable">"停用隱藏式輔助字幕"</string>
+    <string msgid="2346334170216706076" name="lb_playback_controls_closed_captioning_enable">"啟用隱藏式輔助字幕"</string>
+    <string msgid="740570111678243493" name="lb_playback_controls_fast_forward">"快轉"</string>
+    <string msgid="5734614175721471329" name="lb_playback_controls_fast_forward_multiplier">"快轉 %1$dX"</string>
+    <string msgid="5859666950961624736" name="lb_playback_controls_hidden">"媒體控制項已隱藏，按下 D-Pad 即可顯示"</string>
+    <string msgid="1209119371486219736" name="lb_playback_controls_high_quality_disable">"停用高品質播放"</string>
+    <string msgid="3057698527166674705" name="lb_playback_controls_high_quality_enable">"啟用高品質播放"</string>
+    <string msgid="8730341244454469032" name="lb_playback_controls_more_actions">"更多動作"</string>
+    <string msgid="917331776961802657" name="lb_playback_controls_pause">"暫停"</string>
+    <string msgid="5770668162543767702" name="lb_playback_controls_picture_in_picture">"進入子母畫面模式"</string>
+    <string msgid="7088090604803481121" name="lb_playback_controls_play">"播放"</string>
+    <string msgid="8429099206716245199" name="lb_playback_controls_repeat_all">"重複播放所有項目"</string>
+    <string msgid="1614290959784265209" name="lb_playback_controls_repeat_none">"不重複播放"</string>
+    <string msgid="676658705837320560" name="lb_playback_controls_repeat_one">"重複播放單一項目"</string>
+    <string msgid="2866333981131020771" name="lb_playback_controls_rewind">"倒轉"</string>
+    <string msgid="6038956370475252734" name="lb_playback_controls_rewind_multiplier">"倒轉 %1$dX"</string>
+    <string msgid="8690223891515602822" name="lb_playback_controls_shown">"媒體控制項已顯示"</string>
+    <string msgid="6793109999253893369" name="lb_playback_controls_shuffle_disable">"停用隨機播放"</string>
+    <string msgid="5151681938752704485" name="lb_playback_controls_shuffle_enable">"啟用隨機播放"</string>
+    <string msgid="8117512422682146745" name="lb_playback_controls_skip_next">"跳至下一個項目"</string>
+    <string msgid="3481218248309447059" name="lb_playback_controls_skip_previous">"跳至上一個項目"</string>
+    <string msgid="3544533410444618518" name="lb_playback_controls_thumb_down">"取消選取「不喜歡」"</string>
+    <string msgid="8475278766138652105" name="lb_playback_controls_thumb_down_outline">"選取「不喜歡」"</string>
+    <string msgid="3458671378107738666" name="lb_playback_controls_thumb_up">"取消選取「喜歡」"</string>
+    <string msgid="1385865732502550659" name="lb_playback_controls_thumb_up_outline">"選取「喜歡」"</string>
+    <string msgid="1471121602610716654" name="lb_playback_time_separator">"/"</string>
+    <string msgid="5700349211583074131" name="lb_search_bar_hint">"搜尋"</string>
+    <string msgid="5926531297066387462" name="lb_search_bar_hint_speech">"使用語音搜尋"</string>
+    <string msgid="4826526877249029043" name="lb_search_bar_hint_with_title">"搜尋「<ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g>」"</string>
+    <string msgid="6032250334706920550" name="lb_search_bar_hint_with_title_speech">"使用語音搜尋「<ns1:g id="SEARCH_CONTEXT">%1$s</ns1:g>」"</string>
+    <string msgid="1301877238242752863" name="orb_search_action">"搜尋動作"</string>
+    <string name="ply_cancel_survey_message">我們很遺憾您要取消訂閱。請告訴我們您取消訂閱的理由，以幫助我們改善服務：</string>
+    <string name="ply_cancel_survey_reason_1">訂閱價格太高</string>
+    <string name="ply_cancel_survey_reason_2">我發現了其他更好的應用程式</string>
+    <string name="ply_cancel_survey_reason_3">我不再需要這項服務</string>
+    <string name="ply_cancel_survey_reason_4">我不常使用這項服務</string>
+    <string name="ply_cancel_survey_reason_5">出於技術問題</string>
+    <string name="ply_cancel_survey_reason_6">其他</string>
+    <string name="ply_cancel_survey_reason_7">不願回答</string>
+    <string name="ply_cancel_survey_title">您為什麼希望取消訂閱？</string>
+    <string name="ply_configuration_error">Configuration error</string>
+    <string name="ply_in_app_absent_receipt">找不到收據。透過恢復購買重試。</string>
+    <string name="ply_in_app_already_being_purchased_error">該產品已在購買中</string>
+    <string name="ply_in_app_already_being_restored_error">購買恢復已在進行中</string>
+    <string name="ply_in_app_already_subscribed_error">您已成功訂閱我們的線上服務！</string>
+    <string name="ply_in_app_client_invalid_error">您無權執行此操作。</string>
+    <string name="ply_in_app_cloud_permission_error">您拒絕授予對此服務的存取權限。</string>
+    <string name="ply_in_app_cloud_service_revoked_error">您尚未撤銷對該服務的存取權限。</string>
+    <string name="ply_in_app_error_pending">Your payment is being processed.  Your purchase will be validated automatically when your payment has been made.</string>
+    <string name="ply_in_app_login_button">已是會員？請登錄</string>
+    <string name="ply_in_app_network_error">網路連接失敗</string>
+    <string name="ply_in_app_no_product_found_error">找不到產品。</string>
+    <string name="ply_in_app_parsing_error">無法處理服務器回應</string>
+    <string name="ply_in_app_partial_restore_partial_with_errors">以下各件商品已恢復： %1$s 發現以下錯誤  %2$s</string>
+    <string name="ply_in_app_payment_cancelled_error">請求已取消</string>
+    <string name="ply_in_app_payment_invalid_error">購買ID無效。</string>
+    <string name="ply_in_app_payment_not_allowed_error">無法在此裝置上購買。</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_many">%d 天</string>
+    <string name="ply_in_app_period_day_duration_plural_rule_one">1天</string>
+    <string name="ply_in_app_period_day_plural_rule_many">%d 天</string>
+    <string name="ply_in_app_period_day_plural_rule_none">天</string>
+    <string name="ply_in_app_period_day_plural_rule_one">天</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_many">%d 月</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_one">1月</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_six">%d 月</string>
+    <string name="ply_in_app_period_month_duration_plural_rule_three">%d 月</string>
+    <string name="ply_in_app_period_month_plural_rule_many">%d 月</string>
+    <string name="ply_in_app_period_month_plural_rule_none">月</string>
+    <string name="ply_in_app_period_month_plural_rule_one">月</string>
+    <string name="ply_in_app_period_month_plural_rule_six">半年</string>
+    <string name="ply_in_app_period_month_plural_rule_three">季度</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_many">%d 周</string>
+    <string name="ply_in_app_period_week_duration_plural_rule_one">1周</string>
+    <string name="ply_in_app_period_week_plural_rule_many">%d 周</string>
+    <string name="ply_in_app_period_week_plural_rule_none">周</string>
+    <string name="ply_in_app_period_week_plural_rule_one">周</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_many">%d 年</string>
+    <string name="ply_in_app_period_year_duration_plural_rule_one">1年</string>
+    <string name="ply_in_app_period_year_plural_rule_many">%d 年</string>
+    <string name="ply_in_app_period_year_plural_rule_none">年</string>
+    <string name="ply_in_app_period_year_plural_rule_one">年</string>
+    <string name="ply_in_app_product_not_available_error">產品在App Store中不可用</string>
+    <string name="ply_in_app_psd2_required">您的購買將在銀行確認付款後生效。如您遇到任何問題，請重新購買。</string>
+    <string name="ply_in_app_restore_button">重置購物車</string>
+    <string name="ply_in_app_restore_status_errors">恢復失敗，出現以下錯誤：</string>
+    <string name="ply_in_app_restore_status_nothing">找不到購買的商品</string>
+    <string name="ply_in_app_unknown_error">未知錯誤</string>
+    <string name="ply_in_app_validation_failed">無法確認收據。</string>
+    <string name="ply_in_app_validation_timed_out">購買確認可能需要花費一點時間。您可以稍後返回。</string>
+    <string name="ply_modal_alert_default_error_button">確定</string>
+    <string name="ply_modal_alert_default_error_title">錯誤</string>
+    <string name="ply_modal_alert_in_app_deferred_button">確定</string>
+    <string name="ply_modal_alert_in_app_deferred_content">Thank you! Your purchase couldn\'t be completed yet and requires an external validation. Once the validation is completed you will be able to enjoy your purchase.</string>
+    <string name="ply_modal_alert_in_app_deferred_title">等待審核</string>
+    <string name="ply_modal_alert_in_app_error_button">確定</string>
+    <string name="ply_modal_alert_in_app_error_title">錯誤</string>
+    <string name="ply_modal_alert_in_app_restoration_error_title">錯誤</string>
+    <string name="ply_modal_alert_in_app_restore_status_success_content">購買已恢復</string>
+    <string name="ply_modal_alert_in_app_success_button">開始探索！</string>
+    <string name="ply_modal_alert_in_app_success_content">您已購買成功，開始探索吧！</string>
+    <string name="ply_modal_alert_in_app_success_title">很棒！</string>
+    <string name="ply_modal_alert_in_app_success_unauthentified_content">您的購買已生效。登錄或註冊即可在其他設備上享受訂閱服務！</string>
+    <string name="ply_modal_alert_in_app_successfull_restore_message_title">恢復已完成</string>
+    <string name="ply_modal_change_plan_different_store_cancel_button">取消</string>
+    <string name="ply_modal_change_plan_different_store_content">您已經使用%s進行了訂閱。  請取消訂閱避免重複計費。  您是否希望繼續？</string>
+    <string name="ply_modal_change_plan_different_store_continue_button">繼續</string>
+    <string name="ply_modal_change_plan_different_store_title">注意！</string>
+    <string name="ply_modal_downgrade_button">完成！</string>
+    <string name="ply_modal_downgrade_description">您的更改已確認，並將在當前訂閱結束時生效</string>
+    <string name="ply_modal_downgrade_title">恭喜</string>
+    <string name="ply_modal_huawei_not_logged_button">確定</string>
+    <string name="ply_modal_huawei_not_logged_description">請在華為應用市場中登錄華為帳號</string>
+    <string name="ply_modal_huawei_not_logged_title">未找到華為帳號</string>
+    <string name="ply_powered_by_purchasely">Powered by Purchasely</string>
+    <string name="ply_price_free">免费</string>
+    <string name="ply_promo_code_button">優惠碼？</string>
+    <string name="ply_subscription_cancel_pattern">到期日：%s</string>
+    <string name="ply_subscription_detail_group_title">您的訂閱</string>
+    <string name="ply_subscription_plans_group_title">選項</string>
+    <string name="ply_subscription_renew_pattern">下一個帳單日：%s</string>
+    <string name="ply_subscription_title">修改您的訂閱</string>
+    <string name="ply_subscription_unsubscribe_button">取消訂閱</string>
+    <string name="ply_subscription_unsubscribe_change_plan_not_available_google">訂閱並非來自應用商店。</string>
+    <string name="ply_subscriptions_active_group_title">生效</string>
+    <string name="ply_subscriptions_empty_message">您目前沒有生效的訂閱</string>
+    <string name="ply_subscriptions_title">我的訂閱</string>
+    <string name="ply_unsubscribe_amazon_button">Ok</string>
+    <string name="ply_unsubscribe_amazon_content">Go to amazon.com. Check if you’re signed in to the correct Amazon Account. Go to your Account page. Click on Other Subscriptions in the Memberships and subscriptions section Select the subscription you want to cancel. Then Cancel Subscription.</string>
+    <string name="ply_unsubscribe_amazon_title">Cancel a subscription</string>
+    <string name="ply_unsubscribe_apple_button">確定</string>
+    <string name="ply_unsubscribe_apple_content">開啟「設定」App。   點一下您的姓名。   點一下「訂閱項目」。   點一下您要管理的訂閱項目。   點一下「取消訂閱」。</string>
+    <string name="ply_unsubscribe_apple_title">取消訂閱項目</string>
+    <string name="ply_unsubscribe_google_button">確定</string>
+    <string name="ply_unsubscribe_google_content">前往 play.google.com。   檢查您是否已登入正確的 Google 帳戶。   在左側按一下 [我的訂閱內容]。   選取您要取消訂閱的項目。   按一下 [管理] 下一步 [取消訂閱]。</string>
+    <string name="ply_unsubscribe_google_title">取消訂閱項目</string>
+    <string name="ply_untracked_event">事件未處理</string>
+    <string name="ply_webview_qr_or_url">掃描上方二維碼或瀏覽：</string>
+    <string name="ply_webview_url">使用瀏覽器訪問以下網址：</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"搜尋"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>
