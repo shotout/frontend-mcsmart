@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "apps.mcsmart.app-mergeReleaseResources-46:/values-land/values-land.xml",
+            "outputFile": "apps.mcsmart.app-mergeReleaseResources-47:/values-land/values-land.xml",
             "map": [
                 {
                     "source": "/Users/nagi/.gradle/caches/transforms-3/7972c8901a981e6189377312be2a6891/transformed/appcompat-1.4.1/res/values-land/values-land.xml",

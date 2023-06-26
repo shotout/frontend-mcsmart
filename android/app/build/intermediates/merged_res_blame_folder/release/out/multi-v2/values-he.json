@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "apps.mcsmart.app-mergeReleaseResources-46:/values-he/values-he.xml",
+            "outputFile": "apps.mcsmart.app-mergeReleaseResources-47:/values-he/values-he.xml",
             "map": [
                 {
                     "source": "/Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/res/values-he/values-he.xml",

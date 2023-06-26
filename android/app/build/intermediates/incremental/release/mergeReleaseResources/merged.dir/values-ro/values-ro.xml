@@ -45,6 +45,10 @@
     <string name="common_open_on_phone">Deschideți pe telefon</string>
     <string name="common_signin_button_text">Conectați-vă</string>
     <string name="common_signin_button_text_long">Conectați-vă cu Google</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"Linkul a fost copiat în clipboard"</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Copiați linkul"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Deschideți în browser"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Trimiteți linkul"</string>
     <string msgid="4657191930956702614" name="lb_control_display_fast_forward_multiplier">"%1$dX"</string>
     <string msgid="4597148235912710942" name="lb_control_display_rewind_multiplier">"%1$dX"</string>
     <string msgid="893619591225519922" name="lb_guidedaction_continue_title">"Continuați"</string>

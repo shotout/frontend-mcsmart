@@ -6,6 +6,7 @@ import styles from './styles';
 import states from './states';
 import Button from '../../components/button';
 import {askTrackingPermission} from '../../helpers/eventTracking';
+import {handlePayment} from '../../helpers/user';
 
 const bgImage = require('../../assets/images/welcome_banner.png');
 
@@ -27,10 +28,11 @@ function WelcomePage() {
           type="white-button"
           label="Get started"
           onPress={() => {
-            navigate('Register');
-            if (Platform.OS === 'ios') {
-              askTrackingPermission();
-            }
+            // navigate('Register');
+            // if (Platform.OS === 'ios') {
+            //   askTrackingPermission();
+            // }
+            handlePayment('onboarding');
           }}
         />
       </View>

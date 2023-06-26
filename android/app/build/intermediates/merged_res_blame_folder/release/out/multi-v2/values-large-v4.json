@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "apps.mcsmart.app-mergeReleaseResources-46:/values-large-v4/values-large-v4.xml",
+            "outputFile": "apps.mcsmart.app-mergeReleaseResources-47:/values-large-v4/values-large-v4.xml",
             "map": [
                 {
                     "source": "/Users/nagi/.gradle/caches/transforms-3/d5c16b3e9795a5f2c5e4ea4779185a11/transformed/material-1.1.0/res/values-large-v4/values-large-v4.xml",

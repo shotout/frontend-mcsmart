@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "apps.mcsmart.app-mergeReleaseResources-46:/values-v23/values-v23.xml",
+            "outputFile": "apps.mcsmart.app-mergeReleaseResources-47:/values-v23/values-v23.xml",
             "map": [
                 {
                     "source": "/Users/nagi/.gradle/caches/transforms-3/057bd26e94e4420074a62d01a9ced0e5/transformed/work-runtime-2.8.0/res/values-v23/values-v23.xml",
