@@ -1,442 +1,454 @@
 [
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xhdpi/ic_launcher.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_widget_b.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_widget_b.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_category_celebrities.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_category_celebrities.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_photography19.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_photography19.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_knowledge12.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_knowledge12.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_cityscape22.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_cityscape22.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xhdpi_ic_launcher_round_adaptive_fore.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xhdpi/ic_launcher_round_adaptive_fore.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_category_food_drink.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_category_food_drink.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_icons_ads_icon.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_icons_ads_icon.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_lamp.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_lamp.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_texture31.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_texture31.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_consistent.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_consistent.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_setting_banner.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_setting_banner.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_photography16.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_photography16.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-mdpi_ic_launcher_adaptive_back.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-mdpi/ic_launcher_adaptive_back.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_nature7.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_nature7.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_icons_checklist.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_icons_checklist.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_category_sport.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_category_sport.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_welcome_step_2.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_welcome_step_2.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_app_icon_1.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_app_icon_1.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-xhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-xhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_lightbulb_yellow.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_lightbulb_yellow.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_category_sport.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_category_sport.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_abstract9.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_abstract9.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_texture29.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_texture29.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-hdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-hdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_yellow_round.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_yellow_round.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_texture30.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_texture30.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_nature7.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_nature7.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_illustration3.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_illustration3.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_photography15.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_photography15.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_time.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_time.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xhdpi_ic_launcher_round_adaptive_back.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xhdpi/ic_launcher_round_adaptive_back.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_widget_a.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_widget_a.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-hdpi_ic_launcher_round_adaptive_fore.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-hdpi/ic_launcher_round_adaptive_fore.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xxxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_knowledge13.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_knowledge13.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_free_premium.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_free_premium.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xxhdpi/ic_launcher_round.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_knowledge14.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_knowledge14.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-mdpi/ic_launcher.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_app_icon_asset_third.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_app_icon_asset_third.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xxxhdpi_ic_launcher_round_adaptive_back.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xxxhdpi/ic_launcher_round_adaptive_back.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-hdpi_ic_launcher_adaptive_fore.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-hdpi/ic_launcher_adaptive_fore.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_welcome_step_3.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_welcome_step_3.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable_rn_edit_text_material.xml.flat",
-        "source": "apps.mcsmart.app-main-49:/drawable/rn_edit_text_material.xml"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_unselect_rating_star.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_unselect_rating_star.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-xxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-xxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_not_found.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_not_found.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_app_icon_asset_third.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_app_icon_asset_third.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xxhdpi_ic_launcher_adaptive_fore.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xxhdpi/ic_launcher_adaptive_fore.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-hdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-hdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xxxhdpi_ic_launcher_adaptive_fore.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xxxhdpi/ic_launcher_adaptive_fore.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_illustration2.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_illustration2.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_category_celebrities.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_category_celebrities.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_sand_watch.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_sand_watch.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_background_trace_yellow.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_background_trace_yellow.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_widget_b.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_widget_b.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_illustration20.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_illustration20.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xxhdpi_ic_launcher_round_adaptive_back.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xxhdpi/ic_launcher_round_adaptive_back.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xxxhdpi_ic_launcher_round_adaptive_back.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xxxhdpi/ic_launcher_round_adaptive_back.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_abstract4.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_abstract4.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_rating_star.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_rating_star.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-hdpi_ic_launcher_adaptive_back.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-hdpi/ic_launcher_adaptive_back.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable_rn_edit_text_material.xml.flat",
+        "source": "apps.mcsmart.app-main-50:/drawable/rn_edit_text_material.xml"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_nature28.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_nature28.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-mdpi_ic_launcher_round_adaptive_fore.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-mdpi/ic_launcher_round_adaptive_fore.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xhdpi_ic_launcher_adaptive_fore.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xhdpi/ic_launcher_adaptive_fore.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_illustration2.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_illustration2.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_knowledge14.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_knowledge14.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_photography18.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_photography18.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_knowledge13.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_knowledge13.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_burst_name.gif.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_burst_name.gif"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_gender_app.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_gender_app.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_cityscape22.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_cityscape22.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_welcome_banner.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_welcome_banner.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_icons_setting_banner.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_icons_setting_banner.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-xxxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-xxxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_gender.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_gender.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-mdpi_ic_launcher_adaptive_fore.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-mdpi/ic_launcher_adaptive_fore.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_knowledge11.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_knowledge11.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-hdpi/ic_launcher_round.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_consistent.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_consistent.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_notification.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_notification.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_app_icon_asset_fourth.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_app_icon_asset_fourth.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xhdpi_ic_launcher_adaptive_back.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xhdpi/ic_launcher_adaptive_back.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_texture31.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_texture31.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_lightbulb_black.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_lightbulb_black.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_icons_not_found.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_icons_not_found.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_target.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_target.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-hdpi_ic_launcher_round_adaptive_back.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-hdpi/ic_launcher_round_adaptive_back.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_category_economy_business.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_category_economy_business.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xxxhdpi_ic_launcher_round_adaptive_fore.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xxxhdpi/ic_launcher_round_adaptive_fore.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_banner_rating.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_banner_rating.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_icons_close.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_icons_close.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_texture32.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_texture32.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_icons_app_icon_1.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_icons_app_icon_1.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xxhdpi_ic_launcher_adaptive_fore.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xxhdpi/ic_launcher_adaptive_fore.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-hdpi_ic_launcher_adaptive_back.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-hdpi/ic_launcher_adaptive_back.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-mdpi_ic_launcher_adaptive_back.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-mdpi/ic_launcher_adaptive_back.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backiconmask.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backiconmask.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_illustration20.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_illustration20.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xxxhdpi_ic_launcher_adaptive_back.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xxxhdpi/ic_launcher_adaptive_back.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_category_food_drink.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_category_food_drink.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_background_trace_white.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_background_trace_white.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_photography19.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_photography19.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_nature27.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_nature27.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_texture32.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_texture32.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xxhdpi_ic_launcher_adaptive_back.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xxhdpi/ic_launcher_adaptive_back.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_abstract9.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_abstract9.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_app_icon_asset_second.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_app_icon_asset_second.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_welcome_step_5.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_welcome_step_5.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-xhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-xhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-xxxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-xxxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_knowledge11.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_knowledge11.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_app_icon_asset_fourth.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_app_icon_asset_fourth.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_photography16.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_photography16.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_notification_app.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_notification_app.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_lightbulb.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_lightbulb.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xxhdpi/ic_launcher.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_abstract4.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_abstract4.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_nature26.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_nature26.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_nature26.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_nature26.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-mdpi_ic_launcher_adaptive_fore.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-mdpi/ic_launcher_adaptive_fore.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_ads_icon.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_ads_icon.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-mdpi_ic_launcher_round_adaptive_fore.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-mdpi/ic_launcher_round_adaptive_fore.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xhdpi_ic_launcher_round_adaptive_fore.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xhdpi/ic_launcher_round_adaptive_fore.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_stopwatch.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_stopwatch.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-hdpi_ic_launcher_round_adaptive_fore.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-hdpi/ic_launcher_round_adaptive_fore.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xxhdpi_ic_launcher_adaptive_back.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xxhdpi/ic_launcher_adaptive_back.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xhdpi_ic_launcher_round_adaptive_back.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xhdpi/ic_launcher_round_adaptive_back.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_notification_app.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_notification_app.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_illustration21.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_illustration21.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-hdpi_ic_launcher_round_adaptive_back.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-hdpi/ic_launcher_round_adaptive_back.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-mdpi/ic_launcher_round.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xhdpi_ic_launcher_adaptive_back.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xhdpi/ic_launcher_adaptive_back.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_free_premium.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_free_premium.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_app_icon_asset_first.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_app_icon_asset_first.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_knowledge5.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_knowledge5.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_search_white.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_search_white.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_time.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_time.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_register_step_lamp_light.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_register_step_lamp_light.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_welcome_step_6.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_welcome_step_6.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xxhdpi_ic_launcher_round_adaptive_back.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xxhdpi/ic_launcher_round_adaptive_back.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_app_icon_asset_first.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_app_icon_asset_first.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_cityscape24.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_cityscape24.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_nature25.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_nature25.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_random_theme.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_random_theme.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_cityscape23.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_cityscape23.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_photography17.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_photography17.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backiconmask.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backiconmask.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_knowledge5.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_knowledge5.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xxxhdpi_ic_launcher_adaptive_back.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xxxhdpi/ic_launcher_adaptive_back.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_abstract10.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_abstract10.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_welcome_banner.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_welcome_banner.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_search_black.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_search_black.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_icons_random_theme.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_icons_random_theme.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_burst_name.gif.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_burst_name.gif"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-hdpi/ic_launcher.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_icons_banner_rating.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_icons_banner_rating.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_nature25.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_nature25.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_abstract10.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_abstract10.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_texture29.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_texture29.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xxxhdpi/ic_launcher_round.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_yellow_round.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_yellow_round.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_welcome_step_4.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_welcome_step_4.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_gender.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_gender.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_illustration6.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_illustration6.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_sand_watch.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_sand_watch.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_texture30.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_texture30.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_illustration6.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_illustration6.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_welcome_step_7.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_welcome_step_7.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_notification.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_notification.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_target.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_target.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_photography18.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_photography18.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xhdpi/ic_launcher_round.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_nature28.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_nature28.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_nature27.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_nature27.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_checklist.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_checklist.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-hdpi_ic_launcher_adaptive_fore.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-hdpi/ic_launcher_adaptive_fore.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_stopwatch.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_stopwatch.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_welcome_step_1.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_welcome_step_1.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_cityscape23.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_cityscape23.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_category_economy_business.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_category_economy_business.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xxhdpi_ic_launcher_round_adaptive_fore.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xxhdpi/ic_launcher_round_adaptive_fore.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_cityscape24.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_cityscape24.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_icons_rating_star.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_icons_rating_star.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-hdpi/ic_launcher_round.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_cityscape8.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_cityscape8.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_register_step_tutorial_lamp_once.gif.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_register_step_tutorial_lamp_once.gif"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_illustration3.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_illustration3.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_illustration21.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_illustration21.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_widget_a.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_widget_a.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xxhdpi_ic_launcher_round_adaptive_fore.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xxhdpi/ic_launcher_round_adaptive_fore.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xxxhdpi_ic_launcher_round_adaptive_fore.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xxxhdpi/ic_launcher_round_adaptive_fore.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_app_icon_asset_second.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_app_icon_asset_second.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_cityscape8.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_cityscape8.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_icons_search_black.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_icons_search_black.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_knowledge12.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_knowledge12.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_icons_unselect_rating_star.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_icons_unselect_rating_star.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_arrowbottom.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_arrowbottom.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-mdpi_ic_launcher_round_adaptive_back.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-mdpi/ic_launcher_round_adaptive_back.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_lamp.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_lamp.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/mipmap-xxxhdpi_ic_launcher_adaptive_fore.png.flat",
-        "source": "apps.mcsmart.app-main-49:/mipmap-xxxhdpi/ic_launcher_adaptive_fore.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_close.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_close.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_theme_photography17.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_theme_photography17.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-mdpi_ic_launcher_round_adaptive_back.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-mdpi/ic_launcher_round_adaptive_back.png"
     },
     {
-        "merged": "apps.mcsmart.app-merged_res-48:/drawable-mdpi_src_assets_images_gender_app.png.flat",
-        "source": "apps.mcsmart.app-react-43:/drawable-mdpi/src_assets_images_gender_app.png"
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_images_theme_photography15.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_images_theme_photography15.png"
+    },
+    {
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-xxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-xxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "apps.mcsmart.app-merged_res-49:/drawable-mdpi_src_assets_icons_register_step_lamp_tutorial.png.flat",
+        "source": "apps.mcsmart.app-react-44:/drawable-mdpi/src_assets_icons_register_step_lamp_tutorial.png"
+    },
+    {
+        "merged": "apps.mcsmart.app-merged_res-49:/mipmap-xhdpi_ic_launcher_adaptive_fore.png.flat",
+        "source": "apps.mcsmart.app-main-50:/mipmap-xhdpi/ic_launcher_adaptive_fore.png"
     }
 ]

@@ -15,6 +15,7 @@ import DeviceInfo from 'react-native-device-info';
 import messaging from '@react-native-firebase/messaging';
 import Lottie from 'lottie-react-native';
 import TimeZone from 'react-native-timezone';
+import Purchasely from 'react-native-purchasely';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {createAnimatableComponent} from 'react-native-animatable';
@@ -134,11 +135,12 @@ function Register({
 
     DeviceInfo.getUniqueId().then(async uniqueId => {
       try {
+        const id = await Purchasely.getAnonymousUserId();
         setMutateForm({
           ...mutateForm,
           device_id: uniqueId,
           // device_id: Date.now().toString(),
-          purchasely_id: null,
+          purchasely_id: id,
         });
       } catch (err) {
         console.log('Err get device info:', err);

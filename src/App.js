@@ -6,6 +6,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Provider as PaperProvider} from 'react-native-paper';
 
 import FullScreenChz from 'react-native-fullscreen-chz';
+import Purchasely, {RunningMode} from 'react-native-purchasely';
 
 import {Adjust, AdjustConfig} from 'react-native-adjust';
 import Navigator from './screens/app-routes';
@@ -15,6 +16,14 @@ import ModalFirstPremium from './components/modal-first-premium';
 import ModalLock from './layout/main-page/modal-lock';
 
 LogBox.ignoreAllLogs();
+
+Purchasely.startWithAPIKey(
+  'c88ec51a-b7ce-485e-8192-038a120da596',
+  ['Google'],
+  null,
+  Purchasely.logLevelDebug,
+  RunningMode.FULL,
+);
 
 const App = () => {
   const configTracker = () => {

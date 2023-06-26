@@ -12,6 +12,7 @@ MERGED from [:react-native-clipboard_clipboard] /Users/nagi/Documents/mfs-smart/
 MERGED from [:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-45:12
 MERGED from [:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-32:12
 MERGED from [:lottie-react-native] /Users/nagi/Documents/mfs-smart/node_modules/lottie-react-native/src/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-24:12
 MERGED from [:react-native-change-icon] /Users/nagi/Documents/mfs-smart/node_modules/react-native-change-icon/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-device-info] /Users/nagi/Documents/mfs-smart/node_modules/react-native-device-info/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-fast-image] /Users/nagi/Documents/mfs-smart/node_modules/react-native-fast-image/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
@@ -19,6 +20,7 @@ MERGED from [:react-native-fs] /Users/nagi/Documents/mfs-smart/node_modules/reac
 MERGED from [:react-native-fullscreen-chz] /Users/nagi/Documents/mfs-smart/node_modules/react-native-fullscreen-chz/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:3:1-10:12
 MERGED from [:react-native-gesture-handler] /Users/nagi/Documents/mfs-smart/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-in-app-review] /Users/nagi/Documents/mfs-smart/node_modules/react-native-in-app-review/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-24:12
 MERGED from [:react-native-permissions] /Users/nagi/Documents/mfs-smart/node_modules/react-native-permissions/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-purchasely] /Users/nagi/Documents/mfs-smart/node_modules/react-native-purchasely/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-19:12
 MERGED from [:react-native-safe-area-context] /Users/nagi/Documents/mfs-smart/node_modules/react-native-safe-area-context/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
@@ -99,6 +101,7 @@ MERGED from [com.android.billingclient:billing-ktx:4.1.0] /Users/nagi/.gradle/ca
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1] /Users/nagi/.gradle/caches/transforms-3/7e49b4f153bdcf6b55969d94d27a874c/transformed/jetified-lifecycle-viewmodel-ktx-2.3.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.1] /Users/nagi/.gradle/caches/transforms-3/abb46d5c9b60362b008dcdd94a53f5ba/transformed/jetified-lifecycle-runtime-ktx-2.3.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.room:room-runtime:2.5.0] /Users/nagi/.gradle/caches/transforms-3/3828f0ed4a13ad4916fa11dff510709d/transformed/room-runtime-2.5.0/AndroidManifest.xml:17:1-31:12
+MERGED from [androidx.browser:browser:1.3.0] /Users/nagi/.gradle/caches/transforms-3/03987a22866059ca1fffd2b8d1abced7/transformed/browser-1.3.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/nagi/.gradle/caches/transforms-3/2b6ae102340fc1ee1ae4ea564ab33446/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/nagi/.gradle/caches/transforms-3/ba84ff374c40888cfb77432f1d5d2c26/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/nagi/.gradle/caches/transforms-3/f7ffce8836517cebdde359dacfe82e0b/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
@@ -166,6 +169,10 @@ MERGED from [:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/n
 MERGED from [:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-67
 MERGED from [:lottie-react-native] /Users/nagi/Documents/mfs-smart/node_modules/lottie-react-native/src/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-67
 MERGED from [:lottie-react-native] /Users/nagi/Documents/mfs-smart/node_modules/lottie-react-native/src/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-67
+MERGED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-67
+MERGED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-67
+MERGED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-67
+MERGED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-67
 MERGED from [io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:16:5-67
 MERGED from [io.purchasely:core:3.7.0] /Users/nagi/.gradle/caches/transforms-3/e9c40c8289b9717da189cbdab0551bb5/transformed/jetified-core-3.7.0-release/AndroidManifest.xml:16:5-67
 MERGED from [com.google.android.gms:play-services-iid:17.0.0] /Users/nagi/.gradle/caches/transforms-3/cd32ead7862d0deb5a2224aa0cdc0c99/transformed/jetified-play-services-iid-17.0.0/AndroidManifest.xml:24:5-67
@@ -198,6 +205,10 @@ MERGED from [:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/n
 MERGED from [:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:13:5-43:19
 MERGED from [:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:10:5-30:19
 MERGED from [:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:10:5-30:19
+MERGED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:13:5-22:19
+MERGED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:13:5-22:19
+MERGED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:17:5-22:19
+MERGED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:17:5-22:19
 MERGED from [:react-native-purchasely] /Users/nagi/Documents/mfs-smart/node_modules/react-native-purchasely/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-17:19
 MERGED from [:react-native-purchasely] /Users/nagi/Documents/mfs-smart/node_modules/react-native-purchasely/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-17:19
 MERGED from [:react-native-share] /Users/nagi/Documents/mfs-smart/node_modules/react-native-share/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-19:19
@@ -334,6 +345,8 @@ MERGED from [:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_mo
 MERGED from [:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:6:5-8:41
 MERGED from [:lottie-react-native] /Users/nagi/Documents/mfs-smart/node_modules/lottie-react-native/src/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:lottie-react-native] /Users/nagi/Documents/mfs-smart/node_modules/lottie-react-native/src/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-change-icon] /Users/nagi/Documents/mfs-smart/node_modules/react-native-change-icon/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-change-icon] /Users/nagi/Documents/mfs-smart/node_modules/react-native-change-icon/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-device-info] /Users/nagi/Documents/mfs-smart/node_modules/react-native-device-info/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
@@ -348,6 +361,8 @@ MERGED from [:react-native-gesture-handler] /Users/nagi/Documents/mfs-smart/node
 MERGED from [:react-native-gesture-handler] /Users/nagi/Documents/mfs-smart/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-in-app-review] /Users/nagi/Documents/mfs-smart/node_modules/react-native-in-app-review/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-in-app-review] /Users/nagi/Documents/mfs-smart/node_modules/react-native-in-app-review/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-permissions] /Users/nagi/Documents/mfs-smart/node_modules/react-native-permissions/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-permissions] /Users/nagi/Documents/mfs-smart/node_modules/react-native-permissions/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-purchasely] /Users/nagi/Documents/mfs-smart/node_modules/react-native-purchasely/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
@@ -508,6 +523,8 @@ MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.1] /Users/nagi/.gradle
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.1] /Users/nagi/.gradle/caches/transforms-3/abb46d5c9b60362b008dcdd94a53f5ba/transformed/jetified-lifecycle-runtime-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.room:room-runtime:2.5.0] /Users/nagi/.gradle/caches/transforms-3/3828f0ed4a13ad4916fa11dff510709d/transformed/room-runtime-2.5.0/AndroidManifest.xml:21:5-44
 MERGED from [androidx.room:room-runtime:2.5.0] /Users/nagi/.gradle/caches/transforms-3/3828f0ed4a13ad4916fa11dff510709d/transformed/room-runtime-2.5.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.browser:browser:1.3.0] /Users/nagi/.gradle/caches/transforms-3/03987a22866059ca1fffd2b8d1abced7/transformed/browser-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.browser:browser:1.3.0] /Users/nagi/.gradle/caches/transforms-3/03987a22866059ca1fffd2b8d1abced7/transformed/browser-1.3.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/nagi/.gradle/caches/transforms-3/2b6ae102340fc1ee1ae4ea564ab33446/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/nagi/.gradle/caches/transforms-3/2b6ae102340fc1ee1ae4ea564ab33446/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/nagi/.gradle/caches/transforms-3/ba84ff374c40888cfb77432f1d5d2c26/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
@@ -630,6 +647,8 @@ MERGED from [app.notifee:core:202108261754] /Users/nagi/.gradle/caches/transform
 		ADDED from [:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:10:22-65
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [:react-native-firebase_messaging] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:11:5-79
+MERGED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:11:5-79
+MERGED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:11:5-79
 MERGED from [com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:24:5-79
 MERGED from [com.google.firebase:firebase-messaging:23.1.2] /Users/nagi/.gradle/caches/transforms-3/edef3140c127c9850ea7e05ea32fc1f8/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:24:5-79
 MERGED from [com.google.firebase:firebase-installations:17.1.3] /Users/nagi/.gradle/caches/transforms-3/0bf078e216bfeadc8f14e626fd08df81/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:9:5-79
@@ -736,10 +755,42 @@ ADDED from [:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_mod
 		ADDED from [:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:29:13-35
 	android:name
 		ADDED from [:react-native-firebase_app] /Users/nagi/Documents/mfs-smart/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:26:13-88
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:10:5-76
+	android:name
+		ADDED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:10:22-73
+receiver#com.adjust.sdk.AdjustReferrerReceiver
+ADDED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:14:9-21:20
+	android:exported
+		ADDED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:16:13-36
+	android:permission
+		ADDED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:17:13-69
+	android:name
+		ADDED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-65
+intent-filter#action:name:com.android.vending.INSTALL_REFERRER
+ADDED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:18:13-20:29
+action#com.android.vending.INSTALL_REFERRER
+ADDED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:19:17-79
+	android:name
+		ADDED from [:react-native-adjust] /Users/nagi/Documents/mfs-smart/node_modules/react-native-adjust/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:19:25-76
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from [:react-native-fs] /Users/nagi/Documents/mfs-smart/node_modules/react-native-fs/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-81
 	android:name
 		ADDED from [:react-native-fs] /Users/nagi/Documents/mfs-smart/node_modules/react-native-fs/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:22-78
+queries
+ADDED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:11:5-15:15
+intent#action:name:android.support.customtabs.action.CustomTabsService
+ADDED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:12:9-14:18
+action#android.support.customtabs.action.CustomTabsService
+ADDED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-90
+	android:name
+		ADDED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:13:21-87
+activity#com.proyecto26.inappbrowser.ChromeTabsManagerActivity
+ADDED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:18:9-21:20
+	android:exported
+		ADDED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:20:13-37
+	android:name
+		ADDED from [:react-native-inappbrowser-reborn] /Users/nagi/Documents/mfs-smart/node_modules/react-native-inappbrowser-reborn/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:19:13-81
 activity#com.reactnativepurchasely.PLYProductActivity
 ADDED from [:react-native-purchasely] /Users/nagi/Documents/mfs-smart/node_modules/react-native-purchasely/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-13:55
 	android:autoRemoveFromRecents

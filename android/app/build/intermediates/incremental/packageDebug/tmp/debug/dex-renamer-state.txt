@@ -1,4 +1,4 @@
-#Sun Jun 18 16:37:29 WIB 2023
+#Mon Jun 26 10:11:26 WIB 2023
 base.0=/Users/nagi/Documents/mfs-smart/android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/Users/nagi/Documents/mfs-smart/android/app/build/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
 base.2=/Users/nagi/Documents/mfs-smart/android/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
