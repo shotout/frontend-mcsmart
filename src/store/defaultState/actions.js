@@ -6,6 +6,11 @@ export const setStorageStatus = payload => ({
   payload,
 });
 
+export const handleSetProfile = payload => ({
+  type: types.SET_PROFILE_DATA,
+  payload,
+});
+
 export const setUserTheme = payload => {
   store.dispatch({
     type: types.SET_USER_THEMES,

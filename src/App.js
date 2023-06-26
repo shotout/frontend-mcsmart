@@ -8,8 +8,17 @@ import {Provider as PaperProvider} from 'react-native-paper';
 import Navigator from './screens/app-routes';
 import store, {persistor} from './store/configure-store';
 import {networkDebugger} from './shared/networkDebugger';
+import Purchasely, { RunningMode } from 'react-native-purchasely';
 
 LogBox.ignoreAllLogs();
+
+Purchasely.startWithAPIKey(
+  'c88ec51a-b7ce-485e-8192-038a120da596',
+  ['Google'],
+  null,
+  Purchasely.logLevelDebug,
+  RunningMode.FULL,
+);
 
 const App = () => {
   useEffect(() => {
