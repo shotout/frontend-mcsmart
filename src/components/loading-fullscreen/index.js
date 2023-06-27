@@ -8,13 +8,13 @@ const LoadingFullScreen = ({isLoading, modalContainer, testID}) => (
   <Portal>
     <Modal
       contentContainerStyle={[styles.modal, modalContainer]}
-      dismissable={false}
-      visible={isLoading}>
-      <View
-        testID={testID}
-        accessibilityLabel={testID}
-        style={[styles.modalBody, styles.modalBodyContainer]}>
-        <LoadingIndicator />
+      visible={isLoading}
+      // visible
+      dismissable={false}>
+      <View style={styles.ctnRoot}>
+        <View style={[styles.modalBody, styles.modalBodyContainer]}>
+          <LoadingIndicator />
+        </View>
       </View>
     </Modal>
   </Portal>

@@ -25,6 +25,7 @@ import styles from './styles';
 import states from './states';
 import dispatcher from './dispatcher';
 import {
+  handlePayment,
   handleSubscriptionStatus,
   openPrivacyPolicy,
   openTermsofUse,
@@ -185,6 +186,11 @@ function Register({
           handleSubscriptionStatus(res.data.subscription);
           fetchListQuote();
           fetchCollection();
+          setTimeout(() => {
+            handlePayment('onboarding', () => {
+              reset('MainPage', {isFromOnboarding: true});
+            });
+          }, 200);
           await updateProfile({
             ...payload,
             _method: 'PATCH',
@@ -192,7 +198,6 @@ function Register({
           setTimeout(() => {
             reloadUserProfile();
           }, 2000);
-          reset('MainPage', {isFromOnboarding: true});
           AsyncStorage.setItem('isLogin', 'yes');
         } catch (err) {
           console.log('Device id not register');
@@ -228,7 +233,10 @@ function Register({
     console.log('AFter register called');
     await fetchListQuote();
     await fetchCollection();
-    reset('MainPage', {isFromOnboarding: true});
+
+    handlePayment('onboarding', () => {
+      reset('MainPage', {isFromOnboarding: true});
+    });
     AsyncStorage.setItem('isLogin', 'yes');
     setLoading(false);
   };

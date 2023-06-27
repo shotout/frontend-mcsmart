@@ -10,7 +10,7 @@ export default StyleSheet.create({
     marginBottom: moderateScale(20),
     borderRadius: moderateScale(12),
     marginHorizontal: moderateScale(20),
-    paddingHorizontal: moderateScale(20),
+    paddingHorizontal: moderateScale(12),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -23,7 +23,12 @@ export default StyleSheet.create({
     paddingVertical: moderateScale(12),
   },
   checklistContainer: {
-    width: moderateScale(35),
+    width: moderateScale(100),
+  },
+  ctnIconCategory: {
+    width: moderateScale(100),
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   },
   ctnIconItem: {
     height: moderateScale(15),
@@ -47,9 +52,6 @@ export default StyleSheet.create({
     fontFamily: fonts.InterMedium,
     textAlign: 'center',
   },
-  ctnIconCategory: {
-    width: moderateScale(35),
-  },
   imgIconStyle: {
     width: moderateScale(35),
     height: moderateScale(35),
@@ -57,5 +59,31 @@ export default StyleSheet.create({
   },
   bgGray: {
     backgroundColor: colors.gray,
+  },
+  ctnAdsIcon: {
+    height: moderateScale(22),
+    borderRadius: moderateScale(22 / 2),
+    paddingHorizontal: moderateScale(6),
+    marginRight: moderateScale(6),
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: colors.black,
+    marginLeft: moderateScale(6),
+  },
+  iconAds: {
+    width: moderateScale(12),
+    height: moderateScale(12),
+    resizeMode: 'contain',
+    marginRight: moderateScale(4),
+  },
+  txtAds: {
+    color: colors.yellow,
+    fontFamily: fonts.InterMedium,
+    fontSize: moderateScale(12),
+  },
+  ctnSelectPremium: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

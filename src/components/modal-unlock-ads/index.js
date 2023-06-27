@@ -16,7 +16,7 @@ import {getRewardedCategoryID} from '../../shared/static/adsId';
 
 const categoryImg = require('../../assets/icons/unlock_category.png');
 const crownIcon = require('../../assets/icons/crown_icon.png');
-const playIcon = require('../../assets/icons/playIcon.png');
+const playIcon = require('../../assets/icons/play_black.png');
 const iconClose = require('../../assets/icons/close.png');
 
 const rewarded = RewardedAd.createForAdRequest(getRewardedCategoryID(), {
@@ -46,11 +46,7 @@ const ModalUnlockCategory = ({
     const unsubscribeEarned = rewarded.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
       reward => {
-        console.log(
-          'User earned reward of ModalUnlockCategory ',
-          selectedCategory,
-        );
-        handleUnlock(selectedCategory);
+        handleUnlock();
         if (Platform.OS === 'ios') {
           Alert.alert(
             successMessage ||
@@ -59,11 +55,10 @@ const ModalUnlockCategory = ({
             [{text: 'OK'}],
           );
         }
-        handleClose();
+        handleClose(selectedCategory);
       },
     );
 
-    console.log('Check selected theme category:', selectedCategory);
     return () => {
       unsubscribeLoaded();
       unsubscribeEarned();
@@ -87,7 +82,7 @@ const ModalUnlockCategory = ({
     <Portal>
       <Modal
         onDismiss={handleClose}
-        contentContainerStyle={{flex: 1, justifyContent: 'center'}}
+        contentContainerStyle={{justifyContent: 'center'}}
         visible={visible}>
         <View style={styles.ctnRoot}>
           <Image source={imgSource || categoryImg} style={styles.categoryImg} />
@@ -102,6 +97,7 @@ const ModalUnlockCategory = ({
           </View>
           <View style={styles.ctnBtn}>
             <Button
+              type="black"
               txtStyle={styles.txtBtnStyle}
               btnStyle={[styles.btnIcon, styles.mgRight]}
               prependIcon={
@@ -114,7 +110,7 @@ const ModalUnlockCategory = ({
             />
             <View style={styles.ctnWatch}>
               <Button
-                type="tosca"
+                type="yellow"
                 txtStyle={styles.txtBtnStyle}
                 btnStyle={styles.btnIcon}
                 prependIcon={

@@ -82,12 +82,12 @@ export default StyleSheet.create({
   ctnLabel: {
     borderColor: colors.defaultBorder,
     borderBottomWidth: moderateScale(1),
-    paddingVertical: moderateScale(16),
+    paddingBottom: moderateScale(16),
+    marginBottom: moderateScale(16),
   },
   ctnHeader: {
     paddingHorizontal: moderateScale(20),
-    paddingTop: moderateScale(16),
-    paddingBottom: moderateScale(16),
+    paddingVertical: moderateScale(16),
   },
   ctnTextHeader: {
     paddingTop: moderateScale(0),
@@ -113,7 +113,8 @@ export default StyleSheet.create({
     backgroundColor: colors.lightYellow,
     padding: moderateScale(20),
     borderRadius: moderateScale(20 / 2),
-    marginVertical: moderateScale(16),
+    marginBottom: moderateScale(16),
+    marginHorizontal: moderateScale(20),
   },
   ctnRow: {
     flexDirection: 'row',

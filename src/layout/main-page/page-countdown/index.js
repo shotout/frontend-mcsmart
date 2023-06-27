@@ -12,7 +12,7 @@ import {isIphoneXorAbove} from '../../../shared/devices';
 const imgBg = require('../../../assets/icons/quote_bg.png');
 const bannerCountdown = require('../../../assets/icons/banner_img.png');
 const crownIcon = require('../../../assets/icons/crown_icon.png');
-const playIcon = require('../../../assets/icons/playIcon.png');
+const playIcon = require('../../../assets/icons/play_black.png');
 const arrowTop = require('../../../assets/icons/arrow-top.png');
 
 const adUnitId = getRewardedOutOfQuotesID();
@@ -78,7 +78,7 @@ const PageCountDown = () => {
               source={bannerCountdown}
               style={styles.ctnBannerCountdown}>
               <View style={styles.ctnTitle}>
-                <Text style={styles.txtTitle}>New Quotes in...</Text>
+                <Text style={styles.txtTitle}>New Facts in...</Text>
               </View>
               <View style={styles.ctnTimer}>
                 <Text style={styles.txtTimer}>
@@ -90,18 +90,18 @@ const PageCountDown = () => {
           </View>
           <View style={styles.ctnText}>
             <Text style={styles.txtTitleQuotes}>
-              You are out of free Quotes for today!
+              You are out of free Facts for today!
             </Text>
             <Text style={styles.txtDesc}>
               {isIphoneXorAbove()
-                ? 'Don’t stop there. Watch a short Video\nto unlock more Quotes for today for\nFree and without waiting or go\nPremium for Full Unlimited Access!'
-                : 'Don’t stop there. Watch a short Video to unlock more Quotes for today for Free and without waiting or go Premium for Full Unlimited Access!'}
+                ? 'Don’t stop there. Watch a short Video\nto unlock more Facts for today for\nFree and without waiting or go\nPremium for Full Unlimited Access!'
+                : 'Don’t stop there. Watch a short Video to unlock more Facts for today for Free and without waiting or go Premium for Full Unlimited Access!'}
             </Text>
           </View>
           <View style={styles.ctnBtn}>
             <View style={styles.ctnWatch}>
               <Button
-                type="tosca"
+                type="white-button"
                 txtStyle={styles.txtBtnStyle}
                 btnStyle={styles.btnIcon}
                 prependIcon={
@@ -121,6 +121,7 @@ const PageCountDown = () => {
               </View>
             </View>
             <Button
+              type="black"
               txtStyle={styles.txtBtnStyle}
               btnStyle={[styles.btnIcon, styles.mgRight]}
               prependIcon={
@@ -135,7 +136,7 @@ const PageCountDown = () => {
           <View style={styles.ctnSwipe}>
             <Image source={arrowTop} style={styles.icnSwipe} />
             <Text style={styles.txtSwipe}>
-              Swipe to go back to today's quotes
+              Swipe to go back to today's facts
             </Text>
           </View>
         </ScrollView>

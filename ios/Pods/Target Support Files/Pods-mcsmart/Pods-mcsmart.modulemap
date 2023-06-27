@@ -1,6 +1,0 @@
-module Pods_mcsmart {
-  umbrella header "Pods-mcsmart-umbrella.h"
-
-  export *
-  module * { export * }
-}

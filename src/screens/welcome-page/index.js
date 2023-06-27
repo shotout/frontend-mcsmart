@@ -28,11 +28,11 @@ function WelcomePage() {
           type="white-button"
           label="Get started"
           onPress={() => {
-            // navigate('Register');
-            // if (Platform.OS === 'ios') {
-            //   askTrackingPermission();
-            // }
-            handlePayment('onboarding');
+            navigate('Register');
+            if (Platform.OS === 'ios') {
+              askTrackingPermission();
+            }
+            // handlePayment('onboarding');
           }}
         />
       </View>

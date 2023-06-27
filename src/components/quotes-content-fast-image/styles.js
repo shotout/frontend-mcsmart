@@ -28,7 +28,7 @@ export default StyleSheet.create({
   },
   txtQuotesWrapper: {
     paddingHorizontal: moderateScale(30),
-    position:'relative'
+    position:'relative',
   },
   ctnQuotes: {
     fontSize: moderateScale(18),
@@ -42,6 +42,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    // marginBottom: isIphoneXorAbove() ? moderateScale(80) : moderateScale(40),
     marginBottom: moderateScale(40),
     marginTop: moderateScale(20)
   },

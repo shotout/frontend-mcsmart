@@ -17,7 +17,11 @@ import SlidingUpPanel from 'rn-sliding-up-panel';
 import Search from '../../../components/search';
 import styles from './styles';
 import states from './states';
-import {isUserPremium, reloadUserProfile} from '../../../helpers/user';
+import {
+  handleBasicPaywall,
+  isUserPremium,
+  reloadUserProfile,
+} from '../../../helpers/user';
 import {sizing} from '../../../shared/styling';
 import Button from '../../../components/button';
 import PremiumRocket from '../../../assets/svg/RocketPremiumBlack.svg';
@@ -87,7 +91,7 @@ function ModalCategories({
     }
     return (
       <View style={styles.ctnBgWrap}>
-        <TouchableWithoutFeedback onPress={showModalPremium}>
+        <TouchableWithoutFeedback onPress={handleBasicPaywall}>
           <View style={styles.ctnRow}>
             <View style={styles.ctnRowLeft}>
               <Text style={styles.titleStyle}>Go Premium</Text>
@@ -127,8 +131,6 @@ function ModalCategories({
           }}>
           <Search isSelect placeholder="Search" />
         </TouchableOpacity>
-        {renderSubscription()}
-        {renderLabel()}
       </View>
     );
   }
@@ -162,6 +164,7 @@ function ModalCategories({
           handleSelectCategory(item.id, isSelected);
         }}
         isSelected={isSelected}
+        selectedCategory={categoryValue}
         item={item}
       />
     );
@@ -189,10 +192,16 @@ function ModalCategories({
             </TouchableWithoutFeedback>
             <View style={styles.ctnContent}>
               {/* <LineGestureSlide dragHandler={dragHandler} /> */}
+              {renderHeader(dragHandler)}
               <FlatList
                 contentContainerStyle={styles.ctnScroll}
                 data={categories?.category || []}
-                ListHeaderComponent={renderHeader(dragHandler)}
+                ListHeaderComponent={() => (
+                  <>
+                    {renderSubscription()}
+                    {renderLabel()}
+                  </>
+                )}
                 renderItem={renderListCategory}
                 keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
