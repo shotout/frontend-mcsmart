@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -17,12 +17,46 @@ import WelcomePage from '../welcome-page';
 import {navigationLinking} from '../../shared/navigationLinking';
 import Register from '../register';
 import MainPage from '../main-page';
+import {getAppOpenID} from '../../shared/static/adsId';
+import AdsOverlay from '../ads-overlay';
+import Purchasely from 'react-native-purchasely';
+import { setAnimationSlideStatus } from '../../store/defaultState/actions';
+
+
 
 const Stack = createNativeStackNavigator();
+
 
 function Routes() {
   const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
+  const [showAdsOverlay, setAdsOverlay] = useState(false);
+  const paywallStatus = useRef(null);
+  const openAdsOpened = useRef(false);
+
+  const purchaselyListener = () => {
+    Purchasely.addEventListener(event => {
+      paywallStatus.current = event.name;
+    
+      if (event.name === 'PRESENTATION_CLOSED') {
+       
+          setAnimationSlideStatus(true);
+      
+      }
+    });
+
+    Purchasely.addPurchasedListener(res => {
+      // User has successfully purchased a product, reload content
+      console.log('User has purchased', res);
+    });
+  };
+  useEffect(() => {
+    purchaselyListener();
+  
+    return () => {
+      Purchasely.removeEventListener();
+    };
+  }, []);
 
   useEffect(() => {
     const getInitial = async () => {

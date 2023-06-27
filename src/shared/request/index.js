@@ -47,3 +47,9 @@ export const getListGroup = (params = {}) =>
     method: "get",
     params,
   });
+
+  export const getSetting = () =>
+  Wrap({
+    url: `/setting/paywall`,
+    method: 'GET',
+  });

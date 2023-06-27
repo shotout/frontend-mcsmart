@@ -34,6 +34,17 @@ export const isUserPremium = () => {
   }
   return true;
 };
+export const isPremiumToday = () => {
+  const {freeUserPremium} = store.getState().defaultState;
+  if (isUserPremium()) {
+    return true;
+  }
+  if (freeUserPremium) {
+    return true;
+  }
+  return false;
+};
+
 
 export const reloadUserProfile = async () =>
   new Promise(async (resolve, reject) => {
@@ -111,6 +122,7 @@ export const handlePayment = async (vendorId, cb) =>
       const user = store.getState().defaultState.userProfile;
       switch (res.result) {
         case ProductResult.PRODUCT_RESULT_PURCHASED:
+          console.log('siniiii')
           if (user.token) {
             await setSubcription({
               subscription_type: vendorId === "one_month_free" ? 3 : 2,
@@ -129,7 +141,7 @@ export const handlePayment = async (vendorId, cb) =>
           //   message = res.plan.name;
           // }
 
-          // eventTracking(RESTORE_PURCHASED, message);
+          eventTracking(RESTORE_PURCHASED, message);
           break;
         case ProductResult.PRODUCT_RESULT_CANCELLED:
           console.log("Payment cancel");

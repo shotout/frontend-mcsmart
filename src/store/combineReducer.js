@@ -17,8 +17,28 @@ const persistConfig = {
 const commonPersistConfig = {
   key: 'defaultState',
   storage: AsyncStorage,
-  whitelist: [],
-  blacklist: ['showModalPremium'],
+  whitelist: [
+    'userProfile',
+    'defaultData',
+    'activeVersion',
+    'haveBeenAskRating',
+    'quotes',
+    'registerData',
+    'todayAdsLimit',
+    'restPassLength',
+    'freeUserPremium',
+  ],
+  blacklist: [
+    'showModalPremium',
+    'finishInitialLoader',
+    'runAnimationSlide',
+    'paywallNotifcation',
+    'animationCounter',
+  ],
+};
+const widgetPersistConfig = {
+  key: 'widgetState',
+  storage: AsyncStorage,
 };
 
 const rootReducers = combineReducers({
