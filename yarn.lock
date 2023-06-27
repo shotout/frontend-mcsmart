@@ -7253,6 +7253,11 @@ react-native-svg@^13.8.0:
     css-select "^5.1.0"
     css-tree "^1.1.3"
 
+react-native-timezone@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-timezone/-/react-native-timezone-2.3.0.tgz#acb4666e9d35c5b5a38fc710d50de2e2859dd8d2"
+  integrity sha512-C3IGVR7bjZVG6oU8/hTghQfRvjTmKzh9ZiAO5w6yOnZrn+LXEDOYecUtQWJboNTd/Vdh6FlllMnW3rWEiC3MdQ==
+
 react-native@0.71.4:
   version "0.71.4"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.71.4.tgz#f03f600efe68f745d19454ab17f9c1a9ef304790"

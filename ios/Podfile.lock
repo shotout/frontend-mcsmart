@@ -476,6 +476,8 @@ PODS:
     - RCTTypeSafety
     - React-Core
     - ReactCommon/turbomodule/core
+  - react-native-timezone (2.3.0):
+    - React-Core
   - React-perflogger (0.71.4)
   - React-RCTActionSheet (0.71.4):
     - React-Core/RCTActionSheetHeaders (= 0.71.4)
@@ -661,6 +663,7 @@ DEPENDENCIES:
   - react-native-adjust (from `../node_modules/react-native-adjust`)
   - react-native-purchasely (from `../node_modules/react-native-purchasely`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-timezone (from `../node_modules/react-native-timezone`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -775,6 +778,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-purchasely"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-timezone:
+    :path: "../node_modules/react-native-timezone"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -884,6 +889,7 @@ SPEC CHECKSUMS:
   react-native-adjust: 8152efdf7a2e94a85ce427f2096b4167f2824273
   react-native-purchasely: 6611e165e98fa864cc781cc5de8a5019f68b12ee
   react-native-safe-area-context: 39c2d8be3328df5d437ac1700f4f3a4f75716acc
+  react-native-timezone: 92fa6c0a7c041efd632a372a515c957cd8ee9e72
   React-perflogger: 0bb0522a12e058f6eb69d888bc16f40c16c4b907
   React-RCTActionSheet: bfd675a10f06a18728ea15d82082d48f228a213a
   React-RCTAnimation: 2fa220b2052ec75b733112aca39143d34546a941

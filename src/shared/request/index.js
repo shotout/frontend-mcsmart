@@ -13,6 +13,20 @@ export const getUserProfile = () =>
     method: "get",
   });
 
+export const postRegister = (data) =>
+  Wrap({
+    url: "/auth/register",
+    method: "POST",
+    data,
+  });
+  
+export const updateProfile = (data = {}) =>
+  Wrap({
+    url: "/user/profile",
+    method: "POST",
+    data,
+  });
+
 export const setSubcription = (data = {}) =>
   Wrap({
     url: "/subscription/update",
@@ -48,8 +62,8 @@ export const getListGroup = (params = {}) =>
     params,
   });
 
-  export const getSetting = () =>
+export const getSetting = () =>
   Wrap({
     url: `/setting/paywall`,
-    method: 'GET',
+    method: "GET",
   });

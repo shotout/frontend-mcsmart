@@ -23,6 +23,50 @@ export const openImprint = () => {
   Linking.openURL("https://mooti.app/imprint");
 };
 
+export const handleSubscriptionStatus = async (subscription = {}) => {
+  const purchaseId = await Purchasely.getAnonymousUserId();
+  if (subscription.type === 2 || subscription.type === 3) {
+    const trialDay = subscription.type === 2 ? 3 : 30;
+    const dateEndFreeTrial = getFutureDate(subscription.started, trialDay);
+    const nowaDay = moment().format('YYYY-MM-DD');
+    const objPurchase = JSON.parse(subscription.purchasely_data);
+    if (dateToUnix(dateEndFreeTrial) < dateToUnix(nowaDay)) {
+      await setSubcription({
+        subscription_type: 4,
+        purchasely_id: purchaseId,
+      });
+      await reloadUserProfile();
+
+      eventTracking(SUBSCRIPTION_STARTED);
+
+      if (objPurchase) {
+        revenueTracking(
+          objPurchase.plan_price_in_customer_currency,
+          objPurchase.customer_currency,
+        );
+      }
+    }
+  }
+};
+
+export const handlePaymentTwo = async (vendorId, cb) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const purchaseId = await Purchasely.getAnonymousUserId();
+      if (vendorId === 'onboarding') {
+        await setSubcription({
+          subscription_type: 5,
+          purchasely_id: purchaseId,
+        });
+      }
+      const user = store.getState().defaultState.userProfile;
+      if (user.token) {
+        await reloadUserProfile();
+      }
+    } catch (err) {
+      console.log('error payment:', err);
+    }
+  });
 export const isUserPremium = () => {
   const profile = store.getState().defaultState.userProfile;
   if (profile?.data != undefined) {
