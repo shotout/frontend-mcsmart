@@ -21,7 +21,7 @@ import Button from "../../components/button";
 import styles from "./styles";
 import states from "./states";
 import dispatcher from "./dispatcher";
-import { handlePaymentTwo, handleSubscriptionStatus, openPrivacyPolicy, openTermsofUse, reloadUserProfile } from "../../helpers/user";
+import { handlePaymentTwo, handleSubscriptionStatus, iconNameToId, openPrivacyPolicy, openTermsofUse, reloadUserProfile } from "../../helpers/user";
 import LoadingIndicator from "../../components/loading-indicator";
 import { isIphoneXorAbove } from "../../shared/devices";
 
@@ -38,7 +38,7 @@ import ChooseCommitment from "../../layout/register/choose-commitment";
 import Contract from "../../layout/register/contract";
 import { listTopic } from "../../shared/staticData";
 import { reset } from "../../shared/navigationRef";
-import { checkDeviceRegister, selectTheme, updateProfile } from "../../shared/request";
+import { checkDeviceRegister, postRegister, selectTheme, updateProfile } from "../../shared/request";
 import TimeZone from "react-native-timezone";
 import Purchasely from "react-native-purchasely";
 
@@ -143,9 +143,9 @@ function Register({ handleSetProfile, defaultData, registerData }) {
         start: moment(values.start_at).format('HH:mm'),
         end: moment(values.end_at).format('HH:mm'),
         gender: values.gender,
-        feel: values.selectedFeeling.length ? values.selectedFeeling[0] : null,
-        ways: values.causeFeeling,
-        areas: values.selectedCategory,
+        feel: 6,
+        ways: [6],
+        areas: [1, 2, 3, 4, 5, 6, 7, 8],
         timezone: timeZone,
       };
       const res = await postRegister(payload);
@@ -212,12 +212,12 @@ function Register({ handleSetProfile, defaultData, registerData }) {
       DeviceInfo.getUniqueId().then(async uniqueId => {
         try {
           console.log('Device info running', uniqueId);
-          const fcmToken = await messaging().getToken();
+          // const fcmToken = await messaging().getToken();
           const isSetBefore = await AsyncStorage.getItem('customIcon');
           const id = await Purchasely.getAnonymousUserId();
           setMutateForm({
             ...mutateForm,
-            fcm_token: fcmToken,
+            fcm_token: '123123123123123123123123',
             device_id: uniqueId,
             // device_id: Date.now().toString(),
             style: iconNameToId(isSetBefore),
@@ -365,10 +365,10 @@ function Register({ handleSetProfile, defaultData, registerData }) {
       }
     } else if (registerStep === 4) {
       setRegisterStep(registerStep + 1);
-      // handleChangeValue(
-      //   'selectedCategory',
-      //   defaultData.areas.map(item => item.id),
-      // );
+      handleChangeValue(
+        'selectedCategory',
+        defaultData.areas.map(item => item.id),
+      );
     } else {
       setRegisterStep(registerStep + 1);
       setSubstep("a");

@@ -11,7 +11,7 @@ import dispatcher from './dispatcher';
 // Ref routing
 import {navigationRef} from '../../shared/navigationRef';
 import navigationData from '../../shared/navigationData';
-
+import PropTypes from 'prop-types';
 // Screen
 import WelcomePage from '../welcome-page';
 import {navigationLinking} from '../../shared/navigationLinking';
@@ -27,7 +27,18 @@ import { setAnimationSlideStatus } from '../../store/defaultState/actions';
 const Stack = createNativeStackNavigator();
 
 
-function Routes() {
+function Routes({
+  getInitialData,
+  userProfile,
+  fetchListQuote,
+  fetchCollection,
+  fetchPastQuotes,
+  fetchListLiked,
+  activeVersion,
+  handleAppVersion,
+  registerData,
+  quotes,
+}) {
   const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
   const [showAdsOverlay, setAdsOverlay] = useState(false);
@@ -71,9 +82,11 @@ function Routes() {
   }, []);
 
   function getInitialRoute() {
-    if (isLogin) {
+    if (userProfile?.token || registerData?.registerStep === 8) {
       return 'MainPage';
-      // return 'NotificationTester';
+    }
+    if (registerData) {
+      return 'Register';
     }
     return 'WelcomePage';
   }
@@ -103,11 +116,17 @@ function Routes() {
 }
 
 Routes.propTypes = {
-  // userProfile: PropTypes.object,
+  getInitialData: PropTypes.func.isRequired,
+  fetchListQuote: PropTypes.func.isRequired,
+  fetchCollection: PropTypes.func.isRequired,
+  fetchPastQuotes: PropTypes.func.isRequired,
+  handleAppVersion: PropTypes.func.isRequired,
+  userProfile: PropTypes.object,
+  activeVersion: PropTypes.any,
 };
 
 Routes.defaultProps = {
-  // userProfile: {},
+  userProfile: {},
+  activeVersion: null,
 };
-
 export default connect(states, dispatcher)(Routes);

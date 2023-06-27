@@ -48,7 +48,18 @@ export const handleSubscriptionStatus = async (subscription = {}) => {
     }
   }
 };
-
+export const iconNameToId = name => {
+  switch (name) {
+    case 'second':
+      return 2;
+    case 'third':
+      return 3;
+    case 'fourth':
+      return 4;
+    default:
+      return 1;
+  }
+};
 export const handlePaymentTwo = async (vendorId, cb) =>
   new Promise(async (resolve, reject) => {
     try {
