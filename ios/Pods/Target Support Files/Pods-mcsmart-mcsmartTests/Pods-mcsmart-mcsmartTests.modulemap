@@ -1,6 +1,0 @@
-module Pods_mcsmart_mcsmartTests {
-  umbrella header "Pods-mcsmart-mcsmartTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

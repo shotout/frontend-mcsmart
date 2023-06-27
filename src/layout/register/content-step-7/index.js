@@ -64,21 +64,23 @@ function ContentStep7({
     const width = sizing.getDimensionWidth(1);
     const pageNumber = Math.min(
       Math.max(Math.floor(e.nativeEvent.contentOffset.x / width + 0.5) + 1, 0),
-      4,
+      getDataQuote().length,
     );
+
+    currentIndex.current = pageNumber - 1;
     setActiveIndexTutorial(pageNumber - 1);
   };
 
   function getTextInput() {
     switch (substep) {
       case 'b':
-        return 'Would you like to make an impression in professional situations with your co-workers, business partners or your boss?';
+        return 'Would you like to make an\nimpression in professional\nsituations with your co-workers,\nbusiness partners or your boss?';
       case 'c':
-        return 'Would you like to impress your children or other young relatives with your knowledge?';
+        return 'Would you like to impress\nyour children or other young\nrelatives with your\nknowledge?';
       case 'd':
-        return 'Would you like to impress your common members in your sports club using your knowledge?';
+        return 'Would you like to impress\nyour common members in\nyour sports club using your\nknowledge?';
       default:
-        return 'Would you like to impress your friends or partner with your knowledge?';
+        return 'Would you like to impress\nyour friends or partner with your\nknowledge?';
     }
   }
 
@@ -163,7 +165,7 @@ function ContentStep7({
           style={styles.ctnList}
           horizontal
           ref={flatListRef}
-          // onMomentumScrollEnd={onMomentoumScrollEnd}
+          onMomentumScrollEnd={onMomentoumScrollEnd}
           showsHorizontalScrollIndicator={false}
           renderItem={renderListQuote}
           keyExtractor={item => item.id}

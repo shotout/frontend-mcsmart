@@ -12,6 +12,7 @@ export default function Button({
   btnStyle,
   isDisable,
   disableWhite,
+  prependIcon,
 }) {
   function getBgColor() {
     switch (type) {
@@ -59,9 +60,15 @@ export default function Button({
       onPress={onPress}
       style={[styles.ctnRoot, btnStyle, getBgColor()]}>
       {isLoading ? (
-        <ActivityIndicator size="small" color="#fff" />
+        <ActivityIndicator
+          size="small"
+          color={type === 'white-button' ? colors.yellow : '#fff'}
+        />
       ) : (
-        <Text style={[styles.txtButton, getTextColor()]}>{label}</Text>
+        <>
+          {prependIcon}
+          <Text style={[styles.txtButton, getTextColor()]}>{label}</Text>
+        </>
       )}
     </TouchableOpacity>
   );

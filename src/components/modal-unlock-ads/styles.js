@@ -69,7 +69,7 @@ export default StyleSheet.create({
     top: moderateScale(20),
   },
   ctnFree: {
-    backgroundColor: '#ED5267',
+    backgroundColor: colors.black,
     height: moderateScale(20),
     paddingHorizontal: moderateScale(8),
     borderRadius: moderateScale(20 / 2),

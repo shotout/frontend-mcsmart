@@ -1,6 +1,7 @@
 import SplashScreen from 'react-native-splash-screen';
 import notifee, {EventType} from '@notifee/react-native';
 import moment from 'moment';
+import {isArray} from 'lodash';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Linking} from 'react-native';
 import {
@@ -19,12 +20,17 @@ import store from '../configure-store';
 import * as types from './types';
 import {
   checkIsHasLogin,
+  handlePayment,
   handleSubscriptionStatus,
   handleUpdateTimezone,
+  isPremiumToday,
+  isUserPremium,
   reloadUserProfile,
 } from '../../helpers/user';
 import {handleModalFirstPremium} from '../../shared/globalContent';
 import {scrollToTopQuote} from './selector';
+import dummyPastQuotes from '../../shared/static/dummyPastQuotes';
+import {loadOpenAddsReward} from '../../helpers/loadReward';
 
 export const setModalFirstPremium = payload => ({
   type: types.SET_MODAL_FIRST_PREMIUM,
@@ -46,20 +52,96 @@ export const handleSetProfile = payload => ({
   payload,
 });
 
-export const fetchListQuote = params => async dispatch =>
+export const fetchListQuote = (params, isPassPremium) => async dispatch =>
   new Promise(async (resolve, reject) => {
     try {
-      console.log('FETCH LIST QUOTE');
+      const {freeUserPremium} = store.getState().defaultState;
+      let isFreeUserPremium = isPremiumToday();
+      const todayDate = moment().format('YYYY-MM-DD');
+      if (
+        isPremiumToday() &&
+        !isUserPremium() &&
+        todayDate !== freeUserPremium
+      ) {
+        isFreeUserPremium = false;
+      }
       dispatch({type: types.START_FETCH_QUOTES});
       const quote = await getListQuotes({
-        length: 15,
+        length: isFreeUserPremium || isPassPremium ? 1000 : 10,
         page: 1,
         ...params,
       });
-      dispatch({
-        type: types.SUCCESS_FETCH_QUOTE,
-        payload: quote.data,
-      });
+      let restPas = [];
+      if (!isUserPremium()) {
+        const pastQuote = await getListPastQuotes({length: 5, page: 1});
+        restPas = isArray(pastQuote?.data)
+          ? pastQuote?.data
+          : pastQuote?.data?.data || dummyPastQuotes;
+      }
+      if (quote.data?.data?.length > 0) {
+        let overallData = [...restPas, ...quote.data.data];
+        if (!isFreeUserPremium && !isPassPremium) {
+          overallData = [
+            ...[{item_type: 'countdown_page'}],
+            ...restPas,
+            ...quote.data.data,
+            ...[{item_type: 'countdown_page'}],
+          ];
+          overallData = overallData.map((ctn, itemIndex) => {
+            if (
+              itemIndex === 2 ||
+              itemIndex === 5 ||
+              itemIndex === 8 ||
+              itemIndex === 12
+            ) {
+              return {
+                ...ctn,
+                item_type: 'in_app_ads',
+              };
+            }
+            return ctn;
+          });
+        } else if (!isUserPremium()) {
+          overallData = overallData.map((ctn, itemIndex) => {
+            if (
+              itemIndex === 2 ||
+              itemIndex === 5 ||
+              itemIndex === 8 ||
+              itemIndex === 12 ||
+              itemIndex === 16
+            ) {
+              return {
+                ...ctn,
+                item_type: 'in_app_ads',
+              };
+            }
+            if (itemIndex > 16) {
+              if (itemIndex % 4 === 0) {
+                return {
+                  ...ctn,
+                  item_type: 'in_app_ads',
+                };
+              }
+            }
+
+            return {
+              ...ctn,
+              item_type: 'normal_quote',
+            };
+          });
+        }
+        dispatch({
+          type: types.SUCCESS_FETCH_QUOTE,
+          payload: quote.data,
+          arrData: overallData,
+          listBasicQuote:
+            isFreeUserPremium || isPassPremium ? [] : quote.data.data,
+          restPassLength: restPas?.length,
+          isPassPremium,
+          isFreeUserPremium:
+            isFreeUserPremium || isPassPremium ? todayDate : null,
+        });
+      }
       resolve(quote);
     } catch (err) {
       console.log('ERr fetch quote:', err);
@@ -267,7 +349,7 @@ const handleDecrementBadgeCount = () => {
     });
 };
 
-const resetNotificationBadge = isHasLogin => {
+export const resetNotificationBadge = isHasLogin => {
   notifee.setBadgeCount(0).then(() => {
     if (isHasLogin) {
       updateProfile({
@@ -301,7 +383,7 @@ const handleNotificationQuote = async (res, remoteMessage, getInitialURL) => {
   }
 };
 
-const handleNotificationOpened = resProfile => {
+const handleNotificationOpened = (resProfile, loadingRef) => {
   let isAbleToFetchQuote = true;
   notifee.onForegroundEvent(async ({type, detail}) => {
     if (type === EventType.ACTION_PRESS || type === EventType.PRESS) {
@@ -317,17 +399,17 @@ const handleNotificationOpened = resProfile => {
           scrollToTopQuote();
         }
       }
-      // if (detail.notification.data?.type === 'paywall') {
-      //   console.log('Check paywall data:', detail.notification.data);
-      //   if (loadingRef.current) {
-      //     setPaywallNotification(detail.notification.data);
-      //     loadingRef.current = false;
-      //   } else {
-      //     setTimeout(() => {
-      //       handlePayment(detail.notification.data?.placement);
-      //     }, 1000);
-      //   }
-      // }
+      if (detail.notification.data?.type === 'paywall') {
+        console.log('Check paywall data:', detail.notification.data);
+        if (loadingRef.current) {
+          setPaywallNotification(detail.notification.data);
+          loadingRef.current = false;
+        } else {
+          setTimeout(() => {
+            handlePayment(detail.notification.data?.placement);
+          }, 1000);
+        }
+      }
     }
   });
   setTimeout(async () => {
@@ -338,14 +420,42 @@ const handleNotificationOpened = resProfile => {
   }, 1000);
 };
 
-export const fetchUserLoginData = async () => {
+const handleShowAds = async appOpenAd => {
+  const isFinishTutorial = await AsyncStorage.getItem('isFinishTutorial');
+  appOpenAd.load();
+  if (isFinishTutorial === 'yes') {
+    if (appOpenAd.loaded) {
+      appOpenAd.show();
+    } else {
+      const cbFinishOpenAds = () => {
+        SplashScreen.hide();
+        setInitialLoaderStatus(true);
+        console.log('CALLBACK FINISH CALLED');
+      };
+      console.log('LOAD IN APP ADS VIA FORCE LOAD');
+      // cbFinishOpenAds();
+      loadOpenAddsReward(appOpenAd, cbFinishOpenAds);
+    }
+  } else {
+    SplashScreen.hide();
+    setInitialLoaderStatus(true);
+  }
+};
+
+export const fetchUserLoginData = async (appOpenAd, loadingRef) => {
+  if (!isUserPremium()) {
+    handleShowAds(appOpenAd);
+  }
   store.dispatch(getInitialData());
   store.dispatch(fetchCollection());
   const resProfile = await reloadUserProfile();
-  handleNotificationOpened(resProfile);
+  handleNotificationOpened(resProfile, loadingRef);
   await handleSelectTheme(resProfile);
   handleSubscriptionStatus(resProfile.subscription);
   handleUpdateTimezone();
+  if (isUserPremium()) {
+    SplashScreen.hide();
+  }
 };
 
 export const setUserTheme = payload => {
@@ -423,21 +533,11 @@ const handleShowFreePremiumDaily = async () => {
   }
 };
 
-const getSettingData = async () => {
-  const setting = await getSetting();
-  if (setting.data.value !== 'true') {
-    handleShowFreePremiumWeekly();
-    handleShowFreePremiumDaily();
-  }
-};
-
-export const fetchInitialData = async isHasLogin => {
+export const fetchInitialData = async (isHasLogin, appOpenAd, loadingRef) => {
   resetNotificationBadge(isHasLogin);
   if (isHasLogin) {
-    await fetchUserLoginData();
-    SplashScreen.hide();
-    await getSettingData();
-    setAnimationSlideStatus(true);
+    setInitialLoaderStatus(false);
+    await fetchUserLoginData(appOpenAd, loadingRef);
   } else {
     await store.dispatch(getInitialData(false));
     SplashScreen.hide();

@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {colors, fonts, sizing} from '../../../shared/styling';
+import {isIphoneXorAbove} from '../../../shared/devices';
 
 export default StyleSheet.create({
   ctnRoot: {
@@ -13,11 +14,11 @@ export default StyleSheet.create({
     resizeMode: 'contain',
   },
   ctnBannerCountdown: {
-    width: '100%',
-    aspectRatio: 1000 / 964,
+    width: '99%',
+    aspectRatio: 1450 / 1460,
     resizeMode: 'contain',
     alignSelf: 'center',
-    marginTop: moderateScale(20),
+    marginTop: isIphoneXorAbove() ? moderateScale(40) : moderateScale(20),
   },
   ctnTitle: {
     justifyContent: 'center',
@@ -90,7 +91,7 @@ export default StyleSheet.create({
     backgroundColor: '#8F8DB0',
   },
   ctnFree: {
-    backgroundColor: '#ED5267',
+    backgroundColor: colors.black,
     height: moderateScale(26),
     paddingHorizontal: moderateScale(18),
     borderRadius: moderateScale(26 / 2),
@@ -101,9 +102,9 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   txtFree: {
-    color: colors.white,
+    color: colors.yellow,
     fontSize: moderateScale(15),
-    fontFamily: fonts.InterMedium,
+    fontFamily: fonts.InterSemiBold,
   },
   ctnSwipe: {
     flex: 1,

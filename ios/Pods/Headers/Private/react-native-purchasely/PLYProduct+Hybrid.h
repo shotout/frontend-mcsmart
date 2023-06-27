@@ -1,1 +1,0 @@
-../../../../../node_modules/react-native-purchasely/ios/Classes/Hybrid/PLYProduct+Hybrid.h

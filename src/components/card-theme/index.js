@@ -23,11 +23,13 @@ import LoadingIndicator from '../loading-indicator';
 import {handleShuffleTheme} from '../../shared/useBackgroundQuotes';
 // import ModalUnlockCategory from '../modal-unlock-ads';
 import {getArrThemes, listTheme} from '../../shared/static-data/listTheme';
+import ModalUnlockCategory from '../modal-unlock-ads';
 
 const themesArr = getArrThemes();
 
 const iconSuffle = require('../../assets/icons/random_theme.png');
 const adsIcon = require('../../assets/icons/ads_icon.png');
+const themesBanner = require('../../assets/icons/themes_banner.png');
 
 function CardTheme({
   userProfile,
@@ -288,7 +290,7 @@ function CardTheme({
       {renderListTheme()}
       {/* <View style={[styles.ctnRowIcon]}>{renderContent()}</View> */}
 
-      {/* {showUnlockCardAds && (
+      {showUnlockCardAds && (
         <ModalUnlockCategory
           visible={showUnlockCardAds}
           handleClose={() => {
@@ -303,7 +305,7 @@ function CardTheme({
             onPressSelect('theme_selected');
           }}
         />
-      )} */}
+      )}
     </View>
   );
 }

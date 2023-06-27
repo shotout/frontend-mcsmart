@@ -98,7 +98,10 @@ const ModalCountDown = ({visible, handleClose}) => {
     <Portal>
       <Modal
         onDismiss={handleClose}
-        contentContainerStyle={{flex: 1, justifyContent: 'center'}}
+        contentContainerStyle={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
         visible={visible}>
         <View style={styles.ctnRoot}>
           <ImageBackground source={bgTimer} style={styles.ctnCountdown}>
@@ -108,9 +111,9 @@ const ModalCountDown = ({visible, handleClose}) => {
             </Text>
           </ImageBackground>
           <View style={styles.ctnText}>
-            <Text style={styles.txtTitle}>You are out of Quotes!</Text>
+            <Text style={styles.txtTitle}>You are out of Facts!</Text>
             <Text style={styles.txtDesc}>
-              Watch an ad now to unlock the next quotes without waiting!
+              Watch an ad now to unlock the next Facts without waiting!
             </Text>
           </View>
           <View style={styles.ctnBtn}>

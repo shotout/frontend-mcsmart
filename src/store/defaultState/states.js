@@ -9,8 +9,12 @@ const INITIAL_STATE = {
   storageStatus: STORAGE_STATUS.loading,
   userProfile: defaultUser,
   defaultData: {
-    listFactRegister: [],
-    category: [],
+    feeling: [],
+    ways: [],
+    areas: [],
+    categories: {},
+    themes: [],
+    link: {},
   },
   quotes: {
     listData: [],
@@ -131,6 +135,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         userProfile: {},
+        registerData: null,
         listLikedQuote: {
           listDataLike: [],
         },
@@ -180,12 +185,19 @@ export default (state = INITIAL_STATE, action) => {
     case types.SUCCESS_FETCH_QUOTE:
       return {
         ...state,
+        freeUserPremium: action.isFreeUserPremium,
+        restPassLength: action.restPassLength,
+        todayAdsLimit:
+          action.isPassPremium || state.todayAdsLimit > 17
+            ? 99
+            : 12 + action.restPassLength,
         quotes: {
-          listData: action.payload.data,
+          listData: action.arrData,
           currentPage: 1,
           isLoading: false,
           totalQuotes: action.payload.total,
         },
+        listBasicQuote: action.listBasicQuote,
       };
     case types.ERROR_FETCH_QUOTES:
       return {

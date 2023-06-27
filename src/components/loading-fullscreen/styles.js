@@ -1,10 +1,19 @@
 import {StyleSheet} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
+import {sizing} from '../../shared/styling';
+import {isIphoneXorAbove} from '../../shared/devices';
 
 const styles = StyleSheet.create({
   modal: {
-    alignItems: 'center',
     flex: 1,
+  },
+  ctnRoot: {
+    width: sizing.getWindowWidth(1),
+    height: sizing.getWindowHeight(1),
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.9)',
+    marginTop: isIphoneXorAbove() ? moderateScale(-36) : 0,
   },
   modalBody: {
     backgroundColor: '#fff',

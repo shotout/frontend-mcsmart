@@ -8,9 +8,10 @@ import {
   TouchableWithoutFeedback,
   Modal,
   StatusBar,
+  Platform,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import messaging from '@react-native-firebase/messaging';
+import notifee, {EventType} from '@notifee/react-native';
 
 import AnimatedLottieView from 'lottie-react-native';
 import {createAnimatableComponent} from 'react-native-animatable';
@@ -22,6 +23,14 @@ import {
   State,
   TapGestureHandler,
 } from 'react-native-gesture-handler';
+import {
+  AdEventType,
+  BannerAd,
+  BannerAdSize,
+  InterstitialAd,
+  RewardedAd,
+  RewardedAdEventType,
+} from 'react-native-google-mobile-ads';
 import styles from './styles';
 import {sizing} from '../../shared/styling';
 import {useBackgroundQuotes} from '../../helpers/hook/useBackgroundQuotes';
@@ -39,21 +48,58 @@ import ButtonIcon from '../../components/button-icon';
 import ModalTheme from '../../layout/main-page/modal-theme';
 import ModalSetting from '../../layout/main-page/modal-setting';
 import ModalShare from '../../layout/main-page/modal-share';
-import {handleRatingModal, isUserPremium} from '../../helpers/user';
+import {
+  handleBasicPaywall,
+  handlePayment,
+  handleRatingModal,
+  isPremiumToday,
+  isUserPremium,
+} from '../../helpers/user';
 import {
   changeAskRatingParameter,
   changeQuoteLikeStatus,
+  setAnimationSlideStatus,
+  setInitialLoaderStatus,
+  setQuoteRef,
 } from '../../store/defaultState/actions';
 import ModalCategories from '../../layout/main-page/modal-categories';
 import {
   addPastQuotes,
   dislikeQuotes,
   getRatingStatus,
+  getSetting,
 } from '../../shared/request';
 import useLocalNotif from '../../shared/useLocalNotif';
 import ModalRating from '../../components/modal-rating';
 import {showModalPremium} from '../../shared/globalContent';
 import ModalRepeat from '../../components/modal-repeat';
+import {
+  getAdaptiveBannerID,
+  getRewardedInsterstialID,
+  getRewardedOutOfQuotesID,
+} from '../../shared/static/adsId';
+import {checkAdsTracking} from '../../helpers/adsTracking';
+import {loadInterstialAds} from '../../helpers/loadReward';
+import LoadingFullScreen from '../../components/loading-fullscreen';
+import ModalCountDown from '../../components/modal-countdown';
+import PageCountDown from '../../layout/main-page/page-countdown';
+import {isMoreThanThreeHoursSinceLastTime} from '../../helpers/timeHelpers';
+import {reformatDate} from '../../shared/dateHelper';
+
+const adUnitId = getRewardedOutOfQuotesID();
+
+const rewarded = RewardedAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ['fashion', 'clothing'],
+});
+
+const interstialAds = InterstitialAd.createForAdRequest(
+  getRewardedInsterstialID(),
+  {
+    requestNonPersonalizedAdsOnly: true,
+    keywords: ['fashion', 'clothing'],
+  },
+);
 
 const ViewAnimation = createAnimatableComponent(View);
 
@@ -62,38 +108,57 @@ const swipeupIcon = require('../../assets/lottie/swipe_up.json');
 const arrowBottom = require('../../assets/icons/arrow-bottom.png');
 
 const learnMoreButton = require('../../assets/icons/tutorial/learn_more_button.json');
-const learnMoreClick = require('../../assets/icons/tutorial/learn_more_click_once.gif');
 const repeatButton = require('../../assets/icons/tutorial/repeat_button.json');
 const repeatClick = require('../../assets/icons/tutorial/repeat_click.json');
 
 const learnMoreClickLottie = require('../../assets/icons/tutorial/learn_more_click.json');
 
-function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
+let intervalTutorial = null;
+const limitIndex = 6;
+
+function MainPage({
+  quotes,
+  userProfile,
+  runAnimationSlide,
+  animationCounter,
+  todayAdsLimit,
+  route,
+  paywallNotifcation,
+  finishInitialLoader,
+}) {
   const [isTutorial, setTutorial] = useState({
     visible: false,
     step: 1,
   });
-  const [activeSlide, setActiveSlide] = useState(0);
+  const isFromOnboarding = route.params?.isFromOnboarding;
+  const initialIndexContent = isUserPremium() ? 0 : limitIndex;
+  const [activeSlide, setActiveSlide] = useState(initialIndexContent);
+  const [currentSlide, setCurrentSlide] = useState(initialIndexContent);
   const themesId = userProfile.data?.themes[0]?.id;
   const [themeUser] = useBackgroundQuotes(userProfile.data?.themes[0]);
   const [quoteLikeStatus, setQuoteLikeStatus] = useState(false);
   const [captureUri, setCaptureUri] = useState(null);
   const [showModalLike, setShowModalLike] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [modalRatingVisible, setModalRating] = useState(false);
   const [modalRepeat, setModalRepeat] = useState(false);
   const [scheduleTime] = useLocalNotif(userProfile);
 
   const [runQuoteAnimation, setRunQuoteAnimation] = useState(false);
   const [isUserHasScroll, setUserScrollQuotes] = useState(false);
+  const [isShowTutorial, setShowNextTutorial] = useState(true);
   const [isShowNextQuooteAnimation, setShowNextQuoteAnimation] =
     useState(false);
+  const [statusbarStatus, setStatusBar] = useState(false);
+  const [isLoadingInterstial, setLoadingInterstial] = useState(false);
+  const [showModalCountdown, setModalCountdown] = useState(false);
 
   const refThemes = useRef();
   const refSetting = createRef();
   const refShare = createRef();
   const captureRef = useRef();
   const refCategory = createRef();
+  const firstStepTutorial = useRef();
+  const buttonPressAnimationTutorial = useRef();
 
   const getActiveQuote = () => {
     if (quotes?.listData.length > 0 && quotes?.listData[activeSlide]) {
@@ -138,6 +203,37 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
       });
     }
   };
+  const handleShowPaywall = async () => {
+    const res = await getSetting();
+    const initNotification = await notifee.getInitialNotification();
+    const getInitialPlacement =
+      initNotification?.notification?.data || paywallNotifcation;
+    if (res.data.value === 'true' && !isUserPremium() && !isFromOnboarding) {
+      // Paywall open apps
+      if (getInitialPlacement) {
+        const paywallNotifCb = () => {
+          setInitialLoaderStatus(false);
+        };
+        handlePayment(getInitialPlacement?.placement, paywallNotifCb);
+      } else {
+        const getCurrentOpenApps = await AsyncStorage.getItem('latestOpenApps');
+        const mainDate = reformatDate(parseFloat(getCurrentOpenApps));
+        const isMoreThan3Hours = isMoreThanThreeHoursSinceLastTime(mainDate);
+        const stringifyDate = Date.now().toString();
+        if (!getCurrentOpenApps || isMoreThan3Hours) {
+          handleBasicPaywall();
+          AsyncStorage.setItem('latestOpenApps', stringifyDate);
+        } else {
+          setAnimationSlideStatus(true);
+        }
+      }
+
+      handleRatingStatus();
+    } else {
+      handleRatingStatus();
+      setAnimationSlideStatus(true);
+    }
+  };
 
   useEffect(() => {
     const checkTutorial = async () => {
@@ -147,10 +243,52 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
           visible: true,
           step: 1,
         });
+        intervalTutorial = setInterval(() => {
+          if (firstStepTutorial.current) {
+            firstStepTutorial.current?.play();
+          }
+        }, 3500);
       }
     };
     checkTutorial();
-    handleRatingStatus();
+
+    // Handle interstial reward quote ads
+
+    const unsubscribeLoaded = rewarded.addAdEventListener(
+      RewardedAdEventType.LOADED,
+      () => {
+        console.log('LOAD ADS FROM MAIN PAGE REWARD');
+      },
+    );
+    const unsubscribeEarned = rewarded.addAdEventListener(
+      RewardedAdEventType.EARNED_REWARD,
+      reward => {
+        console.log('User earned reward of ', reward);
+      },
+    );
+
+    const rewardedOpen = rewarded.addAdEventListener(AdEventType.OPENED, () => {
+      setStatusBar(true);
+      console.log('LOAD ADS MODAL COUNTDOWN');
+    });
+    const rewardedClose = rewarded.addAdEventListener(
+      AdEventType.CLOSED,
+      () => {
+        setStatusBar(false);
+        console.log('LOAD ADS MODAL COUNTDOWN');
+      },
+    );
+    rewarded.load();
+    interstialAds.load();
+    if (Platform.OS === 'ios') {
+      checkAdsTracking();
+    }
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeEarned();
+      rewardedOpen();
+      rewardedClose();
+    };
   }, []);
 
   useEffect(() => {
@@ -187,6 +325,32 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
     }
 
     setQuoteLikeStatus(isLiked);
+
+    if (activeSlide !== currentSlide) {
+      // if (activeQuote) {
+      //   handleWidgetData(activeQuote);
+      // }
+      if (!isUserPremium()) {
+        handleShowInterstialAds(activeQuote, activeSlide);
+      }
+      if (!interstialAds.loaded) {
+        interstialAds.load();
+      }
+    }
+    if (!isPremiumToday()) {
+      if (currentSlide === 16 || activeSlide === 16) {
+        if (
+          activeSlide === 0 ||
+          activeSlide === 3 ||
+          activeSlide === 7 ||
+          activeSlide === 10 ||
+          activeSlide === 13 ||
+          activeSlide === 16
+        ) {
+          setModalCountdown(true);
+        }
+      }
+    }
   }, [activeSlide]);
 
   useEffect(() => {
@@ -201,6 +365,40 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
       }, 1800);
     }
   }, [runAnimationSlide, isUserHasScroll, isTutorial]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      rewarded.load();
+    }, 2000);
+  }, [todayAdsLimit]);
+
+  useEffect(() => {
+    if (finishInitialLoader) {
+      handleShowPaywall();
+    }
+  }, [finishInitialLoader]);
+
+  const handleShowInterstialAds = async activeQuote => {
+    if (activeQuote?.item_type === 'in_app_ads') {
+      if (interstialAds.loaded) {
+        interstialAds.show();
+      } else {
+        const cbFinish = () => {
+          setLoadingInterstial(false);
+        };
+        setLoadingInterstial(true);
+        await loadInterstialAds(interstialAds, cbFinish);
+        cbFinish();
+      }
+    }
+  };
+
+  const isHideContent = () => {
+    if (getActiveQuote()?.item_type === 'countdown_page') {
+      return true;
+    }
+    return false;
+  };
 
   const handleQuoteActive = () => {
     if (quotes?.listData.length > 0) {
@@ -263,6 +461,10 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
   };
 
   const handleSkipTutorial = async () => {
+    setShowNextTutorial(false);
+    setTimeout(() => {
+      setShowNextTutorial(true);
+    });
     if (isTutorial.step === 4) {
       await AsyncStorage.setItem('isFinishTutorial', 'yes');
       setTutorial({
@@ -270,6 +472,17 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
         step: 1,
       });
     } else {
+      clearInterval(intervalTutorial);
+      intervalTutorial = null;
+      if (isTutorial.step + 1 === 1 || isTutorial.step + 1 === 2) {
+        setTimeout(() => {
+          intervalTutorial = setInterval(() => {
+            if (firstStepTutorial.current) {
+              firstStepTutorial.current?.play();
+            }
+          }, 3000);
+        }, 100);
+      }
       setTutorial({
         ...isTutorial,
         step: isTutorial.step + 1,
@@ -341,6 +554,9 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
   const renderFactItem = ({item, index, disableAnimation}) => {
     const getImageContent = themeUser?.imgLocal;
     const listWhiteYellowTrace = [2, 3];
+    if (item?.item_type === 'countdown_page') {
+      return <PageCountDown />;
+    }
     return (
       <QuotesContent
         item={item}
@@ -348,7 +564,7 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
           setModalRepeat(true);
           setTimeout(() => {
             setModalRepeat(false);
-          }, 1000);
+          }, 2000);
         }}
         themeUser={themeUser}
         source={getImageContent}
@@ -402,6 +618,23 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
     return null;
   }
 
+  function renderBottomAds() {
+    if (isUserPremium() || isHideContent()) {
+      return null;
+    }
+    return (
+      <View style={styles.ctnBannerAds}>
+        <BannerAd
+          unitId={getAdaptiveBannerID()}
+          size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+          requestOptions={{
+            requestNonPersonalizedAdsOnly: true,
+          }}
+        />
+      </View>
+    );
+  }
+
   function renderButton() {
     const bgStyle = {
       // backgroundColor:
@@ -410,8 +643,15 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
       //     : 'rgba(0, 0, 0, 0.7)',
       backgroundColor: 'rgba(0, 0, 0, 0.8)',
     };
+    if (isHideContent()) {
+      return null;
+    }
     return (
-      <View style={styles.btnWrapper}>
+      <View
+        style={[
+          styles.btnWrapper,
+          !isUserPremium() && !isHideContent() && styles.ctnPdAds,
+        ]}>
         {renderArrowSwipe()}
         <View style={styles.subBottomWrapper}>
           <TouchableWithoutFeedback onPress={handleShare}>
@@ -482,16 +722,21 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
                 source={swipeupIcon}
                 style={styles.animationStyle}
                 autoPlay
+                ref={firstStepTutorial}
                 duration={3000}
                 loop={false}
               />
             </View>
             <Text style={styles.txtTutorial}>Swipe up for the next Fact.</Text>
-            <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
-              <Text style={styles.txtDescTutorial}>
-                {'Tap anywhere to go\nto the next tutorial'}
-              </Text>
-            </ViewAnimation>
+            <View style={styles.ctnHeightTutorial}>
+              {isShowTutorial && (
+                <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
+                  <Text style={styles.txtDescTutorial}>
+                    {'Tap anywhere to go\nto the next tutorial'}
+                  </Text>
+                </ViewAnimation>
+              )}
+            </View>
           </ViewAnimation>
         </View>
       );
@@ -508,16 +753,21 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
                 source={doubleTap}
                 style={styles.animationStyle}
                 autoPlay
+                ref={firstStepTutorial}
                 duration={3000}
                 loop={false}
               />
             </View>
             <Text style={styles.txtTutorial}>Double tap to like the Fact.</Text>
-            <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
-              <Text style={styles.txtDescTutorial}>
-                {'Tap anywhere to go\nto the next tutorial'}
-              </Text>
-            </ViewAnimation>
+            <View style={styles.ctnHeightTutorial}>
+              {isShowTutorial && (
+                <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
+                  <Text style={styles.txtDescTutorial}>
+                    {'Tap anywhere to go\nto the next tutorial'}
+                  </Text>
+                </ViewAnimation>
+              )}
+            </View>
           </ViewAnimation>
         </View>
       );
@@ -534,6 +784,7 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
                 source={repeatButton}
                 style={styles.btnLottie}
                 autoPlay
+                ref={firstStepTutorial}
                 duration={3000}
                 loop={false}
               />
@@ -542,11 +793,15 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
               Tap this button to repeat the Fact tomorrow to make sure you
               remember it.
             </Text>
-            <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
-              <Text style={styles.txtDescTutorial}>
-                {'Tap anywhere to go\nto the next tutorial'}
-              </Text>
-            </ViewAnimation>
+            <View style={styles.ctnHeightTutorial}>
+              {isShowTutorial && (
+                <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
+                  <Text style={styles.txtDescTutorial}>
+                    {'Tap anywhere to go\nto the next tutorial'}
+                  </Text>
+                </ViewAnimation>
+              )}
+            </View>
           </ViewAnimation>
         </View>
       );
@@ -570,11 +825,15 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
             <Text style={styles.txtTutorial}>
               To get more information on a Fact, tap this button.
             </Text>
-            <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
-              <Text style={styles.txtDescTutorial}>
-                {'Tap anywhere to go\nto finish the tutorial'}
-              </Text>
-            </ViewAnimation>
+            <View style={styles.ctnHeightTutorial}>
+              {isShowTutorial && (
+                <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
+                  <Text style={styles.txtDescTutorial}>
+                    {'Tap anywhere to go\nto finish the tutorial'}
+                  </Text>
+                </ViewAnimation>
+              )}
+            </View>
           </ViewAnimation>
         </View>
       );
@@ -590,6 +849,7 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
             source={repeatClick}
             style={styles.lottieClickTutorial}
             autoPlay
+            ref={buttonPressAnimationTutorial}
             duration={3000}
             loop={false}
           />
@@ -603,6 +863,7 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
             source={learnMoreClickLottie}
             style={styles.lottieClickTutorial}
             autoPlay
+            ref={buttonPressAnimationTutorial}
             duration={3000}
             loop={false}
           />
@@ -629,15 +890,13 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
   }
 
   function renderFreeBadge() {
-    if (isTutorial.visible || isUserPremium()) {
+    if (isTutorial.visible || isUserPremium() || isHideContent()) {
       return null;
     }
     return (
       <TouchableOpacity
         style={styles.ctnFreeBadge}
-        onPress={() => {
-          showModalPremium();
-        }}>
+        onPress={handleBasicPaywall}>
         <View style={styles.ctnIconCrown}>
           <PremiumRocket width="100%" height="100%" />
         </View>
@@ -678,6 +937,7 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
         activeOffsetX={[-40, 40]}>
         <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
           <FlatList
+            ref={setQuoteRef}
             style={styles.ctnRoot}
             data={quotes?.listData || []}
             pagingEnabled
@@ -688,6 +948,15 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
             onEndReachedThreshold={0.9}
             renderItem={renderFactItem}
             keyExtractor={(item, index) => `${item.id} ${index}`}
+            initialScrollIndex={isUserPremium() ? 0 : limitIndex}
+            getItemLayout={(data, index) => ({
+              length: sizing.getDimensionHeight(1),
+              offset: sizing.getDimensionHeight(1) * index,
+              index,
+            })}
+            onScrollToIndexFailed={() => {
+              console.log('FAILED SCROLL TO INDEX', 5);
+            }}
           />
         </TapGestureHandler>
       </PanGestureHandler>
@@ -703,11 +972,13 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
       <StatusBar
         barStyle={isDarkTheme ? 'light-content' : 'dark-content'}
         backgroundColor={isDarkTheme ? '#000' : '#fff'}
-        // hidden={statusbarStatus}
+        hidden={statusbarStatus}
       />
       {renderScreenshot()}
       {renderFlatList()}
       {renderButton()}
+
+      {renderBottomAds()}
       {renderFreeBadge()}
       {renderTutorial()}
       {renderModalLike()}
@@ -777,6 +1048,21 @@ function MainPage({quotes, userProfile, runAnimationSlide, animationCounter}) {
           setModalRepeat(false);
         }}
       />
+
+      <ModalCountDown
+        adsRef={rewarded}
+        hideStatusbar={() => {
+          setStatusBar(true);
+        }}
+        showStatusBar={() => {
+          setStatusBar(false);
+        }}
+        visible={showModalCountdown}
+        handleClose={() => {
+          setModalCountdown(false);
+        }}
+      />
+      <LoadingFullScreen isLoading={isLoadingInterstial} />
     </View>
   );
 }

@@ -53,17 +53,6 @@ export const isUserPremium = () => {
   return true;
 };
 
-export const isPremiumToday = () => {
-  const {freeUserPremium} = store.getState().defaultState;
-  if (isUserPremium()) {
-    return true;
-  }
-  if (freeUserPremium) {
-    return true;
-  }
-  return false;
-};
-
 export const isCompletedOnboarding = () => {
   const profile = store.getState().defaultState.userProfile;
   const {type} = profile.data.subscription;

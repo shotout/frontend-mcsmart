@@ -27,14 +27,15 @@ export const openImprint = () => {
   Linking.openURL('https://mcsmartapp.com/imprint');
 };
 
-export const isUserPremium = () =>
-  // const profile = store.getState().defaultState.userProfile;
-  // const {type} = profile.data.subscription;
-  // if (type === 1) {
-  //   return false;
-  // }
-  // return true;
-  true;
+export const isUserPremium = () => {
+  const profile = store.getState().defaultState.userProfile;
+  const {type} = profile.data.subscription;
+  if (type === 1) {
+    return false;
+  }
+  return true;
+  // true;
+};
 
 export const handlePayment = async (vendorId, cb) =>
   new Promise(async (resolve, reject) => {
@@ -43,10 +44,10 @@ export const handlePayment = async (vendorId, cb) =>
       let stringVendor = vendorId;
       const purchaseId = await Purchasely.getAnonymousUserId();
       if (vendorId === 'onboarding') {
-        await setSubcription({
-          subscription_type: 5,
-          purchasely_id: purchaseId,
-        });
+        // await setSubcription({
+        //   subscription_type: 5,
+        //   purchasely_id: purchaseId,
+        // });
       } else if (!stringVendor) {
         const currentDate = moment().format('YYYY-MM-DD');
         const getInstallDate = await AsyncStorage.getItem('firstInstall');
@@ -181,17 +182,12 @@ export const setCollectionData = payload => {
 };
 
 export const handleBasicPaywall = async cbPaywall => {
-  // const profile = store.getState().defaultState.userProfile;
-  // const paywallType =
-  //   profile?.data?.notif_count && profile?.data?.notif_count > 2
-  //     ? 'offer_no_purchase_after_onboarding_paywall_2nd'
-  //     : 'offer_no_purchase_after_onboarding_paywall';
-  // console.log(
-  //   'CHECK BASIC PAYWALL paywallType:',
-  //   profile?.data?.notif_count,
-  //   paywallType,
-  // );
-  // await handlePayment(paywallType, cbPaywall);
+  const profile = store.getState().defaultState.userProfile;
+  const paywallType =
+    profile?.data?.notif_count && profile?.data?.notif_count > 2
+      ? 'offer_no_purchase_after_onboarding_paywall_2nd'
+      : 'offer_no_purchase_after_onboarding_paywall';
+  await handlePayment(paywallType, cbPaywall);
 };
 
 export const isCompletedOnboarding = () => {
@@ -265,4 +261,15 @@ export const handleRatingModal = async cbSuccess => {
   } else {
     await AsyncStorage.setItem('openAppsCounter', '2');
   }
+};
+
+export const isPremiumToday = () => {
+  const {freeUserPremium} = store.getState().defaultState;
+  if (isUserPremium()) {
+    return true;
+  }
+  if (freeUserPremium) {
+    return true;
+  }
+  return false;
 };

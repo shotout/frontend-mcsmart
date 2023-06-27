@@ -100,14 +100,14 @@ export default StyleSheet.create({
     marginTop: 20,
   },
   txtStartAds: {
-    color: '#B7B7B7',
+    color: '#FFE55A',
   },
   ctnCountdown: {
     width: '100%',
-    aspectRatio: 342 / 112,
+    aspectRatio: 1443 / 581,
     resizeMode: 'contain',
-    marginTop: moderateScale(30),
-    marginBottom: moderateScale(20),
+    marginTop: moderateScale(20),
+    marginBottom: moderateScale(12),
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: moderateScale(30),
@@ -116,7 +116,7 @@ export default StyleSheet.create({
     color: '#fff',
     fontSize: moderateScale(26),
     fontFamily: fonts.InterBold,
-    paddingLeft: moderateScale(12),
+    paddingLeft: moderateScale(32),
   },
   txtSmall: {
     fontSize: moderateScale(14),

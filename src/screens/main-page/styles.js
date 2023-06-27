@@ -228,4 +228,19 @@ export default StyleSheet.create({
   ctnTutorialWrapper: {
     position: 'relative',
   },
+  ctnHeightTutorial: {
+    height: moderateScale(80),
+  },
+  ctnPdAds: {
+    paddingBottom: isIphoneXorAbove() ? moderateScale(70) : moderateScale(60),
+  },
+  ctnBannerAds: {
+    position: 'absolute',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingBottom: isIphoneXorAbove() ? moderateScale(14) : 0,
+    bottom: 0,
+  },
 });

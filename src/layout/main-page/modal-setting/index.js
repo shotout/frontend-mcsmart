@@ -17,6 +17,7 @@ import SlidingUpPanel from 'rn-sliding-up-panel';
 import {Modal, Portal} from 'react-native-paper';
 
 // import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
+import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
 import styles from './styles';
 import ModalChangeIcon from '../../setting/change-icon';
 import IconClose from '../../../assets/svg/icon_close.svg';
@@ -42,6 +43,7 @@ import PastQuotes from '../../your-quotes/past-quotes';
 import LikeQuotes from '../../your-quotes/liked-quotes';
 import AccountPreference from '../../setting/account-preference';
 import {
+  handleBasicPaywall,
   isUserPremium,
   openPrivacyPolicy,
   openTermsofUse,
@@ -50,6 +52,7 @@ import {sizing} from '../../../shared/styling';
 import LineGestureSlide from '../../../components/line-gesture-slide';
 import {showModalPremium} from '../../../shared/globalContent';
 import RepeatQuotes from '../../your-quotes/repeat-quotes';
+import {getAdaptiveBannerID} from '../../../shared/static/adsId';
 
 const bannerIcon1 = require('../../../assets/icons/app_icon_1.png');
 
@@ -100,7 +103,7 @@ function ModalSetting({contentRef, onClose, collections}) {
     }
     return (
       <View style={styles.ctnBgWrap}>
-        <TouchableWithoutFeedback onPress={showModalPremium}>
+        <TouchableWithoutFeedback onPress={handleBasicPaywall}>
           <View style={styles.ctnRow}>
             <View style={styles.ctnRowLeft}>
               <Text style={styles.titleStyle}>Go Premium</Text>
@@ -121,7 +124,7 @@ function ModalSetting({contentRef, onClose, collections}) {
     return (
       <View style={styles.wrapper}>
         <View style={styles.listCardWrap}>
-          {/* {renderSubscription()} */}
+          {renderSubscription()}
           <ListContent
             title="Account & preferences"
             icon={<IconUser width="100%" height="100%" />}
@@ -269,7 +272,7 @@ function ModalSetting({contentRef, onClose, collections}) {
           {renderFollow()}
         </ScrollView>
 
-        {/* {!isUserPremium() && (
+        {!isUserPremium() && (
           <View style={styles.ctnBanner}>
             <BannerAd
               unitId={getAdaptiveBannerID()}
@@ -279,7 +282,7 @@ function ModalSetting({contentRef, onClose, collections}) {
               }}
             />
           </View>
-        )} */}
+        )}
       </View>
     );
   }
