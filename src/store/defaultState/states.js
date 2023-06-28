@@ -2,11 +2,49 @@ import moment from 'moment';
 import {createUniqueID} from '../../helpers/user';
 import {STORAGE_STATUS} from '../../shared/static';
 import * as types from './types';
-import { listTheme } from '../../shared/static-data/listTheme';
+import {defaultUser} from '../../shared/static/defaultUser';
+import {listTheme} from '../../shared/static-data/listTheme';
 
 const INITIAL_STATE = {
   storageStatus: STORAGE_STATUS.loading,
-  userProfile: {},
+  userProfile: defaultUser,
+  defaultData: {
+    feeling: [],
+    ways: [],
+    areas: [],
+    categories: {},
+    themes: [],
+    link: {},
+  },
+  quotes: {
+    listData: [],
+    currentPage: 1,
+    isLoading: false,
+    totalQuotes: null,
+  },
+  collections: [],
+  showModalPremium: false,
+  pastQuoteList: [],
+  listLikedQuote: {},
+  dataCollection: {},
+  activeVersion: null,
+  modalFirstPremium: false,
+  listQuoteRef: null,
+  haveBeenAskRating: null,
+  registerData: null,
+  loadingModal: {
+    visible: false,
+    counter: 0,
+  },
+  todayAdsLimit: 12,
+  listBasicQuote: [],
+  restPassLength: 0,
+  runAnimationSlide: false,
+  finishInitialLoader: false,
+  paywallNotifcation: null,
+  animationCounter: true,
+  freeUserPremium: false,
+
   userThemes: listTheme[0],
   defaultData: {
     feeling: [],
@@ -100,7 +138,6 @@ export default (state = INITIAL_STATE, action) => {
         },
       };
     case types.SET_REGISTER_STEP: {
-      console.log('SET REGISTER', JSON.stringify(action.payload));
       return {
         ...state,
         registerData: {
@@ -134,7 +171,6 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         userProfile: {},
-        // registerData: null,
         listLikedQuote: {
           listDataLike: [],
         },
@@ -239,9 +275,10 @@ export default (state = INITIAL_STATE, action) => {
           feeling: action.feeling,
           ways: action.ways,
           areas: action.areas,
-          categories: action.categories,
           themes: action.themes,
           link: action.link,
+          categories: action.categories,
+          listFactRegister: action.listFactRegister,
         },
       };
     case types.SET_PROFILE_DATA:

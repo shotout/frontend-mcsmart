@@ -16,7 +16,11 @@ import {getRewardedCategoryID} from '../../shared/static/adsId';
 
 const categoryImg = require('../../assets/icons/unlock_category.png');
 const crownIcon = require('../../assets/icons/crown_icon.png');
+<<<<<<< HEAD
 const playIcon = require('../../assets/icons/playIcon.png');
+=======
+const playIcon = require('../../assets/icons/play_black.png');
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
 const iconClose = require('../../assets/icons/close.png');
 
 const rewarded = RewardedAd.createForAdRequest(getRewardedCategoryID(), {
@@ -46,11 +50,15 @@ const ModalUnlockCategory = ({
     const unsubscribeEarned = rewarded.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
       reward => {
+<<<<<<< HEAD
         console.log(
           'User earned reward of ModalUnlockCategory ',
           selectedCategory,
         );
         handleUnlock(selectedCategory);
+=======
+        handleUnlock();
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
         if (Platform.OS === 'ios') {
           Alert.alert(
             successMessage ||
@@ -59,11 +67,18 @@ const ModalUnlockCategory = ({
             [{text: 'OK'}],
           );
         }
+<<<<<<< HEAD
         handleClose();
       },
     );
 
     console.log('Check selected theme category:', selectedCategory);
+=======
+        handleClose(selectedCategory);
+      },
+    );
+
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     return () => {
       unsubscribeLoaded();
       unsubscribeEarned();
@@ -87,7 +102,11 @@ const ModalUnlockCategory = ({
     <Portal>
       <Modal
         onDismiss={handleClose}
+<<<<<<< HEAD
         contentContainerStyle={{flex: 1, justifyContent: 'center'}}
+=======
+        contentContainerStyle={{justifyContent: 'center'}}
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
         visible={visible}>
         <View style={styles.ctnRoot}>
           <Image source={imgSource || categoryImg} style={styles.categoryImg} />
@@ -102,6 +121,10 @@ const ModalUnlockCategory = ({
           </View>
           <View style={styles.ctnBtn}>
             <Button
+<<<<<<< HEAD
+=======
+              type="black"
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
               txtStyle={styles.txtBtnStyle}
               btnStyle={[styles.btnIcon, styles.mgRight]}
               prependIcon={
@@ -114,7 +137,11 @@ const ModalUnlockCategory = ({
             />
             <View style={styles.ctnWatch}>
               <Button
+<<<<<<< HEAD
                 type="tosca"
+=======
+                type="yellow"
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
                 txtStyle={styles.txtBtnStyle}
                 btnStyle={styles.btnIcon}
                 prependIcon={

@@ -1,60 +1,101 @@
-import React, {useRef, useState} from 'react';
-import {FlatList, Image, ImageBackground, Text, View} from 'react-native';
+import React, {createRef, useEffect, useRef, useState} from 'react';
+import {FlatList, Image, Text, View} from 'react-native';
+import {connect} from 'react-redux';
 import ButtonOutline from '../../../components/button-outline';
-import {listTopic} from '../../../shared/staticData';
 import {sizing} from '../../../shared/styling';
 import styles from './styles';
-import {
-  firstStepQuote,
-  fourthStepQuote,
-  secondStepQuote,
-  thirdStepQuote,
-} from '../../../shared/static-data/register-quote';
+import states from './states';
 
 const bgQuote = require('../../../assets/images/yellow_round.png');
 const lamp = require('../../../assets/images/lamp.png');
+const economyIcon = require('../../../assets/images/category/economy_business.png');
+const celebrityIcon = require('../../../assets/images/category/celebrities.png');
+const foodDrinkCategory = require('../../../assets/images/category/food_drink.png');
+const sportCategory = require('../../../assets/images/category/sport.png');
 
-export default function ContentStep7({
+function ContentStep7({
   onPressGoals,
   specific_goal,
   name,
   substep,
+  listFactRegister,
 }) {
   const flatListRef = useRef();
+  const currentIndex = useRef(0);
   const [activeIndexTutorial, setActiveIndexTutorial] = useState(0);
+
+  function getDataQuote() {
+    switch (substep) {
+      case 'b':
+        return listFactRegister.filter(item => item.category_id === 4);
+      case 'c':
+        return listFactRegister.filter(item => item.category_id === 5);
+      case 'd':
+        return listFactRegister.filter(item => item.category_id === 11);
+      default:
+        return listFactRegister.filter(item => item.category_id === 3);
+    }
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Panggil fungsi di sini
+      currentIndex.current =
+        currentIndex.current + 1 > 4 ? 0 : currentIndex.current + 1;
+      setActiveIndexTutorial(currentIndex.current);
+      flatListRef.current.scrollToIndex({
+        animated: true,
+        index: currentIndex.current,
+      });
+    }, 5000);
+
+    return () => {
+      // Membersihkan interval saat komponen dibongkar
+      clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    currentIndex.current = 0;
+    setActiveIndexTutorial(0);
+  }, [substep]);
 
   const onMomentoumScrollEnd = e => {
     const width = sizing.getDimensionWidth(1);
     const pageNumber = Math.min(
       Math.max(Math.floor(e.nativeEvent.contentOffset.x / width + 0.5) + 1, 0),
-      4,
+      getDataQuote().length,
     );
+
+    currentIndex.current = pageNumber - 1;
     setActiveIndexTutorial(pageNumber - 1);
   };
 
   function getTextInput() {
     switch (substep) {
       case 'b':
-        return 'Would you like to make an impression in professional situations with your co-workers, business partners or your boss?';
+        return 'Would you like to make an\nimpression in professional\nsituations with your co-workers,\nbusiness partners or your boss?';
       case 'c':
-        return 'Would you like to impress your children or other young relatives with your knowledge?';
+        return 'Would you like to impress\nyour children or other young\nrelatives with your\nknowledge?';
       case 'd':
-        return 'Would you like to impress your common members in your sports club using your knowledge?';
+        return 'Would you like to impress\nyour common members in\nyour sports club using your\nknowledge?';
       default:
-        return 'Would you like to impress your friends or partner with your knowledge?';
+        return 'Would you like to impress\nyour friends or partner with your\nknowledge?';
     }
   }
 
-  function getDataQuote() {
-    switch (substep) {
-      case 'b':
-        return secondStepQuote;
-      case 'c':
-        return thirdStepQuote;
-      case 'd':
-        return fourthStepQuote;
+  function getIconCategory(categoryId) {
+    switch (categoryId) {
+      case 4:
+        return economyIcon;
+      case 3:
+        return celebrityIcon;
+      case 5:
+        return foodDrinkCategory;
+      case 11:
+        return sportCategory;
       default:
-        return firstStepQuote;
+        return null;
     }
   }
 
@@ -62,7 +103,9 @@ export default function ContentStep7({
     return (
       <View style={[styles.inputWrapper, styles.ctnInputWrapper]}>
         <View style={styles.ctnText}>
-          <Text style={styles.txtInput}>{getTextInput()}</Text>
+          <Text numberOfLines={4} style={styles.txtInput}>
+            {getTextInput()}
+          </Text>
         </View>
         <View style={styles.ctnGoalsInput}>
           {['Yes', 'No'].map(item => (
@@ -70,7 +113,7 @@ export default function ContentStep7({
               // btnStyle={styles.btnStyle}
               isSelected={item === specific_goal}
               onPress={() => {
-                onPressGoals(item);
+                onPressGoals(item.toLowerCase());
 
                 flatListRef.current.scrollToIndex({animated: true, index: 0});
               }}
@@ -87,10 +130,9 @@ export default function ContentStep7({
 
   const renderListQuote = ({item}) => (
     <View style={styles.ctnTextQuote}>
-      <View style={styles.ctnImg}>
-        <Image source={item.icon} style={styles.imgQuote} />
-      </View>
-      <Text style={styles.txtQuote}>{item.label}</Text>
+      <Text style={styles.txtQuote} numberOfLines={5} ellipsizeMode="tail">
+        {item.title}
+      </Text>
     </View>
   );
 
@@ -110,6 +152,12 @@ export default function ContentStep7({
         {renderInput()}
       </View>
       <View style={styles.ctnItem}>
+        <View style={styles.ctnImg}>
+          <Image
+            source={getIconCategory(getDataQuote()[0].category_id)}
+            style={styles.imgQuote}
+          />
+        </View>
         <FlatList
           data={getDataQuote()}
           extraData={activeIndexTutorial}
@@ -120,12 +168,12 @@ export default function ContentStep7({
           onMomentumScrollEnd={onMomentoumScrollEnd}
           showsHorizontalScrollIndicator={false}
           renderItem={renderListQuote}
-          keyExtractor={item => `${Date.now()}${item.label}`}
+          keyExtractor={item => item.id}
         />
         <View style={styles.dotWrapper}>
           {getDataQuote().map((item, index) => (
             <View
-              key={item.label}
+              key={item.id}
               style={[
                 styles.ctnDot,
                 index === activeIndexTutorial && styles.blackDot,
@@ -137,3 +185,5 @@ export default function ContentStep7({
     </View>
   );
 }
+
+export default connect(states)(ContentStep7);

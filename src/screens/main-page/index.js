@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { createRef, useEffect, useRef, useState } from "react";
+=======
+import React, {createRef, useEffect, useRef, useState} from 'react';
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
 import {
   FlatList,
   Text,
@@ -6,6 +10,7 @@ import {
   View,
   Image,
   TouchableWithoutFeedback,
+<<<<<<< HEAD
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -19,6 +24,102 @@ import { useBackgroundQuotes } from "../../helpers/hook/useBackgroundQuotes";
 import QuotesContent from "../../components/quotes-content-fast-image";
 // import ModalCategories from '../../layout/main-page/modal-categories';
 import states from "./states";
+=======
+  Modal,
+  StatusBar,
+  Platform,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import notifee, {EventType} from '@notifee/react-native';
+
+import AnimatedLottieView from 'lottie-react-native';
+import {createAnimatableComponent} from 'react-native-animatable';
+import {connect} from 'react-redux';
+import ViewShot from 'react-native-view-shot';
+import RNFS from 'react-native-fs';
+import {
+  PanGestureHandler,
+  State,
+  TapGestureHandler,
+} from 'react-native-gesture-handler';
+import {
+  AdEventType,
+  BannerAd,
+  BannerAdSize,
+  InterstitialAd,
+  RewardedAd,
+  RewardedAdEventType,
+} from 'react-native-google-mobile-ads';
+import styles from './styles';
+import {sizing} from '../../shared/styling';
+import {useBackgroundQuotes} from '../../helpers/hook/useBackgroundQuotes';
+import QuotesContent from '../../components/quotes-content-fast-image';
+import states from './states';
+
+import PremiumRocket from '../../assets/svg/PremiumRocketWhite.svg';
+import IconCategories from '../../assets/svg/icon_categories.svg';
+import IconShare from '../../assets/svg/icon_share.svg';
+import IconSetting from '../../assets/svg/icon_setting.svg';
+import IconLove from '../../assets/svg/icon_love_tap.svg';
+import IconLike from '../../assets/svg/icon_like.svg';
+import ThemeIcon from '../../assets/svg/theme_icon.svg';
+import ButtonIcon from '../../components/button-icon';
+import ModalTheme from '../../layout/main-page/modal-theme';
+import ModalSetting from '../../layout/main-page/modal-setting';
+import ModalShare from '../../layout/main-page/modal-share';
+import {
+  handleBasicPaywall,
+  handlePayment,
+  handleRatingModal,
+  isPremiumToday,
+  isUserPremium,
+} from '../../helpers/user';
+import {
+  changeAskRatingParameter,
+  changeQuoteLikeStatus,
+  setAnimationSlideStatus,
+  setInitialLoaderStatus,
+  setQuoteRef,
+} from '../../store/defaultState/actions';
+import ModalCategories from '../../layout/main-page/modal-categories';
+import {
+  addPastQuotes,
+  dislikeQuotes,
+  getRatingStatus,
+  getSetting,
+} from '../../shared/request';
+import useLocalNotif from '../../shared/useLocalNotif';
+import ModalRating from '../../components/modal-rating';
+import {showModalPremium} from '../../shared/globalContent';
+import ModalRepeat from '../../components/modal-repeat';
+import {
+  getAdaptiveBannerID,
+  getRewardedInsterstialID,
+  getRewardedOutOfQuotesID,
+} from '../../shared/static/adsId';
+import {checkAdsTracking} from '../../helpers/adsTracking';
+import {loadInterstialAds} from '../../helpers/loadReward';
+import LoadingFullScreen from '../../components/loading-fullscreen';
+import ModalCountDown from '../../components/modal-countdown';
+import PageCountDown from '../../layout/main-page/page-countdown';
+import {isMoreThanThreeHoursSinceLastTime} from '../../helpers/timeHelpers';
+import {reformatDate} from '../../shared/dateHelper';
+
+const adUnitId = getRewardedOutOfQuotesID();
+
+const rewarded = RewardedAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ['fashion', 'clothing'],
+});
+
+const interstialAds = InterstitialAd.createForAdRequest(
+  getRewardedInsterstialID(),
+  {
+    requestNonPersonalizedAdsOnly: true,
+    keywords: ['fashion', 'clothing'],
+  },
+);
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
 
 import IconCategories from "../../assets/svg/icon_categories.svg";
 import IconShare from "../../assets/svg/icon_share.svg";
@@ -34,6 +135,7 @@ import notifee from '@notifee/react-native';
 import { setAnimationSlideStatus, setInitialLoaderStatus } from "../../store/defaultState/actions";
 const ViewAnimation = createAnimatableComponent(View);
 
+<<<<<<< HEAD
 const freebadgeIcon = require("../../assets/images/rocket_white.png");
 const doubleTap = require("../../assets/lottie/double_tap.json");
 const swipeupIcon = require("../../assets/lottie/swipe_up.json");
@@ -42,20 +144,74 @@ function MainPage({ userThemes,  runAnimationSlide,
   finishInitialLoader,
   paywallNotifcation,
   animationCounter, }) {
+=======
+const doubleTap = require('../../assets/lottie/double_tap.json');
+const swipeupIcon = require('../../assets/lottie/swipe_up.json');
+const arrowBottom = require('../../assets/icons/arrow-bottom.png');
+
+const learnMoreButton = require('../../assets/icons/tutorial/learn_more_button.json');
+const repeatButton = require('../../assets/icons/tutorial/repeat_button.json');
+const repeatClick = require('../../assets/icons/tutorial/repeat_click.json');
+
+const learnMoreClickLottie = require('../../assets/icons/tutorial/learn_more_click.json');
+
+let intervalTutorial = null;
+const limitIndex = 6;
+
+function MainPage({
+  quotes,
+  userProfile,
+  runAnimationSlide,
+  animationCounter,
+  todayAdsLimit,
+  route,
+  paywallNotifcation,
+  finishInitialLoader,
+}) {
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
   const [isTutorial, setTutorial] = useState({
     visible: false,
     step: 1,
   });
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [themeUser] = useBackgroundQuotes(userThemes);
+  const isFromOnboarding = route.params?.isFromOnboarding;
+  const initialIndexContent = isUserPremium() ? 0 : limitIndex;
+  const [activeSlide, setActiveSlide] = useState(initialIndexContent);
+  const [currentSlide, setCurrentSlide] = useState(initialIndexContent);
+  const themesId = userProfile.data?.themes[0]?.id;
+  const [themeUser] = useBackgroundQuotes(userProfile.data?.themes[0]);
   const [quoteLikeStatus, setQuoteLikeStatus] = useState(false);
+<<<<<<< HEAD
   const [isEnableFreePremium, setEnableFreePremium] = useState(false);
   const refCategory = createRef();
   const refThemes = createRef();
+=======
+  const [captureUri, setCaptureUri] = useState(null);
+  const [showModalLike, setShowModalLike] = useState(false);
+  const [modalRatingVisible, setModalRating] = useState(false);
+  const [modalRepeat, setModalRepeat] = useState(false);
+  const [scheduleTime] = useLocalNotif(userProfile);
+
+  const [runQuoteAnimation, setRunQuoteAnimation] = useState(false);
+  const [isUserHasScroll, setUserScrollQuotes] = useState(false);
+  const [isShowTutorial, setShowNextTutorial] = useState(true);
+  const [isShowNextQuooteAnimation, setShowNextQuoteAnimation] =
+    useState(false);
+  const [statusbarStatus, setStatusBar] = useState(false);
+  const [isLoadingInterstial, setLoadingInterstial] = useState(false);
+  const [showModalCountdown, setModalCountdown] = useState(false);
+
+  const refThemes = useRef();
+  const refSetting = createRef();
+  const refShare = createRef();
+  const captureRef = useRef();
+  const refCategory = createRef();
+  const firstStepTutorial = useRef();
+  const buttonPressAnimationTutorial = useRef();
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
 
   const getActiveQuote = () => {
-    if (listFact.length > 0 && listFact[activeSlide]) {
-      return listFact[activeSlide];
+    if (quotes?.listData.length > 0 && quotes?.listData[activeSlide]) {
+      return quotes?.listData[activeSlide];
     }
     return null;
   };
@@ -98,6 +254,74 @@ function MainPage({ userThemes,  runAnimationSlide,
     }
   };
 
+  const handleScreenshot = () => {
+    captureRef.current.capture().then(uri => {
+      // setCaptureUri(`data:image/png;base64,${uri}`);
+      const uriArray = uri.split('/');
+      const nameToChange = uriArray[uriArray.length - 1];
+      const renamedURI = uri.replace(
+        nameToChange,
+        `McSmart - ${(quotes?.listData[activeSlide].title || '').substring(
+          0,
+          10,
+        )}.png`,
+      );
+      RNFS.copyFile(uri, renamedURI)
+        .then(async () => {
+          // await CameraRoll.save(renamedURI, {album: 'mooty', type: 'photo'});
+          setCaptureUri(renamedURI);
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+    });
+  };
+
+  const handleShare = () => {
+    refShare.current.show();
+    handleScreenshot();
+  };
+
+  const handleRatingStatus = async () => {
+    const res = await getRatingStatus();
+    if (res.data === false) {
+      handleRatingModal(() => {
+        setModalRating(true);
+      });
+    }
+  };
+  const handleShowPaywall = async () => {
+    const res = await getSetting();
+    const initNotification = await notifee.getInitialNotification();
+    const getInitialPlacement =
+      initNotification?.notification?.data || paywallNotifcation;
+    if (res.data.value === 'true' && !isUserPremium() && !isFromOnboarding) {
+      // Paywall open apps
+      if (getInitialPlacement) {
+        const paywallNotifCb = () => {
+          setInitialLoaderStatus(false);
+        };
+        handlePayment(getInitialPlacement?.placement, paywallNotifCb);
+      } else {
+        const getCurrentOpenApps = await AsyncStorage.getItem('latestOpenApps');
+        const mainDate = reformatDate(parseFloat(getCurrentOpenApps));
+        const isMoreThan3Hours = isMoreThanThreeHoursSinceLastTime(mainDate);
+        const stringifyDate = Date.now().toString();
+        if (!getCurrentOpenApps || isMoreThan3Hours) {
+          handleBasicPaywall();
+          AsyncStorage.setItem('latestOpenApps', stringifyDate);
+        } else {
+          setAnimationSlideStatus(true);
+        }
+      }
+
+      handleRatingStatus();
+    } else {
+      handleRatingStatus();
+      setAnimationSlideStatus(true);
+    }
+  };
+
   useEffect(() => {
     const checkTutorial = async () => {
       const isFinishTutorial = await AsyncStorage.getItem("isFinishTutorial");
@@ -106,13 +330,73 @@ function MainPage({ userThemes,  runAnimationSlide,
           visible: true,
           step: 1,
         });
+        intervalTutorial = setInterval(() => {
+          if (firstStepTutorial.current) {
+            firstStepTutorial.current?.play();
+          }
+        }, 3500);
       }
     };
     checkTutorial();
+
+    // Handle interstial reward quote ads
+
+    const unsubscribeLoaded = rewarded.addAdEventListener(
+      RewardedAdEventType.LOADED,
+      () => {
+        console.log('LOAD ADS FROM MAIN PAGE REWARD');
+      },
+    );
+    const unsubscribeEarned = rewarded.addAdEventListener(
+      RewardedAdEventType.EARNED_REWARD,
+      reward => {
+        console.log('User earned reward of ', reward);
+      },
+    );
+
+    const rewardedOpen = rewarded.addAdEventListener(AdEventType.OPENED, () => {
+      setStatusBar(true);
+      console.log('LOAD ADS MODAL COUNTDOWN');
+    });
+    const rewardedClose = rewarded.addAdEventListener(
+      AdEventType.CLOSED,
+      () => {
+        setStatusBar(false);
+        console.log('LOAD ADS MODAL COUNTDOWN');
+      },
+    );
+    rewarded.load();
+    interstialAds.load();
+    if (Platform.OS === 'ios') {
+      checkAdsTracking();
+    }
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeEarned();
+      rewardedOpen();
+      rewardedClose();
+    };
   }, []);
 
   useEffect(() => {
+    const handleAddPastQuotes = async currentSlideId => {
+      try {
+        if (
+          quotes.listData[currentSlideId] &&
+          quotes.listData[currentSlideId]?.id
+        ) {
+          await addPastQuotes(quotes.listData[currentSlideId].id);
+        }
+      } catch (err) {
+        console.log('Error add past quotes:', err);
+      }
+    };
     const activeQuote = getActiveQuote();
+    if (activeSlide > currentSlide) {
+      setCurrentSlide(activeSlide);
+      handleAddPastQuotes(currentSlide);
+    }
+
     let isLiked = false;
     if (activeQuote) {
       if (!activeQuote.like) {
@@ -128,51 +412,340 @@ function MainPage({ userThemes,  runAnimationSlide,
     }
 
     setQuoteLikeStatus(isLiked);
+
+    if (activeSlide !== currentSlide) {
+      // if (activeQuote) {
+      //   handleWidgetData(activeQuote);
+      // }
+      if (!isUserPremium()) {
+        handleShowInterstialAds(activeQuote, activeSlide);
+      }
+      if (!interstialAds.loaded) {
+        interstialAds.load();
+      }
+    }
+    if (!isPremiumToday()) {
+      if (currentSlide === 16 || activeSlide === 16) {
+        if (
+          activeSlide === 0 ||
+          activeSlide === 3 ||
+          activeSlide === 7 ||
+          activeSlide === 10 ||
+          activeSlide === 13 ||
+          activeSlide === 16
+        ) {
+          setModalCountdown(true);
+        }
+      }
+    }
   }, [activeSlide]);
 
+<<<<<<< HEAD
   const onMomentoumScrollEnd = (e) => {
     const height = sizing.getDimensionHeight(1);
     const pageNumber = Math.min(
       Math.max(Math.floor(e.nativeEvent.contentOffset.y / height + 0.5) + 1, 0),
       listFact?.length || 0
+=======
+  useEffect(() => {
+    if (runAnimationSlide && !isUserHasScroll && !isTutorial.visible) {
+      setTimeout(() => {
+        if (!isUserHasScroll) {
+          setShowNextQuoteAnimation(true);
+        }
+      }, 2000);
+      setTimeout(() => {
+        setRunQuoteAnimation(true);
+      }, 1800);
+    }
+  }, [runAnimationSlide, isUserHasScroll, isTutorial]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      rewarded.load();
+    }, 2000);
+  }, [todayAdsLimit]);
+
+  useEffect(() => {
+    if (finishInitialLoader) {
+      handleShowPaywall();
+    }
+  }, [finishInitialLoader]);
+
+  const handleShowInterstialAds = async activeQuote => {
+    if (activeQuote?.item_type === 'in_app_ads') {
+      if (interstialAds.loaded) {
+        interstialAds.show();
+      } else {
+        const cbFinish = () => {
+          setLoadingInterstial(false);
+        };
+        setLoadingInterstial(true);
+        await loadInterstialAds(interstialAds, cbFinish);
+        cbFinish();
+      }
+    }
+  };
+
+  const isHideContent = () => {
+    if (getActiveQuote()?.item_type === 'countdown_page') {
+      return true;
+    }
+    return false;
+  };
+
+  const handleQuoteActive = () => {
+    if (quotes?.listData.length > 0) {
+      return quotes?.listData[activeSlide]?.title;
+    }
+    return null;
+  };
+
+  const handleIdQuoteActive = () => {
+    if (quotes?.listData.length > 0 && quotes?.listData[activeSlide]) {
+      return quotes?.listData[activeSlide].id;
+    }
+    return null;
+  };
+
+  const handleLike = async () => {
+    try {
+      setShowModalLike(true);
+      setQuoteLikeStatus(!quoteLikeStatus);
+      setTimeout(() => {
+        setShowModalLike(false);
+      }, 500);
+      const activeQuote = getActiveQuote();
+      let isLiked = false;
+      if (activeQuote) {
+        if (!activeQuote.like) {
+          isLiked = false;
+        }
+        if (activeQuote.like) {
+          if (activeQuote.like?.type) {
+            if (
+              activeQuote.like?.type === '1' ||
+              activeQuote.like?.type === 1
+            ) {
+              isLiked = true;
+            }
+          }
+        }
+      }
+      const payload = {
+        type: isLiked ? '2' : '1',
+      };
+      await dislikeQuotes(payload, activeQuote.id);
+      changeQuoteLikeStatus(activeQuote.id);
+    } catch (err) {
+      console.log('Error liked:', err);
+    }
+  };
+
+  const onMomentoumScrollEnd = e => {
+    const height = sizing.getDimensionHeight(1);
+    const pageNumber = Math.min(
+      Math.max(Math.floor(e.nativeEvent.contentOffset.y / height + 0.5) + 1, 0),
+      quotes?.listData?.length || 0,
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     );
     setActiveSlide(pageNumber - 1);
+    if (pageNumber - 1 !== activeSlide && !isUserHasScroll) {
+      setUserScrollQuotes(true);
+    }
   };
 
   const handleSkipTutorial = async () => {
+<<<<<<< HEAD
     if (isTutorial.step === 2) {
       await AsyncStorage.setItem("isFinishTutorial", "yes");
+=======
+    setShowNextTutorial(false);
+    setTimeout(() => {
+      setShowNextTutorial(true);
+    });
+    if (isTutorial.step === 4) {
+      await AsyncStorage.setItem('isFinishTutorial', 'yes');
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
       setTutorial({
         visible: false,
         step: 1,
       });
     } else {
+      clearInterval(intervalTutorial);
+      intervalTutorial = null;
+      if (isTutorial.step + 1 === 1 || isTutorial.step + 1 === 2) {
+        setTimeout(() => {
+          intervalTutorial = setInterval(() => {
+            if (firstStepTutorial.current) {
+              firstStepTutorial.current?.play();
+            }
+          }, 3000);
+        }, 100);
+      }
       setTutorial({
         ...isTutorial,
         step: isTutorial.step + 1,
       });
     }
   };
+<<<<<<< HEAD
   console.log("Check theme:", themeUser);
 
   const renderFactItem = ({ item, index }) => {
     const getImageContent = themeUser.imgLocal;
+=======
+
+  const handleGesture = evt => {
+    const {nativeEvent} = evt;
+    if (nativeEvent.velocityX < -614) {
+      refThemes.current.show();
+    }
+  };
+
+  const onDoubleTap = event => {
+    if (!isUserHasScroll && event.nativeEvent.state === State.BEGAN) {
+      setUserScrollQuotes(true);
+    }
+    if (event.nativeEvent.state === State.ACTIVE) {
+      handleLike();
+    }
+  };
+
+  function renderArrowSwipe() {
+    if (
+      runAnimationSlide &&
+      !isUserHasScroll &&
+      !isTutorial.visible &&
+      isShowNextQuooteAnimation &&
+      animationCounter
+    ) {
+      return (
+        <ViewAnimation
+          animation="fadeIn"
+          duration={1000}
+          style={[
+            styles.ctnSwipe,
+            isUserPremium() && styles.adjustBtmPremiumSwipe,
+          ]}>
+          <ViewAnimation
+            animation="slideInUp"
+            duration={500}
+            style={styles.ctnSlideUp}>
+            <ViewAnimation
+              animation="slideOutDown"
+              duration={1000}
+              delay={1500}
+              style={styles.ctnSlideDown}>
+              <ViewAnimation
+                animation="fadeOut"
+                duration={200}
+                delay={1600}
+                onAnimationEnd={() => {
+                  setShowNextQuoteAnimation(false);
+                  setShowNextQuoteAnimation(true);
+                }}
+                style={styles.ctnSlideDown}>
+                <Text style={styles.txtSwipe}>Swipe to see next Quote</Text>
+                <Image source={arrowBottom} style={styles.icnSwipe} />
+              </ViewAnimation>
+            </ViewAnimation>
+          </ViewAnimation>
+        </ViewAnimation>
+      );
+    }
+    return null;
+  }
+
+  const renderFactItem = ({item, index, disableAnimation}) => {
+    const getImageContent = themeUser?.imgLocal;
+    const listWhiteYellowTrace = [2, 3];
+    if (item?.item_type === 'countdown_page') {
+      return <PageCountDown />;
+    }
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     return (
       <QuotesContent
         item={item}
+        onPressRating={() => {
+          setModalRepeat(true);
+          setTimeout(() => {
+            setModalRepeat(false);
+          }, 2000);
+        }}
         themeUser={themeUser}
         source={getImageContent}
+        isYellowTrace={listWhiteYellowTrace.includes(themeUser.id)}
+        isActive={activeSlide === index}
+        index={index}
+        showButtonOption={!isTutorial.visible && !disableAnimation}
+        isAnimationStart={
+          !disableAnimation &&
+          runAnimationSlide &&
+          !isUserHasScroll &&
+          !isTutorial.visible &&
+          runQuoteAnimation
+        }
         // source={require(themeUser.urlLocal)}
       />
     );
   };
 
-  function renderFreeBadge() {
+  function renderWaterMark() {
+    if (isUserPremium()) {
+      return null;
+    }
     return (
+<<<<<<< HEAD
       <TouchableOpacity style={styles.ctnFreeBadge} onPress={handleBasicPaywall}>
         <Text style={styles.txtFreeBadge}>Try it free!</Text>
         <Image source={freebadgeIcon} style={styles.ctnIconCrown} />
       </TouchableOpacity>
+=======
+      <View style={styles.ctnWatermark}>
+        <Text style={styles.txtWatermark}>McSmart App</Text>
+      </View>
+    );
+  }
+
+  function renderScreenshot() {
+    if (quotes?.listData?.length > 0) {
+      return (
+        <ViewShot
+          style={styles.ctnViewShot}
+          ref={captureRef}
+          options={{
+            fileName: `McSmart${Date.now()}`,
+            format: 'png',
+            quality: 1.0,
+          }}>
+          {renderFactItem({
+            item: quotes?.listData[activeSlide],
+            index: activeSlide,
+            disableAnimation: true,
+          })}
+          {renderWaterMark()}
+        </ViewShot>
+      );
+    }
+    return null;
+  }
+
+  function renderBottomAds() {
+    if (isUserPremium() || isHideContent()) {
+      return null;
+    }
+    return (
+      <View style={styles.ctnBannerAds}>
+        <BannerAd
+          unitId={getAdaptiveBannerID()}
+          size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+          requestOptions={{
+            requestNonPersonalizedAdsOnly: true,
+          }}
+        />
+      </View>
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     );
   }
 
@@ -184,16 +757,24 @@ function MainPage({ userThemes,  runAnimationSlide,
       //     : 'rgba(0, 0, 0, 0.7)',
       backgroundColor: "rgba(0, 0, 0, 0.8)",
     };
+    if (isHideContent()) {
+      return null;
+    }
     return (
-      <View style={styles.btnWrapper}>
+      <View
+        style={[
+          styles.btnWrapper,
+          !isUserPremium() && !isHideContent() && styles.ctnPdAds,
+        ]}>
+        {renderArrowSwipe()}
         <View style={styles.subBottomWrapper}>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={handleShare}>
             <View style={[styles.ctnRounded, bgStyle]}>
               {/* {renderSharePopup()} */}
               <IconShare width="90%" height="90%" />
             </View>
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={handleLike}>
             <View style={[styles.ctnRounded, bgStyle]}>
               {quoteLikeStatus ? (
                 <IconLove width="80%" height="80%" />
@@ -212,9 +793,15 @@ function MainPage({ userThemes,  runAnimationSlide,
               label="Categories"
               btnStyle={styles.btnCategories}
               txtStyle={styles.txtCategory}
+<<<<<<< HEAD
               // onPress={() => {
               //   refCategory.current.show();
               // }}
+=======
+              onPress={() => {
+                refCategory.current.show();
+              }}
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
             />
           </View>
           <View style={styles.rowRight}>
@@ -233,7 +820,7 @@ function MainPage({ userThemes,  runAnimationSlide,
               source={<IconSetting width="100%" height="100%" />}
               btnStyle={[styles.btnRight, styles.mgLeft]}
               onPress={() => {
-                // refSetting.current.show();
+                refSetting.current.show();
               }}
             />
           </View>
@@ -256,16 +843,29 @@ function MainPage({ userThemes,  runAnimationSlide,
                 source={swipeupIcon}
                 style={styles.animationStyle}
                 autoPlay
+                ref={firstStepTutorial}
                 duration={3000}
                 loop={false}
               />
             </View>
             <Text style={styles.txtTutorial}>Swipe up for the next Fact.</Text>
+<<<<<<< HEAD
             <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
               <Text style={styles.txtDescTutorial}>
                 {"Tap anywhere to go\nto the next tutorial"}
               </Text>
             </ViewAnimation>
+=======
+            <View style={styles.ctnHeightTutorial}>
+              {isShowTutorial && (
+                <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
+                  <Text style={styles.txtDescTutorial}>
+                    {'Tap anywhere to go\nto the next tutorial'}
+                  </Text>
+                </ViewAnimation>
+              )}
+            </View>
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
           </ViewAnimation>
         </View>
       );
@@ -283,17 +883,128 @@ function MainPage({ userThemes,  runAnimationSlide,
                 source={doubleTap}
                 style={styles.animationStyle}
                 autoPlay
+                ref={firstStepTutorial}
                 duration={3000}
                 loop={false}
               />
             </View>
             <Text style={styles.txtTutorial}>Double tap to like the Fact.</Text>
+<<<<<<< HEAD
             <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
               <Text style={styles.txtDescTutorial}>
                 {"Tap anywhere to go\nto the next tutorial"}
               </Text>
             </ViewAnimation>
+=======
+            <View style={styles.ctnHeightTutorial}>
+              {isShowTutorial && (
+                <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
+                  <Text style={styles.txtDescTutorial}>
+                    {'Tap anywhere to go\nto the next tutorial'}
+                  </Text>
+                </ViewAnimation>
+              )}
+            </View>
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
           </ViewAnimation>
+        </View>
+      );
+    }
+    if (isTutorial.step === 3) {
+      return (
+        <View style={styles.ctnRound}>
+          <ViewAnimation
+            animation="bounceIn"
+            duration={800}
+            style={styles.ctnCenter}>
+            <View style={styles.btnTutorialStyle}>
+              <AnimatedLottieView
+                source={repeatButton}
+                style={styles.btnLottie}
+                autoPlay
+                ref={firstStepTutorial}
+                duration={3000}
+                loop={false}
+              />
+            </View>
+            <Text style={styles.txtTutorial}>
+              Tap this button to repeat the Fact tomorrow to make sure you
+              remember it.
+            </Text>
+            <View style={styles.ctnHeightTutorial}>
+              {isShowTutorial && (
+                <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
+                  <Text style={styles.txtDescTutorial}>
+                    {'Tap anywhere to go\nto the next tutorial'}
+                  </Text>
+                </ViewAnimation>
+              )}
+            </View>
+          </ViewAnimation>
+        </View>
+      );
+    }
+    if (isTutorial.step === 4) {
+      return (
+        <View style={styles.ctnRound}>
+          <ViewAnimation
+            animation="bounceIn"
+            duration={800}
+            style={styles.ctnCenter}>
+            <View style={styles.btnTutorialStyle}>
+              <AnimatedLottieView
+                source={learnMoreButton}
+                style={styles.btnLottie}
+                autoPlay
+                duration={3000}
+                loop={false}
+              />
+            </View>
+            <Text style={styles.txtTutorial}>
+              To get more information on a Fact, tap this button.
+            </Text>
+            <View style={styles.ctnHeightTutorial}>
+              {isShowTutorial && (
+                <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
+                  <Text style={styles.txtDescTutorial}>
+                    {'Tap anywhere to go\nto finish the tutorial'}
+                  </Text>
+                </ViewAnimation>
+              )}
+            </View>
+          </ViewAnimation>
+        </View>
+      );
+    }
+    return null;
+  }
+
+  function renderClickButtonTutorial() {
+    if (isTutorial.step === 3) {
+      return (
+        <View style={styles.ctnBtnTutorial}>
+          <AnimatedLottieView
+            source={repeatClick}
+            style={styles.lottieClickTutorial}
+            autoPlay
+            ref={buttonPressAnimationTutorial}
+            duration={3000}
+            loop={false}
+          />
+        </View>
+      );
+    }
+    if (isTutorial.step === 4) {
+      return (
+        <View style={styles.ctnBtnTutorial}>
+          <AnimatedLottieView
+            source={learnMoreClickLottie}
+            style={styles.lottieClickTutorial}
+            autoPlay
+            ref={buttonPressAnimationTutorial}
+            duration={3000}
+            loop={false}
+          />
         </View>
       );
     }
@@ -304,30 +1015,111 @@ function MainPage({ userThemes,  runAnimationSlide,
     if (isTutorial.visible) {
       return (
         <TouchableWithoutFeedback onPress={handleSkipTutorial}>
-          <View style={styles.ctnTutorial}>{renderContentTutorial()}</View>
+          <View style={styles.ctnTutorial}>
+            <View style={styles.ctnTutorialWrapper}>
+              {renderClickButtonTutorial()}
+              {renderContentTutorial()}
+            </View>
+          </View>
         </TouchableWithoutFeedback>
       );
     }
     return null;
   }
 
+  function renderFreeBadge() {
+    if (isTutorial.visible || isUserPremium() || isHideContent()) {
+      return null;
+    }
+    return (
+      <TouchableOpacity
+        style={styles.ctnFreeBadge}
+        onPress={handleBasicPaywall}>
+        <View style={styles.ctnIconCrown}>
+          <PremiumRocket width="100%" height="100%" />
+        </View>
+        <Text style={styles.txtFreeBadge}>Go Premium!</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  function renderModalLike() {
+    if (showModalLike === true) {
+      return (
+        <Modal
+          animationType="fade"
+          visible={showModalLike}
+          transparent
+          onDismiss={() => {
+            setShowModalLike(false);
+          }}>
+          <View style={styles.ctnLike}>
+            <View style={styles.iconLikeWrap}>
+              {quoteLikeStatus ? (
+                <IconLove width="100%" height="100%" />
+              ) : (
+                <IconLike width="100%" height="100%" />
+              )}
+            </View>
+          </View>
+        </Modal>
+      );
+    }
+    return null;
+  }
+
+  function renderFlatList() {
+    return (
+      <PanGestureHandler
+        onGestureEvent={handleGesture}
+        activeOffsetX={[-40, 40]}>
+        <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
+          <FlatList
+            ref={setQuoteRef}
+            style={styles.ctnRoot}
+            data={quotes?.listData || []}
+            pagingEnabled
+            onMomentumScrollEnd={onMomentoumScrollEnd}
+            scrollsToTop={false}
+            showsVerticalScrollIndicator={false}
+            // onEndReached={handleEndReach}
+            onEndReachedThreshold={0.9}
+            renderItem={renderFactItem}
+            keyExtractor={(item, index) => `${item.id} ${index}`}
+            initialScrollIndex={isUserPremium() ? 0 : limitIndex}
+            getItemLayout={(data, index) => ({
+              length: sizing.getDimensionHeight(1),
+              offset: sizing.getDimensionHeight(1) * index,
+              index,
+            })}
+            onScrollToIndexFailed={() => {
+              console.log('FAILED SCROLL TO INDEX', 5);
+            }}
+          />
+        </TapGestureHandler>
+      </PanGestureHandler>
+    );
+  }
+
+  const isDarkTheme = [
+    4, 9, 11, 14, 17, 17, 19, 6, 8, 22, 24, 7, 25, 26, 27, 29, 31, 32,
+  ].includes(themesId);
+
   return (
     <View style={styles.ctnRoot}>
-      <FlatList
-        style={styles.ctnRoot}
-        data={listFact || []}
-        pagingEnabled
-        onMomentumScrollEnd={onMomentoumScrollEnd}
-        scrollsToTop={false}
-        showsVerticalScrollIndicator={false}
-        // onEndReached={handleEndReach}
-        onEndReachedThreshold={0.9}
-        renderItem={renderFactItem}
-        keyExtractor={(item, index) => `${item.id} ${index}`}
+      <StatusBar
+        barStyle={isDarkTheme ? 'light-content' : 'dark-content'}
+        backgroundColor={isDarkTheme ? '#000' : '#fff'}
+        hidden={statusbarStatus}
       />
+      {renderScreenshot()}
+      {renderFlatList()}
       {renderButton()}
+
+      {renderBottomAds()}
       {renderFreeBadge()}
       {renderTutorial()}
+<<<<<<< HEAD
 
       {/* <ModalCategories
         refPanel={refCategory}
@@ -342,12 +1134,90 @@ function MainPage({ userThemes,  runAnimationSlide,
           refCategory.current.hide();
         }}
       /> */}
+=======
+      {renderModalLike()}
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
       <ModalTheme
         contentRef={refThemes}
         onClose={() => {
           refThemes.current.hide();
         }}
       />
+
+      <ModalSetting
+        contentRef={c => {
+          if (c) {
+            refSetting.current = {
+              ...c,
+            };
+          }
+        }}
+        onClose={() => {
+          refSetting.current.hide();
+        }}
+      />
+
+      <ModalShare
+        contentRef={c => {
+          if (c) {
+            refShare.current = {
+              ...c,
+            };
+          }
+        }}
+        onClose={() => {
+          refShare.current.hide();
+        }}
+        captureUri={captureUri}
+        onPremium={() => {
+          refShare.current.hide();
+        }}
+        idQuote={handleIdQuoteActive()} // mengambil data id active
+        quoteText={handleQuoteActive()} // mengambil data title active
+      />
+
+      <ModalCategories
+        refPanel={refCategory}
+        contentRef={c => {
+          if (c) {
+            refCategory.current = {
+              ...c,
+            };
+          }
+        }}
+        onClose={() => {
+          refCategory.current.hide();
+        }}
+      />
+
+      <ModalRating
+        visible={modalRatingVisible}
+        handleClose={() => {
+          setModalRating(false);
+          changeAskRatingParameter();
+        }}
+      />
+      <ModalRepeat
+        isVisible={modalRepeat}
+        onClose={() => {
+          setModalRepeat(false);
+        }}
+      />
+
+      <ModalCountDown
+        adsRef={rewarded}
+        hideStatusbar={() => {
+          setStatusBar(true);
+        }}
+        showStatusBar={() => {
+          setStatusBar(false);
+        }}
+        visible={showModalCountdown}
+        handleClose={() => {
+          setModalCountdown(false);
+        }}
+      />
+      <LoadingFullScreen isLoading={isLoadingInterstial} />
     </View>
   );
 }

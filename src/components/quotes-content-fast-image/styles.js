@@ -28,7 +28,7 @@ export default StyleSheet.create({
   },
   txtQuotesWrapper: {
     paddingHorizontal: moderateScale(30),
-    marginBottom: moderateScale(60)
+    position:'relative',
   },
   ctnQuotes: {
     fontSize: moderateScale(18),
@@ -38,4 +38,60 @@ export default StyleSheet.create({
     lineHeight: moderateScale(24),
     padding: moderateScale(4)
   },
+  ctnRowButton:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    // marginBottom: isIphoneXorAbove() ? moderateScale(80) : moderateScale(40),
+    marginBottom: moderateScale(40),
+    marginTop: moderateScale(20)
+  },
+  ctnBtn:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: moderateScale(12),
+    height: moderateScale(44),
+    borderRadius: moderateScale(44 / 2),
+    backgroundColor: 'rgba(0,0,0,0.8)',
+    width: moderateScale(130)
+  },
+  imgBtn: {
+    width: moderateScale(22),
+    height: moderateScale(22),
+    resizeMode: 'contain',
+    marginRight: moderateScale(8)
+  },
+  txtButton:{
+    color: colors.white,
+    fontFamily: fonts.InterMedium,
+  },
+  mgLeft:{
+    marginLeft: moderateScale(16)
+  },
+  ctnAbsolute:{
+    position: 'absolute'
+  },
+  bgYellow:{
+    backgroundColor: colors.yellow,
+    borderColor: '#515151',
+    borderWidth: 1
+  },
+  txtBlack:{
+    color: colors.black
+  },
+  traceBg:{
+    width: moderateScale(220),
+    height: moderateScale(220),
+    resizeMode: 'contain',
+  },
+  ctnBgTrace:{
+
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center'
+  }
 });

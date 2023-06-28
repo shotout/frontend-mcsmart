@@ -1,9 +1,17 @@
 import {Adjust, AdjustEvent} from 'react-native-adjust';
+<<<<<<< HEAD
 import analytics from '@react-native-firebase/analytics';
 import {isIphone} from '../shared/devices';
 
 export const ONBOARDING_COMPLETE = '8zqgwt';
 export const APP_INSTALLED = '3nkdfh';
+=======
+// import analytics from '@react-native-firebase/analytics';
+import {isIphone} from '../shared/devices';
+
+export const ONBOARDING_COMPLETE = '8zqgwt';
+export const APP_INSTALLED = 'e6a5ns';
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
 export const SHOW_PAYWALL = 'nubmht';
 export const FREE_TRIAL = 'jrw4sf';
 
@@ -46,9 +54,15 @@ export const eventTracking = async (id, message) => {
       adjustEvent.setCallbackId(message);
     }
     Adjust.trackEvent(adjustEvent);
+<<<<<<< HEAD
     await analytics().logEvent(getScreenName(id), {
       id,
     });
+=======
+    // await analytics().logEvent(getScreenName(id), {
+    //   id,
+    // });
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     console.log('Success tracking:', getScreenName(id));
   } catch (err) {
     console.log('Err tracking:', err);
@@ -61,10 +75,17 @@ export const revenueTracking = async (price, currency) => {
   adjustEvent.setRevenue(price, currency);
 
   Adjust.trackEvent(adjustEvent);
+<<<<<<< HEAD
   await analytics().logEvent(getScreenName(REVENUE_TRACKING), {
     id: REVENUE_TRACKING,
     item: `PRICE ${price}, currency ${currency}`,
   });
+=======
+  // await analytics().logEvent(getScreenName(REVENUE_TRACKING), {
+  //   id: REVENUE_TRACKING,
+  //   item: `PRICE ${price}, currency ${currency}`,
+  // });
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
   console.log('Revenue tracked:', price, currency);
 };
 

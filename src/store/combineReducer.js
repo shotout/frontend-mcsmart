@@ -6,6 +6,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 import defaultState from './defaultState/states';
+import widgetState from './widgetState/states';
 import {setStorageStatus} from './defaultState/actions';
 import {SET_STORAGE_STATUS} from './defaultState/types';
 
@@ -43,6 +44,7 @@ const widgetPersistConfig = {
 
 const rootReducers = combineReducers({
   defaultState: persistReducer(commonPersistConfig, defaultState),
+  widgetState: persistReducer(widgetPersistConfig, widgetState),
 });
 
 const pReducers = persistReducer(persistConfig, rootReducers);

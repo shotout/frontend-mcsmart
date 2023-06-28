@@ -1,9 +1,8 @@
-import React, {useCallback, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Animated,
+  FlatList,
   Image,
-  Platform,
-  ScrollView,
   StatusBar,
   Text,
   TouchableOpacity,
@@ -12,24 +11,25 @@ import {
 } from 'react-native';
 import {Portal} from 'react-native-paper';
 import {connect} from 'react-redux';
+
 import PropTypes from 'prop-types';
 import SlidingUpPanel from 'rn-sliding-up-panel';
-import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
 import Search from '../../../components/search';
 import styles from './styles';
-import CardCategories from '../../../components/card-categories';
 import states from './states';
-import ModalCategoriesSearch from '../modal-categories-search';
 import {
   handleBasicPaywall,
-  handlePayment,
   isUserPremium,
+  reloadUserProfile,
 } from '../../../helpers/user';
 import {sizing} from '../../../shared/styling';
 import Button from '../../../components/button';
-import {getAdaptiveBannerID} from '../../../shared/static/adsId';
-
-const ios = Platform.OS === 'ios';
+import PremiumRocket from '../../../assets/svg/RocketPremiumBlack.svg';
+import {updateCategory} from '../../../shared/request';
+import CategoryItem from '../../../components/category-item';
+import ModalCategoriesSearch from '../modal-categories-search';
+import useDebounce from '../../../helpers/useDebounce';
+import {showModalPremium} from '../../../shared/globalContent';
 
 const iconClose = require('../../../assets/icons/close.png');
 
@@ -40,118 +40,70 @@ function ModalCategories({
   contentRef,
   fullSize,
   onCustomSelectCategory,
-  customSelected,
 }) {
   const [categoryValue, setCategoryValue] = useState([]);
+  const [showModalSearch, setModalSearch] = useState(false);
+  const debounceReloadCategory = useDebounce(categoryValue, 5000);
   const draggableRange = {
     top: fullSize
       ? sizing.getDimensionHeight(1)
       : sizing.getDimensionHeight(1) - StatusBar.currentHeight,
     bottom: 0,
   };
-  const [showModalSearch, setModalSearch] = useState(false);
-  const [scrollEnabled, setScrollEnabled] = useState(false);
-  const [allowDragging, setAllowDragging] = useState(true);
-  const [atTop, setAtTop] = useState(true);
   const [panelPositionVal] = useState(
     new Animated.Value(draggableRange.bottom),
   );
   const snappingPoints = [draggableRange.top, draggableRange.bottom];
 
-  // fired when panel is finished being dragged up or down
-  // if panel is dragged to 'top' position, then we switch to scrollmode
-  const onMomentumDragEnd = useCallback(
-    value => {
-      // console.log('onMomentumDragEnd', value === draggableRange.top);
-      if (value === draggableRange.top && !scrollEnabled) {
-        setScrollEnabled(true);
-        setAtTop(true);
-        if (ios) {
-          setAllowDragging(false);
-        }
+  useEffect(() => {
+    const getInitialCategory = () => {
+      if (userProfile.data.categories?.length > 0) {
+        setCategoryValue(userProfile.data.categories.map(item => item.id));
       }
-    },
-    [draggableRange, scrollEnabled],
-  );
+    };
+    getInitialCategory();
+  }, [userProfile.data.categories]);
 
-  // if panel is at the top and scrolling is allowed
-  // check the velocity of the drag,
-  // if the velocity is downward, then we animate the panel to its bottom state
-  // if the velocity is upward, we treat the drag like a scroll instead
-  const onDragStart = useCallback(
-    (_, gestureState) => {
-      // console.log('Check onDragStart', atTop, scrollEnabled, gestureState.vy);
-      if (atTop && scrollEnabled) {
-        if (gestureState.vy > 0) {
-          setScrollEnabled(false);
-          if (ios) {
-            setAllowDragging(true);
-          }
-        } else {
-          setAtTop(false);
-          setScrollEnabled(true);
-          if (ios) {
-            setAllowDragging(false);
-          }
-        }
-      }
-    },
-    [atTop, scrollEnabled],
-  );
-
-  // fired when scroll is finished inside the panel,
-  // if the content in the panel has scrolled to the very top,
-  // then we allow the panel to be dragged down
-  // (only if the next gesture is down, not up)
-  const onMomentumScrollEnd = useCallback(event => {
-    const {nativeEvent} = event;
-    // console.log(
-    //   'Check scroll nativeEvent.contentOffset.y:',
-    //   nativeEvent.contentOffset.y,
-    // );
-    if (nativeEvent.contentOffset.y === 0) {
-      setAtTop(true);
-      if (ios) {
-        setAllowDragging(true);
-      }
-    }
-  }, []);
-
-  const getInitialCategory = () => {
-    if (customSelected && customSelected.length > 0) {
-      return customSelected.map(item => item.id);
-    }
-    if (userProfile?.data?.categories?.length > 0) {
-      return userProfile.data.categories.map(item => item.id);
-    }
-    return [];
+  const isDataSelected = value => {
+    const findItem = categoryValue.find(item => item === value);
+    if (findItem) return true;
+    return false;
   };
 
-  function renderHeader(dragHandler = {}) {
+  const handleSelectCategory = async (id, isHasSelect) => {
+    let curentCategory = [...categoryValue];
+    if (isHasSelect) {
+      curentCategory = curentCategory.filter(cat => cat !== id);
+    } else {
+      curentCategory.push(id);
+    }
+    setCategoryValue(curentCategory);
+    await updateCategory({
+      categories: curentCategory,
+      _method: 'PATCH',
+    });
+    reloadUserProfile();
+  };
+
+  function renderSubscription() {
+    if (isUserPremium()) {
+      return null;
+    }
     return (
-      <View style={styles.ctnHeader} {...dragHandler}>
-        <View style={styles.ctnTextHeader}>
-          <Text style={styles.boldHeader}>Categories</Text>
-        </View>
-        {!isUserPremium() && (
-          <View style={styles.rowHeaderText}>
-            <View />
-            {/* <TouchableOpacity onPress={onClose}>
-            <Text style={[styles.txtHeaderBtn, styles.txtBlack]}>Done</Text>
-          </TouchableOpacity> */}
-            <TouchableOpacity
-              onPress={handleBasicPaywall}
-              style={styles.ctnJustifyEnd}>
-              <Text style={styles.txtHeaderBtn}>Unlock all</Text>
-            </TouchableOpacity>
+      <View style={styles.ctnBgWrap}>
+        <TouchableWithoutFeedback onPress={handleBasicPaywall}>
+          <View style={styles.ctnRow}>
+            <View style={styles.ctnRowLeft}>
+              <Text style={styles.titleStyle}>Go Premium</Text>
+              <Text style={styles.subTitleStyle}>
+                Access unlimited categories, Facts, themes and remove ads!
+              </Text>
+            </View>
+            <View style={styles.ctnIcon}>
+              <PremiumRocket width="100%" height="100%" />
+            </View>
           </View>
-        )}
-        <TouchableOpacity
-          onPress={() => {
-            setModalSearch(true);
-          }}>
-          <Search isSelect placeholder="Search" />
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
       </View>
     );
   }
@@ -160,6 +112,25 @@ function ModalCategories({
     return (
       <View style={styles.ctnLabel}>
         <Text style={styles.txtMix}>Make your own mix</Text>
+      </View>
+    );
+  }
+
+  function renderHeader(dragHandler = {}) {
+    return (
+      <View style={styles.ctnHeader} {...dragHandler}>
+        <View style={styles.ctnTextHeader}>
+          <Text style={styles.boldHeader}>Categories</Text>
+          <Text style={styles.txtDesc}>
+            {'Choose the topics that you\nwant to learn more about.'}
+          </Text>
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            setModalSearch(true);
+          }}>
+          <Search isSelect placeholder="Search" />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -185,7 +156,19 @@ function ModalCategories({
     );
   }
 
-  // console.log('Check is scroll enable:', allowDragging, scrollEnabled, atTop);
+  const renderListCategory = ({item, index}) => {
+    const isSelected = isDataSelected(item.id);
+    return (
+      <CategoryItem
+        onPress={() => {
+          handleSelectCategory(item.id, isSelected);
+        }}
+        isSelected={isSelected}
+        selectedCategory={categoryValue}
+        item={item}
+      />
+    );
+  };
 
   return (
     <Portal>
@@ -210,51 +193,29 @@ function ModalCategories({
             <View style={styles.ctnContent}>
               {/* <LineGestureSlide dragHandler={dragHandler} /> */}
               {renderHeader(dragHandler)}
-              <ScrollView
-                // scrollEnabled={scrollEnabled}
-                showsVerticalScrollIndicator={false}
-                bounces={false}
-                // onMomentumScrollEnd={onMomentumScrollEnd}
-                scrollsToTop={false}
-                contentContainerStyle={styles.ctnScroll}>
-                {renderLabel()}
-                {/* <View style={{height: sizing.getDimensionHeight(200)}} /> */}
-                {onCustomSelectCategory ? (
-                  <CardCategories
-                    initialSelect={getInitialCategory()}
-                    customSelected={customSelected}
-                    onCustomSelectCategory={val => {
-                      setCategoryValue(val);
-                    }}
-                    listData={categories}
-                  />
-                ) : (
-                  <CardCategories
-                    initialSelect={getInitialCategory()}
-                    customSelected={customSelected}
-                    listData={categories}
-                  />
+              <FlatList
+                contentContainerStyle={styles.ctnScroll}
+                data={categories?.category || []}
+                ListHeaderComponent={() => (
+                  <>
+                    {renderSubscription()}
+                    {renderLabel()}
+                  </>
                 )}
-              </ScrollView>
+                renderItem={renderListCategory}
+                keyExtractor={item => item.id}
+                showsVerticalScrollIndicator={false}
+              />
 
-              {!isUserPremium() && (
-                <View style={styles.ctnBanner}>
-                  <BannerAd
-                    unitId={getAdaptiveBannerID()}
-                    size={BannerAdSize.BANNER}
-                    requestOptions={{
-                      requestNonPersonalizedAdsOnly: true,
-                    }}
-                  />
-                </View>
-              )}
               {renderIconClose()}
             </View>
+
             {showModalSearch && (
               <ModalCategoriesSearch
                 onClose={() => {
                   setModalSearch(false);
                 }}
+                selectedCategory={categoryValue}
                 isVisible={showModalSearch}
               />
             )}

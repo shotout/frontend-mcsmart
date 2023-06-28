@@ -28,6 +28,7 @@ target 'mcsmart' do
 
   # Flags change depending on the env values.
   flags = get_default_flags()
+ 
   pod 'Firebase', :modular_headers => true
   pod 'FirebaseCore', :modular_headers => true
   pod 'GoogleUtilities', :modular_headers => true
@@ -38,7 +39,7 @@ target 'mcsmart' do
     # Hermes is now enabled by default. Disable by setting this flag to false.
     # Upcoming versions of React Native may rely on get_default_flags(), but
     # we make it explicit here to aid in the React Native upgrade process.
-    :hermes_enabled => flags[:hermes_enabled],
+    :hermes_enabled => false,
     :fabric_enabled => flags[:fabric_enabled],
     # Enables Flipper.
     #
@@ -55,7 +56,18 @@ target 'mcsmart' do
   end
 
   post_install do |installer|
-    react_native_post_install(installer)
+    react_native_post_install(
+      installer,
+      # Set `mac_catalyst_enabled` to `true` in order to apply patches
+      # necessary for Mac Catalyst builds
+      :mac_catalyst_enabled => false
+    )
+    # NOTE: Change IPHONEOS_DEPLOYMENT_TARGET to 12.4.
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.4'
+      end
+    end
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
     apply_flipper_fix(installer)
   end

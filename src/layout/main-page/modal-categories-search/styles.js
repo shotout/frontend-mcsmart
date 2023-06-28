@@ -9,7 +9,10 @@ export default StyleSheet.create({
   },
   ctnScroll: {
     flexGrow: 1,
+<<<<<<< HEAD
     paddingHorizontal: moderateScale(20),
+=======
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     paddingBottom: isIphoneXorAbove() ? moderateScale(100) : moderateScale(100),
   },
   rowHeaderText: {
@@ -46,7 +49,11 @@ export default StyleSheet.create({
   },
   txtHeaderBtn: {
     fontSize: moderateScale(14),
+<<<<<<< HEAD
     color: colors.tosca,
+=======
+    color: colors.black,
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     fontFamily: fonts.InterMedium,
   },
   ctnJustifyEnd: {
@@ -82,4 +89,40 @@ export default StyleSheet.create({
     flex: 1,
     marginHorizontal: moderateScale(12),
   },
+<<<<<<< HEAD
+=======
+  ctnEmpty: {
+    marginTop: moderateScale(20),
+  },
+  emptyBanner: {
+    width: moderateScale(100),
+    height: moderateScale(100),
+    resizeMode: 'contain',
+    alignSelf: 'center',
+  },
+  ctnTextDream: {
+    marginTop: moderateScale(20),
+    borderBottomColor: '#B7B7B7',
+    borderBottomWidth: moderateScale(1),
+    paddingBottom: moderateScale(20),
+    marginBottom: moderateScale(20),
+  },
+  txtDream: {
+    fontFamily: fonts.InterMedium,
+    color: colors.black,
+    fontSize: moderateScale(16),
+    textAlign: 'center',
+    lineHeight: moderateScale(24),
+  },
+  ctnAlt: {
+    marginBottom: moderateScale(20),
+  },
+  txtAlt: {
+    fontFamily: fonts.InterMedium,
+    color: colors.black,
+    fontSize: moderateScale(16),
+    textAlign: 'center',
+    lineHeight: moderateScale(24),
+  },
+>>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
 });

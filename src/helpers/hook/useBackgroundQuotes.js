@@ -1,7 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from 'moment';
 import {useEffect, useState} from 'react';
-import {listTheme} from '../../shared/static-data/listTheme';
+import {getArrThemes} from '../../shared/static-data/listTheme';
+
+const listTheme = getArrThemes();
 
 export const handleShuffleTheme = async () => {
   const getItems = listTheme[Math.floor(Math.random() * listTheme.length)];

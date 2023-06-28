@@ -9,9 +9,10 @@ export default StyleSheet.create({
   },
   ctnInput: {
     height: moderateScale(48),
-    backgroundColor: colors.lightBlue,
+    backgroundColor: colors.gray,
     borderRadius: moderateScale(12),
     paddingHorizontal: moderateScale(12),
+    color: colors.black
   },
   ctnRow: {
     flexDirection: 'row',
@@ -21,8 +22,8 @@ export default StyleSheet.create({
   },
   inputStyle: {
     flex: 1,
-    fontFamily: fonts.InterRegular,
-    color: colors.blue,
+    fontFamily: fonts.InterMedium,
+    color: colors.black,
     fontSize: moderateScale(14),
   },
   searchIcon: {

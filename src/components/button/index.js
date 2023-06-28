@@ -11,6 +11,8 @@ export default function Button({
   isLoading,
   btnStyle,
   isDisable,
+  disableWhite,
+  prependIcon,
 }) {
   function getBgColor() {
     switch (type) {
@@ -18,11 +20,19 @@ export default function Button({
         return {backgroundColor: colors.white};
       case 'dark':
         return {backgroundColor: colors.dark};
+      case 'black':
+        if (isDisable) {
+          return {backgroundColor: colors.gray};
+        }
+        return {backgroundColor: colors.black};
       case 'green':
         return {backgroundColor: colors.green};
       case 'tosca':
         return {backgroundColor: colors.tosca};
       default:
+        if (isDisable && disableWhite) {
+          return {backgroundColor: colors.white};
+        }
         if (isDisable) {
           return {backgroundColor: colors.gray};
         }
@@ -34,6 +44,8 @@ export default function Button({
     switch (type) {
       case 'white-button':
         return {color: colors.black};
+      case 'black':
+        return {color: colors.white};
       default:
         if (isDisable) {
           // return {backgroundColor: colors.white};
@@ -48,9 +60,15 @@ export default function Button({
       onPress={onPress}
       style={[styles.ctnRoot, btnStyle, getBgColor()]}>
       {isLoading ? (
-        <ActivityIndicator size="small" color="#fff" />
+        <ActivityIndicator
+          size="small"
+          color={type === 'white-button' ? colors.yellow : '#fff'}
+        />
       ) : (
-        <Text style={[styles.txtButton, getTextColor()]}>{label}</Text>
+        <>
+          {prependIcon}
+          <Text style={[styles.txtButton, getTextColor()]}>{label}</Text>
+        </>
       )}
     </TouchableOpacity>
   );
