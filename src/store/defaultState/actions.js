@@ -31,6 +31,10 @@ import {handleModalFirstPremium} from '../../shared/globalContent';
 import {scrollToTopQuote} from './selector';
 import dummyPastQuotes from '../../shared/static/dummyPastQuotes';
 import {loadOpenAddsReward} from '../../helpers/loadReward';
+import {
+  OPEN_OFFER_NOTIFICATION,
+  eventTracking,
+} from '../../helpers/eventTracking';
 
 export const setModalFirstPremium = payload => ({
   type: types.SET_MODAL_FIRST_PREMIUM,
@@ -409,6 +413,7 @@ const handleNotificationOpened = (resProfile, loadingRef) => {
             handlePayment(detail.notification.data?.placement);
           }, 1000);
         }
+        eventTracking(OPEN_OFFER_NOTIFICATION);
       }
     }
   });

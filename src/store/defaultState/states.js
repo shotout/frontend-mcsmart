@@ -7,7 +7,7 @@ import {listTheme} from '../../shared/static-data/listTheme';
 
 const INITIAL_STATE = {
   storageStatus: STORAGE_STATUS.loading,
-  userProfile: defaultUser,
+  userProfile: {},
   defaultData: {
     feeling: [],
     ways: [],

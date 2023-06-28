@@ -9,7 +9,15 @@ import {getUserProfile, setSubcription, updateProfile} from '../shared/request';
 import store from '../store/configure-store';
 import {handleSetProfile} from '../store/defaultState/actions';
 import {SUCCESS_FETCH_COLLECTION} from '../store/defaultState/types';
-import {FREE_TRIAL, SHOW_PAYWALL, eventTracking} from './eventTracking';
+import {
+  CANCEL_SUBSCRIBE_AFTER_TRIAL,
+  FREE_TRIAL,
+  SHOW_PAYWALL,
+  SUBSCRIPTION_STARTED,
+  eventTracking,
+  revenueTracking,
+} from './eventTracking';
+import {reset} from '../shared/navigationRef';
 
 export const dateToUnix = date => moment(date).unix();
 export const getFutureDate = (defaultDate, day) =>
@@ -42,10 +50,12 @@ export const handlePayment = async (vendorId, cb) =>
     try {
       eventTracking(SHOW_PAYWALL);
       let stringVendor = vendorId;
+      // const subscriptions = await Purchasely.userSubscriptions();
+      // console.log('Subscription status:', subscriptions);
       const purchaseId = await Purchasely.getAnonymousUserId();
       if (vendorId === 'onboarding') {
         // await setSubcription({
-        //   subscription_type: 5,
+        //   subscription_type: 1,
         //   purchasely_id: purchaseId,
         // });
       } else if (!stringVendor) {
@@ -57,14 +67,18 @@ export const handlePayment = async (vendorId, cb) =>
           stringVendor = 'offer_no_purchase_after_onboarding_paywall_2nd';
         }
       }
+      console.log('OPEN Purchasely', vendorId);
       const res = await Purchasely.presentPresentationForPlacement({
         placementVendorId:
           stringVendor || 'offer_no_purchase_after_onboarding_paywall',
         isFullscreen: true,
       });
+      console.log('Purchasely result:', res.result);
       const user = store.getState().defaultState.userProfile;
+      console.log('Check user data purchase:', user);
       switch (res.result) {
         case ProductResult.PRODUCT_RESULT_PURCHASED:
+          console.log('FINISH PURCHASED:', user.token);
           if (user.token) {
             await setSubcription({
               subscription_type: vendorId === 'one_month_free' ? 3 : 2,
@@ -72,6 +86,7 @@ export const handlePayment = async (vendorId, cb) =>
               purchasely_id: purchaseId,
             });
             await reloadUserProfile();
+            Purchasely.closePaywall();
           }
           eventTracking(FREE_TRIAL);
           break;
@@ -115,66 +130,71 @@ export const createUniqueID = () =>
   Date.now().toString(36) + Math.random().toString(36);
 
 export const reloadUserProfile = async () =>
-  new Promise(async resolve => {
-    const res = await getUserProfile();
-    const currentUserProfile = store.getState().defaultState.userProfile;
-    store.dispatch(
-      handleSetProfile({
-        ...currentUserProfile,
-        ...res,
-      }),
-    );
-    // if (res.data.subscription.type !== 5) {
-    //   if (currentUserProfile.data) {
-    //     if (currentUserProfile.data.subscription.type !== 1) {
-    //       if (res.data.subscription.type === 1) {
-    //         eventTracking(CANCEL_SUBSCRIBE_AFTER_TRIAL);
-    //       }
-    //       if (
-    //         currentUserProfile.data.subscription.type !==
-    //         res.data.subscription.type
-    //       ) {
-    //         if (res.data.subscription.type !== 1) {
-    //           eventTracking(SUBSCRIPTION_STARTED);
-    //           const objPurchase = JSON.parse(
-    //             res.data.subscription.purchasely_data,
-    //           );
-    //           if (objPurchase) {
-    //             revenueTracking(
-    //               objPurchase.plan_price_in_customer_currency,
-    //               objPurchase.customer_currency,
-    //             );
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
-    resolve(res.data);
+  new Promise(async (resolve, reject) => {
+    try {
+      const res = await getUserProfile();
+      const currentUserProfile = store.getState().defaultState.userProfile;
+      store.dispatch(
+        handleSetProfile({
+          ...currentUserProfile,
+          ...res,
+        }),
+      );
+      if (res.data.subscription.type !== 5) {
+        if (currentUserProfile.data) {
+          if (currentUserProfile.data.subscription.type !== 1) {
+            if (res.data.subscription.type === 1) {
+              eventTracking(CANCEL_SUBSCRIBE_AFTER_TRIAL);
+            }
+            if (
+              currentUserProfile.data.subscription.type !==
+              res.data.subscription.type
+            ) {
+              if (res.data.subscription.type !== 1) {
+                eventTracking(SUBSCRIPTION_STARTED);
+                const objPurchase = JSON.parse(
+                  res.data.subscription.purchasely_data,
+                );
+                if (objPurchase) {
+                  revenueTracking(
+                    objPurchase.plan_price_in_customer_currency,
+                    objPurchase.customer_currency,
+                  );
+                }
+              }
+            }
+          }
+        }
+      }
+      resolve(res.data);
+    } catch (err) {
+      reset('WelcomePage');
+      reject('error get profile');
+    }
   });
 
 export const handleSubscriptionStatus = async (subscription = {}) => {
-  // const purchaseId = await Purchasely.getAnonymousUserId();
-  // if (subscription.type === 2 || subscription.type === 3) {
-  //   const trialDay = subscription.type === 2 ? 3 : 30;
-  //   const dateEndFreeTrial = getFutureDate(subscription.started, trialDay);
-  //   const nowaDay = moment().format('YYYY-MM-DD');
-  //   const objPurchase = JSON.parse(subscription.purchasely_data);
-  //   if (dateToUnix(dateEndFreeTrial) < dateToUnix(nowaDay)) {
-  //     await setSubcription({
-  //       subscription_type: 4,
-  //       purchasely_id: purchaseId,
-  //     });
-  //     await reloadUserProfile();
-  //     eventTracking(SUBSCRIPTION_STARTED);
-  //     if (objPurchase) {
-  //       revenueTracking(
-  //         objPurchase.plan_price_in_customer_currency,
-  //         objPurchase.customer_currency,
-  //       );
-  //     }
-  //   }
-  // }
+  const purchaseId = await Purchasely.getAnonymousUserId();
+  if (subscription.type === 2 || subscription.type === 3) {
+    const trialDay = subscription.type === 2 ? 3 : 30;
+    const dateEndFreeTrial = getFutureDate(subscription.started, trialDay);
+    const nowaDay = moment().format('YYYY-MM-DD');
+    const objPurchase = JSON.parse(subscription.purchasely_data);
+    if (dateToUnix(dateEndFreeTrial) < dateToUnix(nowaDay)) {
+      await setSubcription({
+        subscription_type: 4,
+        purchasely_id: purchaseId,
+      });
+      await reloadUserProfile();
+      eventTracking(SUBSCRIPTION_STARTED);
+      if (objPurchase) {
+        revenueTracking(
+          objPurchase.plan_price_in_customer_currency,
+          objPurchase.customer_currency,
+        );
+      }
+    }
+  }
 };
 
 export const setCollectionData = payload => {
@@ -272,4 +292,37 @@ export const isPremiumToday = () => {
     return true;
   }
   return false;
+};
+
+const changeStatus = async res => {
+  const purchaseId = await Purchasely.getAnonymousUserId();
+
+  const subscriptions = await Purchasely.userSubscriptions();
+  console.log('SUbscription status:', subscriptions);
+  if (subscriptions.length > 0 && !isUserPremium()) {
+    const planData = subscriptions[0].plan;
+    await setSubcription({
+      subscription_type: planData.vendorId === 'one_month_free' ? 3 : 2,
+      subscription_data: planData,
+      purchasely_id: purchaseId,
+    });
+    await reloadUserProfile();
+    Purchasely.closePaywall();
+  }
+};
+
+export const purchaselyListener = () => {
+  Purchasely.addEventListener(event => {
+    console.log('Purchasely listener', event);
+    if (event.name === 'RECEIPT_FAILED') {
+      setTimeout(() => {
+        changeStatus(event.properties);
+      }, 1000);
+    }
+  });
+
+  Purchasely.addPurchasedListener(res => {
+    // User has successfully purchased a product, reload content
+    console.log('User has purchased', res);
+  });
 };

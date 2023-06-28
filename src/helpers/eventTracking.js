@@ -2,20 +2,23 @@ import {Adjust, AdjustEvent} from 'react-native-adjust';
 // import analytics from '@react-native-firebase/analytics';
 import {isIphone} from '../shared/devices';
 
-export const ONBOARDING_COMPLETE = '8zqgwt';
+export const ONBOARDING_COMPLETE = 'se2bvp';
 export const APP_INSTALLED = 'e6a5ns';
-export const SHOW_PAYWALL = 'nubmht';
-export const FREE_TRIAL = 'jrw4sf';
+export const SHOW_PAYWALL = 's2ei1x';
+export const FREE_TRIAL = '7ajk5x';
 
-export const CANCEL_SUBSCRIBE_AFTER_TRIAL = 'lb41cg';
-export const SUBSCRIPTION_STARTED = '9z8iij';
-export const QUOTE_SHARED = 'u80tp1';
-export const QUOTE_LIKED = '3jc09q';
+export const CANCEL_SUBSCRIBE_AFTER_TRIAL = '3gut9w';
+export const SUBSCRIPTION_STARTED = 'nmuhaz';
+export const QUOTE_SHARED = 'wt1g6g';
+export const QUOTE_LIKED = 'sle19s';
 
-export const REVENUE_TRACKING = 'od70qt';
+export const REVENUE_TRACKING = 'p495gn';
+export const OPEN_OFFER_NOTIFICATION = 'idgcal';
 
 const getScreenName = id => {
   switch (id) {
+    case OPEN_OFFER_NOTIFICATION:
+      return 'OPEN_OFFER_NOTIFICATION';
     case ONBOARDING_COMPLETE:
       return 'ONBOARDING_COMPLETE';
     case APP_INSTALLED:
@@ -29,9 +32,9 @@ const getScreenName = id => {
     case SUBSCRIPTION_STARTED:
       return 'SUBSCRIPTION_STARTED';
     case QUOTE_SHARED:
-      return 'QUOTE_SHARED';
+      return 'FACT_SHARED';
     case QUOTE_LIKED:
-      return 'QUOTE_LIKED';
+      return 'FACT_LIKED';
     case REVENUE_TRACKING:
       return 'SUBSCRIBE';
     default:

@@ -178,26 +178,23 @@ function Register({
             // topics: values.selectedCategory,
             fcm_token: getFcmToken,
           };
-          const res = await checkDeviceRegister({
-            device_id: mutateForm.device_id,
-          });
-          setHasRegister(true);
-          handleSetProfile(res);
-          handleSubscriptionStatus(res.data.subscription);
-          fetchListQuote();
-          fetchCollection();
-          setTimeout(() => {
-            handlePayment('onboarding', () => {
-              reset('MainPage', {isFromOnboarding: true});
+          if (isHasRegister) {
+            setTimeout(() => {
+              handlePayment('onboarding', () => {
+                reset('MainPage', {isFromOnboarding: true});
+              });
+            }, 200);
+            await updateProfile({
+              ...payload,
+              _method: 'PATCH',
             });
-          }, 200);
-          await updateProfile({
-            ...payload,
-            _method: 'PATCH',
-          });
-          setTimeout(() => {
-            reloadUserProfile();
-          }, 2000);
+            setTimeout(() => {
+              reloadUserProfile();
+            }, 2000);
+          } else {
+            handleSubmit(true);
+          }
+
           AsyncStorage.setItem('isLogin', 'yes');
         } catch (err) {
           console.log('Device id not register');
@@ -205,6 +202,20 @@ function Register({
         }
       };
       getDeviceID();
+    }
+    if (registerStep === 7) {
+      const setRegisterUser = async () => {
+        const res = await checkDeviceRegister({
+          device_id: mutateForm.device_id,
+        });
+        setHasRegister(true);
+        handleSetProfile(res);
+        handleSubscriptionStatus(res.data.subscription);
+        fetchListQuote();
+        fetchCollection();
+        AsyncStorage.setItem('isLogin', 'yes');
+      };
+      setRegisterUser();
     }
   }, [registerStep]);
 
