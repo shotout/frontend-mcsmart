@@ -13,12 +13,36 @@ PODS:
     - React-Core (= 0.71.4)
     - React-jsi (= 0.71.4)
     - ReactCommon/turbomodule/core (= 0.71.4)
-  - Firebase (2.5.1)
+  - Firebase (10.3.0):
+    - Firebase/Core (= 10.3.0)
+  - Firebase/Analytics (10.3.0):
+    - Firebase/Core
+  - Firebase/Core (10.3.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (~> 10.3.0)
   - Firebase/CoreOnly (10.3.0):
     - FirebaseCore (= 10.3.0)
   - Firebase/Messaging (10.3.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 10.3.0)
+  - FirebaseAnalytics (10.3.0):
+    - FirebaseAnalytics/AdIdSupport (= 10.3.0)
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseAnalytics/AdIdSupport (10.3.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleAppMeasurement (= 10.3.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
   - FirebaseCore (10.3.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
@@ -106,25 +130,25 @@ PODS:
   - Google-Mobile-Ads-SDK (10.6.0):
     - GoogleAppMeasurement (< 11.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
-  - GoogleAppMeasurement (10.11.0):
-    - GoogleAppMeasurement/AdIdSupport (= 10.11.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+  - GoogleAppMeasurement (10.3.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.3.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (10.11.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.11.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+  - GoogleAppMeasurement/AdIdSupport (10.3.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.3.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (10.11.0):
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.3.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - GoogleDataTransport (9.2.3):
     - GoogleUtilities/Environment (~> 7.7)
@@ -523,6 +547,10 @@ PODS:
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
+  - RNFBAnalytics (16.7.0):
+    - Firebase/Analytics (= 10.3.0)
+    - React-Core
+    - RNFBApp
   - RNFBApp (16.7.0):
     - Firebase/CoreOnly (= 10.3.0)
     - React-Core
@@ -639,6 +667,7 @@ DEPENDENCIES:
   - "RNCClipboard (from `../node_modules/@react-native-clipboard/clipboard`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNFastImage (from `../node_modules/react-native-fast-image`)
+  - "RNFBAnalytics (from `../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNFS (from `../node_modules/react-native-fs`)
@@ -657,6 +686,7 @@ SPEC REPOS:
     - Adjust
     - CocoaAsyncSocket
     - Firebase
+    - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreExtension
     - FirebaseCoreInternal
@@ -782,6 +812,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-device-info"
   RNFastImage:
     :path: "../node_modules/react-native-fast-image"
+  RNFBAnalytics:
+    :path: "../node_modules/@react-native-firebase/analytics"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBMessaging:
@@ -815,6 +847,7 @@ SPEC CHECKSUMS:
   FBLazyVector: 446e84642979fff0ba57f3c804c2228a473aeac2
   FBReactNativeSpec: 241709e132e3bf1526c1c4f00bc5384dd39dfba9
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
+  FirebaseAnalytics: 036232b6a1e2918e5f67572417be1173576245f3
   FirebaseCore: 988754646ab3bd4bdcb740f1bfe26b9f6c0d5f2a
   FirebaseCoreExtension: 93d252fabdc9696bf14a73b04d84877ab9b3a832
   FirebaseCoreInternal: 9e46c82a14a3b3a25be4e1e151ce6d21536b89c0
@@ -832,7 +865,7 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   Google-Mobile-Ads-SDK: 07599a44221fb3f00d111d5c2f4e27549f8dbf21
-  GoogleAppMeasurement: d3dabccdb336fc0ae44b633c8abaa26559893cd9
+  GoogleAppMeasurement: c7d6fff39bf2d829587d74088d582e32d75133c3
   GoogleDataTransport: f0308f5905a745f94fb91fea9c6cbaf3831cb1bd
   GoogleUserMessagingPlatform: 5f8b30daf181805317b6b985bb51c1ff3beca054
   GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
@@ -884,6 +917,7 @@ SPEC CHECKSUMS:
   RNCClipboard: 3f0451a8100393908bea5c5c5b16f96d45f30bfc
   RNDeviceInfo: 475a4c447168d0ad4c807e48ef5e0963a0f4eb1b
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
+  RNFBAnalytics: 4cd20dd7d8332ee4560e522c60b38d4a7e53a005
   RNFBApp: 1ee535dcb7773ca612d3a2e53a1f78f8f2fb6abf
   RNFBMessaging: 04ecf12bae7543cd8df145f1b26d89d867594be7
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688

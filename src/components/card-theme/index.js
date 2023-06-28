@@ -1,23 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { ImageBackground, TouchableWithoutFeedback, View } from "react-native";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import styles from "./styles";
-import IconLockWhite from "../../assets/svg/icon_lock_color_white.svg";
-import IconChecklist from "../../assets/svg/icon_checklist.svg";
-import states from "./states";
-import dispatcher from "./dispatcher";
-import { handlePayment, isUserPremium } from "../../helpers/user";
-import LoadingIndicator from "../loading-indicator";
-import { setUserTheme } from "../../store/defaultState/actions";
-import { listTheme } from "../../shared/static-data/listTheme";
-import { selectTheme, unlockByAdmob } from "../../shared/request";
+import React, {useEffect, useState} from 'react';
+import {
+  FlatList,
+  Image,
+  ImageBackground,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import FastImage from 'react-native-fast-image';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {BACKEND_URL} from '../../shared/static';
+import styles from './styles';
+import IconLockWhite from '../../assets/svg/icon_lock.svg';
+import IconChecklist from '../../assets/svg/icon_checklist.svg';
+import {selectTheme, unlockByAdmob} from '../../shared/request';
+import states from './states';
+import dispatcher from './dispatcher';
+import {isUserPremium} from '../../helpers/user';
+import LoadingIndicator from '../loading-indicator';
+import {handleShuffleTheme} from '../../shared/useBackgroundQuotes';
+// import ModalUnlockCategory from '../modal-unlock-ads';
+import {getArrThemes, listTheme} from '../../shared/static-data/listTheme';
+import ModalUnlockCategory from '../modal-unlock-ads';
 
-const iconSuffle = require("../../assets/images/random_theme.png");
+const themesArr = getArrThemes();
+
+const iconSuffle = require('../../assets/icons/random_theme.png');
+const adsIcon = require('../../assets/icons/ads_icon.png');
+const themesBanner = require('../../assets/icons/themes_banner.png');
 
 function CardTheme({
-  listData,
   userProfile,
   handleSetProfile,
   onClose,
@@ -29,7 +43,7 @@ function CardTheme({
     background_color: null,
     id: 1,
     is_free: 1,
-    name: "Random",
+    name: 'Random',
     status: 2,
   };
   const [selectedCard, setSelectedCard] = useState([]);
@@ -83,7 +97,7 @@ function CardTheme({
     }
   };
 
-  const onPressSelect = (value) => {
+  const onPressSelect = value => {
     // const isSelected = isDataSelected(value);
     // if (isSelected) {
     //   setSelectedCard(selectedCard.filter(item => item !== value));
@@ -102,7 +116,7 @@ function CardTheme({
     }
   };
 
-  const handleItem = (item) => {
+  const handleItem = item => {
     if (item.is_free === 1 || isUserPremium()) {
       onPressSelect(item.id);
       if (item.id === 1) {
@@ -115,9 +129,9 @@ function CardTheme({
       setTimeout(() => {
         setUnlockCards(true);
       });
-      return true;
-      // onPressSelect(item.id);
     }
+    return true;
+    // onPressSelect(item.id);
   };
 
   const getLocalImage = id => {

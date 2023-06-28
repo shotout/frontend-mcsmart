@@ -32,25 +32,7 @@ import {scrollToTopQuote} from './selector';
 import dummyPastQuotes from '../../shared/static/dummyPastQuotes';
 import {loadOpenAddsReward} from '../../helpers/loadReward';
 
-export const setModalFirstPremium = payload => ({
-  type: types.SET_MODAL_FIRST_PREMIUM,
-  payload,
-});
 
-export const setModalPremium = payload => ({
-  type: types.SET_MODAL_PREMIUM_VISIBILITY,
-  payload,
-});
-
-export const setModalFirstPremium = payload => ({
-  type: types.SET_MODAL_FIRST_PREMIUM,
-  payload,
-});
-
-export const setModalPremium = payload => ({
-  type: types.SET_MODAL_PREMIUM_VISIBILITY,
-  payload,
-});
 
 export const setStorageStatus = payload => ({
   type: types.SET_STORAGE_STATUS,

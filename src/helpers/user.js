@@ -92,79 +92,6 @@ export const isUserPremium = () => {
   // true;
 };
 
-export const handlePayment = async (vendorId, cb) =>
-  new Promise(async (resolve, reject) => {
-    try {
-      eventTracking(SHOW_PAYWALL);
-      let stringVendor = vendorId;
-      const purchaseId = await Purchasely.getAnonymousUserId();
-      if (vendorId === 'onboarding') {
-        // await setSubcription({
-        //   subscription_type: 5,
-        //   purchasely_id: purchaseId,
-        // });
-      } else if (!stringVendor) {
-        const currentDate = moment().format('YYYY-MM-DD');
-        const getInstallDate = await AsyncStorage.getItem('firstInstall');
-        if (getInstallDate === currentDate) {
-          stringVendor = 'offer_no_purchase_after_onboarding_paywall';
-        } else {
-          stringVendor = 'offer_no_purchase_after_onboarding_paywall_2nd';
-        }
-      }
-      const res = await Purchasely.presentPresentationForPlacement({
-        placementVendorId:
-          stringVendor || 'offer_no_purchase_after_onboarding_paywall',
-        isFullscreen: true,
-      });
-      const user = store.getState().defaultState.userProfile;
-      switch (res.result) {
-        case ProductResult.PRODUCT_RESULT_PURCHASED:
-          if (user.token) {
-            await setSubcription({
-              subscription_type: vendorId === 'one_month_free' ? 3 : 2,
-              subscription_data: res,
-              purchasely_id: purchaseId,
-            });
-            await reloadUserProfile();
-          }
-          eventTracking(FREE_TRIAL);
-          break;
-        case ProductResult.PRODUCT_RESULT_RESTORED:
-          console.log('Payment restored');
-          // let message = null;
-          // if (res.plan != null) {
-          //   console.log(`User purchased ${res.plan.name}`);
-          //   message = res.plan.name;
-          // }
-
-          // eventTracking(RESTORE_PURCHASED, message);
-          break;
-        case ProductResult.PRODUCT_RESULT_CANCELLED:
-          console.log('Payment cancel');
-          if (Platform.OS === 'android') {
-            if (
-              !vendorId ||
-              vendorId === 'onboarding' ||
-              vendorId === 'offer_no_purchase_after_onboarding_paywall'
-            ) {
-              // handlePayment(vendorId);
-            }
-          }
-          // await setSubcription({
-          //   subscription_type: 1,
-          //   purchasely_id: purchaseId,
-          // });
-          break;
-        default:
-          break;
-      }
-      if (typeof cb === 'function') cb();
-      resolve(res);
-    } catch (err) {
-      console.log('error payment:', err);
-    }
-  });
 
 export const createUniqueID = () =>
   Date.now().toString(36) + Math.random().toString(36);
@@ -318,18 +245,7 @@ export const handleBasicPaywall = async cbPaywall => {
   const paywallType =
     currentDate > endDate ? 'in_app_paywall' : 'in_app_paywall_2nd';
   await handlePayment(paywallType, cbPaywall);
-export const iconNameToId = name => {
-  switch (name) {
-    case 'second':
-      return 2;
-    case 'third':
-      return 3;
-    case 'fourth':
-      return 4;
-    default:
-      return 1;
-  }
-};
+}
 
 export const checkIsHasLogin = async () => {
   const resLogin = await AsyncStorage.getItem('isLogin');

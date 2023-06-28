@@ -33,7 +33,7 @@ import {
 } from '../../helpers/user';
 import LoadingIndicator from '../../components/loading-indicator';
 import {isIphoneXorAbove} from '../../shared/devices';
-
+import PropTypes from 'prop-types';
 import HeaderStep from '../../layout/register/header-step';
 import ContentName from '../../layout/register/content-step-1';
 import ContentGender from '../../layout/register/content-step-2';
@@ -156,7 +156,7 @@ function Register({
   }, []);
 
   useEffect(() => {
-    if (registerStep === 8) {
+    if (registerStep === 7) {
       const getDeviceID = async () => {
         try {
           const timeZone = await TimeZone.getTimeZone();
@@ -169,7 +169,6 @@ function Register({
             end: moment(values.end_at).format('HH:mm'),
             gender: values.gender,
             timezone: timeZone,
-
             impress_friends: values.impress_friends,
             impress_business: values.impress_business,
             impress_children: values.impress_children,

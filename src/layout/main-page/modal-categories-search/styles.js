@@ -9,10 +9,6 @@ export default StyleSheet.create({
   },
   ctnScroll: {
     flexGrow: 1,
-<<<<<<< HEAD
-    paddingHorizontal: moderateScale(20),
-=======
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     paddingBottom: isIphoneXorAbove() ? moderateScale(100) : moderateScale(100),
   },
   rowHeaderText: {
@@ -49,11 +45,7 @@ export default StyleSheet.create({
   },
   txtHeaderBtn: {
     fontSize: moderateScale(14),
-<<<<<<< HEAD
-    color: colors.tosca,
-=======
     color: colors.black,
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     fontFamily: fonts.InterMedium,
   },
   ctnJustifyEnd: {
@@ -89,8 +81,6 @@ export default StyleSheet.create({
     flex: 1,
     marginHorizontal: moderateScale(12),
   },
-<<<<<<< HEAD
-=======
   ctnEmpty: {
     marginTop: moderateScale(20),
   },
@@ -124,5 +114,4 @@ export default StyleSheet.create({
     textAlign: 'center',
     lineHeight: moderateScale(24),
   },
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
 });

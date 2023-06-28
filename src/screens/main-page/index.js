@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { createRef, useEffect, useRef, useState } from "react";
-=======
 import React, {createRef, useEffect, useRef, useState} from 'react';
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
 import {
   FlatList,
   Text,
@@ -10,21 +6,6 @@ import {
   View,
   Image,
   TouchableWithoutFeedback,
-<<<<<<< HEAD
-} from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import AnimatedLottieView from "lottie-react-native";
-import { createAnimatableComponent } from "react-native-animatable";
-import { connect } from "react-redux";
-import styles from "./styles";
-import { listFact } from "../../shared/static-data/listFact";
-import { sizing } from "../../shared/styling";
-import { useBackgroundQuotes } from "../../helpers/hook/useBackgroundQuotes";
-import QuotesContent from "../../components/quotes-content-fast-image";
-// import ModalCategories from '../../layout/main-page/modal-categories';
-import states from "./states";
-=======
   Modal,
   StatusBar,
   Platform,
@@ -104,7 +85,6 @@ import ModalCountDown from '../../components/modal-countdown';
 import PageCountDown from '../../layout/main-page/page-countdown';
 import {isMoreThanThreeHoursSinceLastTime} from '../../helpers/timeHelpers';
 import {reformatDate} from '../../shared/dateHelper';
-
 const adUnitId = getRewardedOutOfQuotesID();
 
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
@@ -119,32 +99,8 @@ const interstialAds = InterstitialAd.createForAdRequest(
     keywords: ['fashion', 'clothing'],
   },
 );
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
-
-import IconCategories from "../../assets/svg/icon_categories.svg";
-import IconShare from "../../assets/svg/icon_share.svg";
-import IconSetting from "../../assets/svg/icon_setting.svg";
-import IconLove from "../../assets/svg/icon_love_tap.svg";
-import IconLike from "../../assets/svg/icon_like.svg";
-import ThemeIcon from "../../assets/svg/theme_icon.svg";
-import ButtonIcon from "../../components/button-icon";
-import ModalTheme from "../../layout/main-page/modal-theme";
-import { handleBasicPaywall, handlePayment, isUserPremium } from "../../helpers/user";
-import { getSetting } from "../../shared/request";
-import notifee from '@notifee/react-native';
-import { setAnimationSlideStatus, setInitialLoaderStatus } from "../../store/defaultState/actions";
 const ViewAnimation = createAnimatableComponent(View);
 
-<<<<<<< HEAD
-const freebadgeIcon = require("../../assets/images/rocket_white.png");
-const doubleTap = require("../../assets/lottie/double_tap.json");
-const swipeupIcon = require("../../assets/lottie/swipe_up.json");
-
-function MainPage({ userThemes,  runAnimationSlide,
-  finishInitialLoader,
-  paywallNotifcation,
-  animationCounter, }) {
-=======
 const doubleTap = require('../../assets/lottie/double_tap.json');
 const swipeupIcon = require('../../assets/lottie/swipe_up.json');
 const arrowBottom = require('../../assets/icons/arrow-bottom.png');
@@ -168,7 +124,6 @@ function MainPage({
   paywallNotifcation,
   finishInitialLoader,
 }) {
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
   const [isTutorial, setTutorial] = useState({
     visible: false,
     step: 1,
@@ -180,11 +135,7 @@ function MainPage({
   const themesId = userProfile.data?.themes[0]?.id;
   const [themeUser] = useBackgroundQuotes(userProfile.data?.themes[0]);
   const [quoteLikeStatus, setQuoteLikeStatus] = useState(false);
-<<<<<<< HEAD
   const [isEnableFreePremium, setEnableFreePremium] = useState(false);
-  const refCategory = createRef();
-  const refThemes = createRef();
-=======
   const [captureUri, setCaptureUri] = useState(null);
   const [showModalLike, setShowModalLike] = useState(false);
   const [modalRatingVisible, setModalRating] = useState(false);
@@ -207,7 +158,6 @@ function MainPage({
   const refCategory = createRef();
   const firstStepTutorial = useRef();
   const buttonPressAnimationTutorial = useRef();
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
 
   const getActiveQuote = () => {
     if (quotes?.listData.length > 0 && quotes?.listData[activeSlide]) {
@@ -220,39 +170,7 @@ function MainPage({
       handleShowPaywall();
   
   }, []);
-  const handleShowPaywall = async () => {
-    const res = await getSetting();
-    const initNotification = await notifee.getInitialNotification();
-    const getInitialPlacement =
-      initNotification?.notification?.data || paywallNotifcation;
-    setEnableFreePremium(res.data.value !== 'true');
-    if (res.data.value === 'true' && !isUserPremium() && !isFromOnboarding) {
-      // Paywall open apps
-      if (getInitialPlacement) {
-        const paywallNotifCb = () => {
-          setInitialLoaderStatus(false);
-          handleShowPopupShare();
-        };
-        handlePayment(getInitialPlacement?.placement, paywallNotifCb);
-      } else {
-        const getCurrentOpenApps = await AsyncStorage.getItem('latestOpenApps');
-        const mainDate = reformatDate(parseFloat(getCurrentOpenApps));
-        const isMoreThan3Hours = isMoreThanThreeHoursSinceLastTime(mainDate);
-        const stringifyDate = Date.now().toString();
-        if (!getCurrentOpenApps || isMoreThan3Hours) {
-          handleBasicPaywall(handleShowPopupShare);
-          AsyncStorage.setItem('latestOpenApps', stringifyDate);
-        } else {
-          setAnimationSlideStatus(true);
-        }
-      }
-
-    
-    } else {
-     
-      setAnimationSlideStatus(true);
-    }
-  };
+  
 
   const handleScreenshot = () => {
     captureRef.current.capture().then(uri => {
@@ -440,13 +358,6 @@ function MainPage({
     }
   }, [activeSlide]);
 
-<<<<<<< HEAD
-  const onMomentoumScrollEnd = (e) => {
-    const height = sizing.getDimensionHeight(1);
-    const pageNumber = Math.min(
-      Math.max(Math.floor(e.nativeEvent.contentOffset.y / height + 0.5) + 1, 0),
-      listFact?.length || 0
-=======
   useEffect(() => {
     if (runAnimationSlide && !isUserHasScroll && !isTutorial.visible) {
       setTimeout(() => {
@@ -547,7 +458,6 @@ function MainPage({
     const pageNumber = Math.min(
       Math.max(Math.floor(e.nativeEvent.contentOffset.y / height + 0.5) + 1, 0),
       quotes?.listData?.length || 0,
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     );
     setActiveSlide(pageNumber - 1);
     if (pageNumber - 1 !== activeSlide && !isUserHasScroll) {
@@ -556,17 +466,12 @@ function MainPage({
   };
 
   const handleSkipTutorial = async () => {
-<<<<<<< HEAD
-    if (isTutorial.step === 2) {
-      await AsyncStorage.setItem("isFinishTutorial", "yes");
-=======
     setShowNextTutorial(false);
     setTimeout(() => {
       setShowNextTutorial(true);
     });
     if (isTutorial.step === 4) {
       await AsyncStorage.setItem('isFinishTutorial', 'yes');
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
       setTutorial({
         visible: false,
         step: 1,
@@ -589,12 +494,6 @@ function MainPage({
       });
     }
   };
-<<<<<<< HEAD
-  console.log("Check theme:", themeUser);
-
-  const renderFactItem = ({ item, index }) => {
-    const getImageContent = themeUser.imgLocal;
-=======
 
   const handleGesture = evt => {
     const {nativeEvent} = evt;
@@ -663,7 +562,6 @@ function MainPage({
     if (item?.item_type === 'countdown_page') {
       return <PageCountDown />;
     }
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     return (
       <QuotesContent
         item={item}
@@ -696,12 +594,6 @@ function MainPage({
       return null;
     }
     return (
-<<<<<<< HEAD
-      <TouchableOpacity style={styles.ctnFreeBadge} onPress={handleBasicPaywall}>
-        <Text style={styles.txtFreeBadge}>Try it free!</Text>
-        <Image source={freebadgeIcon} style={styles.ctnIconCrown} />
-      </TouchableOpacity>
-=======
       <View style={styles.ctnWatermark}>
         <Text style={styles.txtWatermark}>McSmart App</Text>
       </View>
@@ -745,7 +637,6 @@ function MainPage({
           }}
         />
       </View>
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     );
   }
 
@@ -793,15 +684,9 @@ function MainPage({
               label="Categories"
               btnStyle={styles.btnCategories}
               txtStyle={styles.txtCategory}
-<<<<<<< HEAD
-              // onPress={() => {
-              //   refCategory.current.show();
-              // }}
-=======
               onPress={() => {
                 refCategory.current.show();
               }}
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
             />
           </View>
           <View style={styles.rowRight}>
@@ -849,13 +734,6 @@ function MainPage({
               />
             </View>
             <Text style={styles.txtTutorial}>Swipe up for the next Fact.</Text>
-<<<<<<< HEAD
-            <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
-              <Text style={styles.txtDescTutorial}>
-                {"Tap anywhere to go\nto the next tutorial"}
-              </Text>
-            </ViewAnimation>
-=======
             <View style={styles.ctnHeightTutorial}>
               {isShowTutorial && (
                 <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
@@ -865,7 +743,6 @@ function MainPage({
                 </ViewAnimation>
               )}
             </View>
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
           </ViewAnimation>
         </View>
       );
@@ -889,13 +766,6 @@ function MainPage({
               />
             </View>
             <Text style={styles.txtTutorial}>Double tap to like the Fact.</Text>
-<<<<<<< HEAD
-            <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
-              <Text style={styles.txtDescTutorial}>
-                {"Tap anywhere to go\nto the next tutorial"}
-              </Text>
-            </ViewAnimation>
-=======
             <View style={styles.ctnHeightTutorial}>
               {isShowTutorial && (
                 <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
@@ -905,7 +775,6 @@ function MainPage({
                 </ViewAnimation>
               )}
             </View>
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
           </ViewAnimation>
         </View>
       );
@@ -1119,24 +988,7 @@ function MainPage({
       {renderBottomAds()}
       {renderFreeBadge()}
       {renderTutorial()}
-<<<<<<< HEAD
-
-      {/* <ModalCategories
-        refPanel={refCategory}
-        contentRef={(c) => {
-          if (c) {
-            refCategory.current = {
-              ...c,
-            };
-          }
-        }}
-        onClose={() => {
-          refCategory.current.hide();
-        }}
-      /> */}
-=======
       {renderModalLike()}
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
       <ModalTheme
         contentRef={refThemes}
         onClose={() => {

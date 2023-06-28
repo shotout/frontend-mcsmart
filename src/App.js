@@ -12,7 +12,6 @@ import {Adjust, AdjustConfig} from 'react-native-adjust';
 import Navigator from './screens/app-routes';
 import store, {persistor} from './store/configure-store';
 import {networkDebugger} from './shared/networkDebugger';
-import Purchasely, { RunningMode } from 'react-native-purchasely';
 import ModalFirstPremium from './components/modal-first-premium';
 import ModalLock from './layout/main-page/modal-lock';
 

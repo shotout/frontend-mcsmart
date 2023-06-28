@@ -40,7 +40,7 @@ const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
 });
 appOpenAd.load();
 
-function Routes({registerData}) {
+function Routes({registerData, userProfile}) {
   const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
   const [showAdsOverlay, setAdsOverlay] = useState(false);
@@ -144,13 +144,9 @@ function Routes({registerData}) {
   }, []);
 
   function getInitialRoute() {
-    if (userProfile?.token || registerData?.registerStep === 8) {
+    if (userProfile?.token) {
       return 'MainPage';
     }
-    if (registerData) {
-      return 'Register';
-    }
-
     if (registerData) {
       return 'Register';
     }
@@ -190,7 +186,7 @@ Routes.propTypes = {
   fetchCollection: PropTypes.func.isRequired,
   fetchPastQuotes: PropTypes.func.isRequired,
   handleAppVersion: PropTypes.func.isRequired,
-  userProfile: PropTypes.object,
+  userProfile: PropTypes.object.isRequired,
   activeVersion: PropTypes.any,
 };
 

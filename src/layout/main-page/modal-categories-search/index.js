@@ -1,33 +1,10 @@
-<<<<<<< HEAD
-import React, {useCallback, useEffect, useState} from 'react';
-import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
-=======
 import React, {Fragment, useCallback, useEffect, useState} from 'react';
 import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
 import PropTypes from 'prop-types';
 import {Modal, Portal} from 'react-native-paper';
 import {connect} from 'react-redux';
 import Search from '../../../components/search';
 import styles from './styles';
-<<<<<<< HEAD
-import CardCategories from '../../../components/card-categories';
-import {getListGroup} from '../../../shared/request';
-import useDebounce from '../../../helpers/useDebounce';
-import {
-  handleBasicPaywall,
-  handlePayment,
-  isUserPremium,
-} from '../../../helpers/user';
-import LoadingIndicator from '../../../components/loading-indicator';
-import states from './states';
-
-const iconClose = require('../../../assets/icons/close.png');
-
-function ModalCategoriesSearch({isVisible, onClose, userProfile}) {
-  const [listCategories, setCategories] = useState([]);
-  const [isAutoFocus, setAutoFocus] = useState(false);
-=======
 import {getListCategory, updateCategory} from '../../../shared/request';
 import useDebounce from '../../../helpers/useDebounce';
 import {
@@ -55,7 +32,6 @@ function ModalCategoriesSearch({
   const [alternativeCategory, setAlternativeCategory] = useState([]);
   const debounceReloadCategory = useDebounce(categoryValue, 1000);
 
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
   const [isLoading, setLoader] = useState(false);
   const [searchText, setSearchText] = useState(null);
   const debounceSearch = useDebounce(searchText, 500);
@@ -63,34 +39,23 @@ function ModalCategoriesSearch({
   useState(() => {
     setTimeout(() => {
       setAutoFocus(true);
-<<<<<<< HEAD
-=======
       setCategoryValue(selectedCategory);
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     }, 1000);
   }, []);
 
   useEffect(() => {
-<<<<<<< HEAD
-=======
     // reloadUserProfile();
   }, [debounceReloadCategory]);
 
   useEffect(() => {
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
     if (debounceSearch) {
       const handleSearch = async () => {
         const params = {
           search: debounceSearch,
         };
-<<<<<<< HEAD
-        const res = await getListGroup(params);
-        setCategories(res.data);
-=======
         const res = await getListCategory(params);
         setCategories(res.data?.category || []);
         setAlternativeCategory(res.data?.alternative || []);
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
         setLoader(false);
       };
       handleSearch();
@@ -101,16 +66,6 @@ function ModalCategoriesSearch({
     }
   }, [debounceSearch]);
 
-<<<<<<< HEAD
-  const getInitialCategory = useCallback(() => {
-    if (userProfile?.data?.categories?.length > 0) {
-      return userProfile.data.categories.map(item => item.id);
-    }
-    return [];
-  }, [userProfile?.data?.categories]);
-
-=======
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
   const handleClose = () => {
     setAutoFocus(false);
     if (typeof onClose === 'function') onClose();
@@ -151,8 +106,6 @@ function ModalCategoriesSearch({
     );
   }
 
-<<<<<<< HEAD
-=======
   const isDataSelected = value => {
     const findItem = categoryValue.find(item => item === value);
     if (findItem) return true;
@@ -212,7 +165,6 @@ function ModalCategoriesSearch({
     return null;
   }
 
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
   return (
     <Portal>
       <Modal
@@ -223,22 +175,6 @@ function ModalCategoriesSearch({
         onDismiss={handleClose}>
         <View style={styles.ctnRoot}>
           <View style={styles.ctnContent}>
-<<<<<<< HEAD
-            {renderHeader()}
-            <ScrollView
-              contentContainerStyle={styles.ctnScroll}
-              style={styles.ctnRoot}>
-              <CardCategories
-                buttonLabel="Go Premium"
-                hidePopular
-                hidePremium
-                isSearch
-                listData={listCategories}
-                initialSelect={getInitialCategory}
-                additionalContent={isLoading ? <LoadingIndicator /> : null}
-              />
-            </ScrollView>
-=======
             <FlatList
               style={styles.ctnRoot}
               contentContainerStyle={styles.ctnScroll}
@@ -250,7 +186,6 @@ function ModalCategoriesSearch({
               ListEmptyComponent={renderListEmpty()}
               ListFooterComponent={isLoading ? <LoadingIndicator /> : null}
             />
->>>>>>> 4e965b142c7a73a7605f7e70ce10a84e11abdabc
           </View>
         </View>
       </Modal>
