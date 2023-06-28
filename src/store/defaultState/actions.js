@@ -1,3 +1,4 @@
+import { APP_VERSION } from '../../shared/static';
 import store from '../configure-store';
 import * as types from './types';
 
@@ -88,5 +89,49 @@ export const setAnimationCounter = payload => {
   store.dispatch({
     type: types.SET_ANIMATION_COUNTER,
     payload,
+  });
+};
+
+export const getInitialData = callbackError => async dispatch =>
+  new Promise(async (resolve, reject) => {
+    try {
+      // const feeling = await getlistFeel();
+      // const getWay = await getListWays();
+      // const area = await getListArea();
+      // const category = await getListGroup();
+      // const theme = await getListTheme();
+      // const link = await getListLink();
+      dispatch({
+        type: types.SET_DEFAULT_DATA,
+        // feeling: feeling.data,
+        // ways: getWay.data,
+        // areas: area.data,
+        // categories: category.data,
+        // themes: theme.data,
+        // link: link.data,
+      });
+      // const preloadTheme = [];
+      // if (category.data?.category?.length > 0) {
+      //   category.data.category.forEach(item => {
+      //     if (item.categories?.length > 0) {
+      //       item.categories.forEach(sub => {
+      //         preloadTheme.push({uri: `${BACKEND_URL}${sub.icon.url}`});
+      //       });
+      //     }
+      //   });
+      // }
+      // FastImage.preload(preloadTheme);
+      resolve('success');
+    } catch (err) {
+      if (typeof callbackError === 'function') callbackError();
+      console.log('Err fetch data:', err);
+      reject(err);
+    }
+  });
+
+export const handleAppVersion = () => async dispatch => {
+  dispatch({
+    type: types.SET_APP_VERSION,
+    payload: APP_VERSION,
   });
 };

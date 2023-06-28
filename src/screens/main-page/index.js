@@ -28,20 +28,31 @@ import IconLike from "../../assets/svg/icon_like.svg";
 import ThemeIcon from "../../assets/svg/theme_icon.svg";
 import ButtonIcon from "../../components/button-icon";
 import ModalTheme from "../../layout/main-page/modal-theme";
-import { handleBasicPaywall, handlePayment, isUserPremium } from "../../helpers/user";
+import {
+  handleBasicPaywall,
+  handlePayment,
+  isUserPremium,
+} from "../../helpers/user";
 import { getSetting } from "../../shared/request";
-import notifee from '@notifee/react-native';
-import { setAnimationSlideStatus, setInitialLoaderStatus } from "../../store/defaultState/actions";
+import notifee from "@notifee/react-native";
+import {
+  setAnimationSlideStatus,
+  setInitialLoaderStatus,
+} from "../../store/defaultState/actions";
 const ViewAnimation = createAnimatableComponent(View);
 
 const freebadgeIcon = require("../../assets/images/rocket_white.png");
 const doubleTap = require("../../assets/lottie/double_tap.json");
 const swipeupIcon = require("../../assets/lottie/swipe_up.json");
 
-function MainPage({ userThemes,  runAnimationSlide,
+function MainPage({
+  userThemes,
+  runAnimationSlide,
   finishInitialLoader,
   paywallNotifcation,
-  animationCounter, }) {
+  animationCounter,
+}) {
+  const isFromOnboarding = route.params?.isFromOnboarding;
   const [isTutorial, setTutorial] = useState({
     visible: false,
     step: 1,
@@ -59,18 +70,18 @@ function MainPage({ userThemes,  runAnimationSlide,
     }
     return null;
   };
+
   useEffect(() => {
-   
-      handleShowPaywall();
-  
+    handleShowPaywall();
   }, []);
+
   const handleShowPaywall = async () => {
     const res = await getSetting();
     const initNotification = await notifee.getInitialNotification();
     const getInitialPlacement =
       initNotification?.notification?.data || paywallNotifcation;
-    setEnableFreePremium(res.data.value !== 'true');
-    if (res.data.value === 'true' && !isUserPremium() && !isFromOnboarding) {
+    setEnableFreePremium(res.data.value !== "true");
+    if (res.data.value === "true" && !isUserPremium() && !isFromOnboarding) {
       // Paywall open apps
       if (getInitialPlacement) {
         const paywallNotifCb = () => {
@@ -79,21 +90,18 @@ function MainPage({ userThemes,  runAnimationSlide,
         };
         handlePayment(getInitialPlacement?.placement, paywallNotifCb);
       } else {
-        const getCurrentOpenApps = await AsyncStorage.getItem('latestOpenApps');
+        const getCurrentOpenApps = await AsyncStorage.getItem("latestOpenApps");
         const mainDate = reformatDate(parseFloat(getCurrentOpenApps));
         const isMoreThan3Hours = isMoreThanThreeHoursSinceLastTime(mainDate);
         const stringifyDate = Date.now().toString();
         if (!getCurrentOpenApps || isMoreThan3Hours) {
           handleBasicPaywall(handleShowPopupShare);
-          AsyncStorage.setItem('latestOpenApps', stringifyDate);
+          AsyncStorage.setItem("latestOpenApps", stringifyDate);
         } else {
           setAnimationSlideStatus(true);
         }
       }
-
-    
     } else {
-     
       setAnimationSlideStatus(true);
     }
   };
@@ -169,7 +177,10 @@ function MainPage({ userThemes,  runAnimationSlide,
 
   function renderFreeBadge() {
     return (
-      <TouchableOpacity style={styles.ctnFreeBadge} onPress={handleBasicPaywall}>
+      <TouchableOpacity
+        style={styles.ctnFreeBadge}
+        onPress={handleBasicPaywall}
+      >
         <Text style={styles.txtFreeBadge}>Try it free!</Text>
         <Image source={freebadgeIcon} style={styles.ctnIconCrown} />
       </TouchableOpacity>

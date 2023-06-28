@@ -11,9 +11,9 @@ import { connect } from "react-redux";
 import moment from "moment";
 import notifee from "@notifee/react-native";
 import DeviceInfo from "react-native-device-info";
-import messaging from '@react-native-firebase/messaging';
+import messaging from "@react-native-firebase/messaging";
 import Lottie from "lottie-react-native";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { createAnimatableComponent } from "react-native-animatable";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -21,7 +21,14 @@ import Button from "../../components/button";
 import styles from "./styles";
 import states from "./states";
 import dispatcher from "./dispatcher";
-import { handlePaymentTwo, handleSubscriptionStatus, iconNameToId, openPrivacyPolicy, openTermsofUse, reloadUserProfile } from "../../helpers/user";
+import {
+  handlePaymentTwo,
+  handleSubscriptionStatus,
+  iconNameToId,
+  openPrivacyPolicy,
+  openTermsofUse,
+  reloadUserProfile,
+} from "../../helpers/user";
 import LoadingIndicator from "../../components/loading-indicator";
 import { isIphoneXorAbove } from "../../shared/devices";
 
@@ -38,7 +45,12 @@ import ChooseCommitment from "../../layout/register/choose-commitment";
 import Contract from "../../layout/register/contract";
 import { listTopic } from "../../shared/staticData";
 import { reset } from "../../shared/navigationRef";
-import { checkDeviceRegister, postRegister, selectTheme, updateProfile } from "../../shared/request";
+import {
+  checkDeviceRegister,
+  postRegister,
+  selectTheme,
+  updateProfile,
+} from "../../shared/request";
 import TimeZone from "react-native-timezone";
 import Purchasely from "react-native-purchasely";
 
@@ -55,9 +67,9 @@ function Register({ handleSetProfile, defaultData, registerData }) {
   const [isLoading, setLoading] = useState(false);
   const [mutateForm, setMutateForm] = useState({
     style: 1,
-    fcm_token: null,
+    fcm_token: "",
     purchasely_id: null,
-    device_id: null,
+    device_id: "",
   });
   const [values, setFormValues] = useState({
     name: "",
@@ -132,7 +144,7 @@ function Register({ handleSetProfile, defaultData, registerData }) {
     }, 2300);
   };
 
-  const handleSubmitRegist = async showPaywall => {
+  const handleSubmitRegist = async (showPaywall) => {
     try {
       const timeZone = await TimeZone.getTimeZone();
       const payload = {
@@ -140,8 +152,8 @@ function Register({ handleSetProfile, defaultData, registerData }) {
         name: values.name,
         anytime: values.isAnytime,
         often: values.often,
-        start: moment(values.start_at).format('HH:mm'),
-        end: moment(values.end_at).format('HH:mm'),
+        start: moment(values.start_at).format("HH:mm"),
+        end: moment(values.end_at).format("HH:mm"),
         gender: values.gender,
         feel: 6,
         ways: [6],
@@ -152,14 +164,14 @@ function Register({ handleSetProfile, defaultData, registerData }) {
       handleSetProfile(res);
       if (res.data.subscription.type === 1 && res.data.themes[0].id !== 6) {
         await selectTheme({
-          _method: 'PATCH',
+          _method: "PATCH",
           themes: [6],
         });
       }
 
-      await handlePaymentTwo('onboarding');
+      await handlePaymentTwo("onboarding");
 
-      await AsyncStorage.setItem('isFinishTutorial', 'no');
+      await AsyncStorage.setItem("isFinishTutorial", "no");
       setTimeout(() => {
         reloadUserProfile();
       }, 2000);
@@ -171,8 +183,8 @@ function Register({ handleSetProfile, defaultData, registerData }) {
             name: values.name,
             anytime: values.isAnytime,
             often: values.often,
-            start: moment(values.start_at).format('HH:mm'),
-            end: moment(values.end_at).format('HH:mm'),
+            start: moment(values.start_at).format("HH:mm"),
+            end: moment(values.end_at).format("HH:mm"),
             gender: values.gender,
             feel: values.selectedFeeling.length
               ? values.selectedFeeling[0]
@@ -188,13 +200,13 @@ function Register({ handleSetProfile, defaultData, registerData }) {
           handleSubscriptionStatus(res.data.subscription);
           if (res.data.subscription.type === 1 && res.data.themes[0].id !== 6) {
             await selectTheme({
-              _method: 'PATCH',
+              _method: "PATCH",
               themes: [6],
             });
           }
           await updateProfile({
             ...payload,
-            _method: 'PATCH',
+            _method: "PATCH",
           });
           setTimeout(() => {
             reloadUserProfile();
@@ -203,21 +215,79 @@ function Register({ handleSetProfile, defaultData, registerData }) {
       };
       getDeviceID();
     } catch (err) {
-      console.log('Error register:', err);
+      const timeZone = await TimeZone.getTimeZone();
+      const payload = {
+        ...mutateForm,
+        name: "User",
+        anytime: null,
+        often: 15,
+        start: "08:00",
+        end: "20:00",
+        gender: "",
+        feel: 6,
+        ways: [6],
+        areas: [1, 2, 3, 4, 5, 6, 7, 8],
+        timezone: timeZone,
+      };
+      const res = await postRegister(payload);
+      handleSetProfile(res);
+      console.log("Error register:", err);
+    }
+  };
+
+  const handleSubmit = async (showPaywall) => {
+    try {
+      setLoading(true);
+
+      const timeZone = await TimeZone.getTimeZone();
+      const payload = {
+        ...mutateForm,
+        name: "User",
+        anytime: null,
+        often: 15,
+        start: "08:00",
+        end: "20:00",
+        gender: "",
+        feel: 6,
+        ways: [6],
+        areas: [1, 2, 3, 4, 5, 6, 7, 8],
+        timezone: timeZone,
+      };
+      const res = await postRegister(payload);
+      handleSetProfile(res);
+      if (res.data.subscription.type === 1 && res.data.themes[0].id !== 6) {
+        await selectTheme({
+          _method: "PATCH",
+          themes: [6],
+        });
+      }
+      // if (showPaywall) {
+      //   await handlePayment('onboarding');
+      // }
+      // setHasRegister(true);
+      await AsyncStorage.setItem("isFinishTutorial", "yes");
+      // handleAfterRegister();
+      setTimeout(() => {
+        reloadUserProfile();
+      }, 2000);
+      // eventTracking(ONBOARDING_COMPLETE);
+    } catch (err) {
+      console.log("Error register:", err);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     if (registerStep === 7) {
-      DeviceInfo.getUniqueId().then(async uniqueId => {
+      DeviceInfo.getUniqueId().then(async (uniqueId) => {
         try {
-          console.log('Device info running', uniqueId);
+          console.log("Device info running", uniqueId);
           // const fcmToken = await messaging().getToken();
-          const isSetBefore = await AsyncStorage.getItem('customIcon');
+          const isSetBefore = await AsyncStorage.getItem("customIcon");
           const id = await Purchasely.getAnonymousUserId();
           setMutateForm({
             ...mutateForm,
-            fcm_token: '123123123123123123123123',
+            fcm_token: "123123123123123123123123",
             device_id: uniqueId,
             // device_id: Date.now().toString(),
             style: iconNameToId(isSetBefore),
@@ -247,7 +317,10 @@ function Register({ handleSetProfile, defaultData, registerData }) {
               handleSetProfile(res);
               handleSubscriptionStatus(res.data.subscription);
               handlePaymentTwo("onboarding");
-              if (res.data.subscription.type === 1 && res.data.themes[0].id !== 6) {
+              if (
+                res.data.subscription.type === 1 &&
+                res.data.themes[0].id !== 6
+              ) {
                 await selectTheme({
                   _method: "PATCH",
                   themes: [6],
@@ -265,12 +338,11 @@ function Register({ handleSetProfile, defaultData, registerData }) {
               handleSubmitRegist(true);
             }
           };
-          getDeviceID()
+          getDeviceID();
         } catch (err) {
-          console.log('Err get device info:', err);
+          console.log("Err get device info:", err);
         }
       });
-     
     }
   }, [registerStep]);
 
@@ -319,7 +391,10 @@ function Register({ handleSetProfile, defaultData, registerData }) {
         setRegisterStep(7);
       }
     } else if (registerStep === 7) {
-      reset("MainPage");
+      const user = store.getState().defaultState.userProfile;
+      if (user?.token) {
+        reset("MainPage", { isFromOnboarding: false });
+      }
       AsyncStorage.setItem("isLogin", "yes");
     } else {
       setRegisterStep(registerStep + 1);
@@ -366,8 +441,8 @@ function Register({ handleSetProfile, defaultData, registerData }) {
     } else if (registerStep === 4) {
       setRegisterStep(registerStep + 1);
       handleChangeValue(
-        'selectedCategory',
-        defaultData.areas.map(item => item.id),
+        "selectedCategory",
+        defaultData.areas.map((item) => item.id)
       );
     } else {
       setRegisterStep(registerStep + 1);

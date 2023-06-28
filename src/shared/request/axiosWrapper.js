@@ -20,7 +20,7 @@ const request = options => {
    * Create an Axios Client with defaults
    */
   const requestHeaders = options.customHeaders || {
-    'Content-type': 'application/json',
+    'content-type': 'application/json',
     Accept: 'application/json',
     'cache-control': 'no-cache',
     'Accept-Encoding': 'gzip',

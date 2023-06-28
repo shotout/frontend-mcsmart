@@ -3,7 +3,14 @@ import { Linking, Platform } from "react-native";
 import Purchasely, { ProductResult } from "react-native-purchasely";
 import store from "../store/configure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CANCEL_SUBSCRIBE_AFTER_TRIAL, FREE_TRIAL, SHOW_PAYWALL, SUBSCRIPTION_STARTED, eventTracking, revenueTracking } from "./eventTracking";
+import {
+  CANCEL_SUBSCRIBE_AFTER_TRIAL,
+  FREE_TRIAL,
+  SHOW_PAYWALL,
+  SUBSCRIPTION_STARTED,
+  eventTracking,
+  revenueTracking,
+} from "./eventTracking";
 import { getUserProfile, setSubcription } from "../shared/request";
 import { handleSetProfile } from "../store/defaultState/actions";
 
@@ -28,7 +35,7 @@ export const handleSubscriptionStatus = async (subscription = {}) => {
   if (subscription.type === 2 || subscription.type === 3) {
     const trialDay = subscription.type === 2 ? 3 : 30;
     const dateEndFreeTrial = getFutureDate(subscription.started, trialDay);
-    const nowaDay = moment().format('YYYY-MM-DD');
+    const nowaDay = moment().format("YYYY-MM-DD");
     const objPurchase = JSON.parse(subscription.purchasely_data);
     if (dateToUnix(dateEndFreeTrial) < dateToUnix(nowaDay)) {
       await setSubcription({
@@ -42,29 +49,30 @@ export const handleSubscriptionStatus = async (subscription = {}) => {
       if (objPurchase) {
         revenueTracking(
           objPurchase.plan_price_in_customer_currency,
-          objPurchase.customer_currency,
+          objPurchase.customer_currency
         );
       }
     }
   }
 };
-export const iconNameToId = name => {
+export const iconNameToId = (name) => {
   switch (name) {
-    case 'second':
+    case "second":
       return 2;
-    case 'third':
+    case "third":
       return 3;
-    case 'fourth':
+    case "fourth":
       return 4;
     default:
       return 1;
   }
 };
+
 export const handlePaymentTwo = async (vendorId, cb) =>
   new Promise(async (resolve, reject) => {
     try {
       const purchaseId = await Purchasely.getAnonymousUserId();
-      if (vendorId === 'onboarding') {
+      if (vendorId === "onboarding") {
         await setSubcription({
           subscription_type: 5,
           purchasely_id: purchaseId,
@@ -75,7 +83,7 @@ export const handlePaymentTwo = async (vendorId, cb) =>
         await reloadUserProfile();
       }
     } catch (err) {
-      console.log('error payment:', err);
+      console.log("error payment:", err);
     }
   });
 export const isUserPremium = () => {
@@ -90,7 +98,7 @@ export const isUserPremium = () => {
   return true;
 };
 export const isPremiumToday = () => {
-  const {freeUserPremium} = store.getState().defaultState;
+  const { freeUserPremium } = store.getState().defaultState;
   if (isUserPremium()) {
     return true;
   }
@@ -99,7 +107,6 @@ export const isPremiumToday = () => {
   }
   return false;
 };
-
 
 export const reloadUserProfile = async () =>
   new Promise(async (resolve, reject) => {
@@ -177,7 +184,7 @@ export const handlePayment = async (vendorId, cb) =>
       const user = store.getState().defaultState.userProfile;
       switch (res.result) {
         case ProductResult.PRODUCT_RESULT_PURCHASED:
-          console.log('siniiii')
+          console.log("siniiii");
           if (user.token) {
             await setSubcription({
               subscription_type: vendorId === "one_month_free" ? 3 : 2,
@@ -224,14 +231,13 @@ export const handlePayment = async (vendorId, cb) =>
     }
   });
 
-
-export const handleBasicPaywall = async cbPaywall => {
-  const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
-  const getInstallDate = await AsyncStorage.getItem('firstInstall');
+export const handleBasicPaywall = async (cbPaywall) => {
+  const currentDate = moment().format("YYYY-MM-DD HH:mm:ss");
+  const getInstallDate = await AsyncStorage.getItem("firstInstall");
   const endDate = moment(getInstallDate)
-    .add(1, 'days')
-    .format('YYYY-MM-DD HH:mm:ss');
+    .add(1, "days")
+    .format("YYYY-MM-DD HH:mm:ss");
   const paywallType =
-    currentDate > endDate ? 'in_app_paywall' : 'in_app_paywall_2nd';
+    currentDate > endDate ? "in_app_paywall" : "in_app_paywall_2nd";
   await handlePayment(paywallType, cbPaywall);
 };
