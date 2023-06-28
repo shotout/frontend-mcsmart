@@ -65,7 +65,7 @@ function Subscription({isVisible, onClose, userProfile}) {
               <Text style={styles.cttnNote}>You are subscribed to:</Text>
               <View style={styles.listContentWrap}>
                 <ListContent
-                  title={subscriptionData?.plan.title || 'Mooti free trial'}
+                  title={subscriptionData?.plan.title || 'McSmart free trial'}
                   icon={<IconStart width="100%" height="100%" />}
                   titleStyle={styles.titleListContent}
                 />

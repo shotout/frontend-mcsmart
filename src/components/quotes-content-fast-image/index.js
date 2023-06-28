@@ -30,6 +30,7 @@ export default function QuotesContent({
   showButtonOption,
   isYellowTrace,
   onPressRating,
+  handleShowInterstialAds,
 }) {
   const [isRepeat, setRepeat] = useState(!!item.repeat);
   const handleRepeat = () => {
@@ -108,6 +109,12 @@ export default function QuotesContent({
           showTitle: false,
           enableDefaultShare: false,
         });
+        if (result.type === 'cancel') {
+          setTimeout(() => {
+            if (typeof handleShowInterstialAds === 'function')
+              handleShowInterstialAds();
+          }, 500);
+        }
         console.log('Check result:', result);
       } else Linking.openURL(url);
     } catch (error) {

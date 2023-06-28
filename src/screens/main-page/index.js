@@ -54,6 +54,7 @@ import {
   handleRatingModal,
   isPremiumToday,
   isUserPremium,
+  purchaselyListener,
 } from '../../helpers/user';
 import {
   changeAskRatingParameter,
@@ -68,6 +69,7 @@ import {
   dislikeQuotes,
   getRatingStatus,
   getSetting,
+  setSubcription,
 } from '../../shared/request';
 import useLocalNotif from '../../shared/useLocalNotif';
 import ModalRating from '../../components/modal-rating';
@@ -85,6 +87,9 @@ import ModalCountDown from '../../components/modal-countdown';
 import PageCountDown from '../../layout/main-page/page-countdown';
 import {isMoreThanThreeHoursSinceLastTime} from '../../helpers/timeHelpers';
 import {reformatDate} from '../../shared/dateHelper';
+import {scrollToTopQuote} from '../../store/defaultState/selector';
+import ContentSubscription from '../../layout/setting/content-subscription';
+import dispatcher from './dispatcher';
 
 const adUnitId = getRewardedOutOfQuotesID();
 
@@ -125,6 +130,7 @@ function MainPage({
   route,
   paywallNotifcation,
   finishInitialLoader,
+  fetchListQuote,
 }) {
   const [isTutorial, setTutorial] = useState({
     visible: false,
@@ -132,6 +138,7 @@ function MainPage({
   });
   const isFromOnboarding = route.params?.isFromOnboarding;
   const initialIndexContent = isUserPremium() ? 0 : limitIndex;
+  const [showModalSubscribe, setShowModalSubscribe] = useState(false);
   const [activeSlide, setActiveSlide] = useState(initialIndexContent);
   const [currentSlide, setCurrentSlide] = useState(initialIndexContent);
   const themesId = userProfile.data?.themes[0]?.id;
@@ -151,6 +158,7 @@ function MainPage({
   const [statusbarStatus, setStatusBar] = useState(false);
   const [isLoadingInterstial, setLoadingInterstial] = useState(false);
   const [showModalCountdown, setModalCountdown] = useState(false);
+  const [isPremiumBefore, setPremiumBefore] = useState(isUserPremium());
 
   const refThemes = useRef();
   const refSetting = createRef();
@@ -236,6 +244,13 @@ function MainPage({
   };
 
   useEffect(() => {
+    // setSubcription({
+    //   subscription_type: 1,
+    // });
+    purchaselyListener();
+    if (isFromOnboarding) {
+      scrollToTopQuote();
+    }
     const checkTutorial = async () => {
       const isFinishTutorial = await AsyncStorage.getItem('isFinishTutorial');
       if (isFinishTutorial !== 'yes') {
@@ -373,13 +388,37 @@ function MainPage({
   }, [todayAdsLimit]);
 
   useEffect(() => {
-    if (finishInitialLoader) {
+    if (finishInitialLoader && !isTutorial.visible) {
       handleShowPaywall();
     }
   }, [finishInitialLoader]);
 
+  useEffect(() => {
+    if (!isPremiumBefore && isUserPremium()) {
+      setPremiumBefore(true);
+      setShowModalSubscribe(true);
+      fetchListQuote();
+    }
+  }, [userProfile, isPremiumBefore]);
+
   const handleShowInterstialAds = async activeQuote => {
     if (activeQuote?.item_type === 'in_app_ads') {
+      if (interstialAds.loaded) {
+        interstialAds.show();
+      } else {
+        const cbFinish = () => {
+          setLoadingInterstial(false);
+        };
+        setLoadingInterstial(true);
+        await loadInterstialAds(interstialAds, cbFinish);
+        cbFinish();
+      }
+    }
+  };
+
+  const showInterStialAds = async () => {
+    console.log('TRY SHOW INTERSTIAL ADS', interstialAds.loaded);
+    if (!isUserPremium()) {
       if (interstialAds.loaded) {
         interstialAds.show();
       } else {
@@ -505,6 +544,7 @@ function MainPage({
       handleLike();
     }
   };
+  console.log('Check isPremiumToday():', isPremiumToday());
 
   function renderArrowSwipe() {
     if (
@@ -566,6 +606,9 @@ function MainPage({
             setModalRepeat(false);
           }, 2000);
         }}
+        handleShowInterstialAds={() => {
+          showInterStialAds();
+        }}
         themeUser={themeUser}
         source={getImageContent}
         isYellowTrace={listWhiteYellowTrace.includes(themeUser.id)}
@@ -619,7 +662,7 @@ function MainPage({
   }
 
   function renderBottomAds() {
-    if (isUserPremium() || isHideContent()) {
+    if (isUserPremium() || isHideContent() || isTutorial.visible) {
       return null;
     }
     return (
@@ -643,7 +686,7 @@ function MainPage({
       //     : 'rgba(0, 0, 0, 0.7)',
       backgroundColor: 'rgba(0, 0, 0, 0.8)',
     };
-    if (isHideContent()) {
+    if (isHideContent() || isTutorial.visible) {
       return null;
     }
     return (
@@ -1062,9 +1105,16 @@ function MainPage({
           setModalCountdown(false);
         }}
       />
+
+      <ContentSubscription
+        isVisible={showModalSubscribe}
+        onClose={() => {
+          setShowModalSubscribe(false);
+        }}
+      />
       <LoadingFullScreen isLoading={isLoadingInterstial} />
     </View>
   );
 }
 
-export default connect(states)(MainPage);
+export default connect(states, dispatcher)(MainPage);
