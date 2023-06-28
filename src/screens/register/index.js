@@ -156,7 +156,55 @@ function Register({
   }, []);
 
   useEffect(() => {
-    if (registerStep === 8) {
+    if (registerStep === 7){
+      const getDeviceID = async () => {
+        try {
+          const timeZone = await TimeZone.getTimeZone();
+          const payload = {
+            ...mutateForm,
+            name: values.name,
+            anytime: values.isAnytime,
+            often: values.often,
+            start: moment(values.start_at).format('HH:mm'),
+            end: moment(values.end_at).format('HH:mm'),
+            gender: values.gender,
+            timezone: timeZone,
+            impress_friends: values.impress_friends,
+            impress_business: values.impress_business,
+            impress_children: values.impress_children,
+            impress_members: values.impress_members,
+            commit_goal: values.commit_goal,
+            // topics: values.selectedCategory,
+            fcm_token: getFcmToken,
+          };
+          const res = await checkDeviceRegister({
+            device_id: mutateForm.device_id,
+          });
+          setHasRegister(true);
+          handleSetProfile(res);
+          handleSubscriptionStatus(res.data.subscription);
+          fetchListQuote();
+          fetchCollection();
+          setTimeout(() => {
+            handlePayment('onboarding', () => {
+              reset('MainPage', {isFromOnboarding: true});
+            });
+          }, 200);
+          await updateProfile({
+            ...payload,
+            _method: 'PATCH',
+          });
+          setTimeout(() => {
+            reloadUserProfile();
+          }, 2000);
+          AsyncStorage.setItem('isLogin', 'yes');
+        } catch (err) {
+          console.log('Device id not register');
+          handleSubmit(true);
+        }
+      };
+      getDeviceID();
+    }else if (registerStep === 8) {
       const getDeviceID = async () => {
         try {
           const timeZone = await TimeZone.getTimeZone();

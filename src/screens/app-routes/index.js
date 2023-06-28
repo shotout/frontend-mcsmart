@@ -11,7 +11,7 @@ import Purchasely from 'react-native-purchasely';
 import {AppState, Platform, View} from 'react-native';
 import states from './states';
 import dispatcher from './dispatcher';
-
+import PropTypes from 'prop-types';
 // Ref routing
 import {navigationRef} from '../../shared/navigationRef';
 import navigationData from '../../shared/navigationData';
@@ -40,7 +40,7 @@ const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
 });
 appOpenAd.load();
 
-function Routes({registerData}) {
+function Routes({registerData, userProfile}) {
   const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
   const [showAdsOverlay, setAdsOverlay] = useState(false);
@@ -144,11 +144,9 @@ function Routes({registerData}) {
   }, []);
 
   function getInitialRoute() {
-    if (isLogin) {
+    if (userProfile?.token) {
       return 'MainPage';
-      // return 'NotificationTester';
     }
-
     if (registerData) {
       return 'Register';
     }
@@ -183,11 +181,18 @@ function Routes({registerData}) {
 }
 
 Routes.propTypes = {
-  // userProfile: PropTypes.object,
+  getInitialData: PropTypes.func.isRequired,
+  fetchListQuote: PropTypes.func.isRequired,
+  fetchCollection: PropTypes.func.isRequired,
+  fetchPastQuotes: PropTypes.func.isRequired,
+  handleAppVersion: PropTypes.func.isRequired,
+  userProfile: PropTypes.object.isRequired,
+  activeVersion: PropTypes.any,
 };
 
 Routes.defaultProps = {
-  // userProfile: {},
+  userProfile: {},
+  activeVersion: null,
 };
 
 export default connect(states, dispatcher)(Routes);
