@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AdEventType, AppOpenAd} from 'react-native-google-mobile-ads';
 import SplashScreen from 'react-native-splash-screen';
 import Purchasely from 'react-native-purchasely';
-import {AppState, Platform, View} from 'react-native';
+import {Alert, AppState, Platform, View} from 'react-native';
 import states from './states';
 import dispatcher from './dispatcher';
 import PropTypes from 'prop-types';
@@ -144,7 +144,7 @@ function Routes({registerData, userProfile}) {
   }, []);
 
   function getInitialRoute() {
-    if (userProfile?.token) {
+    if (userProfile?.token || registerData?.registerStep === 7) {
       return 'MainPage';
     }
     if (registerData) {
