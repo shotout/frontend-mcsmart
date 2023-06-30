@@ -103,7 +103,14 @@ export default StyleSheet.create({
     height: 200,
   },
   animationStyle: {
-    width: sizing.getDimensionWidth(1),
-    height: sizing.getWindowHeight(1),
+    width:
+      Platform.OS === 'android'
+        ? sizing.getWindowWidth(1.2)
+        : sizing.getWindowWidth(1),
+    height:
+      Platform.OS === 'android'
+        ? sizing.getWindowHeight(1.2)
+        : sizing.getWindowHeight(1),
+    backgroundColor: 'red',
   },
 });

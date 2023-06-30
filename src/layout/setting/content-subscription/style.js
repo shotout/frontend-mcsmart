@@ -20,10 +20,10 @@ export default StyleSheet.create({
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
     elevation: 3,
-    paddingBottom: 0,
     borderTopRightRadius: moderateScale(20),
     borderTopLeftRadius: moderateScale(20),
     marginTop: isIphoneXorAbove() ? moderateScale(38) : moderateScale(20),
+    paddingBottom: isIphoneXorAbove() ? 20 : 0,
   },
   wrapper: {
     paddingHorizontal: moderateScale(20),
@@ -75,8 +75,13 @@ export default StyleSheet.create({
     bottom: 0,
     left: 7,
     right: 0,
-    backgroundColor: colors.lightBlue,
+    backgroundColor: colors.yellow,
     width: moderateScale(2),
     height: moderateScale(13),
+  },
+  bgYellow: {
+    borderColor: colors.yellow,
+    borderWidth: 1,
+    borderRadius: moderateScale(15 / 2),
   },
 });

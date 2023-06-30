@@ -17,7 +17,7 @@ const CategoryItem = ({onPress, item, isSelected}) => {
   const isGeneralCategory = item.id === 1;
 
   const handlePressAds = () => {
-    if (item.is_free === 0) {
+    if (item.is_free === 0 && !isUserPremium()) {
       setUnlockByAds(true);
     } else {
       onPress();

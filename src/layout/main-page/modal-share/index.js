@@ -463,6 +463,7 @@ function ModalShare(props) {
           {renderModalCopy()}
 
           <ModalAddCollection
+            showAddNew
             isVisible={showModalAddCollection}
             onClose={() => {
               setShowModalAddCollection(false);

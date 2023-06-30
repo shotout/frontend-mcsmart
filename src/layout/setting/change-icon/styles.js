@@ -44,7 +44,7 @@ export default StyleSheet.create({
     paddingHorizontal: moderateScale(20),
   },
   iconWrapper: {
-    width: '22%',
+    width: '24%',
     justifyContent: 'center',
     alignItems: 'center',
     padding: moderateScale(4),
@@ -77,8 +77,54 @@ export default StyleSheet.create({
     resizeMode: 'contain',
     borderRadius: moderateScale(12),
     overflow: 'hidden',
+    position: 'relative',
   },
   bgBlack: {
     backgroundColor: colors.black,
+  },
+  ctnSelectPremium: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 4,
+  },
+  ctnIconIndicator: {
+    backgroundColor: colors.black,
+    borderRadius: moderateScale(15 / 2),
+    height: moderateScale(15),
+    width: moderateScale(15),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ctnIconItem: {
+    height: moderateScale(8),
+    width: moderateScale(8),
+    resizeMode: 'contain',
+  },
+  ctnAdsIcon: {
+    height: moderateScale(15),
+    borderRadius: moderateScale(22 / 2),
+    paddingHorizontal: moderateScale(4),
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: colors.black,
+    marginLeft: moderateScale(2),
+  },
+  iconAds: {
+    width: moderateScale(10),
+    height: moderateScale(10),
+    resizeMode: 'contain',
+    marginRight: moderateScale(4),
+  },
+  txtAds: {
+    color: colors.yellow,
+    fontFamily: fonts.InterMedium,
+    fontSize: moderateScale(10),
+  },
+  loadingStyle: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.7)',
   },
 });

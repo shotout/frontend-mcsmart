@@ -27,7 +27,7 @@ import {
   setInitialLoaderStatus,
 } from '../../store/defaultState/actions';
 import {getAppOpenID} from '../../shared/static/adsId';
-import {handleUpdateTimezone} from '../../helpers/user';
+import {handleUpdateTimezone, isUserPremium} from '../../helpers/user';
 import AdsOverlay from '../../components/ads-overlay';
 
 const Stack = createNativeStackNavigator();
@@ -54,7 +54,7 @@ function Routes({registerData}) {
   const handleLoadInAppAds = async () => {
     const isFinishTutorial = await AsyncStorage.getItem('isFinishTutorial');
     if (isFinishTutorial === 'yes') {
-      if (appOpenAd.loaded) {
+      if (appOpenAd.loaded && !isUserPremium()) {
         setAdsOverlay(true);
         appOpenAd.show();
       }

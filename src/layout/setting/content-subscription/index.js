@@ -35,7 +35,7 @@ function Subscription({isVisible, onClose, userProfile}) {
         <View style={styles.lineSeparator} />
         <View style={styles.rowWrap}>
           <View style={styles.rowLeft}>
-            <View style={styles.iconWrap}>
+            <View style={[styles.iconWrap, styles.bgYellow]}>
               <IconChecklistOutline width="100%" height="100%" />
             </View>
             <Text style={styles.dueBold}>Renewal:</Text>

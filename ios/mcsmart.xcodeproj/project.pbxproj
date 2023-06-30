@@ -11,6 +11,7 @@
 		012078F8BA0343F28E476F4C /* AbrilFatface-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 510C863D72354ADA861C3B09 /* AbrilFatface-Regular.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-mcsmart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-mcsmart.a */; };
 		111D887A2A32F48600F46DEA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 111D88792A32F48500F46DEA /* GoogleService-Info.plist */; };
+		117AB5E52A4DD6B800932D93 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117AB5E42A4DD6B800932D93 /* StoreKit.framework */; };
 		11CEA8562A3731AF00716D72 /* third@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11CEA84E2A3731AF00716D72 /* third@3x.png */; };
 		11CEA8572A3731AF00716D72 /* fourth@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11CEA84F2A3731AF00716D72 /* fourth@3x.png */; };
 		11CEA8582A3731AF00716D72 /* fourth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11CEA8502A3731AF00716D72 /* fourth@2x.png */; };
@@ -104,6 +105,7 @@
 		067E078A427A49928FAD90F8 /* Koulen-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Koulen-Regular.ttf"; path = "../src/assets/fonts/Koulen-Regular.ttf"; sourceTree = "<group>"; };
 		0F9D7BD38A6C4A75B51C1508 /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraBold.ttf"; path = "../src/assets/fonts/Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
 		111D88792A32F48500F46DEA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		117AB5E42A4DD6B800932D93 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		11CA4CDD2A3301ED003E13D3 /* mcsmart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = mcsmart.entitlements; path = mcsmart/mcsmart.entitlements; sourceTree = "<group>"; };
 		11CEA84E2A3731AF00716D72 /* third@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "third@3x.png"; path = "AppIcons/third@3x.png"; sourceTree = "<group>"; };
 		11CEA84F2A3731AF00716D72 /* fourth@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fourth@3x.png"; path = "AppIcons/fourth@3x.png"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C80B921A6F3F58F76C31292 /* libPods-mcsmart.a in Frameworks */,
+				117AB5E52A4DD6B800932D93 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +258,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				117AB5E42A4DD6B800932D93 /* StoreKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				5DCACB8F33CDC322A6C60F78 /* libPods-mcsmart.a */,
 				19F6CBCC0A4E27FBF8BF4A61 /* libPods-mcsmart-mcsmartTests.a */,
@@ -808,7 +812,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mcsmart/mcsmart.entitlements;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = PQ7KYCJA35;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mcsmart/Info.plist;
@@ -838,7 +842,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mcsmart/mcsmart.entitlements;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = PQ7KYCJA35;
 				INFOPLIST_FILE = mcsmart/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = McSmart;
