@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import {Modal, Portal} from 'react-native-paper';
 import styles from './styles';
 import Button from '../../../components/button';
-import IconCheckOutline from '../../../assets/svg/icon_checklist_tosca_outline.svg';
 import IconChecklist from '../../../assets/svg/icon_checklist_color_tosca.svg';
 import states from './states';
 import {addToCollection} from '../../../shared/request';
@@ -21,6 +20,7 @@ function ModalAddCollection({
   collections,
   idQuote,
   fetchCollection,
+  showAddNew,
 }) {
   const [selectedCard, setSelectedCard] = useState([]);
   const [isLoading, setLoading] = useState(false);
@@ -56,7 +56,7 @@ function ModalAddCollection({
     if (isSelected) {
       return <IconChecklist width="100%" height="100%" />;
     }
-    return <IconCheckOutline width="100%" height="100%" />;
+    return <View style={[styles.ctnIcon, styles.outlineYellow]} />;
   }
 
   function renderButton() {
@@ -80,12 +80,14 @@ function ModalAddCollection({
         <TouchableOpacity onPress={onClose}>
           <Text style={styles.ctnTxtDone}>Done</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity
-          onPress={() => {
-            setShowModalNewCollection(true);
-          }}>
-          <Text style={styles.txtBtnAdd}>Create new collection</Text>
-        </TouchableOpacity> */}
+        {showAddNew && (
+          <TouchableOpacity
+            onPress={() => {
+              setShowModalNewCollection(true);
+            }}>
+            <Text style={styles.txtBtnAdd}>Create new collection</Text>
+          </TouchableOpacity>
+        )}
       </View>
     );
   }

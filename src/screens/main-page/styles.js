@@ -243,4 +243,14 @@ export default StyleSheet.create({
     paddingBottom: isIphoneXorAbove() ? moderateScale(14) : 0,
     bottom: 0,
   },
+  ctnWatermark: {
+    position: 'absolute',
+    top: isIphoneXorAbove() ? moderateScale(110) : moderateScale(90),
+    right: moderateScale(20),
+  },
+  txtWatermark: {
+    fontFamily: fonts.InterMedium,
+    color: colors.watermark,
+    fontSize: moderateScale(16),
+  },
 });

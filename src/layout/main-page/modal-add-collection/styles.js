@@ -82,4 +82,9 @@ export default StyleSheet.create({
   ctnEmpty: {
     paddingHorizontal: 0,
   },
+  outlineYellow: {
+    borderRadius: moderateScale(17 / 2),
+    borderWidth: 1,
+    borderColor: colors.yellow,
+  },
 });

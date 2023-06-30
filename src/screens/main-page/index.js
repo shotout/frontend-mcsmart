@@ -544,7 +544,6 @@ function MainPage({
       handleLike();
     }
   };
-  console.log('Check isPremiumToday():', isPremiumToday());
 
   function renderArrowSwipe() {
     if (
