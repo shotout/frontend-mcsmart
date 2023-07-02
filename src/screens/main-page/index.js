@@ -77,7 +77,7 @@ import {showModalPremium} from '../../shared/globalContent';
 import ModalRepeat from '../../components/modal-repeat';
 import {
   getAdaptiveBannerID,
-  getRewardedInsterstialID,
+  getRewardedInsterstialLearnMoreID,
   getRewardedOutOfQuotesID,
 } from '../../shared/static/adsId';
 import {checkAdsTracking} from '../../helpers/adsTracking';
@@ -99,7 +99,7 @@ const rewarded = RewardedAd.createForAdRequest(adUnitId, {
 });
 
 const interstialAds = InterstitialAd.createForAdRequest(
-  getRewardedInsterstialID(),
+  getRewardedInsterstialLearnMoreID(),
   {
     requestNonPersonalizedAdsOnly: true,
     keywords: ['fashion', 'clothing'],

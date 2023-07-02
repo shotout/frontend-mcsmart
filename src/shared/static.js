@@ -1,6 +1,6 @@
 // Prod version
-// export const BACKEND_URL = 'https://backend-mooti.walletads.io';
-// export const API_URL = 'https://backend-mooti.walletads.io/api/v1';
+// export const BACKEND_URL = 'https://backend-api.mcsmartapp.com';
+// export const API_URL = 'https://backend-api.mcsmartapp.com/api/v1';
 
 // dev version
 export const BACKEND_URL = 'https://backend-api-dev.mcsmartapp.com';
