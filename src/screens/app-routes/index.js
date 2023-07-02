@@ -131,13 +131,13 @@ function Routes({ registerData }) {
   };
   useEffect(() => {
     const getInitial = async () => {
-      const resLogin = await AsyncStorage.getItem("isLogin");
       setTimeout(async () => {
-        await messaging().setAPNSToken('test');
         const fcmToken = await messaging().getToken();
         console.log("Check fcmToken:", fcmToken);
         setFcmToken(fcmToken);
       }, 200);
+      const resLogin = await AsyncStorage.getItem("isLogin");
+     
     
       if (resLogin === "yes") {
         setLogin(true);
