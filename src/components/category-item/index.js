@@ -8,6 +8,7 @@ import styles from './styles';
 import ModalUnlockCategory from '../modal-unlock-ads';
 import {isUserPremium} from '../../helpers/user';
 import {colors} from '../../shared/styling';
+import { getListFactRegister } from '../../shared/request';
 
 const adsIcon = require('../../assets/icons/ads_icon.png');
 const categoryAdsIcon = require('../../assets/icons/category_icon.png');
@@ -23,7 +24,112 @@ const CategoryItem = ({onPress, item, isSelected}) => {
       onPress();
     }
   };
+  const handleFetch = async (id) => {
+    const params = {
+      id,
+    };
+    fetchListQuote(params)
+  }
 
+  const fetchListQuote = (params, isPassPremium) => async dispatch =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const {freeUserPremium} = store.getState().defaultState;
+      let isFreeUserPremium = isPremiumToday();
+      const todayDate = moment().format('YYYY-MM-DD');
+      if (
+        isPremiumToday() &&
+        !isUserPremium() &&
+        todayDate !== freeUserPremium
+      ) {
+        isFreeUserPremium = false;
+      }
+      dispatch({type: types.START_FETCH_QUOTES});
+      const quote = await getListFactRegister({
+        length: isFreeUserPremium || isPassPremium ? 1000 : 15,
+        page: 1,
+        ...params,
+      });
+      let restPas = [];
+      if (!isUserPremium()) {
+        const pastQuote = await getListFactRegister({ length: isFreeUserPremium || isPassPremium ? 1000 : 5,
+          page: 1,
+          ...params,});
+        restPas = isArray(pastQuote?.data)
+          ? pastQuote?.data
+          : pastQuote?.data?.data || dummyPastQuotes;
+      }
+      if (quote.data?.data?.length > 0) {
+        let overallData = [...restPas, ...quote.data.data];
+        if (!isFreeUserPremium && !isPassPremium) {
+          overallData = [
+            ...[{item_type: 'countdown_page'}],
+            ...restPas,
+            ...quote.data.data,
+            ...[{item_type: 'countdown_page'}],
+          ];
+          overallData = overallData.map((ctn, itemIndex) => {
+            if (
+              itemIndex === 2 ||
+              itemIndex === 5 ||
+              itemIndex === 8 ||
+              itemIndex === 12
+            ) {
+              return {
+                ...ctn,
+                item_type: 'in_app_ads',
+              };
+            }
+            return ctn;
+          });
+        } else if (!isUserPremium()) {
+          overallData = overallData.map((ctn, itemIndex) => {
+            if (
+              itemIndex === 2 ||
+              itemIndex === 5 ||
+              itemIndex === 8 ||
+              itemIndex === 12 ||
+              itemIndex === 16
+            ) {
+              return {
+                ...ctn,
+                item_type: 'in_app_ads',
+              };
+            }
+            if (itemIndex > 16) {
+              if (itemIndex % 4 === 0) {
+                return {
+                  ...ctn,
+                  item_type: 'in_app_ads',
+                };
+              }
+            }
+
+            return {
+              ...ctn,
+              item_type: 'normal_quote',
+            };
+          });
+        }
+        dispatch({
+          type: types.SUCCESS_FETCH_QUOTE,
+          payload: quote.data,
+          arrData: overallData,
+          listBasicQuote:
+            isFreeUserPremium || isPassPremium ? [] : quote.data.data,
+          restPassLength: restPas?.length,
+          isPassPremium,
+          isFreeUserPremium:
+            isFreeUserPremium || isPassPremium ? todayDate : null,
+        });
+      }
+      resolve(quote);
+    } catch (err) {
+      console.log('ERr fetch quote:', err);
+      dispatch({type: types.ERROR_FETCH_QUOTES});
+      reject(err);
+    }
+  });
   function renderSelectedBox() {
     if (!isUserPremium() && item.is_free === 0 && !isSelected) {
       return (
@@ -83,7 +189,8 @@ const CategoryItem = ({onPress, item, isSelected}) => {
       {showUnlockByAds && (
         <ModalUnlockCategory
           visible={showUnlockByAds}
-          handleClose={() => {
+          handleClose={(selectedCategory) => {
+            handleFetch(selectedCategory.id)
             setUnlockByAds(false);
           }}
           imgSource={categoryAdsIcon}
