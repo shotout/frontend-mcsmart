@@ -71,7 +71,7 @@ export const fetchListQuote = (params, isPassPremium) => async dispatch =>
       }
       dispatch({type: types.START_FETCH_QUOTES});
       const quote = await getListQuotes({
-        length: isFreeUserPremium || isPassPremium ? 1000 : 10,
+        length: isFreeUserPremium || isPassPremium ? 1000 : 15,
         page: 1,
         ...params,
       });
