@@ -13,7 +13,10 @@ import InAppBrowser from 'react-native-inappbrowser-reborn';
 import styles from './styles';
 import {colors, sizing} from '../../shared/styling';
 import {removeRepeat, repeatQuotes} from '../../shared/request';
-import {setAnimationCounter} from '../../store/defaultState/actions';
+import {setAnimationCounter, setInitialLoaderStatus} from '../../store/defaultState/actions';
+import { getAppOpenID } from '../../shared/static/adsId';
+import { AppOpenAd } from 'react-native-google-mobile-ads';
+import { loadOpenAddsReward } from '../../helpers/loadReward';
 
 const lightbulbIcon = require('../../assets/icons/lightbulb.png');
 const searchWhiteIcon = require('../../assets/icons/search_white.png');
@@ -108,6 +111,25 @@ export default function QuotesContent({
           showTitle: false,
           enableDefaultShare: false,
         });
+        if (result.type == 'cancel') {
+          const adUnitId = getAppOpenID();
+          const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
+            requestNonPersonalizedAdsOnly: true,
+            keywords: ['fashion', 'clothing'],
+          });
+          appOpenAd.load();
+          if (appOpenAd.loaded) {
+            appOpenAd.show();
+          } else {
+            const cbFinishOpenAds = () => {
+              setInitialLoaderStatus(true);
+              console.log('CALLBACK FINISH CALLED');
+            };
+            console.log('LOAD IN APP ADS VIA FORCE LOAD');
+            // cbFinishOpenAds();
+            loadOpenAddsReward(appOpenAd, cbFinishOpenAds);
+          }
+        }
         console.log('Check result:', result);
       } else Linking.openURL(url);
     } catch (error) {

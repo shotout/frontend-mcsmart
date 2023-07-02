@@ -13,7 +13,7 @@ import {
 import store from "../store/configure-store";
 import { handleSetProfile } from "../store/defaultState/actions";
 import { SUCCESS_FETCH_COLLECTION } from "../store/defaultState/types";
-import { FREE_TRIAL, SHOW_PAYWALL, eventTracking } from "./eventTracking";
+import { FREE_TRIAL, SHOW_PAYWALL, SUBSCRIPTION_STARTED, eventTracking, revenueTracking } from "./eventTracking";
 
 export const dateToUnix = (date) => moment(date).unix();
 export const getFutureDate = (defaultDate, day) =>
@@ -177,39 +177,41 @@ export const reloadUserProfile = async () =>
   });
 
 export const handleSubscriptionStatus = async (subscription = {}) => {
-  // const purchaseId = await Purchasely.getAnonymousUserId();
-  // if (subscription.type === 2 || subscription.type === 3) {
-  //   const trialDay = subscription.type === 2 ? 3 : 30;
-  //   const dateEndFreeTrial = getFutureDate(subscription.started, trialDay);
-  //   const nowaDay = moment().format('YYYY-MM-DD');
-  //   const objPurchase = JSON.parse(subscription.purchasely_data);
-  //   if (dateToUnix(dateEndFreeTrial) < dateToUnix(nowaDay)) {
-  //     await setSubcription({
-  //       subscription_type: 4,
-  //       purchasely_id: purchaseId,
-  //     });
-  //     await reloadUserProfile();
-  //     eventTracking(SUBSCRIPTION_STARTED);
-  //     if (objPurchase) {
-  //       revenueTracking(
-  //         objPurchase.plan_price_in_customer_currency,
-  //         objPurchase.customer_currency,
-  //       );
-  //     }
-  //   }
-  // }
+  const purchaseId = await Purchasely.getAnonymousUserId();
+  if (subscription.type === 2 || subscription.type === 3) {
+    const trialDay = subscription.type === 2 ? 3 : 30;
+    const dateEndFreeTrial = getFutureDate(subscription.started, trialDay);
+    const nowaDay = moment().format('YYYY-MM-DD');
+    const objPurchase = JSON.parse(subscription.purchasely_data);
+    if (dateToUnix(dateEndFreeTrial) < dateToUnix(nowaDay)) {
+      await setSubcription({
+        subscription_type: 4,
+        purchasely_id: purchaseId,
+      });
+      await reloadUserProfile();
+      eventTracking(SUBSCRIPTION_STARTED);
+      if (objPurchase) {
+        revenueTracking(
+          objPurchase.plan_price_in_customer_currency,
+          objPurchase.customer_currency,
+        );
+      }
+    }
+  }
 };
 
 export const setCollectionData = (payload) => {
   store.dispatch({ type: SUCCESS_FETCH_COLLECTION, payload });
 };
 
-export const handleBasicPaywall = async (cbPaywall) => {
-  const profile = store.getState().defaultState.userProfile;
+export const handleBasicPaywall = async cbPaywall => {
+  const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
+  const getInstallDate = await AsyncStorage.getItem('firstInstall');
+  const endDate = moment(getInstallDate)
+    .add(1, 'days')
+    .format('YYYY-MM-DD HH:mm:ss');
   const paywallType =
-    profile?.data?.notif_count && profile?.data?.notif_count > 2
-      ? "offer_no_purchase_after_onboarding_paywall_2nd"
-      : "offer_no_purchase_after_onboarding_paywall";
+    currentDate > endDate ? 'in_app_paywall' : 'in_app_paywall_2nd';
   await handlePayment(paywallType, cbPaywall);
 };
 

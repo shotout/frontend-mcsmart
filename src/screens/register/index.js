@@ -386,7 +386,14 @@ function Register({
         fcm_token: getFcmToken,
       };
       const res = await postRegister(payload);
+      if (res.data.subscription.type === 1 && res.data.themes[0].id !== 6) {
+        await selectTheme({
+          _method: "PATCH",
+          themes: [6],
+        });
+      }
       handleSetProfile(res);
+      await handlePaymentTwo("onboarding");
       await AsyncStorage.setItem("isFinishTutorial", "yes");
       setHasRegister(true);
       handleAfterRegister();
