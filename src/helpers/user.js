@@ -294,7 +294,9 @@ export const handleBasicPaywall = async (cbPaywall) => {
     .add(1, 'days')
     .format('YYYY-MM-DD HH:mm:ss');
   const paywallType =
-    currentDate > endDate ? 'in_app_paywall' : 'in_app_paywall_2nd';
+    currentDate > endDate ? 
+    "offer_no_purchase_after_onboarding_paywall_2nd"
+    : "offer_no_purchase_after_onboarding_paywall";;
   await handlePayment(paywallType, cbPaywall);
 };
 

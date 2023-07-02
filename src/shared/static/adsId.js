@@ -16,9 +16,9 @@ export const getAdaptiveBannerID = () => {
     return TestIds.GAM_BANNER;
   }
   if (Platform.OS === 'ios') {
-    return 'ca-app-pub-1891825795064804/8207883533';
+    return 'ca-app-pub-1891825795064804/5998562713';
   }
-  return 'ca-app-pub-1891825795064804/8614506820';
+  return 'ca-app-pub-1891825795064804/8992445613';
 };
 
 export const getRewardedCategoryID = () => {
@@ -59,4 +59,14 @@ export const getRewardedInsterstialID = () => {
     return 'ca-app-pub-1891825795064804/5373512261';
   }
   return 'ca-app-pub-1891825795064804/6244873672';
+};
+
+export const getRewardedInsterstialLearnMoreID = () => {
+  if (__DEV__) {
+    return TestIds.INTERSTITIAL;
+  }
+  if (Platform.OS === 'ios') {
+    return 'ca-app-pub-1891825795064804/8207883533';
+  }
+  return 'ca-app-pub-1891825795064804/8614506820';
 };
