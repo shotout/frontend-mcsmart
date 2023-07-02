@@ -180,7 +180,7 @@ export const fetchListQuote = (params, isPassPremium) => async (dispatch) =>
       });
       let restPas = [];
       if (!isUserPremium()) {
-        const pastQuote = await pastQuote({
+        const pastQuote = await getListPastQuotes({
           length: 5,
           page: 1,
         });
