@@ -30,7 +30,7 @@ export default function QuotesContent({
   showButtonOption,
   isYellowTrace,
   onPressRating,
-  handleShowInterstialAds,
+  handleShowInterstialAdsLearn,
 }) {
   const [isRepeat, setRepeat] = useState(!!item.repeat);
   const handleRepeat = () => {
@@ -111,8 +111,8 @@ export default function QuotesContent({
         });
         if (result.type === 'cancel') {
           setTimeout(() => {
-            if (typeof handleShowInterstialAds === 'function')
-              handleShowInterstialAds();
+            if (typeof handleShowInterstialAdsLearn === 'function')
+              handleShowInterstialAdsLearn();
           }, 500);
         }
         console.log('Check result:', result);
