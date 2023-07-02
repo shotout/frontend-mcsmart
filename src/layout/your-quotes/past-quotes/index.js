@@ -57,20 +57,42 @@ function PastQuotes({isVisible, onClose, userProfile, fetchPastQuotes}) {
   const getListDataPast = async () => {
     setListDataPast({...listDataPast, isLoading: true});
     const res = await getListPastQuotes({length: 10, page: 1});
-    if (Array.isArray(res.data)) {
-      setListDataPast({
-        listData: res.data || [],
-        isLoading: false,
-        total: 0,
-        page: 1,
-      });
+    if (res.data.data.length > 0) {
+      if (Array.isArray(res.data)) {
+        setListDataPast({
+          listData: res.data || [],
+          isLoading: false,
+          total: 0,
+          page: 1,
+        });
+      } else {
+        setListDataPast({
+          listData: res.data?.data || [],
+          isLoading: false,
+          total: res.data.total,
+          page: 1,
+        });
+      }
     } else {
-      setListDataPast({
-        listData: res.data?.data || [],
-        isLoading: false,
-        total: res.data.total,
+      const resp = await getListQuotes({
+        length: 15,
         page: 1,
       });
+      if (Array.isArray(resp.data)) {
+        setListDataPast({
+          listData: res.data || [],
+          isLoading: false,
+          total: 0,
+          page: 1,
+        });
+      } else {
+        setListDataPast({
+          listData: resp.data?.data || [],
+          isLoading: false,
+          total: resp.data.total,
+          page: 1,
+        });
+      }
     }
   };
 
