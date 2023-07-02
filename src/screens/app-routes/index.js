@@ -1,34 +1,49 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, { useEffect, useRef, useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // Redux
-import {connect} from 'react-redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {AdEventType, AppOpenAd} from 'react-native-google-mobile-ads';
-import SplashScreen from 'react-native-splash-screen';
-import Purchasely from 'react-native-purchasely';
-import {AppState, Platform, View} from 'react-native';
-import states from './states';
-import dispatcher from './dispatcher';
-
+import { connect } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AdEventType, AppOpenAd } from "react-native-google-mobile-ads";
+import SplashScreen from "react-native-splash-screen";
+import Purchasely from "react-native-purchasely";
+import { AppState, Platform, View } from "react-native";
+import states from "./states";
+import dispatcher from "./dispatcher";
+import PropTypes from "prop-types";
 // Ref routing
-import {navigationRef} from '../../shared/navigationRef';
-import navigationData from '../../shared/navigationData';
-
+import { navigationRef, reset } from "../../shared/navigationRef";
+import navigationData from "../../shared/navigationData";
+import messaging from "@react-native-firebase/messaging";
 // Screen
-import WelcomePage from '../welcome-page';
-import {navigationLinking} from '../../shared/navigationLinking';
-import Register from '../register';
-import MainPage from '../main-page';
+import WelcomePage from "../welcome-page";
+import { navigationLinking } from "../../shared/navigationLinking";
+import Register from "../register";
+import MainPage from "../main-page";
 import {
   fetchInitialData,
+  handleSetProfile,
   resetNotificationBadge,
   setInitialLoaderStatus,
-} from '../../store/defaultState/actions';
-import {getAppOpenID} from '../../shared/static/adsId';
-import {handleUpdateTimezone, isUserPremium} from '../../helpers/user';
-import AdsOverlay from '../../components/ads-overlay';
+} from "../../store/defaultState/actions";
+import { getAppOpenID } from "../../shared/static/adsId";
+import {
+  handlePaymentBypass,
+  handlePaymentTwo,
+  handleUpdateTimezone,
+  isUserPremium,
+  reloadUserProfile,
+} from "../../helpers/user";
+import AdsOverlay from "../../components/ads-overlay";
+import {
+  getUserProfile,
+  postRegister,
+  updateProfile,
+} from "../../shared/request";
+import DeviceInfo from "react-native-device-info";
+import TimeZone from "react-native-timezone";
+import store from "../../store/configure-store";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,24 +51,24 @@ const adUnitId = getAppOpenID();
 
 const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
-  keywords: ['fashion', 'clothing'],
+  keywords: ["fashion", "clothing"],
 });
 appOpenAd.load();
 
-function Routes({registerData}) {
+function Routes({ registerData }) {
   const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
   const [showAdsOverlay, setAdsOverlay] = useState(false);
   const openAdsOpened = useRef(false);
   const loadingRef = useRef(true);
-
+  const [getFcmToken, setFcmToken] = useState(null);
   const paywallStatus = useRef(null);
   const appState = useRef(AppState.currentState);
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
 
   const handleLoadInAppAds = async () => {
-    const isFinishTutorial = await AsyncStorage.getItem('isFinishTutorial');
-    if (isFinishTutorial === 'yes') {
+    const isFinishTutorial = await AsyncStorage.getItem("isFinishTutorial");
+    if (isFinishTutorial === "yes") {
       if (appOpenAd.loaded && !isUserPremium()) {
         setAdsOverlay(true);
         appOpenAd.show();
@@ -61,14 +76,79 @@ function Routes({registerData}) {
     }
   };
 
-  useEffect(() => {
-    const getInitial = async () => {
-      const resLogin = await AsyncStorage.getItem('isLogin');
-      if (resLogin === 'yes') {
-        setLogin(true);
-      }
+  const handleSubmit = async () => {
+    try {
+      const id = await Purchasely.getAnonymousUserId();
+      const deviceId = await DeviceInfo.getUniqueId();
+      const timeZone = await TimeZone.getTimeZone();
+      const resLogin = await AsyncStorage.getItem("isLogin");
+      const payload = {
+        icon: 1,
+        fcm_token: getFcmToken,
+        purchasely_id: id,
+        device_id: deviceId,
+        purchaseId: id,
+        name: "User",
+        anytime: null,
+        often: 15,
+        start: "08:00",
+        end: "20:00",
+        gender: "",
+        timezone: timeZone,
 
-      fetchInitialData(resLogin === 'yes', appOpenAd, loadingRef);
+        impress_friends: "yes",
+        impress_business: "yes",
+        impress_children: "yes",
+        impress_members: "yes",
+        commit_goal: "12",
+        // topics: values.selectedCategory,
+      };
+      const res = await postRegister(payload);
+
+      const currentUserProfile = store.getState().defaultState.userProfile;
+      store.dispatch(
+        handleSetProfile({
+          ...currentUserProfile,
+          ...res,
+        })
+      );
+      await updateProfile({
+        ...payload,
+        _method: "PATCH",
+      });
+      setTimeout(() => {
+        handlePaymentBypass('onboarding', () => {
+          reset('MainPage', {isFromOnboarding: true});
+        });
+      }, 200);
+      await AsyncStorage.setItem("isFinishTutorial", "yes");
+      AsyncStorage.setItem("isLogin", "yes");
+      fetchInitialData(resLogin === "yes", appOpenAd, loadingRef);
+     
+    } catch (err) {
+      console.log("Error register:", err);
+    }
+  };
+  useEffect(() => {
+    
+    const getInitial = async () => {
+      const resLogin = await AsyncStorage.getItem("isLogin");
+    
+      if (resLogin === "yes") {
+        setTimeout(async () => {
+          const fcmToken = await messaging().getToken();
+          console.log("Check fcmToken:", fcmToken);
+          setFcmToken(fcmToken);
+        }, 3000);
+        setLogin(true);
+        try {
+          const res = await getUserProfile();
+          fetchInitialData(resLogin === "yes", appOpenAd, loadingRef);
+        } catch (error) {
+          handleSubmit();
+        }
+      }      
+
       setLoading(false);
     };
     getInitial();
@@ -79,17 +159,17 @@ function Routes({registerData}) {
       AdEventType.CLOSED,
       () => {
         setAdsOverlay(false);
-      },
+      }
     );
 
     const listenerOpenApps = appOpenAd.addAdEventListener(
       AdEventType.OPENED,
       () => {
-        console.log('OPEN ADS OPENED');
+        console.log("OPEN ADS OPENED");
         SplashScreen.hide();
         setAdsOverlay(true);
         openAdsOpened.current = true;
-      },
+      }
     );
 
     const listenerIAPAds = appOpenAd.addAdEventListener(
@@ -100,39 +180,39 @@ function Routes({registerData}) {
         if (loadingRef.current) {
           loadingRef.current = false;
         }
-      },
+      }
     );
 
     const subscription = AppState.addEventListener(
-      'change',
-      async nextAppState => {
+      "change",
+      async (nextAppState) => {
         if (
           appState.current.match(/inactive|background/) &&
-          nextAppState === 'active'
+          nextAppState === "active"
         ) {
           resetNotificationBadge();
           handleUpdateTimezone();
         }
-        if (appState.current.match('background') && nextAppState === 'active') {
+        if (appState.current.match("background") && nextAppState === "active") {
           appOpenAd.load();
           if (
             paywallStatus &&
-            paywallStatus.current !== 'PRESENTATION_CLOSED'
+            paywallStatus.current !== "PRESENTATION_CLOSED"
           ) {
-            if (Platform.OS === 'ios') {
+            if (Platform.OS === "ios") {
               handleLoadInAppAds();
             }
           } else {
             appOpenAd.load();
           }
         } else {
-          paywallStatus.current = 'READY';
+          paywallStatus.current = "READY";
           appOpenAd.load();
         }
 
         appState.current = nextAppState;
         setAppStateVisible(appState.current);
-      },
+      }
     );
 
     return () => {
@@ -144,20 +224,22 @@ function Routes({registerData}) {
   }, []);
 
   function getInitialRoute() {
+    alert(isLogin)
     if (isLogin) {
-      return 'MainPage';
+     
+      return "MainPage";
       // return 'NotificationTester';
     }
 
     if (registerData) {
-      return 'Register';
+      return "Register";
     }
-    return 'WelcomePage';
+    return "WelcomePage";
   }
 
   if (isLoading) return null;
   return (
-    <View style={{flex: 1, position: 'relative'}}>
+    <View style={{ flex: 1, position: "relative" }}>
       <NavigationContainer ref={navigationRef} linking={navigationLinking}>
         <Stack.Navigator initialRouteName={getInitialRoute()}>
           <Stack.Screen
@@ -183,11 +265,13 @@ function Routes({registerData}) {
 }
 
 Routes.propTypes = {
-  // userProfile: PropTypes.object,
+  userProfile: PropTypes.object.isRequired,
+  activeVersion: PropTypes.any,
 };
 
 Routes.defaultProps = {
-  // userProfile: {},
+  userProfile: {},
+  activeVersion: null,
 };
 
 export default connect(states, dispatcher)(Routes);
