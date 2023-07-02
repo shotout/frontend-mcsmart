@@ -77,6 +77,7 @@ import {showModalPremium} from '../../shared/globalContent';
 import ModalRepeat from '../../components/modal-repeat';
 import {
   getAdaptiveBannerID,
+  getRewardedInsterstialID,
   getRewardedInsterstialLearnMoreID,
   getRewardedOutOfQuotesID,
 } from '../../shared/static/adsId';
@@ -99,6 +100,14 @@ const rewarded = RewardedAd.createForAdRequest(adUnitId, {
 });
 
 const interstialAds = InterstitialAd.createForAdRequest(
+  getRewardedInsterstialID(),
+  {
+    requestNonPersonalizedAdsOnly: true,
+    keywords: ['fashion', 'clothing'],
+  },
+);
+
+const interstialAdsLearn = InterstitialAd.createForAdRequest(
   getRewardedInsterstialLearnMoreID(),
   {
     requestNonPersonalizedAdsOnly: true,
@@ -295,6 +304,7 @@ function MainPage({
     );
     rewarded.load();
     interstialAds.load();
+    interstialAdsLearn.load();
     if (Platform.OS === 'ios') {
       checkAdsTracking();
     }
@@ -350,6 +360,9 @@ function MainPage({
       }
       if (!interstialAds.loaded) {
         interstialAds.load();
+      }
+      if (!interstialAdsLearn.loaded) {
+        interstialAdsLearn.load();
       }
     }
     if (!isPremiumToday()) {
@@ -411,6 +424,22 @@ function MainPage({
         };
         setLoadingInterstial(true);
         await loadInterstialAds(interstialAds, cbFinish);
+        cbFinish();
+      }
+    }
+  };
+
+  const handleShowInterstialAdsLearn = async () => {
+    console.log('TRY SHOW INTERSTIAL ADS', interstialAdsLearn.loaded);
+    if (!isUserPremium()) {
+      if (interstialAdsLearn.loaded) {
+        interstialAdsLearn.show();
+      } else {
+        const cbFinish = () => {
+          setLoadingInterstial(false);
+        };
+        setLoadingInterstial(true);
+        await loadInterstialAds(interstialAdsLearn, cbFinish);
         cbFinish();
       }
     }
@@ -607,6 +636,9 @@ function MainPage({
         }}
         handleShowInterstialAds={() => {
           showInterStialAds();
+        }}
+        handleShowInterstialAdsLearn={() => {
+          handleShowInterstialAdsLearn();
         }}
         themeUser={themeUser}
         source={getImageContent}

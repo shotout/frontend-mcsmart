@@ -56,9 +56,9 @@ export const getRewardedInsterstialID = () => {
     return TestIds.INTERSTITIAL;
   }
   if (Platform.OS === 'ios') {
-    return 'ca-app-pub-1891825795064804/5373512261';
+    return 'ca-app-pub-1891825795064804/2369781260';
   }
-  return 'ca-app-pub-1891825795064804/6244873672';
+  return 'ca-app-pub-1891825795064804/8504167513';
 };
 
 export const getRewardedInsterstialLearnMoreID = () => {
