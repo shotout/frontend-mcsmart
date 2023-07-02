@@ -145,7 +145,7 @@ function Register({
           purchasely_id: id,
         });
       } catch (err) {
-        console.log('Err get device info:', err);
+        console.log('Err get device info banget:', err);
       }
     });
     handleInitial();

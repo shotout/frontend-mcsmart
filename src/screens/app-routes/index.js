@@ -530,7 +530,7 @@ function Routes({
             console.log("Error register:", err);
           }
         } catch (err) {
-          console.log("Err get device info:", err);
+          console.log("Err get device info ini ya:", err);
         }
       });
       goToFirstPage();
