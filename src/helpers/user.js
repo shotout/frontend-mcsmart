@@ -137,43 +137,47 @@ export const handlePaymentTwo = async (vendorId, cb) =>
 export const createUniqueID = () =>
   Date.now().toString(36) + Math.random().toString(36);
 
-export const reloadUserProfile = async () =>
-  new Promise(async (resolve) => {
-    const res = await getUserProfile();
-    const currentUserProfile = store.getState().defaultState.userProfile;
-    store.dispatch(
-      handleSetProfile({
-        ...currentUserProfile,
-        ...res,
-      })
-    );
-    // if (res.data.subscription.type !== 5) {
-    //   if (currentUserProfile.data) {
-    //     if (currentUserProfile.data.subscription.type !== 1) {
-    //       if (res.data.subscription.type === 1) {
-    //         eventTracking(CANCEL_SUBSCRIBE_AFTER_TRIAL);
-    //       }
-    //       if (
-    //         currentUserProfile.data.subscription.type !==
-    //         res.data.subscription.type
-    //       ) {
-    //         if (res.data.subscription.type !== 1) {
-    //           eventTracking(SUBSCRIPTION_STARTED);
-    //           const objPurchase = JSON.parse(
-    //             res.data.subscription.purchasely_data,
-    //           );
-    //           if (objPurchase) {
-    //             revenueTracking(
-    //               objPurchase.plan_price_in_customer_currency,
-    //               objPurchase.customer_currency,
-    //             );
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
-    resolve(res.data);
+  export const reloadUserProfile = async () =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const res = await getUserProfile();
+      const currentUserProfile = store.getState().defaultState.userProfile;
+      store.dispatch(
+        handleSetProfile({
+          ...currentUserProfile,
+          ...res,
+        }),
+      );
+      if (res.data.subscription.type !== 5) {
+        if (currentUserProfile.data) {
+          if (currentUserProfile.data.subscription.type !== 1) {
+            if (res.data.subscription.type === 1) {
+              eventTracking(CANCEL_SUBSCRIBE_AFTER_TRIAL);
+            }
+            if (
+              currentUserProfile.data.subscription.type !==
+              res.data.subscription.type
+            ) {
+              if (res.data.subscription.type !== 1) {
+                eventTracking(SUBSCRIPTION_STARTED);
+                const objPurchase = JSON.parse(
+                  res.data.subscription.purchasely_data,
+                );
+                if (objPurchase) {
+                  revenueTracking(
+                    objPurchase.plan_price_in_customer_currency,
+                    objPurchase.customer_currency,
+                  );
+                }
+              }
+            }
+          }
+        }
+      }
+      resolve(res.data);
+    } catch (err) {
+      reject('error get profile');
+    }
   });
 
 export const handleSubscriptionStatus = async (subscription = {}) => {

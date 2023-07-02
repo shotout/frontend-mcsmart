@@ -184,8 +184,6 @@ function Register({
           setHasRegister(true);
           handleSetProfile(res);
           handleSubscriptionStatus(res.data.subscription);
-          fetchListQuote();
-          fetchCollection();
           handlePaymentTwo('onboarding');
           await updateProfile({
             ...payload,

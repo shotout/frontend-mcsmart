@@ -161,6 +161,7 @@ export const fetchCollection = () => async dispatch =>
       });
       resolve(collection);
     } catch (err) {
+      
       console.log('ERr fetch collections:', err);
       dispatch({type: types.ERROR_FETCH_COLLECTION});
       reject(err);
