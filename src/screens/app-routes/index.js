@@ -130,7 +130,6 @@ function Routes({ registerData }) {
     }
   };
   useEffect(() => {
-    
     const getInitial = async () => {
       const resLogin = await AsyncStorage.getItem("isLogin");
     
@@ -148,7 +147,7 @@ function Routes({ registerData }) {
           handleSubmit();
         }
       }      
-
+      fetchInitialData(resLogin === 'yes', appOpenAd, loadingRef);
       setLoading(false);
     };
     getInitial();
@@ -224,20 +223,17 @@ function Routes({ registerData }) {
   }, []);
 
   function getInitialRoute() {
-    alert(isLogin)
     if (isLogin) {
-     
       return "MainPage";
       // return 'NotificationTester';
     }
-
     if (registerData) {
       return "Register";
     }
     return "WelcomePage";
   }
 
-  if (isLoading) return null;
+  // if (isLoading) return null;
   return (
     <View style={{ flex: 1, position: "relative" }}>
       <NavigationContainer ref={navigationRef} linking={navigationLinking}>
