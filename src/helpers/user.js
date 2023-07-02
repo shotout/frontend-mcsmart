@@ -216,47 +216,47 @@ export const reloadUserProfile = async () =>
   });
 
 export const registerUserDefault = async (fcmToken) => {
-    try {
-      const id = await Purchasely.getAnonymousUserId();
-      const deviceId = await DeviceInfo.getUniqueId()
-     
-     
-      const timeZone = await TimeZone.getTimeZone();
-      const payload = {
-        icon: 1,
-        fcm_token: fcmToken,
-        purchasely_id: id,
-        device_id: deviceId,
-        purchaseId: id,
-        name: "User",
-        anytime: null,
-        often: 15,
-        start: "08:00",
-        end: "20:00",
-        gender: "",
-        timezone: timeZone,
+  try {
+    const id = await Purchasely.getAnonymousUserId();
+    const deviceId = await DeviceInfo.getUniqueId()
 
-        impress_friends: "yes",
-        impress_business: "yes",
-        impress_children: "yes",
-        impress_members: "yes",
-        commit_goal: "12",
-        // topics: values.selectedCategory,
-      };
-      const res = await postRegister(payload);
-      handleSetProfile(res);
-      await handlePaymentTwo("onboarding");
-      await AsyncStorage.setItem("isFinishTutorial", "yes");
-      await updateProfile({
-        ...payload,
-        _method: "PATCH",
-      });
-      setTimeout(() => {
-        reloadUserProfile();
-      }, 2000);
-    } catch (err) {
-      console.log("Error register:", err);
-    }
+
+    const timeZone = await TimeZone.getTimeZone();
+    const payload = {
+      icon: 1,
+      fcm_token: fcmToken,
+      purchasely_id: id,
+      device_id: deviceId,
+      purchaseId: id,
+      name: "User",
+      anytime: null,
+      often: 15,
+      start: "08:00",
+      end: "20:00",
+      gender: "",
+      timezone: timeZone,
+
+      impress_friends: "yes",
+      impress_business: "yes",
+      impress_children: "yes",
+      impress_members: "yes",
+      commit_goal: "12",
+      // topics: values.selectedCategory,
+    };
+    const res = await postRegister(payload);
+    handleSetProfile(res);
+    await handlePaymentTwo("onboarding");
+    await AsyncStorage.setItem("isFinishTutorial", "yes");
+    await updateProfile({
+      ...payload,
+      _method: "PATCH",
+    });
+    setTimeout(() => {
+      reloadUserProfile();
+    }, 2000);
+  } catch (err) {
+    console.log("Error register:", err);
+  }
 }
 
 export const handleSubscriptionStatus = async (subscription = {}) => {
@@ -288,11 +288,13 @@ export const setCollectionData = (payload) => {
 };
 
 export const handleBasicPaywall = async (cbPaywall) => {
-  const profile = store.getState().defaultState.userProfile;
+  const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
+  const getInstallDate = await AsyncStorage.getItem('firstInstall');
+  const endDate = moment(getInstallDate)
+    .add(1, 'days')
+    .format('YYYY-MM-DD HH:mm:ss');
   const paywallType =
-    profile?.data?.notif_count && profile?.data?.notif_count > 2
-      ? "offer_no_purchase_after_onboarding_paywall_2nd"
-      : "offer_no_purchase_after_onboarding_paywall";
+    currentDate > endDate ? 'in_app_paywall' : 'in_app_paywall_2nd';
   await handlePayment(paywallType, cbPaywall);
 };
 

@@ -110,10 +110,9 @@ export default function QuotesContent({
           enableDefaultShare: false,
         });
         if (result.type === 'cancel') {
-          setTimeout(() => {
-            if (typeof handleShowInterstialAds === 'function')
-              handleShowInterstialAds();
-          }, 500);
+          if (typeof handleShowInterstialAds === 'function'){
+            handleShowInterstialAds();
+          }
         }
         console.log('Check result:', result);
       } else Linking.openURL(url);
