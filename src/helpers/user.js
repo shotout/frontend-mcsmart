@@ -176,7 +176,7 @@ export const createUniqueID = () =>
       }
       resolve(res.data);
     } catch (err) {
-      reject('error get profile');
+      reject('error get profile ya');
     }
   });
 

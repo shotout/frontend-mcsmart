@@ -468,6 +468,7 @@ function Routes({
       // if (userProfile?.token) {
         const resProfile = await reloadUserProfile();
         handleDidMount(resProfile);
+        alert(JSON.stringify(resProfile))
     } catch (err) {
       DeviceInfo.getUniqueId().then(async (uniqueId) => {
         try {
