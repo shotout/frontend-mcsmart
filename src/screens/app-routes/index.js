@@ -95,7 +95,6 @@ function Routes({ registerData }) {
         end: "20:00",
         gender: "",
         timezone: timeZone,
-
         impress_friends: "yes",
         impress_business: "yes",
         impress_children: "yes",
@@ -104,11 +103,10 @@ function Routes({ registerData }) {
         // topics: values.selectedCategory,
       };
       const res = await postRegister(payload);
-
       const currentUserProfile = store.getState().defaultState.userProfile;
+     
       store.dispatch(
         handleSetProfile({
-          ...currentUserProfile,
           ...res,
         })
       );
@@ -117,42 +115,44 @@ function Routes({ registerData }) {
         _method: "PATCH",
       });
       setTimeout(() => {
-        handlePaymentBypass('onboarding', () => {
-          reset('MainPage', {isFromOnboarding: true});
+        handlePaymentBypass("onboarding", () => {
+          reset("MainPage", { isFromOnboarding: true });
         });
       }, 200);
       await AsyncStorage.setItem("isFinishTutorial", "yes");
       AsyncStorage.setItem("isLogin", "yes");
       fetchInitialData(resLogin === "yes", appOpenAd, loadingRef);
-     
     } catch (err) {
       console.log("Error register:", err);
     }
   };
+
+  const getFcm = async () => {
+    setTimeout(async () => {
+      const fcmToken = await messaging().getToken();
+      console.log("Check fcmToken:", fcmToken);
+      setFcmToken(fcmToken);
+    }, 200);
+  };
   useEffect(() => {
     const getInitial = async () => {
-      setTimeout(async () => {
-        const fcmToken = await messaging().getToken();
-        console.log("Check fcmToken:", fcmToken);
-        setFcmToken(fcmToken);
-      }, 200);
       const resLogin = await AsyncStorage.getItem("isLogin");
-     
-    
       if (resLogin === "yes") {
         setLogin(true);
         try {
           const res = await getUserProfile();
-          fetchInitialData(resLogin === "yes", appOpenAd, loadingRef);
+          setTimeout(() => {
+            reset("MainPage", { isFromOnboarding: false });
+          }, 200);
         } catch (error) {
           handleSubmit();
         }
-      }      
-      fetchInitialData(resLogin === 'yes', appOpenAd, loadingRef);
+      }
+      fetchInitialData(resLogin === "yes", appOpenAd, loadingRef);
+
       setLoading(false);
     };
     getInitial();
-
     Purchasely.isReadyToPurchase(true);
 
     const unsubscribeAppOpenAds = appOpenAd.addAdEventListener(
@@ -224,9 +224,8 @@ function Routes({ registerData }) {
   }, []);
 
   function getInitialRoute() {
-    if (isLogin) {
+    if (isLogin || registerData?.registerStep === 7) {
       return "MainPage";
-      // return 'NotificationTester';
     }
     if (registerData) {
       return "Register";

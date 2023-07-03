@@ -59,6 +59,7 @@ import {
 import {
   changeAskRatingParameter,
   changeQuoteLikeStatus,
+  fetchListQuoteFilter,
   setAnimationSlideStatus,
   setInitialLoaderStatus,
   setQuoteRef,
@@ -91,6 +92,7 @@ import {reformatDate} from '../../shared/dateHelper';
 import {scrollToTopQuote} from '../../store/defaultState/selector';
 import ContentSubscription from '../../layout/setting/content-subscription';
 import dispatcher from './dispatcher';
+import store from '../../store/configure-store';
 
 const adUnitId = getRewardedOutOfQuotesID();
 
@@ -183,6 +185,15 @@ function MainPage({
     }
     return null;
   };
+
+  // const handleFetch = async (id) => {
+  //   console.log(id)
+  //   const params = {
+  //     category: id,
+  //   };
+  //   store.dispatch(fetchListQuoteFilter(params));
+  //   getActiveQuote()
+  // }
 
   const handleScreenshot = () => {
     captureRef.current.capture().then(uri => {
@@ -1107,6 +1118,9 @@ function MainPage({
         onClose={() => {
           refCategory.current.hide();
         }}
+        // onCustomSelectCategory={(value) => {
+        //   handleFetch(value)
+        // }}
       />
 
       <ModalRating

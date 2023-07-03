@@ -20,7 +20,7 @@ import states from './states';
 import {
   handleBasicPaywall,
   isUserPremium,
-  reloadUserProfile,
+  reloadUserProfile
 } from '../../../helpers/user';
 import {sizing} from '../../../shared/styling';
 import Button from '../../../components/button';
@@ -30,7 +30,7 @@ import CategoryItem from '../../../components/category-item';
 import ModalCategoriesSearch from '../modal-categories-search';
 import useDebounce from '../../../helpers/useDebounce';
 import {showModalPremium} from '../../../shared/globalContent';
-
+import dispatcher from './dispatcher';
 const iconClose = require('../../../assets/icons/close.png');
 
 function ModalCategories({
@@ -40,6 +40,7 @@ function ModalCategories({
   contentRef,
   fullSize,
   onCustomSelectCategory,
+  fetchListQuote
 }) {
   const [categoryValue, setCategoryValue] = useState([]);
   const [showModalSearch, setModalSearch] = useState(false);
@@ -62,7 +63,9 @@ function ModalCategories({
       }
     };
     getInitialCategory();
+    console.log(JSON.stringify(userProfile.data.categories))
   }, [userProfile.data.categories]);
+
 
   const isDataSelected = value => {
     const findItem = categoryValue.find(item => item === value);
@@ -78,10 +81,13 @@ function ModalCategories({
       curentCategory.push(id);
     }
     setCategoryValue(curentCategory);
+   
     await updateCategory({
       categories: curentCategory,
       _method: 'PATCH',
     });
+    console.log('ini current fetch'+curentCategory)
+    await fetchListQuote();
     reloadUserProfile();
   };
 
@@ -229,6 +235,7 @@ function ModalCategories({
 ModalCategories.propTypes = {
   categories: PropTypes.object,
   userProfile: PropTypes.object.isRequired,
+  fetchListQuote: PropTypes.func.isRequired,
 };
 
 ModalCategories.defaultProps = {
@@ -238,4 +245,4 @@ ModalCategories.defaultProps = {
   },
 };
 
-export default connect(states)(ModalCategories);
+export default connect(states, dispatcher)(ModalCategories);

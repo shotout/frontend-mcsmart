@@ -34,7 +34,7 @@ import {
 } from '../../helpers/user';
 import LoadingIndicator from '../../components/loading-indicator';
 import {isIphoneXorAbove} from '../../shared/devices';
-
+import store from "../../store/configure-store";
 import HeaderStep from '../../layout/register/header-step';
 import ContentName from '../../layout/register/content-step-1';
 import ContentGender from '../../layout/register/content-step-2';
@@ -156,81 +156,38 @@ function Register({
     }, 3000);
   }, []);
 
-  const handleSubmitRegist = async (showPaywall) => {
+  const handleSubmitRegist = async () => {
     try {
+      setLoading(true);
       const timeZone = await TimeZone.getTimeZone();
       const payload = {
         ...mutateForm,
         name: values.name,
         anytime: values.isAnytime,
         often: values.often,
-        start: moment(values.start_at).format("HH:mm"),
-        end: moment(values.end_at).format("HH:mm"),
+        start: moment(values.start_at).format('HH:mm'),
+        end: moment(values.end_at).format('HH:mm'),
         gender: values.gender,
-        feel: values.selectedFeeling.length ? values.selectedFeeling[0] : null,
-        ways: values.causeFeeling,
-        areas: values.selectedCategory,
         timezone: timeZone,
+
+        impress_friends: values.impress_friends,
+        impress_business: values.impress_business,
+        impress_children: values.impress_children,
+        impress_members: values.impress_members,
+        commit_goal: values.commit_goal,
+        // topics: values.selectedCategory,
+        fcm_token: getFcmToken,
       };
       const res = await postRegister(payload);
       handleSetProfile(res);
-      if (res.data.subscription.type === 1 && res.data.themes[0].id !== 6) {
-        await selectTheme({
-          _method: "PATCH",
-          themes: [6],
-        });
-      }
-
-      await handlePaymentTwo("onboarding");
-
-      await AsyncStorage.setItem("isFinishTutorial", "no");
+      await fetchListQuote();
+      await fetchCollection();
       setTimeout(() => {
         reloadUserProfile();
       }, 2000);
-      const getDeviceID = async () => {
-        try {
-          const timeZone = await TimeZone.getTimeZone();
-          const payload = {
-            ...mutateForm,
-            name: values.name,
-            anytime: values.isAnytime,
-            often: values.often,
-            start: moment(values.start_at).format("HH:mm"),
-            end: moment(values.end_at).format("HH:mm"),
-            gender: values.gender,
-            timezone: timeZone,
-
-            impress_friends: values.impress_friends,
-            impress_business: values.impress_business,
-            impress_children: values.impress_children,
-            impress_members: values.impress_members,
-            commit_goal: values.commit_goal,
-            // topics: values.selectedCategory,
-            fcm_token: getFcmToken,
-          };
-          const res = await checkDeviceRegister({
-            device_id: mutateForm.device_id,
-          });
-          handleSetProfile(res);
-          handleSubscriptionStatus(res.data.subscription);
-          if (res.data.subscription.type === 1 && res.data.themes[0].id !== 6) {
-            await selectTheme({
-              _method: "PATCH",
-              themes: [6],
-            });
-          }
-          await updateProfile({
-            ...payload,
-            _method: "PATCH",
-          });
-          setTimeout(() => {
-            reloadUserProfile();
-          }, 2000);
-        } catch (err) {}
-      };
-      getDeviceID();
+      AsyncStorage.setItem("isLogin", "yes");
     } catch (err) {
-      console.log("Error register:", err);
+      console.log('Error register:', err);
     }
   };
 
@@ -248,6 +205,7 @@ function Register({
             end: moment(values.end_at).format("HH:mm"),
             gender: values.gender,
             timezone: timeZone,
+
             impress_friends: values.impress_friends,
             impress_business: values.impress_business,
             impress_children: values.impress_children,
@@ -259,7 +217,6 @@ function Register({
           const res = await checkDeviceRegister({
             device_id: mutateForm.device_id,
           });
-          setHasRegister(true);
           handleSetProfile(res);
           handleSubscriptionStatus(res.data.subscription);
           fetchListQuote();
@@ -279,6 +236,49 @@ function Register({
         }
       };
       getDeviceID();
+      // const getDeviceID = async () => {
+      //   try {
+      //     const timeZone = await TimeZone.getTimeZone();
+      //     const payload = {
+      //       ...mutateForm,
+      //       name: values.name,
+      //       anytime: values.isAnytime,
+      //       often: values.often,
+      //       start: moment(values.start_at).format("HH:mm"),
+      //       end: moment(values.end_at).format("HH:mm"),
+      //       gender: values.gender,
+      //       timezone: timeZone,
+      //       impress_friends: values.impress_friends,
+      //       impress_business: values.impress_business,
+      //       impress_children: values.impress_children,
+      //       impress_members: values.impress_members,
+      //       commit_goal: values.commit_goal,
+      //       // topics: values.selectedCategory,
+      //       fcm_token: getFcmToken,
+      //     };
+      //     const res = await checkDeviceRegister({
+      //       device_id: mutateForm.device_id,
+      //     });
+      //     setHasRegister(true);
+      //     handleSetProfile(res);
+      //     handleSubscriptionStatus(res.data.subscription);
+      //     fetchListQuote();
+      //     fetchCollection();
+      //     handlePaymentTwo("onboarding");
+      //     await updateProfile({
+      //       ...payload,
+      //       _method: "PATCH",
+      //     });
+      //     setTimeout(() => {
+      //       reloadUserProfile();
+      //     }, 2000);
+      //     AsyncStorage.setItem("isLogin", "yes");
+      //   } catch (err) {
+      //     console.log("Device id not register");
+      //     handleSubmitRegist(true);
+      //   }
+      // };
+      // getDeviceID();
     } else if (registerStep === 8) {
       const getDeviceID = async () => {
         try {
@@ -367,7 +367,6 @@ function Register({
   const handleSubmit = async () => {
     try {
       setLoading(true);
-
       const timeZone = await TimeZone.getTimeZone();
       const payload = {
         ...mutateForm,

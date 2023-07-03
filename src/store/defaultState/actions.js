@@ -72,29 +72,29 @@ export const fetchListQuoteFilter =
           isFreeUserPremium = false;
         }
         dispatch({ type: types.START_FETCH_QUOTES });
-        const quote = await getListFactRegister({
+        const quote = await getListQuotes({
           length: isFreeUserPremium || isPassPremium ? 1000 : 15,
           page: 1,
           ...params,
         });
         let restPas = [];
         if (!isUserPremium()) {
-          const pastQuote = await getListFactRegister({
-            length: isFreeUserPremium || isPassPremium ? 1000 : 15,
+          const pastQuote = await getListPastQuotes({
+            length: 5,
             page: 1,
-            ...params,
           });
           restPas = isArray(pastQuote?.data)
             ? pastQuote?.data
-            : pastQuote?.data?.data || dummyPastQuotes;
+            : pastQuote?.data || dummyPastQuotes;
         }
-        if (quote.data?.data?.length > 0) {
-          let overallData = [...restPas, ...quote.data.data];
+        if (quote.data?.length > 0) {
+          // let overallData = [...restPas, ...quote.data];
+          let overallData = [];
           if (!isFreeUserPremium && !isPassPremium) {
             overallData = [
               ...[{ item_type: "countdown_page" }],
               ...restPas,
-              ...quote.data.data,
+              ...quote.data,
               ...[{ item_type: "countdown_page" }],
             ];
             overallData = overallData.map((ctn, itemIndex) => {
@@ -145,7 +145,7 @@ export const fetchListQuoteFilter =
             payload: quote.data,
             arrData: overallData,
             listBasicQuote:
-              isFreeUserPremium || isPassPremium ? [] : quote.data.data,
+              isFreeUserPremium || isPassPremium ? [] : quote.data,
             restPassLength: restPas?.length,
             isPassPremium,
             isFreeUserPremium:
@@ -172,6 +172,7 @@ export const fetchListQuote = (params, isPassPremium) => async (dispatch) =>
       ) {
         isFreeUserPremium = false;
       }
+    
       dispatch({ type: types.START_FETCH_QUOTES });
       const quote = await getListQuotes({
         length: isFreeUserPremium || isPassPremium ? 1000 : 15,
@@ -472,7 +473,6 @@ export const resetNotificationBadge = (isHasLogin) => {
 
 const handleNotificationQuote = async (res, remoteMessage, getInitialURL) => {
   let idQuote = null;
-  console.log("FETCH QUOTE:", remoteMessage?.data?.id || idQuote);
   if (getInitialURL) {
     const urlArr = getInitialURL.split("/");
     if (urlArr[3]) {
