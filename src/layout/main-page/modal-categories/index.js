@@ -63,6 +63,7 @@ function ModalCategories({
 
       if (userProfile.data.categories?.length > 0 && data) {
         setCategoryValue(userProfile.data.categories.map((item) => item.id));
+        fetchList(categoryValue)
       } else if (userProfile.data.categories?.length > 0) {
         let result;
         if (categoryValue.includes(2)) {
@@ -74,9 +75,8 @@ function ModalCategories({
           setCategoryValue(result);
           fetchList(result)
         }
-      }else{
-        setCategoryValue(categoryValue)
-        fetchList(categoryValue)
+      } else if (userProfile.data.categories?.length === 0){
+        fetchList([2])
       }
     };
     getInitialCategory();
