@@ -25,12 +25,7 @@ const CategoryItem = ({onPress, item, isSelected}) => {
       onPress();
     }
   };
-  const handleFetch = async (id) => {
-    const params = {
-      id,
-    };
-    store.dispatch(fetchListQuoteFilter(params));
-  }
+ 
 
 
   function renderSelectedBox() {
@@ -93,7 +88,6 @@ const CategoryItem = ({onPress, item, isSelected}) => {
         <ModalUnlockCategory
           visible={showUnlockByAds}
           handleClose={(selectedCategory) => {
-            handleFetch(selectedCategory.id)
             setUnlockByAds(false);
           }}
           imgSource={categoryAdsIcon}
