@@ -76,7 +76,6 @@ function CardCategories({
         categories: categoryArr,
         _method: 'PATCH',
       };
-      alert('siniii', categoryArr)
       const res = await updateCategory(payload);
       const updateObj = {
         ...userProfile,

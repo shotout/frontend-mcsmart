@@ -64,14 +64,26 @@ function ModalCategories({
       if (userProfile.data.categories?.length > 0 && data) {
         setCategoryValue(userProfile.data.categories.map((item) => item.id));
         fetchList(categoryValue)
+        console.log('masuk sini 3', categoryValue)
       } else if (userProfile.data.categories?.length > 0) {
+        
         let result;
         if (categoryValue.includes(2)) {
           result = [2, categoryValue[categoryValue.length - 1]];
-          setCategoryValue(result);
-          fetchList(result)
+
+          if(categoryValue.length > 1 &&  categoryValue[categoryValue.length - 1] != 2){
+          
+            setCategoryValue(result);
+            fetchList(result)
+          }else{
+          
+            setCategoryValue(categoryValue);
+            fetchList(categoryValue)
+          }
+         
         } else {
           result = [categoryValue[categoryValue.length - 1]];
+          
           setCategoryValue(result);
           fetchList(result)
         }
@@ -83,12 +95,16 @@ function ModalCategories({
   }, [userProfile.data.categories]);
 
   const fetchList = async (value) => {
-    await updateCategory({
-      categories: value,
-      _method: "PATCH",
-    });
-    console.log("ini current fetch" + value);
-    await fetchListQuote();
+    if(value != null || value != ''){
+    
+      await updateCategory({
+        categories: value,
+        _method: "PATCH",
+      });
+      console.log("ini current fetch" + value);
+      await fetchListQuote();
+    }
+   
   }
 
   useEffect(() => {

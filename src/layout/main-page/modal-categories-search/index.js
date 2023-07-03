@@ -120,6 +120,7 @@ function ModalCategoriesSearch({
       curentCategory.push(id);
     }
     setCategoryValue(curentCategory);
+    alert('SINIII')
     updateCategory({
       categories: curentCategory,
       _method: 'PATCH',
