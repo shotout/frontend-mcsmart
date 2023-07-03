@@ -95,8 +95,7 @@ function ModalCategories({
   }, [userProfile.data.categories]);
 
   const fetchList = async (value) => {
-    if(value != null || value != ''){
-    
+    if (value.length > 0 && value[0] != null) {
       await updateCategory({
         categories: value,
         _method: "PATCH",
