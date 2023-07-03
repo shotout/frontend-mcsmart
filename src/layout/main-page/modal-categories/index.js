@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import {
+  Alert,
   Animated,
   FlatList,
   Image,
@@ -8,30 +9,30 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
-} from 'react-native';
-import {Portal} from 'react-native-paper';
-import {connect} from 'react-redux';
+} from "react-native";
+import { Portal } from "react-native-paper";
+import { connect } from "react-redux";
 
-import PropTypes from 'prop-types';
-import SlidingUpPanel from 'rn-sliding-up-panel';
-import Search from '../../../components/search';
-import styles from './styles';
-import states from './states';
+import PropTypes from "prop-types";
+import SlidingUpPanel from "rn-sliding-up-panel";
+import Search from "../../../components/search";
+import styles from "./styles";
+import states from "./states";
 import {
   handleBasicPaywall,
   isUserPremium,
-  reloadUserProfile
-} from '../../../helpers/user';
-import {sizing} from '../../../shared/styling';
-import Button from '../../../components/button';
-import PremiumRocket from '../../../assets/svg/RocketPremiumBlack.svg';
-import {updateCategory} from '../../../shared/request';
-import CategoryItem from '../../../components/category-item';
-import ModalCategoriesSearch from '../modal-categories-search';
-import useDebounce from '../../../helpers/useDebounce';
-import {showModalPremium} from '../../../shared/globalContent';
-import dispatcher from './dispatcher';
-const iconClose = require('../../../assets/icons/close.png');
+  reloadUserProfile,
+} from "../../../helpers/user";
+import { sizing } from "../../../shared/styling";
+import Button from "../../../components/button";
+import PremiumRocket from "../../../assets/svg/RocketPremiumBlack.svg";
+import { updateCategory } from "../../../shared/request";
+import CategoryItem from "../../../components/category-item";
+import ModalCategoriesSearch from "../modal-categories-search";
+import useDebounce from "../../../helpers/useDebounce";
+import { showModalPremium } from "../../../shared/globalContent";
+import dispatcher from "./dispatcher";
+const iconClose = require("../../../assets/icons/close.png");
 
 function ModalCategories({
   onClose,
@@ -40,7 +41,7 @@ function ModalCategories({
   contentRef,
   fullSize,
   onCustomSelectCategory,
-  fetchListQuote
+  fetchListQuote,
 }) {
   const [categoryValue, setCategoryValue] = useState([]);
   const [showModalSearch, setModalSearch] = useState(false);
@@ -52,23 +53,52 @@ function ModalCategories({
     bottom: 0,
   };
   const [panelPositionVal] = useState(
-    new Animated.Value(draggableRange.bottom),
+    new Animated.Value(draggableRange.bottom)
   );
   const snappingPoints = [draggableRange.top, draggableRange.bottom];
 
   useEffect(() => {
-    const getInitialCategory = () => {
-      if (userProfile.data.categories?.length > 0) {
-        setCategoryValue(userProfile.data.categories.map(item => item.id));
+    const data = isUserPremium();
+    const getInitialCategory = async () => {
+
+      if (userProfile.data.categories?.length > 0 && data) {
+        setCategoryValue(userProfile.data.categories.map((item) => item.id));
+      } else if (userProfile.data.categories?.length > 0) {
+        let result;
+        if (categoryValue.includes(2)) {
+          result = [2, categoryValue[categoryValue.length - 1]];
+          setCategoryValue(result);
+          fetchList(result)
+        } else {
+          result = [categoryValue[categoryValue.length - 1]];
+          setCategoryValue(result);
+          fetchList(result)
+        }
+      }else{
+        setCategoryValue(categoryValue)
+        fetchList(categoryValue)
       }
     };
     getInitialCategory();
-    console.log(JSON.stringify(userProfile.data.categories))
   }, [userProfile.data.categories]);
 
+  const fetchList = async (value) => {
+    await updateCategory({
+      categories: value,
+      _method: "PATCH",
+    });
+    console.log("ini current fetch" + value);
+    await fetchListQuote();
+  }
 
-  const isDataSelected = value => {
-    const findItem = categoryValue.find(item => item === value);
+  useEffect(() => {
+    if (userProfile.data.categories?.length > 0 ) {
+      setCategoryValue(userProfile.data.categories.map((item) => item.id));
+    }
+  }, []);
+
+  const isDataSelected = (value) => {
+    const findItem = categoryValue.find((item) => item === value);
     if (findItem) return true;
     return false;
   };
@@ -76,18 +106,11 @@ function ModalCategories({
   const handleSelectCategory = async (id, isHasSelect) => {
     let curentCategory = [...categoryValue];
     if (isHasSelect) {
-      curentCategory = curentCategory.filter(cat => cat !== id);
+      curentCategory = curentCategory.filter((cat) => cat !== id)
     } else {
       curentCategory.push(id);
     }
     setCategoryValue(curentCategory);
-   
-    await updateCategory({
-      categories: curentCategory,
-      _method: 'PATCH',
-    });
-    console.log('ini current fetch'+curentCategory)
-    await fetchListQuote();
     reloadUserProfile();
   };
 
@@ -128,13 +151,14 @@ function ModalCategories({
         <View style={styles.ctnTextHeader}>
           <Text style={styles.boldHeader}>Categories</Text>
           <Text style={styles.txtDesc}>
-            {'Choose the topics that you\nwant to learn more about.'}
+            {"Choose the topics that you\nwant to learn more about."}
           </Text>
         </View>
         <TouchableOpacity
           onPress={() => {
             setModalSearch(true);
-          }}>
+          }}
+        >
           <Search isSelect placeholder="Search" />
         </TouchableOpacity>
       </View>
@@ -162,7 +186,7 @@ function ModalCategories({
     );
   }
 
-  const renderListCategory = ({item, index}) => {
+  const renderListCategory = ({ item, index }) => {
     const isSelected = isDataSelected(item.id);
     return (
       <CategoryItem
@@ -191,7 +215,7 @@ function ModalCategories({
         // onMomentumDragEnd={onMomentumDragEnd}
         // onDragStart={onDragStart}
       >
-        {dragHandler => (
+        {(dragHandler) => (
           <View style={styles.ctnRoot}>
             <TouchableWithoutFeedback onPress={onClose}>
               <View style={styles.ctnClose} />
@@ -209,7 +233,7 @@ function ModalCategories({
                   </>
                 )}
                 renderItem={renderListCategory}
-                keyExtractor={item => item.id}
+                keyExtractor={(item) => item.id}
                 showsVerticalScrollIndicator={false}
               />
 

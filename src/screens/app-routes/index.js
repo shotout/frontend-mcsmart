@@ -138,18 +138,19 @@ function Routes({ registerData }) {
     const getInitial = async () => {
       const resLogin = await AsyncStorage.getItem("isLogin");
       if (resLogin === "yes") {
+      
         setLogin(true);
-        try {
-          const res = await getUserProfile();
-          setTimeout(() => {
-            reset("MainPage", { isFromOnboarding: false });
-          }, 200);
-        } catch (error) {
-          handleSubmit();
-        }
+        // try {
+        //   const res = await getUserProfile();
+        //   setTimeout(() => {
+        //     reset("MainPage", { isFromOnboarding: false });
+        //   }, 200);
+        // } catch (error) {
+        //   handleSubmit();
+        // }
       }
+      
       fetchInitialData(resLogin === "yes", appOpenAd, loadingRef);
-
       setLoading(false);
     };
     getInitial();
@@ -224,7 +225,7 @@ function Routes({ registerData }) {
   }, []);
 
   function getInitialRoute() {
-    if (isLogin || registerData?.registerStep === 7) {
+    if (isLogin) {
       return "MainPage";
     }
     if (registerData) {
