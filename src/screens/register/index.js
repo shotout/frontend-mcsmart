@@ -132,7 +132,7 @@ function Register({
           setSubstep('b');
         }, 2300);
       }
-      await AsyncStorage.removeItem('isFinishTutorial');
+      // await AsyncStorage.removeItem('isFinishTutorial');
     };
 
     DeviceInfo.getUniqueId().then(async uniqueId => {

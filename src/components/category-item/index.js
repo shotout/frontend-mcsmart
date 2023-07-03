@@ -19,7 +19,8 @@ const CategoryItem = ({onPress, item, isSelected}) => {
   const isGeneralCategory = item.id === 1;
 
   const handlePressAds = () => {
-    if (item.is_free === 0 && !isUserPremium()) {
+    const data = isUserPremium()
+    if (item.is_free === 0 && !data) {
       setUnlockByAds(true);
     } else {
       onPress();
@@ -46,6 +47,7 @@ const CategoryItem = ({onPress, item, isSelected}) => {
         </View>
       );
     }
+    console.log('iniiii',isSelected)
     return (
       <View
         style={[
