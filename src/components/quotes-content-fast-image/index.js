@@ -185,15 +185,15 @@ export default function QuotesContent({
   }
 
   function renderWaterMark() {
-    if (isUserPremium()) {
-      return null;
+    if (showButtonOption && !isUserPremium()) {
+      return (
+        <View style={styles.ctnWatermark}>
+          <Text style={styles.txtWatermark}>@mcsmart_app</Text>
+        </View>
+      );
     }
-    return (
-      <View style={styles.ctnWatermark}>
-        <Text style={styles.txtWatermark}>@mcsmart_app</Text>
-      </View>
-    );
-  }
+    return null;
+  };
 
   return (
     <View style={styles.ctnWrapper}>
