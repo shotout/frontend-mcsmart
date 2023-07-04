@@ -368,7 +368,7 @@ function MainPage({
       // }
 
       if (!isUserPremium()) {
-        console.log(activeSlide, currentSlide)
+        console.log(activeSlide, currentSlide);
         handleShowInterstialAds(activeQuote, activeSlide);
       }
       if (!interstialAds.loaded) {
@@ -428,8 +428,9 @@ function MainPage({
   }, [userProfile, isPremiumBefore]);
 
   const handleShowInterstialAds = async (activeQuote) => {
+    console.log("TRY SHOW INTERSTIAL ADS QUOTE", interstialAdsLearn.loaded);
     if (activeQuote?.item_type === "in_app_ads") {
-      console.log(activeQuote)
+      console.log(activeQuote);
       if (interstialAds.loaded) {
         interstialAds.show();
       } else {
@@ -587,6 +588,30 @@ function MainPage({
       handleLike();
     }
   };
+  const pressRepeat = async () => {
+    const repeateDate = new Date();
+    const data = AsyncStorage.getItem("repeat");
+    if (data === null) {
+      await AsyncStorage.setItem("repeat", repeateDate.toString());
+    } else {
+      const storedDateTime = new Date(data);
+      const timeDifferenceInMilliseconds = repeateDate - storedDateTime;
+      const timeDifferenceInHours =
+        timeDifferenceInMilliseconds / (1000 * 60 * 60);
+
+      if (timeDifferenceInHours > 4) {
+        setModalRepeat(true);
+        setTimeout(() => {
+          setModalRepeat(false);
+        }, 2000);
+        await AsyncStorage.setItem("repeat", repeateDate.toString());
+      } else {
+        // Waktu saat ini belum mencapai 4 jam
+        // Lakukan sesuatu di sini jika waktu belum mencapai 4 jam
+        console.log("Waktu belum mencapai 4 jam: false");
+      }
+    }
+  };
 
   function renderArrowSwipe() {
     if (
@@ -646,12 +671,7 @@ function MainPage({
     return (
       <QuotesContent
         item={item}
-        onPressRating={() => {
-          setModalRepeat(true);
-          setTimeout(() => {
-            setModalRepeat(false);
-          }, 2000);
-        }}
+        onPressRating={() => pressRepeat()}
         handleShowInterstialAds={() => {
           showInterStialAds();
         }}
