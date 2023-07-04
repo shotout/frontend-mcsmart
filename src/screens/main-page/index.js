@@ -1,4 +1,4 @@
-import React, {createRef, useEffect, useRef, useState} from 'react';
+import React, { createRef, useEffect, useRef, useState } from "react";
 import {
   FlatList,
   Text,
@@ -9,20 +9,20 @@ import {
   Modal,
   StatusBar,
   Platform,
-} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import notifee, {EventType} from '@notifee/react-native';
+} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import notifee, { EventType } from "@notifee/react-native";
 
-import AnimatedLottieView from 'lottie-react-native';
-import {createAnimatableComponent} from 'react-native-animatable';
-import {connect} from 'react-redux';
-import ViewShot from 'react-native-view-shot';
-import RNFS from 'react-native-fs';
+import AnimatedLottieView from "lottie-react-native";
+import { createAnimatableComponent } from "react-native-animatable";
+import { connect } from "react-redux";
+import ViewShot from "react-native-view-shot";
+import RNFS from "react-native-fs";
 import {
   PanGestureHandler,
   State,
   TapGestureHandler,
-} from 'react-native-gesture-handler';
+} from "react-native-gesture-handler";
 import {
   AdEventType,
   BannerAd,
@@ -30,24 +30,24 @@ import {
   InterstitialAd,
   RewardedAd,
   RewardedAdEventType,
-} from 'react-native-google-mobile-ads';
-import styles from './styles';
-import {sizing} from '../../shared/styling';
-import {useBackgroundQuotes} from '../../helpers/hook/useBackgroundQuotes';
-import QuotesContent from '../../components/quotes-content-fast-image';
-import states from './states';
+} from "react-native-google-mobile-ads";
+import styles from "./styles";
+import { sizing } from "../../shared/styling";
+import { useBackgroundQuotes } from "../../helpers/hook/useBackgroundQuotes";
+import QuotesContent from "../../components/quotes-content-fast-image";
+import states from "./states";
 
-import PremiumRocket from '../../assets/svg/PremiumRocketWhite.svg';
-import IconCategories from '../../assets/svg/icon_categories.svg';
-import IconShare from '../../assets/svg/icon_share.svg';
-import IconSetting from '../../assets/svg/icon_setting.svg';
-import IconLove from '../../assets/svg/icon_love_tap.svg';
-import IconLike from '../../assets/svg/icon_like.svg';
-import ThemeIcon from '../../assets/svg/theme_icon.svg';
-import ButtonIcon from '../../components/button-icon';
-import ModalTheme from '../../layout/main-page/modal-theme';
-import ModalSetting from '../../layout/main-page/modal-setting';
-import ModalShare from '../../layout/main-page/modal-share';
+import PremiumRocket from "../../assets/svg/PremiumRocketWhite.svg";
+import IconCategories from "../../assets/svg/icon_categories.svg";
+import IconShare from "../../assets/svg/icon_share.svg";
+import IconSetting from "../../assets/svg/icon_setting.svg";
+import IconLove from "../../assets/svg/icon_love_tap.svg";
+import IconLike from "../../assets/svg/icon_like.svg";
+import ThemeIcon from "../../assets/svg/theme_icon.svg";
+import ButtonIcon from "../../components/button-icon";
+import ModalTheme from "../../layout/main-page/modal-theme";
+import ModalSetting from "../../layout/main-page/modal-setting";
+import ModalShare from "../../layout/main-page/modal-share";
 import {
   handleBasicPaywall,
   handlePayment,
@@ -55,7 +55,7 @@ import {
   isPremiumToday,
   isUserPremium,
   purchaselyListener,
-} from '../../helpers/user';
+} from "../../helpers/user";
 import {
   changeAskRatingParameter,
   changeQuoteLikeStatus,
@@ -63,71 +63,71 @@ import {
   setAnimationSlideStatus,
   setInitialLoaderStatus,
   setQuoteRef,
-} from '../../store/defaultState/actions';
-import ModalCategories from '../../layout/main-page/modal-categories';
+} from "../../store/defaultState/actions";
+import ModalCategories from "../../layout/main-page/modal-categories";
 import {
   addPastQuotes,
   dislikeQuotes,
   getRatingStatus,
   getSetting,
   setSubcription,
-} from '../../shared/request';
-import useLocalNotif from '../../shared/useLocalNotif';
-import ModalRating from '../../components/modal-rating';
-import {showModalPremium} from '../../shared/globalContent';
-import ModalRepeat from '../../components/modal-repeat';
+} from "../../shared/request";
+import useLocalNotif from "../../shared/useLocalNotif";
+import ModalRating from "../../components/modal-rating";
+import { showModalPremium } from "../../shared/globalContent";
+import ModalRepeat from "../../components/modal-repeat";
 import {
   getAdaptiveBannerID,
   getRewardedInsterstialID,
   getRewardedInsterstialLearnMoreID,
   getRewardedOutOfQuotesID,
-} from '../../shared/static/adsId';
-import {checkAdsTracking} from '../../helpers/adsTracking';
-import {loadInterstialAds} from '../../helpers/loadReward';
-import LoadingFullScreen from '../../components/loading-fullscreen';
-import ModalCountDown from '../../components/modal-countdown';
-import PageCountDown from '../../layout/main-page/page-countdown';
-import {isMoreThanThreeHoursSinceLastTime} from '../../helpers/timeHelpers';
-import {reformatDate} from '../../shared/dateHelper';
-import {scrollToTopQuote} from '../../store/defaultState/selector';
-import ContentSubscription from '../../layout/setting/content-subscription';
-import dispatcher from './dispatcher';
-import store from '../../store/configure-store';
+} from "../../shared/static/adsId";
+import { checkAdsTracking } from "../../helpers/adsTracking";
+import { loadInterstialAds } from "../../helpers/loadReward";
+import LoadingFullScreen from "../../components/loading-fullscreen";
+import ModalCountDown from "../../components/modal-countdown";
+import PageCountDown from "../../layout/main-page/page-countdown";
+import { isMoreThanThreeHoursSinceLastTime } from "../../helpers/timeHelpers";
+import { reformatDate } from "../../shared/dateHelper";
+import { scrollToTopQuote } from "../../store/defaultState/selector";
+import ContentSubscription from "../../layout/setting/content-subscription";
+import dispatcher from "./dispatcher";
+import store from "../../store/configure-store";
 
 const adUnitId = getRewardedOutOfQuotesID();
 
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
-  keywords: ['fashion', 'clothing'],
+  keywords: ["fashion", "clothing"],
 });
 
 const interstialAds = InterstitialAd.createForAdRequest(
   getRewardedInsterstialID(),
   {
     requestNonPersonalizedAdsOnly: true,
-    keywords: ['fashion', 'clothing'],
-  },
+    keywords: ["fashion", "clothing"],
+  }
 );
 
 const interstialAdsLearn = InterstitialAd.createForAdRequest(
   getRewardedInsterstialLearnMoreID(),
   {
     requestNonPersonalizedAdsOnly: true,
-    keywords: ['fashion', 'clothing'],
-  },
+    keywords: ["fashion", "clothing"],
+  }
 );
 
 const ViewAnimation = createAnimatableComponent(View);
 
-const doubleTap = require('../../assets/lottie/double_tap.json');
-const swipeupIcon = require('../../assets/lottie/swipe_up.json');
-const arrowBottom = require('../../assets/icons/arrow-bottom.png');
+const doubleTap = require("../../assets/lottie/double_tap.json");
+const swipeupIcon = require("../../assets/lottie/swipe_up.json");
+const arrowBottom = require("../../assets/icons/arrow-bottom.png");
 
-const learnMoreButton = require('../../assets/icons/tutorial/learn_more_button.json');
-const repeatButton = require('../../assets/icons/tutorial/repeat_button.json');
-const repeatClick = require('../../assets/icons/tutorial/repeat_click.json');
+const learnMoreButton = require("../../assets/icons/tutorial/learn_more_button.json");
+const repeatButton = require("../../assets/icons/tutorial/repeat_button.json");
+const repeatClick = require("../../assets/icons/tutorial/repeat_click.json");
 
-const learnMoreClickLottie = require('../../assets/icons/tutorial/learn_more_click.json');
+const learnMoreClickLottie = require("../../assets/icons/tutorial/learn_more_click.json");
 
 let intervalTutorial = null;
 const limitIndex = 6;
@@ -196,23 +196,23 @@ function MainPage({
   // }
 
   const handleScreenshot = () => {
-    captureRef.current.capture().then(uri => {
+    captureRef.current.capture().then((uri) => {
       // setCaptureUri(`data:image/png;base64,${uri}`);
-      const uriArray = uri.split('/');
+      const uriArray = uri.split("/");
       const nameToChange = uriArray[uriArray.length - 1];
       const renamedURI = uri.replace(
         nameToChange,
-        `McSmart - ${(quotes?.listData[activeSlide].title || '').substring(
+        `McSmart - ${(quotes?.listData[activeSlide].title || "").substring(
           0,
-          10,
-        )}.png`,
+          10
+        )}.png`
       );
       RNFS.copyFile(uri, renamedURI)
         .then(async () => {
           // await CameraRoll.save(renamedURI, {album: 'mooty', type: 'photo'});
           setCaptureUri(renamedURI);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err.message);
         });
     });
@@ -236,7 +236,7 @@ function MainPage({
     const initNotification = await notifee.getInitialNotification();
     const getInitialPlacement =
       initNotification?.notification?.data || paywallNotifcation;
-    if (res.data.value === 'true' && !isUserPremium() && !isFromOnboarding) {
+    if (res.data.value === "true" && !isUserPremium() && !isFromOnboarding) {
       // Paywall open apps
       if (getInitialPlacement) {
         const paywallNotifCb = () => {
@@ -244,13 +244,13 @@ function MainPage({
         };
         handlePayment(getInitialPlacement?.placement, paywallNotifCb);
       } else {
-        const getCurrentOpenApps = await AsyncStorage.getItem('latestOpenApps');
+        const getCurrentOpenApps = await AsyncStorage.getItem("latestOpenApps");
         const mainDate = reformatDate(parseFloat(getCurrentOpenApps));
         const isMoreThan3Hours = isMoreThanThreeHoursSinceLastTime(mainDate);
         const stringifyDate = Date.now().toString();
         if (!getCurrentOpenApps || isMoreThan3Hours) {
           handleBasicPaywall();
-          AsyncStorage.setItem('latestOpenApps', stringifyDate);
+          AsyncStorage.setItem("latestOpenApps", stringifyDate);
         } else {
           setAnimationSlideStatus(true);
         }
@@ -272,8 +272,8 @@ function MainPage({
       scrollToTopQuote();
     }
     const checkTutorial = async () => {
-      const isFinishTutorial = await AsyncStorage.getItem('isFinishTutorial');
-      if (isFinishTutorial !== 'yes') {
+      const isFinishTutorial = await AsyncStorage.getItem("isFinishTutorial");
+      if (isFinishTutorial !== "yes") {
         setTutorial({
           visible: true,
           step: 1,
@@ -292,31 +292,31 @@ function MainPage({
     const unsubscribeLoaded = rewarded.addAdEventListener(
       RewardedAdEventType.LOADED,
       () => {
-        console.log('LOAD ADS FROM MAIN PAGE REWARD');
-      },
+        console.log("LOAD ADS FROM MAIN PAGE REWARD");
+      }
     );
     const unsubscribeEarned = rewarded.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
-      reward => {
-        console.log('User earned reward of ', reward);
-      },
+      (reward) => {
+        console.log("User earned reward of ", reward);
+      }
     );
 
     const rewardedOpen = rewarded.addAdEventListener(AdEventType.OPENED, () => {
       setStatusBar(true);
-      console.log('LOAD ADS MODAL COUNTDOWN');
+      console.log("LOAD ADS MODAL COUNTDOWN");
     });
     const rewardedClose = rewarded.addAdEventListener(
       AdEventType.CLOSED,
       () => {
         setStatusBar(false);
-        console.log('LOAD ADS MODAL COUNTDOWN');
-      },
+        console.log("LOAD ADS MODAL COUNTDOWN");
+      }
     );
     rewarded.load();
     interstialAds.load();
     interstialAdsLearn.load();
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === "ios") {
       checkAdsTracking();
     }
     return () => {
@@ -328,7 +328,7 @@ function MainPage({
   }, []);
 
   useEffect(() => {
-    const handleAddPastQuotes = async currentSlideId => {
+    const handleAddPastQuotes = async (currentSlideId) => {
       try {
         if (
           quotes.listData[currentSlideId] &&
@@ -337,7 +337,7 @@ function MainPage({
           await addPastQuotes(quotes.listData[currentSlideId].id);
         }
       } catch (err) {
-        console.log('Error add past quotes:', err);
+        console.log("Error add past quotes:", err);
       }
     };
     const activeQuote = getActiveQuote();
@@ -353,7 +353,7 @@ function MainPage({
       }
       if (activeQuote.like) {
         if (activeQuote.like?.type) {
-          if (activeQuote.like?.type === '1' || activeQuote.like?.type === 1) {
+          if (activeQuote.like?.type === "1" || activeQuote.like?.type === 1) {
             isLiked = true;
           }
         }
@@ -366,7 +366,9 @@ function MainPage({
       // if (activeQuote) {
       //   handleWidgetData(activeQuote);
       // }
+
       if (!isUserPremium()) {
+        console.log(activeSlide, currentSlide)
         handleShowInterstialAds(activeQuote, activeSlide);
       }
       if (!interstialAds.loaded) {
@@ -425,8 +427,9 @@ function MainPage({
     }
   }, [userProfile, isPremiumBefore]);
 
-  const handleShowInterstialAds = async activeQuote => {
-    if (activeQuote?.item_type === 'in_app_ads') {
+  const handleShowInterstialAds = async (activeQuote) => {
+    if (activeQuote?.item_type === "in_app_ads") {
+      console.log(activeQuote)
       if (interstialAds.loaded) {
         interstialAds.show();
       } else {
@@ -441,7 +444,7 @@ function MainPage({
   };
 
   const handleShowInterstialAdsLearn = async () => {
-    console.log('TRY SHOW INTERSTIAL ADS', interstialAdsLearn.loaded);
+    console.log("TRY SHOW INTERSTIAL ADS", interstialAdsLearn.loaded);
     if (!isUserPremium()) {
       if (interstialAdsLearn.loaded) {
         interstialAdsLearn.show();
@@ -457,7 +460,7 @@ function MainPage({
   };
 
   const showInterStialAds = async () => {
-    console.log('TRY SHOW INTERSTIAL ADS', interstialAds.loaded);
+    console.log("TRY SHOW INTERSTIAL ADS", interstialAds.loaded);
     if (!isUserPremium()) {
       if (interstialAds.loaded) {
         interstialAds.show();
@@ -473,7 +476,7 @@ function MainPage({
   };
 
   const isHideContent = () => {
-    if (getActiveQuote()?.item_type === 'countdown_page') {
+    if (getActiveQuote()?.item_type === "countdown_page") {
       return true;
     }
     return false;
@@ -509,7 +512,7 @@ function MainPage({
         if (activeQuote.like) {
           if (activeQuote.like?.type) {
             if (
-              activeQuote.like?.type === '1' ||
+              activeQuote.like?.type === "1" ||
               activeQuote.like?.type === 1
             ) {
               isLiked = true;
@@ -518,20 +521,20 @@ function MainPage({
         }
       }
       const payload = {
-        type: isLiked ? '2' : '1',
+        type: isLiked ? "2" : "1",
       };
       await dislikeQuotes(payload, activeQuote.id);
       changeQuoteLikeStatus(activeQuote.id);
     } catch (err) {
-      console.log('Error liked:', err);
+      console.log("Error liked:", err);
     }
   };
 
-  const onMomentoumScrollEnd = e => {
+  const onMomentoumScrollEnd = (e) => {
     const height = sizing.getDimensionHeight(1);
     const pageNumber = Math.min(
       Math.max(Math.floor(e.nativeEvent.contentOffset.y / height + 0.5) + 1, 0),
-      quotes?.listData?.length || 0,
+      quotes?.listData?.length || 0
     );
     setActiveSlide(pageNumber - 1);
     if (pageNumber - 1 !== activeSlide && !isUserHasScroll) {
@@ -545,7 +548,7 @@ function MainPage({
       setShowNextTutorial(true);
     });
     if (isTutorial.step === 4) {
-      await AsyncStorage.setItem('isFinishTutorial', 'yes');
+      await AsyncStorage.setItem("isFinishTutorial", "yes");
       setTutorial({
         visible: false,
         step: 1,
@@ -569,14 +572,14 @@ function MainPage({
     }
   };
 
-  const handleGesture = evt => {
-    const {nativeEvent} = evt;
+  const handleGesture = (evt) => {
+    const { nativeEvent } = evt;
     if (nativeEvent.velocityX < -614) {
       refThemes.current.show();
     }
   };
 
-  const onDoubleTap = event => {
+  const onDoubleTap = (event) => {
     if (!isUserHasScroll && event.nativeEvent.state === State.BEGAN) {
       setUserScrollQuotes(true);
     }
@@ -600,16 +603,19 @@ function MainPage({
           style={[
             styles.ctnSwipe,
             isUserPremium() && styles.adjustBtmPremiumSwipe,
-          ]}>
+          ]}
+        >
           <ViewAnimation
             animation="slideInUp"
             duration={500}
-            style={styles.ctnSlideUp}>
+            style={styles.ctnSlideUp}
+          >
             <ViewAnimation
               animation="slideOutDown"
               duration={1000}
               delay={1500}
-              style={styles.ctnSlideDown}>
+              style={styles.ctnSlideDown}
+            >
               <ViewAnimation
                 animation="fadeOut"
                 duration={200}
@@ -618,7 +624,8 @@ function MainPage({
                   setShowNextQuoteAnimation(false);
                   setShowNextQuoteAnimation(true);
                 }}
-                style={styles.ctnSlideDown}>
+                style={styles.ctnSlideDown}
+              >
                 <Text style={styles.txtSwipe}>Swipe to see next Quote</Text>
                 <Image source={arrowBottom} style={styles.icnSwipe} />
               </ViewAnimation>
@@ -630,10 +637,10 @@ function MainPage({
     return null;
   }
 
-  const renderFactItem = ({item, index, disableAnimation}) => {
+  const renderFactItem = ({ item, index, disableAnimation }) => {
     const getImageContent = themeUser?.imgLocal;
     const listWhiteYellowTrace = [2, 3];
-    if (item?.item_type === 'countdown_page') {
+    if (item?.item_type === "countdown_page") {
       return <PageCountDown />;
     }
     return (
@@ -688,9 +695,10 @@ function MainPage({
           ref={captureRef}
           options={{
             fileName: `McSmart${Date.now()}`,
-            format: 'png',
+            format: "png",
             quality: 1.0,
-          }}>
+          }}
+        >
           {renderFactItem({
             item: quotes?.listData[activeSlide],
             index: activeSlide,
@@ -726,7 +734,7 @@ function MainPage({
       //   themeUser.id === 4 || themeUser.id === 2
       //     ? 'rgba(255, 255, 255, 0.2)'
       //     : 'rgba(0, 0, 0, 0.7)',
-      backgroundColor: 'rgba(0, 0, 0, 0.8)',
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
     };
     if (isHideContent() || isTutorial.visible) {
       return null;
@@ -736,7 +744,8 @@ function MainPage({
         style={[
           styles.btnWrapper,
           !isUserPremium() && !isHideContent() && styles.ctnPdAds,
-        ]}>
+        ]}
+      >
         {renderArrowSwipe()}
         <View style={styles.subBottomWrapper}>
           <TouchableWithoutFeedback onPress={handleShare}>
@@ -801,7 +810,8 @@ function MainPage({
           <ViewAnimation
             animation="bounceIn"
             duration={200}
-            style={styles.ctnCenter}>
+            style={styles.ctnCenter}
+          >
             <View style={styles.ctnIconTutorial}>
               <AnimatedLottieView
                 source={swipeupIcon}
@@ -817,7 +827,7 @@ function MainPage({
               {isShowTutorial && (
                 <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
                   <Text style={styles.txtDescTutorial}>
-                    {'Tap anywhere to go\nto the next tutorial'}
+                    {"Tap anywhere to go\nto the next tutorial"}
                   </Text>
                 </ViewAnimation>
               )}
@@ -832,7 +842,8 @@ function MainPage({
           <ViewAnimation
             animation="bounceIn"
             duration={800}
-            style={styles.ctnCenter}>
+            style={styles.ctnCenter}
+          >
             <View style={styles.ctnIconTutorial}>
               <AnimatedLottieView
                 source={doubleTap}
@@ -848,7 +859,7 @@ function MainPage({
               {isShowTutorial && (
                 <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
                   <Text style={styles.txtDescTutorial}>
-                    {'Tap anywhere to go\nto the next tutorial'}
+                    {"Tap anywhere to go\nto the next tutorial"}
                   </Text>
                 </ViewAnimation>
               )}
@@ -863,7 +874,8 @@ function MainPage({
           <ViewAnimation
             animation="bounceIn"
             duration={800}
-            style={styles.ctnCenter}>
+            style={styles.ctnCenter}
+          >
             <View style={styles.btnTutorialStyle}>
               <AnimatedLottieView
                 source={repeatButton}
@@ -882,7 +894,7 @@ function MainPage({
               {isShowTutorial && (
                 <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
                   <Text style={styles.txtDescTutorial}>
-                    {'Tap anywhere to go\nto the next tutorial'}
+                    {"Tap anywhere to go\nto the next tutorial"}
                   </Text>
                 </ViewAnimation>
               )}
@@ -897,7 +909,8 @@ function MainPage({
           <ViewAnimation
             animation="bounceIn"
             duration={800}
-            style={styles.ctnCenter}>
+            style={styles.ctnCenter}
+          >
             <View style={styles.btnTutorialStyle}>
               <AnimatedLottieView
                 source={learnMoreButton}
@@ -914,7 +927,7 @@ function MainPage({
               {isShowTutorial && (
                 <ViewAnimation delay={1000} animation="fadeIn" duration={2000}>
                   <Text style={styles.txtDescTutorial}>
-                    {'Tap anywhere to go\nto finish the tutorial'}
+                    {"Tap anywhere to go\nto finish the tutorial"}
                   </Text>
                 </ViewAnimation>
               )}
@@ -981,7 +994,8 @@ function MainPage({
     return (
       <TouchableOpacity
         style={styles.ctnFreeBadge}
-        onPress={handleBasicPaywall}>
+        onPress={handleBasicPaywall}
+      >
         <View style={styles.ctnIconCrown}>
           <PremiumRocket width="100%" height="100%" />
         </View>
@@ -999,7 +1013,8 @@ function MainPage({
           transparent
           onDismiss={() => {
             setShowModalLike(false);
-          }}>
+          }}
+        >
           <View style={styles.ctnLike}>
             <View style={styles.iconLikeWrap}>
               {quoteLikeStatus ? (
@@ -1019,8 +1034,9 @@ function MainPage({
     return (
       <PanGestureHandler
         onGestureEvent={handleGesture}
-        activeOffsetX={[-40, 40]}>
-        <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
+        activeOffsetX={[-40, 40]}
+      >
+        <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={3}>
           <FlatList
             ref={setQuoteRef}
             style={styles.ctnRoot}
@@ -1040,7 +1056,7 @@ function MainPage({
               index,
             })}
             onScrollToIndexFailed={() => {
-              console.log('FAILED SCROLL TO INDEX', 5);
+              console.log("FAILED SCROLL TO INDEX", 5);
             }}
           />
         </TapGestureHandler>
@@ -1055,8 +1071,8 @@ function MainPage({
   return (
     <View style={styles.ctnRoot}>
       <StatusBar
-        barStyle={isDarkTheme ? 'light-content' : 'dark-content'}
-        backgroundColor={isDarkTheme ? '#000' : '#fff'}
+        barStyle={isDarkTheme ? "light-content" : "dark-content"}
+        backgroundColor={isDarkTheme ? "#000" : "#fff"}
         hidden={statusbarStatus}
       />
       {renderScreenshot()}
@@ -1075,7 +1091,7 @@ function MainPage({
       />
 
       <ModalSetting
-        contentRef={c => {
+        contentRef={(c) => {
           if (c) {
             refSetting.current = {
               ...c,
@@ -1088,7 +1104,7 @@ function MainPage({
       />
 
       <ModalShare
-        contentRef={c => {
+        contentRef={(c) => {
           if (c) {
             refShare.current = {
               ...c,
@@ -1108,7 +1124,7 @@ function MainPage({
 
       <ModalCategories
         refPanel={refCategory}
-        contentRef={c => {
+        contentRef={(c) => {
           if (c) {
             refCategory.current = {
               ...c,

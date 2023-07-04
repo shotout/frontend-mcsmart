@@ -1,17 +1,24 @@
-import React, {createRef, useEffect, useRef, useState} from 'react';
-import {FlatList, Image, Text, View} from 'react-native';
-import {connect} from 'react-redux';
-import ButtonOutline from '../../../components/button-outline';
-import {sizing} from '../../../shared/styling';
-import styles from './styles';
-import states from './states';
+import React, { createRef, useEffect, useRef, useState } from "react";
+import {
+  Animated,
+  FlatList,
+  Image,
+  Text,
+  View,
+  PanResponder,
+} from "react-native";
+import { connect } from "react-redux";
+import ButtonOutline from "../../../components/button-outline";
+import { sizing } from "../../../shared/styling";
+import styles from "./styles";
+import states from "./states";
 
-const bgQuote = require('../../../assets/images/yellow_round.png');
-const lamp = require('../../../assets/images/lamp.png');
-const economyIcon = require('../../../assets/images/category/economy_business.png');
-const celebrityIcon = require('../../../assets/images/category/celebrities.png');
-const foodDrinkCategory = require('../../../assets/images/category/food_drink.png');
-const sportCategory = require('../../../assets/images/category/sport.png');
+const bgQuote = require("../../../assets/images/yellow_round.png");
+const lamp = require("../../../assets/images/lamp.png");
+const economyIcon = require("../../../assets/images/category/economy_business.png");
+const celebrityIcon = require("../../../assets/images/category/celebrities.png");
+const foodDrinkCategory = require("../../../assets/images/category/food_drink.png");
+const sportCategory = require("../../../assets/images/category/sport.png");
 
 function ContentStep7({
   onPressGoals,
@@ -22,18 +29,21 @@ function ContentStep7({
 }) {
   const flatListRef = useRef();
   const currentIndex = useRef(0);
+  const [isTextAnimated, setIsTextAnimated] = useState(false);
   const [activeIndexTutorial, setActiveIndexTutorial] = useState(0);
+  const [isSwiped, setIsSwiped] = useState(false);
+  const swipeAnim = useRef(new Animated.Value(0)).current;
 
   function getDataQuote() {
     switch (substep) {
-      case 'b':
-        return listFactRegister.filter(item => item.category_id === 4);
-      case 'c':
-        return listFactRegister.filter(item => item.category_id === 5);
-      case 'd':
-        return listFactRegister.filter(item => item.category_id === 11);
+      case "b":
+        return listFactRegister.filter((item) => item.category_id === 4);
+      case "c":
+        return listFactRegister.filter((item) => item.category_id === 5);
+      case "d":
+        return listFactRegister.filter((item) => item.category_id === 11);
       default:
-        return listFactRegister.filter(item => item.category_id === 3);
+        return listFactRegister.filter((item) => item.category_id === 3);
     }
   }
 
@@ -47,7 +57,24 @@ function ContentStep7({
         animated: true,
         index: currentIndex.current,
       });
-    }, 5000);
+    }, 6000);
+
+    return () => {
+      // Membersihkan interval saat komponen dibongkar
+      clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Panggil fungsi di sini
+
+      setActiveIndexTutorial(currentIndex.current);
+      flatListRef.current.scrollToIndex({
+        animated: true,
+        index: currentIndex.current,
+      });
+    }, 6000);
 
     return () => {
       // Membersihkan interval saat komponen dibongkar
@@ -60,11 +87,41 @@ function ContentStep7({
     setActiveIndexTutorial(0);
   }, [substep]);
 
-  const onMomentoumScrollEnd = e => {
+  const handleSwipe = () => {
+    setIsSwiped(true);
+    Animated.timing(swipeAnim, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const resetSwipe = () => {
+    setIsSwiped(false);
+    Animated.timing(swipeAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: (_, gestureState) => gestureState.dx > 5,
+      onPanResponderRelease: (_, gestureState) => {
+        if (gestureState.dx > 50) {
+          handleSwipe();
+        } else {
+          resetSwipe();
+        }
+      },
+    })
+  ).current;
+
+  const onMomentoumScrollEnd = (e) => {
     const width = sizing.getDimensionWidth(1);
     const pageNumber = Math.min(
       Math.max(Math.floor(e.nativeEvent.contentOffset.x / width + 0.5) + 1, 0),
-      getDataQuote().length,
+      getDataQuote().length
     );
 
     currentIndex.current = pageNumber - 1;
@@ -73,14 +130,14 @@ function ContentStep7({
 
   function getTextInput() {
     switch (substep) {
-      case 'b':
-        return 'Would you like to make an\nimpression in professional\nsituations with your co-workers,\nbusiness partners or your boss?';
-      case 'c':
-        return 'Would you like to impress\nyour children or other young\nrelatives with your\nknowledge?';
-      case 'd':
-        return 'Would you like to impress\nyour common members in\nyour sports club using your\nknowledge?';
+      case "b":
+        return "Would you like to make an\nimpression in professional\nsituations with your co-workers,\nbusiness partners or your boss?";
+      case "c":
+        return "Would you like to impress\nyour children or other young\nrelatives with your\nknowledge?";
+      case "d":
+        return "Would you like to impress\nyour common members in\nyour sports club using your\nknowledge?";
       default:
-        return 'Would you like to impress\nyour friends or partner with your\nknowledge?';
+        return "Would you like to impress\nyour friends or partner with your\nknowledge?";
     }
   }
 
@@ -102,25 +159,36 @@ function ContentStep7({
   function renderInput() {
     return (
       <View style={[styles.inputWrapper, styles.ctnInputWrapper]}>
-        <View style={styles.ctnText}>
-          <Text numberOfLines={4} style={styles.txtInput}>
-            {getTextInput()}
-          </Text>
-        </View>
+       <Animated.Text
+          numberOfLines={4}
+          style={[
+            styles.txtInput,
+            isTextAnimated && {
+              transform: [{ translateX: 200 }], // Sesuaikan jarak swipe yang diinginkan
+              opacity: 0,
+            },
+          ]}
+        >
+          {getTextInput()}
+        </Animated.Text>
         <View style={styles.ctnGoalsInput}>
-          {['Yes', 'No'].map(item => (
+          {["Yes", "No"].map((item) => (
             <ButtonOutline
               // btnStyle={styles.btnStyle}
               isSelected={item === specific_goal}
               onPress={() => {
                 onPressGoals(item.toLowerCase());
-
-                flatListRef.current.scrollToIndex({animated: true, index: 0});
+                setIsTextAnimated(true);
+                setTimeout(() => {
+                  setIsTextAnimated(false);
+                }, 300);
+                flatListRef.current.scrollToIndex({ animated: true, index: 0 });
               }}
               btnStyle={styles.btnOption}
               theme="blue"
               label={item}
               key={item}
+              {...panResponder.panHandlers}
             />
           ))}
         </View>
@@ -128,7 +196,7 @@ function ContentStep7({
     );
   }
 
-  const renderListQuote = ({item}) => (
+  const renderListQuote = ({ item }) => (
     <View style={styles.ctnTextQuote}>
       <Text style={styles.txtQuote} numberOfLines={5} ellipsizeMode="tail">
         {item.title}
@@ -146,7 +214,7 @@ function ContentStep7({
       <View style={styles.ctnFlatlist}>
         <View style={styles.ctnWelcome}>
           <Text style={styles.txtWelcome}>{`${
-            name ? `Hey ${name}` : 'Hey'
+            name ? `Hey ${name}` : "Hey"
           }, let’s personalize the topics that you will learn about with McSmart according to the situations that you will use them in!`}</Text>
         </View>
         {renderInput()}
@@ -168,7 +236,7 @@ function ContentStep7({
           onMomentumScrollEnd={onMomentoumScrollEnd}
           showsHorizontalScrollIndicator={false}
           renderItem={renderListQuote}
-          keyExtractor={item => item.id}
+          keyExtractor={(item) => item.id}
         />
         <View style={styles.dotWrapper}>
           {getDataQuote().map((item, index) => (

@@ -112,7 +112,7 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Capriola-Regular',
     color: '#000',
-    fontSize: moderateScale(17),
+    fontSize: moderateScale(14),
     lineHeight: moderateScale(28),
   },
   ctnFlatlist: {
