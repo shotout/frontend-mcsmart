@@ -2,7 +2,7 @@ export const firstStepSelection = [
   {
     id: 5,
     group_id: null,
-    name: 'Food & Drink',
+    name: 'Food & Drinks',
     is_free: 0,
     status: 2,
     created_at: '2023-06-13T08:15:36.000000Z',
@@ -113,7 +113,7 @@ export const secondStepSelection = [
   {
     id: 5,
     group_id: null,
-    name: 'Food & Drink',
+    name: 'Food & Drinks',
     is_free: 0,
     status: 2,
     created_at: '2023-06-13T08:15:36.000000Z',
@@ -242,7 +242,7 @@ export const thirdStepSelection = [
   {
     id: 5,
     group_id: null,
-    name: 'Food & Drink',
+    name: 'Food & Drinks',
     is_free: 0,
     status: 2,
     created_at: '2023-06-13T08:15:36.000000Z',
@@ -337,7 +337,7 @@ export const forthStepSelection = [
   {
     id: 5,
     group_id: null,
-    name: 'Food & Drink',
+    name: 'Food & Drinks',
     is_free: 0,
     status: 2,
     created_at: '2023-06-13T08:15:36.000000Z',

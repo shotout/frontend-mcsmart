@@ -285,7 +285,7 @@ function ModalShare(props) {
           label="Instagram Stories"
           icon={<IconStoryIg width="100%" height="100%" />}
           onPress={() => {
-            Alert.alert('Don’t forget to tag us!\n@McSmartApp', '', [
+            Alert.alert('Don’t forget to tag us!\n@mcsmart_app', '', [
               {text: 'OK', onPress: handleIGStoryShare},
             ]);
           }}
@@ -297,7 +297,7 @@ function ModalShare(props) {
             handleCopyText();
             Alert.alert(
               'Copied to your pasteboard',
-              'Text and hastags ready to be pasted in\nyour caption.\n\nDon’t forget to tag us!\n@McSmartApp',
+              'Text and hastags ready to be pasted in\nyour caption.\n\nDon’t forget to tag us!\n@mcsmart_app',
               [{text: 'OK', onPress: handleShareInstagramDefault}],
             );
           }}

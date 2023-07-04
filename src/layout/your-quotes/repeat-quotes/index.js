@@ -355,7 +355,7 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
             setShowModalAddCollection(true);
           }}
           onPressDelete={() => {
-            Alert.alert('Are you sure you want to stop repeat this Fact?', '', [
+            Alert.alert('Are you sure you want to stop repeating this Fact?', '', [
               {
                 text: 'Yes',
                 onPress: () => {

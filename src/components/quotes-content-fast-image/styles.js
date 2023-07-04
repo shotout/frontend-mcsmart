@@ -93,5 +93,15 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center'
-  }
+  },
+  ctnWatermark: {
+    position: 'absolute',
+    top: isIphoneXorAbove() ? moderateScale(130) : moderateScale(100),
+    alignSelf: 'center'
+  },
+  txtWatermark: {
+    fontFamily: fonts.InterMedium,
+    color: colors.watermark,
+    fontSize: moderateScale(16),
+  },
 });

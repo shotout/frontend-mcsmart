@@ -10,7 +10,7 @@
     "iphone": "npx react-native run-ios --device \"iPhone Gian\"",
     "link-font": "npx react-native-asset",
     "lint": "eslint .",
-    "start": "react-native start",
+    "start": "react-native start --reset-cache",
     "test": "jest",
     "clean": "cd android && ./gradlew clean",
     "pod": "rm -rf ios/Pods ios/Podfile.lock && cd ios && pod install",

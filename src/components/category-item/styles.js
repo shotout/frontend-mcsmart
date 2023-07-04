@@ -26,7 +26,7 @@ export default StyleSheet.create({
     width: moderateScale(100),
   },
   ctnIconCategory: {
-    width: moderateScale(100),
+    width: moderateScale(80),
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
