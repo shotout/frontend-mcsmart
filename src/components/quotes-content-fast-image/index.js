@@ -34,7 +34,7 @@ export default function QuotesContent({
   onPressRating,
   handleShowInterstialAdsLearn,
 }) {
-  const [isRepeat, setRepeat] = useState(!!item.repeat);
+  const [isRepeat, setRepeat] = useState(item?.repeat?.time != undefined ? true : false);
   const handleRepeat = () => {
     setRepeat(!isRepeat);
     if (isRepeat) {
