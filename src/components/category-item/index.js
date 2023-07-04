@@ -47,7 +47,6 @@ const CategoryItem = ({onPress, item, isSelected}) => {
         </View>
       );
     }
-    console.log('iniiii',isSelected)
     return (
       <View
         style={[

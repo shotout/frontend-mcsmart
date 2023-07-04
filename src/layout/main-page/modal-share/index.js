@@ -29,9 +29,11 @@ import IconIg from '../../../assets/svg/icon_ig.svg';
 import IconStoryFb from '../../../assets/svg/icon_story_fb.svg';
 import IconFb from '../../../assets/svg/icon_fb.svg';
 import IconCollection from '../../../assets/svg/icon_add_collection.svg';
+import IconCollectionYellow from '../../../assets/svg/icon_add_collection_yellow.svg';
 import IconSave from '../../../assets/svg/icon_save.svg';
 import IconCopy from '../../../assets/svg/icon_copy.svg';
 import IconDislike from '../../../assets/svg/icon_dislike.svg';
+import IconDislikeYellow from '../../../assets/svg/icon_dislike_yellow.svg';
 import IconMore from '../../../assets/svg/icon_more.svg';
 import IconDislikeColor from '../../../assets/svg/icon_dislike_color_red.svg';
 import IconChecklistColor from '../../../assets/svg/icon_checklist_color_tosca.svg';
@@ -64,8 +66,12 @@ function ModalShare(props) {
   const [showModalCopy, setShowModalCopy] = useState(false);
   const [showModalCollection, setShowModalCollection] = useState(false);
   const [showModalAddCollection, setShowModalAddCollection] = useState(false);
+  const [labelDislike, setLabelDislike] = useState('Dislike')
+  const [labelAdd, setLabelAdd] = useState('Add to collection')
+  const [idLike, setIdLike] = useState([])
+  const [idAdd, setIdAdd] = useState([])
   const base64CaptureImage = useRef(null);
-
+console.log(idLike)
   useEffect(() => {
     if (captureUri) {
       RNFS.readFile(captureUri, 'base64').then(res => {
@@ -117,11 +123,14 @@ function ModalShare(props) {
 
   const handleSubmit = async () => {
     try {
+
       setShowModalDislike(true);
+      setIdLike(idLike.concat(idQuote))
       const payload = {
         type: '2',
       };
       // await dislikeQuotes(payload, idQuote);
+     
       setTimeout(() => {
         setShowModalDislike(false);
       }, 1000);
@@ -333,8 +342,8 @@ function ModalShare(props) {
     return (
       <View style={styles.rowCard}>
         <Card
-          label="Add to collection"
-          icon={<IconCollection width="100%" height="100%" />}
+          label={idAdd.includes(idQuote) ? 'Added to collection' : labelAdd}
+          icon={idAdd.includes(idQuote)   ? <IconCollectionYellow width="100%" height="100%" /> : <IconCollection width="100%" height="100%" />}
           onPress={() => {
             renderOnPressCollection();
           }}
@@ -350,8 +359,8 @@ function ModalShare(props) {
           onPress={copyToClipboard}
         />
         <Card
-          label="Dislike"
-          icon={<IconDislike width="100%" height="100%" />}
+          label={idLike.includes(idQuote) ? 'Disliked' : labelDislike}
+          icon={idLike.includes(idQuote) ? <IconDislikeYellow width="100%" height="100%" /> : <IconDislike width="100%" height="100%" />}
           onPress={() => {
             handleSubmit();
           }}
@@ -469,6 +478,10 @@ function ModalShare(props) {
               setShowModalAddCollection(false);
             }}
             idQuote={idQuote}
+            update={(value) =>  {
+              setIdAdd(idAdd.concat(idQuote))
+            }
+            }
           />
 
           <ModalCollection

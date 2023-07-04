@@ -21,10 +21,12 @@ function ModalAddCollection({
   idQuote,
   fetchCollection,
   showAddNew,
+  update
 }) {
   const [selectedCard, setSelectedCard] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [showModalNewCollection, setShowModalNewCollection] = useState(false);
+  const [isUpdate, setUpdate] = useState(false);
 
   const isDataSelected = value => {
     const findItem = selectedCard.find(item => item === value);
@@ -35,10 +37,12 @@ function ModalAddCollection({
   const handleSubmit = async () => {
     try {
       setLoading(true);
+
       await addToCollection({
         idCollection: selectedCard[0],
         idQuote,
       });
+      update(true)
       await fetchCollection();
       onClose();
       setLoading(false);
