@@ -101,7 +101,7 @@ export default function QuotesContent({
       console.log('IS AVAILABLE', isAvailable, url);
       if (isAvailable) {
         const result = await InAppBrowser.open(url, {
-          dismissButtonStyle: 'cancel',
+          dismissButtonStyle: 'done',
           enableUrlBarHiding: true,
           hasBackButton: false,
           modalPresentationStyle: 'popover',
