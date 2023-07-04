@@ -28,6 +28,7 @@ export default StyleSheet.create({
   rowWrap: {
     flexDirection: 'row',
     alignItems: 'center',
+    width: '80%',
   },
   iconRight: {
     width: moderateScale(18),

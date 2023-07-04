@@ -1,7 +1,7 @@
 export const listTopic = [
   {name: 'Celebrities', id: 1},
   {name: 'Economy & Business', id: 2},
-  {name: 'Food & Drink', id: 3},
+  {name: 'Food & Drinks', id: 3},
   {name: 'Geography & Travel', id: 4},
   {name: 'History & Politics', id: 5},
   {name: 'Music & Entertainment', id: 6},

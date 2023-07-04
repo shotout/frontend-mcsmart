@@ -682,7 +682,7 @@ function MainPage({
     }
     return (
       <View style={styles.ctnWatermark}>
-        <Text style={styles.txtWatermark}>McSmart App</Text>
+        <Text style={styles.txtWatermark}>@mcsmart_app</Text>
       </View>
     );
   }

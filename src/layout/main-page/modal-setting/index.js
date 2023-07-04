@@ -226,14 +226,14 @@ function ModalSetting({contentRef, onClose, collections}) {
             title="Instagram"
             icon={<IconIgBlack width="100%" height="100%" />}
             onPress={() => {
-              Linking.openURL('https://www.instagram.com/mcsmart_app/');
+              Linking.openURL('https://www.instagram.com/mcsmart_app');
             }}
           />
           <ListContent
             title="Facebook"
             icon={<IconFbBlack width="100%" height="100%" />}
             onPress={() => {
-              Linking.openURL('https://www.facebook.com/McSmartApp');
+              Linking.openURL('https://www.facebook.com/McSmartApp?mibextid=LQQJ4d');
             }}
           />
           <View style={styles.ctnFooter}>
