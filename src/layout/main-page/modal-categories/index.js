@@ -121,7 +121,10 @@ function ModalCategories({
   const handleSelectCategory = async (id, isHasSelect) => {
     let curentCategory = [...categoryValue];
     if (isHasSelect) {
-      curentCategory = curentCategory.filter((cat) => cat !== id)
+      curentCategory = curentCategory.filter((cat) => cat !== id);
+      if (curentCategory?.length === 0) {
+        curentCategory = [1];
+      }
     } else {
       curentCategory.push(id);
     }

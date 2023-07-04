@@ -11,9 +11,11 @@ import {
 import {moderateScale} from 'react-native-size-matters';
 import InAppBrowser from 'react-native-inappbrowser-reborn';
 import styles from './styles';
+import stylesWatermark from '../../screens/main-page/styles';
 import {colors, sizing} from '../../shared/styling';
 import {removeRepeat, repeatQuotes} from '../../shared/request';
 import {setAnimationCounter} from '../../store/defaultState/actions';
+import { isUserPremium } from '../../helpers/user';
 
 const lightbulbIcon = require('../../assets/icons/lightbulb.png');
 const searchWhiteIcon = require('../../assets/icons/search_white.png');
@@ -182,6 +184,17 @@ export default function QuotesContent({
     return null;
   }
 
+  function renderWaterMark() {
+    if (isUserPremium()) {
+      return null;
+    }
+    return (
+      <View style={styles.ctnWatermark}>
+        <Text style={styles.txtWatermark}>@mcsmart_app</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.ctnWrapper}>
       {renderBackgroundImage()}
@@ -253,6 +266,7 @@ export default function QuotesContent({
               </View>
               {renderButtonOption()}
             </View>
+            {renderWaterMark()}
           </View>
         </ImageBackground>
       </Animated.View>
