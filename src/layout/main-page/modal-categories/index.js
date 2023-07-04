@@ -63,6 +63,7 @@ function ModalCategories({
 
       if (userProfile.data.categories?.length > 0 && data) {
         setCategoryValue(userProfile.data.categories.map((item) => item.id));
+        console.log('disini 4', categoryValue)
         fetchList(categoryValue)
         console.log('masuk sini 3', categoryValue)
       } else if (userProfile.data.categories?.length > 0) {
@@ -85,9 +86,12 @@ function ModalCategories({
           result = [categoryValue[categoryValue.length - 1]];
           
           setCategoryValue(result);
-          fetchList(result)
+          if(categoryValue[categoryValue.length - 1] != undefined){
+            fetchList(result)
+          }
         }
       } else if (userProfile.data.categories?.length === 0){
+      
         fetchList([2])
       }
     };
