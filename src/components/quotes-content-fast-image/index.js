@@ -111,7 +111,7 @@ export default function QuotesContent({
           showTitle: false,
           enableDefaultShare: false,
         });
-        if (result.type === 'cancel') {
+        if (result.type === 'done') {
           setTimeout(() => {
             if (typeof handleShowInterstialAdsLearn === 'function')
               handleShowInterstialAdsLearn();
