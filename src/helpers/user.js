@@ -44,12 +44,14 @@ export const openImprint = () => {
 
 export const isUserPremium = () => {
   const profile = store.getState().defaultState.userProfile;
-  const { type } = profile.data.subscription;
-  if (type === 1) {
-    return false;
+  if (profile?.data != undefined) {
+    const {type} = profile?.data?.subscription;
+    if (type === 1 || type === 5) {
+      return false;
+    }
+    return true;
   }
   return true;
-  // true;
 };
 
 export const handlePayment = async (vendorId, cb) =>

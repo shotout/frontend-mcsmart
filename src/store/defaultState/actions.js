@@ -180,7 +180,7 @@ export const fetchListQuote = (params, isPassPremium) => async (dispatch) =>
         ...params,
       });
       let restPas = [];
-      if (!isUserPremium()) {
+      if (isUserPremium()) {
         const pastQuote = await getListPastQuotes({
           length: 5,
           page: 1,
@@ -278,19 +278,30 @@ export const fetchCollection = () => async (dispatch) =>
     }
   });
 
-export const fetchPastQuotes = () => async (dispatch) =>
+  export const fetchPastQuotes = () => async dispatch =>
   new Promise(async (resolve, reject) => {
     try {
-      dispatch({ type: types.START_PAST_QUOTES });
+      dispatch({type: types.START_PAST_QUOTES});
       const pastQuote = await getListPastQuotes();
-      dispatch({
-        type: types.SUCCESS_PAST_QUOTES,
-        payload: pastQuote.data,
-      });
+      if (pastQuote.data.data.length > 0) {
+        dispatch({
+          type: types.SUCCESS_PAST_QUOTES,
+          payload: pastQuote.data,
+        });
+      } else {
+        // const resp = await getListQuotes({
+        //   length: 15,
+        //   page: 1,
+        // });
+        // dispatch({
+        //   type: types.SUCCESS_PAST_QUOTES,
+        //   payload: resp.data,
+        // });
+      }
       resolve(pastQuote);
     } catch (err) {
-      console.log("ERr fetch past quotes:", err);
-      dispatch({ type: types.ERROR_PAST_QUOTES });
+      console.log('ERr fetch past quotes:', err);
+      dispatch({type: types.ERROR_PAST_QUOTES});
       reject(err);
     }
   });

@@ -31,8 +31,7 @@ function ContentStep7({
   const currentIndex = useRef(0);
   const [isTextAnimated, setIsTextAnimated] = useState(false);
   const [activeIndexTutorial, setActiveIndexTutorial] = useState(0);
-  const [isSwiped, setIsSwiped] = useState(false);
-  const swipeAnim = useRef(new Animated.Value(0)).current;
+  const slideAnimation = useRef(new Animated.Value(0)).current;
 
   function getDataQuote() {
     switch (substep) {
@@ -87,36 +86,6 @@ function ContentStep7({
     setActiveIndexTutorial(0);
   }, [substep]);
 
-  const handleSwipe = () => {
-    setIsSwiped(true);
-    Animated.timing(swipeAnim, {
-      toValue: 1,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const resetSwipe = () => {
-    setIsSwiped(false);
-    Animated.timing(swipeAnim, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-  const panResponder = useRef(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: (_, gestureState) => gestureState.dx > 5,
-      onPanResponderRelease: (_, gestureState) => {
-        if (gestureState.dx > 50) {
-          handleSwipe();
-        } else {
-          resetSwipe();
-        }
-      },
-    })
-  ).current;
-
   const onMomentoumScrollEnd = (e) => {
     const width = sizing.getDimensionWidth(1);
     const pageNumber = Math.min(
@@ -127,6 +96,22 @@ function ContentStep7({
     currentIndex.current = pageNumber - 1;
     setActiveIndexTutorial(pageNumber - 1);
   };
+
+  const startAnimation = () => {
+    Animated.timing(slideAnimation, {
+      toValue: 200, // Sesuaikan jarak swipe yang diinginkan
+      duration: 500, // Sesuaikan durasi animasi yang diinginkan
+      useNativeDriver: true,
+    }).start(() => {
+      // Setelah animasi selesai, atur kembali nilai slideAnimation ke 0
+      slideAnimation.setValue(0);
+    });
+  };
+  useEffect(() => {
+    if (isTextAnimated) {
+      startAnimation();
+    }
+  }, [isTextAnimated]);
 
   function getTextInput() {
     switch (substep) {
@@ -159,18 +144,19 @@ function ContentStep7({
   function renderInput() {
     return (
       <View style={[styles.inputWrapper, styles.ctnInputWrapper]}>
-       <Animated.Text
-          numberOfLines={4}
-          style={[
-            styles.txtInput,
-            isTextAnimated && {
-              transform: [{ translateX: 200 }], // Sesuaikan jarak swipe yang diinginkan
-              opacity: 0,
-            },
-          ]}
-        >
-          {getTextInput()}
-        </Animated.Text>
+        <Animated.Text
+        numberOfLines={4}
+        style={[
+          styles.txtInput,
+          {
+            transform: [{ translateX: slideAnimation }],
+            opacity: isTextAnimated ? 0 : 1,
+          },
+        ]}
+      >
+        {getTextInput()}
+      </Animated.Text>
+
         <View style={styles.ctnGoalsInput}>
           {["Yes", "No"].map((item) => (
             <ButtonOutline
@@ -181,14 +167,19 @@ function ContentStep7({
                 setIsTextAnimated(true);
                 setTimeout(() => {
                   setIsTextAnimated(false);
-                }, 300);
+                }, 500);
                 flatListRef.current.scrollToIndex({ animated: true, index: 0 });
               }}
-              btnStyle={styles.btnOption}
+              btnStyle={[
+                styles.btnOption,
+                {
+                  transform: [{ translateX: slideAnimation }],
+                  opacity: isTextAnimated ? 0 : 1,
+                },
+              ]}
               theme="blue"
               label={item}
               key={item}
-              {...panResponder.panHandlers}
             />
           ))}
         </View>
@@ -226,6 +217,7 @@ function ContentStep7({
             style={styles.imgQuote}
           />
         </View>
+        
         <FlatList
           data={getDataQuote()}
           extraData={activeIndexTutorial}
@@ -238,6 +230,8 @@ function ContentStep7({
           renderItem={renderListQuote}
           keyExtractor={(item) => item.id}
         />
+        
+        
         <View style={styles.dotWrapper}>
           {getDataQuote().map((item, index) => (
             <View
