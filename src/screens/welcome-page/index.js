@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Image, Platform, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {navigate} from '../../shared/navigationRef';
@@ -11,6 +11,11 @@ import {handlePayment} from '../../helpers/user';
 const bgImage = require('../../assets/images/welcome_banner.png');
 
 function WelcomePage() {
+  useEffect(() => {
+    if (Platform.OS === 'ios') {
+      askTrackingPermission();
+    }
+  }, [])
   return (
     <View style={styles.ctnRoot}>
       <View style={styles.ctnIcon}>
@@ -29,9 +34,6 @@ function WelcomePage() {
           label="Get started"
           onPress={() => {
             navigate('Register');
-            if (Platform.OS === 'ios') {
-              askTrackingPermission();
-            }
             // handlePayment('onboarding');
           }}
         />
