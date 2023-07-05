@@ -180,8 +180,8 @@ function Register({
       };
       const res = await postRegister(payload);
       handleSetProfile(res);
-      await fetchListQuote();
-      await fetchCollection();
+      fetchListQuote();
+      fetchCollection();
       setTimeout(() => {
         reloadUserProfile();
       }, 2000);

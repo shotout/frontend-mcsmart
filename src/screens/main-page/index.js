@@ -368,7 +368,6 @@ function MainPage({
       // }
 
       if (!isUserPremium()) {
-        console.log(activeSlide, currentSlide);
         handleShowInterstialAds(activeQuote, activeSlide);
       }
       if (!interstialAds.loaded) {
@@ -428,9 +427,8 @@ function MainPage({
   }, [userProfile, isPremiumBefore]);
 
   const handleShowInterstialAds = async (activeQuote) => {
-    console.log("TRY SHOW INTERSTIAL ADS QUOTE", interstialAdsLearn.loaded);
+   
     if (activeQuote?.item_type === "in_app_ads") {
-      console.log(activeQuote);
       if (interstialAds.loaded) {
         interstialAds.show();
       } else {
