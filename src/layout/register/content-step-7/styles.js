@@ -32,6 +32,11 @@ export default StyleSheet.create({
     fontSize: moderateScale(18),
     lineHeight: moderateScale(28),
   },
+  sliderContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    transform: [{ translateX: -200 }], // Sesuaikan jarak swipe yang diinginkan
+  },
   txtDesc: {
     marginHorizontal: moderateScale(20),
     fontFamily: fonts.InterMedium,
