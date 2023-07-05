@@ -189,13 +189,6 @@ console.log(idLike)
         appId: '637815961525510', // facebook appId
         social: Share.Social.FACEBOOK_STORIES,
       });
-      // await Share.shareSingle({
-      //   url: base64CaptureImage.current,
-      //   appId: '637815961525510', // facebook appId
-      //   backgroundBottomColor: '#fff',
-      //   backgroundTopColor: '#fff',
-      //   social: Share.Social.FACEBOOK,
-      // });
       eventShare();
     } catch (err) {
       console.log('Error post to story:', err);
@@ -324,7 +317,12 @@ console.log(idLike)
         <Card
           label="Facebook"
           icon={<IconFb width="100%" height="100%" />}
-          onPress={handleShareFBDefault}
+          onPress={() => {
+            Alert.alert('“McSmart”\nWould Like to open “Facebook”', '', [
+              {text: 'Cancel', onPress: () => {}},
+              {text: 'OK', onPress: handleShareFBDefault},
+            ]);
+          }}
         />
       </View>
     );

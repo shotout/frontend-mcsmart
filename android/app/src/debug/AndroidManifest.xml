@@ -2,6 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <queries>
+      <package android:name="com.google.android.youtube" />
+      <package android:name="com.facebook.katana" />
+      <package android:name="com.facebook.orca" />
+      <package android:name="com.facebook.mlite" />
+      <package android:name="com.facebook.lite" />
+      <package android:name="org.telegram.messenger" />
+      <package android:name="com.whatsapp" />
+      <package android:name="com.instagram.android" />
+    </queries>
+
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
