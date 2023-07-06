@@ -27,7 +27,7 @@ export default StyleSheet.create({
   },
   quoteStyle: {
     fontFamily: fonts.InterMedium,
-    fontSize: moderateScale(14),
+    fontSize: moderateScale(13),
     color: colors.black,
     lineHeight: moderateScale(22),
   },

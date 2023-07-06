@@ -100,7 +100,7 @@ export default StyleSheet.create({
     marginTop: 20,
   },
   txtStartAds: {
-    color: '#FFE55A',
+    color: colors.black,
   },
   ctnCountdown: {
     width: '100%',

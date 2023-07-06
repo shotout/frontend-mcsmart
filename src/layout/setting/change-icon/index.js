@@ -30,7 +30,7 @@ import {updateProfile} from '../../../shared/request';
 import LoadingIndicator from '../../../components/loading-indicator';
 
 const bannerIcon1 = require('../../../assets/app_icon_asset/first.png');
-const bannerIcon2 = require('../../../assets/app_icon_asset/second.png');
+const bannerIcon2 = require('../../../assets/app_icon_asset/second_new.png');
 const bannerIcon3 = require('../../../assets/app_icon_asset/third.png');
 const bannerIcon4 = require('../../../assets/app_icon_asset/fourth.png');
 
