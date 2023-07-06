@@ -1,35 +1,36 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   FlatList,
   Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
-} from 'react-native';
-import {connect} from 'react-redux';
-import Share from 'react-native-share';
-import {Modal, Portal} from 'react-native-paper';
-import HeaderButton from '../../../components/header-button';
-import Search from '../../../components/search';
-import styles from './styles';
-import IconSort from '../../../assets/svg/icon_sort.svg';
-import CardMyCollection from '../../../components/card-my-collection';
-import ImgNoLike from '../../../assets/svg/img_no_like.svg';
-import states from './states';
-import ModalAddCollection from '../../main-page/modal-add-collection';
+} from "react-native";
+import { connect } from "react-redux";
+import Share from "react-native-share";
+import { Modal, Portal } from "react-native-paper";
+import HeaderButton from "../../../components/header-button";
+import Search from "../../../components/search";
+import styles from "./styles";
+import IconSort from "../../../assets/svg/icon_sort.svg";
+import CardMyCollection from "../../../components/card-my-collection";
+import ImgNoLike from "../../../assets/svg/img_no_like.svg";
+import states from "./states";
+import ModalAddCollection from "../../main-page/modal-add-collection";
 import {
   dislikeQuotes,
   getListRepeat,
   removeRepeat,
-} from '../../../shared/request';
-import dispatcher from './dispatcher';
-import PopupDelete from '../../../components/popup-delete';
-import useDebounce from '../../../helpers/useDebounce';
-import IconDislike from '../../../assets/svg/icon_dislike.svg';
-import LoadingIndicator from '../../../components/loading-indicator';
-import {downloadText} from '../../../shared/static';
-
-function RepeatQuotes({contentRef, onClose, isVisible}) {
+} from "../../../shared/request";
+import dispatcher from "./dispatcher";
+import PopupDelete from "../../../components/popup-delete";
+import useDebounce from "../../../helpers/useDebounce";
+import IconDislike from "../../../assets/svg/icon_dislike.svg";
+import LoadingIndicator from "../../../components/loading-indicator";
+import { downloadText } from "../../../shared/static";
+import IconBack from "../../../assets/svg/icon_back.svg";
+function RepeatQuotes({ contentRef, onClose, isVisible }) {
   const [showModalAddCollection, setShowModalAddCollection] = useState(false);
   const [activeQuote, setActiveQuote] = useState();
   const [isLoading, setLoading] = useState(false); // utk button
@@ -37,7 +38,7 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
   const [dataActive, setDataActive] = useState({});
   const [instruksi, setInstruksi] = useState(false);
   const [moreData, setMoreData] = useState(false);
-  const [textQuote, setTextQuote] = useState('');
+  const [textQuote, setTextQuote] = useState("");
   const [showModalLike, setShowModalLike] = useState(false);
   const [searchText, setSearchText] = useState(null);
   const debounceSearch = useDebounce(searchText, 500);
@@ -45,8 +46,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
     listLike: [],
     activePage: 1,
     isloading: true,
-    dir: '',
-    column: '',
+    dir: "",
+    column: "",
     total: 0,
   });
 
@@ -55,8 +56,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
       listLike: [],
       activePage: 1,
       isloading: true,
-      dir: '',
-      column: '',
+      dir: "",
+      column: "",
       total: 0,
     });
   };
@@ -66,8 +67,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
       listLike: [],
       activePage: 1,
       isloading: true,
-      dir: '',
-      column: '',
+      dir: "",
+      column: "",
       total: 0,
     });
     const params = {
@@ -92,7 +93,7 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
   }, [isVisible]);
 
   useEffect(() => {
-    if (debounceSearch || debounceSearch === '') {
+    if (debounceSearch || debounceSearch === "") {
       const handleSearch = async () => {
         resetList();
         const params = {
@@ -116,7 +117,7 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
     if (!likeData.loading) {
       if (likeData.listLike?.length > 0) {
         if (likeData.listLike?.length < likeData.total) {
-          setLikeData({...likeData, isloading: true});
+          setLikeData({ ...likeData, isloading: true });
           const listLiked = await getListRepeat({
             length: 10,
             page: likeData.activePage + 1,
@@ -136,35 +137,35 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
     }
   };
 
-  const handleShare = async quoteText => {
+  const handleShare = async (quoteText) => {
     await Share.open({
       message: `“${quoteText}”\n\n${downloadText}`,
     });
   };
 
-  const handleDelete = async idQuote => {
+  const handleDelete = async (idQuote) => {
     try {
       removeRepeat(idQuote);
       setLikeData({
         ...likeData,
-        listLike: likeData.listLike.filter(item => item.id !== idQuote),
+        listLike: likeData.listLike.filter((item) => item.id !== idQuote),
         total: likeData.total - 1,
       });
     } catch (err) {
-      console.log('Error new collection:', err);
+      console.log("Error new collection:", err);
     }
   };
 
   const onShowHide = () => {
-    setInstruksi(prevState => !prevState);
+    setInstruksi((prevState) => !prevState);
   };
 
-  const onMoreShowHide = idActive => {
+  const onMoreShowHide = (idActive) => {
     setDataActive(idActive || null);
-    setMoreData(prevState => !prevState);
+    setMoreData((prevState) => !prevState);
   };
 
-  const onPressSelect = value => {
+  const onPressSelect = (value) => {
     if (moreData === true) {
       onMoreShowHide(value);
     } else {
@@ -176,8 +177,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
     resetList();
     const params = {
       length: 10,
-      dir: 'asc',
-      column: 'title',
+      dir: "asc",
+      column: "title",
       page: 1,
     };
     const res = await getListRepeat(params);
@@ -185,8 +186,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
       ...likeData,
       listLike: res.data.data,
       isloading: false,
-      dir: 'asc',
-      column: 'title',
+      dir: "asc",
+      column: "title",
     });
   };
 
@@ -194,8 +195,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
     resetList();
     const params = {
       length: 10,
-      dir: 'desc',
-      column: 'title',
+      dir: "desc",
+      column: "title",
       page: 1,
     };
     const res = await getListRepeat(params);
@@ -203,8 +204,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
       ...likeData,
       listLike: res.data.data,
       isloading: false,
-      dir: 'desc',
-      column: 'title',
+      dir: "desc",
+      column: "title",
     });
   };
 
@@ -212,8 +213,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
     resetList();
     const params = {
       length: 10,
-      dir: 'desc',
-      column: 'id',
+      dir: "desc",
+      column: "id",
       page: 1,
     };
     const res = await getListRepeat(params);
@@ -221,8 +222,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
       ...likeData,
       listLike: res.data.data,
       isloading: false,
-      dir: 'desc',
-      column: 'id',
+      dir: "desc",
+      column: "id",
     });
   };
 
@@ -230,8 +231,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
     resetList();
     const params = {
       length: 10,
-      dir: 'asc',
-      column: 'id',
+      dir: "asc",
+      column: "id",
       page: 1,
     };
     const res = await getListRepeat(params);
@@ -240,8 +241,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
       ...likeData,
       listLike: res.data.data,
       isloading: false,
-      dir: 'asc',
-      column: 'id',
+      dir: "asc",
+      column: "id",
     });
   };
 
@@ -251,7 +252,7 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
         setShowModalLike(true);
       }
       const payload = {
-        type: status ? '2' : '1',
+        type: status ? "2" : "1",
       };
       await dislikeQuotes(payload, idQuote);
 
@@ -261,7 +262,7 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
         }, 200);
       }
     } catch (err) {
-      console.log('Error dislike:', err);
+      console.log("Error dislike:", err);
     }
   };
 
@@ -273,7 +274,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
             onPress={() => {
               handleSortTitleAsc();
               onShowHide();
-            }}>
+            }}
+          >
             <View style={styles.ctnRowSort}>
               <Text style={styles.label}>Sort by title A-Z</Text>
             </View>
@@ -283,7 +285,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
             onPress={() => {
               handleSortTitleDesc();
               onShowHide();
-            }}>
+            }}
+          >
             <View style={styles.ctnRowSort}>
               <Text style={styles.label}>Sort by title Z-A</Text>
             </View>
@@ -293,7 +296,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
             onPress={() => {
               handleSortDesc();
               onShowHide();
-            }}>
+            }}
+          >
             <View style={styles.ctnRowSort}>
               <Text style={styles.label}>Sort by newest</Text>
             </View>
@@ -303,7 +307,8 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
             onPress={() => {
               handleSortAsc();
               onShowHide();
-            }}>
+            }}
+          >
             <View style={styles.ctnRowSort}>
               <Text style={styles.label}>Sort by oldest</Text>
             </View>
@@ -321,7 +326,7 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
           ctnRootStyle={styles.searchStyle}
           placeholder="Search"
           value={searchText}
-          onChangeText={value => {
+          onChangeText={(value) => {
             setSearchText(value);
           }}
         />
@@ -347,7 +352,7 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
           onPresShare={() => {
             handleShare(item.title);
           }}
-          onPresLiked={status => {
+          onPresLiked={(status) => {
             handleLike(item.id, status);
           }}
           onPressAddCollection={() => {
@@ -355,15 +360,19 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
             setShowModalAddCollection(true);
           }}
           onPressDelete={() => {
-            Alert.alert('Are you sure you want to stop repeating this Fact?', '', [
-              {
-                text: 'Yes',
-                onPress: () => {
-                  handleDelete(item.id);
+            Alert.alert(
+              "Are you sure you want to stop repeating this Fact?",
+              "",
+              [
+                {
+                  text: "Yes",
+                  onPress: () => {
+                    handleDelete(item.id);
+                  },
                 },
-              },
-              {text: 'Cancel', onPress: () => {}},
-            ]);
+                { text: "Cancel", onPress: () => {} },
+              ]
+            );
           }}
           onPressMore={() => {
             onPressSelect(item.id);
@@ -383,7 +392,7 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
             <ImgNoLike width="100%" height="100%" />
           </View>
           <Text style={styles.ctnText}>
-            {'You don’t have any\nrepeated Facts yet'}
+            {"You don’t have any\nrepeated Facts yet"}
           </Text>
         </View>
       );
@@ -431,10 +440,11 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
           visible={showModalLike}
           animationType="fade"
           transparent
-          contentContainerStyle={{flex: 1}}
+          contentContainerStyle={{ flex: 1 }}
           onDismiss={() => {
             setShowModalLike(false);
-          }}>
+          }}
+        >
           <View style={styles.ctnDislike}>
             <View style={styles.ctnBgDislike}>
               <View style={styles.iconDislikeWrap}>
@@ -455,23 +465,33 @@ function RepeatQuotes({contentRef, onClose, isVisible}) {
         visible={isVisible}
         animationType="fade"
         transparent
-        contentContainerStyle={{flex: 1}}
-        onDismiss={onClose}>
+        contentContainerStyle={{ flex: 1 }}
+        onDismiss={onClose}
+      >
         <View style={styles.ctnRoot}>
           <View style={styles.ctnContent}>
-            <HeaderButton
-              title={`Deep Learning\n(Repeated Facts)`}
-              onPress={onClose}
-            />
+          
+              <View style={[styles.rowWrap]}>
+                <TouchableOpacity onPress={onClose}>
+                  <View style={styles.iconWrap}>
+                    <IconBack width="100%" height="100%" />
+                  </View>
+                </TouchableOpacity>
+                <View style={styles.titleWrap}>
+                  <Text ellipsizeMode="tail" style={styles.ctnTitle}>
+                    Deep Learning (Repeated Facts)
+                  </Text>
+                </View>
+              </View>
             <View style={styles.ctnWrap}>
               {renderSearch()}
               <FlatList
-                style={{flex: 1}}
+                style={{ flex: 1 }}
                 contentContainerStyle={styles.ctnScroll}
                 showsVerticalScrollIndicator={false}
                 data={likeData.listLike}
-                renderItem={({item, index}) => renderContent(item, index)}
-                keyExtractor={item => item.id}
+                renderItem={({ item, index }) => renderContent(item, index)}
+                keyExtractor={(item) => item.id}
                 ListEmptyComponent={renderNoData()}
                 ListFooterComponent={() => {
                   if (

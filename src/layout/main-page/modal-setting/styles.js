@@ -133,8 +133,8 @@ export default StyleSheet.create({
     paddingBottom: moderateScale(20),
   },
   iconChangedWrap: {
-    width: moderateScale(60),
-    height: moderateScale(60),
+    width: moderateScale(80),
+    height: moderateScale(80),
     resizeMode: 'contain',
   },
   txtChanged: {

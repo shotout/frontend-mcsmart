@@ -33,6 +33,7 @@ export default function QuotesContent({
   isYellowTrace,
   onPressRating,
   handleShowInterstialAdsLearn,
+  main
 }) {
   const [isRepeat, setRepeat] = useState(item?.repeat?.time != undefined ? true : false);
   const handleRepeat = () => {
@@ -266,7 +267,7 @@ export default function QuotesContent({
               </View>
               {renderButtonOption()}
             </View>
-            {renderWaterMark()}
+            {main ? null : renderWaterMark()}
           </View>
         </ImageBackground>
       </Animated.View>

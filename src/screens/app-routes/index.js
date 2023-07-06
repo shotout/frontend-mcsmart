@@ -44,6 +44,7 @@ import {
 import DeviceInfo from "react-native-device-info";
 import TimeZone from "react-native-timezone";
 import store from "../../store/configure-store";
+import { askTrackingPermission } from "../../helpers/eventTracking";
 
 const Stack = createNativeStackNavigator();
 
@@ -230,6 +231,9 @@ function Routes({ registerData }) {
     }
     if (registerData) {
       return "Register";
+    }
+    if (Platform.OS === 'ios') {
+      askTrackingPermission();
     }
     return "WelcomePage";
   }

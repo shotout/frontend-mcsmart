@@ -54,7 +54,7 @@ export default StyleSheet.create({
   txtBtnAdd: {
     fontSize: moderateScale(16),
     fontFamily: fonts.InterMedium,
-    color: colors.yellow,
+    color: colors.black,
   },
   rowContentWrap: {
     flexDirection: 'row',
@@ -86,5 +86,17 @@ export default StyleSheet.create({
     borderRadius: moderateScale(17 / 2),
     borderWidth: 1,
     borderColor: colors.yellow,
+  },
+  btnClose: {
+    height: moderateScale(24),
+    width: moderateScale(24),
+    resizeMode: 'contain',
+    marginHorizontal: moderateScale(10),
+    marginVertical: moderateScale(5),
+  },
+  btnStyle: {
+   alignItems: 'flex-end',
+    left: moderateScale(20),
+    marginTop: moderateScale(-20),
   },
 });
