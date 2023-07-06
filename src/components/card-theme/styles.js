@@ -30,7 +30,7 @@ export default StyleSheet.create({
     width: moderateScale(25),
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'#fff',
+    backgroundColor:'#292929',
     borderRadius: moderateScale(25 / 2)
   },
   ctnIconItem: {

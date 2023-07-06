@@ -27,7 +27,7 @@ import ModalUnlockCategory from '../modal-unlock-ads';
 
 const themesArr = getArrThemes();
 
-const iconSuffle = require('../../assets/icons/random_theme.png');
+const iconSuffle = require('../../assets/icons/random_theme_new.png');
 const adsIcon = require('../../assets/icons/ads_icon.png');
 const themesBanner = require('../../assets/icons/themes_banner.png');
 
@@ -179,7 +179,7 @@ function CardTheme({
         <View style={styles.ctnLock}>
           <View style={styles.ctnIcon}>
             <View style={styles.ctnIconItem}>
-              <IconLockWhite color="#000" width="100%" height="100%" />
+              <IconLockWhite color="#fff" width="100%" height="100%" />
             </View>
           </View>
           <View style={styles.ctnAdsIcon}>
