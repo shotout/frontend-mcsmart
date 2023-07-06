@@ -96,7 +96,7 @@ console.log(idLike)
       if (premiumStatus) {
         const objStatus = JSON.parse(premiumStatus);
         if (objStatus.activeStatus === 3) {
-          await handleBasicPaywall();
+          await handlePayment('one_month_free');
           if (typeof onPremium === 'function') onPremium();
           onClose();
           const submitObj = {
