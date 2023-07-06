@@ -56,7 +56,7 @@ function ContentStep7({
         animated: true,
         index: currentIndex.current,
       });
-    }, 6000);
+    }, 3000);
 
     return () => {
       // Membersihkan interval saat komponen dibongkar

@@ -588,9 +588,13 @@ function MainPage({
   };
   const pressRepeat = async () => {
     const repeateDate = new Date();
-    const data = AsyncStorage.getItem("repeat");
+    const data = await AsyncStorage.getItem("repeat");
     if (data === null) {
       await AsyncStorage.setItem("repeat", repeateDate.toString());
+      setModalRepeat(true);
+      setTimeout(() => {
+        setModalRepeat(false);
+      }, 2000);
     } else {
       const storedDateTime = new Date(data);
       const timeDifferenceInMilliseconds = repeateDate - storedDateTime;
@@ -681,6 +685,7 @@ function MainPage({
         isYellowTrace={listWhiteYellowTrace.includes(themeUser.id)}
         isActive={activeSlide === index}
         index={index}
+        main={true}
         showButtonOption={!isTutorial.visible && !disableAnimation}
         isAnimationStart={
           !disableAnimation &&
