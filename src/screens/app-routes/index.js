@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AdEventType, AppOpenAd } from "react-native-google-mobile-ads";
 import SplashScreen from "react-native-splash-screen";
 import Purchasely from "react-native-purchasely";
-import { AppState, Platform, View } from "react-native";
+import { AppState, Linking, Platform, View } from "react-native";
 import states from "./states";
 import dispatcher from "./dispatcher";
 import PropTypes from "prop-types";
@@ -312,6 +312,30 @@ function Routes({ registerData, userProfile }) {
     };
   }, []);
 
+  useEffect(() => {
+    return notifee.onForegroundEvent(({ type, detail }) => {
+      switch (type) {
+        case EventType.DISMISSED:
+          console.log('Press dismissed notification', detail.notification);
+          break;
+        case EventType.PRESS:
+          console.log('Press pressed notification', detail.notification);
+          break;
+      }
+    });
+  }, []);
+  useEffect(() => {
+    return notifee.onBackgroundEvent(({ type, detail }) => {
+      switch (type) {
+        case EventType.DISMISSED:
+          console.log('Press dismissed notification', detail.notification);
+          break;
+        case EventType.PRESS:
+          console.log('Press pressed notification', detail.notification);
+          break;
+      }
+    });
+  }, []);
   function getInitialRoute() {
     if (userProfile?.token || registerData?.registerStep === 7) {
       return "MainPage";

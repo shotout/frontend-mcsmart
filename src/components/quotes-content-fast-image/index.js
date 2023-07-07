@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
   Image,
@@ -7,21 +7,23 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
-import InAppBrowser from 'react-native-inappbrowser-reborn';
-import styles from './styles';
-import stylesWatermark from '../../screens/main-page/styles';
-import {colors, sizing} from '../../shared/styling';
-import {removeRepeat, repeatQuotes} from '../../shared/request';
-import {setAnimationCounter} from '../../store/defaultState/actions';
-import { isUserPremium } from '../../helpers/user';
+} from "react-native";
+import { moderateScale } from "react-native-size-matters";
+import InAppBrowser from "react-native-inappbrowser-reborn";
+import styles from "./styles";
+import stylesWatermark from "../../screens/main-page/styles";
+import { colors, sizing } from "../../shared/styling";
+import { removeRepeat, repeatQuotes } from "../../shared/request";
+import { setAnimationCounter } from "../../store/defaultState/actions";
+import { isUserPremium } from "../../helpers/user";
 
-const lightbulbIcon = require('../../assets/icons/lightbulb.png');
-const searchWhiteIcon = require('../../assets/icons/search_white.png');
-const lightBulbBlack = require('../../assets/icons/lightbulb_black.png');
-const traceWhite = require('../../assets/icons/background_trace_white.png');
-const traceYellow = require('../../assets/icons/background_trace_yellow.png');
+const lightbulbIcon = require("../../assets/icons/lightbulb.png");
+const searchWhiteIcon = require("../../assets/icons/search_white.png");
+const lightBulbBlack = require("../../assets/icons/lightbulb_black.png");
+const traceWhite = require("../../assets/icons/background_trace_white.png");
+const traceYellow = require("../../assets/icons/background_trace_yellow.png");
+const waterMark = require("../../assets/icons/watermark.png");
+const watertMark_gray = require("../../assets/icons/watermark_new2.png");
 
 export default function QuotesContent({
   item,
@@ -33,9 +35,11 @@ export default function QuotesContent({
   isYellowTrace,
   onPressRating,
   handleShowInterstialAdsLearn,
-  main
+  main,
 }) {
-  const [isRepeat, setRepeat] = useState(item?.repeat?.time != undefined ? true : false);
+  const [isRepeat, setRepeat] = useState(
+    item?.repeat?.time != undefined ? true : false
+  );
   const handleRepeat = () => {
     setRepeat(!isRepeat);
     if (isRepeat) {
@@ -101,27 +105,27 @@ export default function QuotesContent({
     try {
       const url = encodeURI(`https://www.google.com/search?q=${item.title}`);
       const isAvailable = await InAppBrowser.isAvailable();
-      console.log('IS AVAILABLE', isAvailable, url);
+      console.log("IS AVAILABLE", isAvailable, url);
       if (isAvailable) {
         const result = await InAppBrowser.open(url, {
-          dismissButtonStyle: 'done',
+          dismissButtonStyle: "done",
           enableUrlBarHiding: true,
           hasBackButton: false,
-          modalPresentationStyle: 'popover',
+          modalPresentationStyle: "popover",
           ephemeralWebSession: false,
           showTitle: false,
           enableDefaultShare: false,
         });
-        if (result.type === 'cancel') {
+        if (result.type === "cancel") {
           setTimeout(() => {
-            if (typeof handleShowInterstialAdsLearn === 'function')
+            if (typeof handleShowInterstialAdsLearn === "function")
               handleShowInterstialAdsLearn();
           }, 500);
         }
-        console.log('Check result:', result);
+        console.log("Check result:", result);
       } else Linking.openURL(url);
     } catch (error) {
-      console.log('ERror open browser:', error);
+      console.log("ERror open browser:", error);
     }
   };
 
@@ -129,13 +133,13 @@ export default function QuotesContent({
     if (activeStatus.current) {
       activeStatus.current = false;
       setTimeout(() => {
-        console.log('RESET ANIMATION');
+        console.log("RESET ANIMATION");
         Animated.timing(translateX, {
           toValue: 0,
           duration: 300,
           useNativeDriver: true,
         }).start(() => {
-          console.log('SUCCESS RESET ANIMATION');
+          console.log("SUCCESS RESET ANIMATION");
 
           translateX.setValue(0);
           Animated.timing(translateX).stop();
@@ -163,7 +167,8 @@ export default function QuotesContent({
           <TouchableOpacity
             activeOpacity={0.7}
             style={[styles.ctnBtn, isRepeat && styles.bgYellow]}
-            onPress={handleRepeat}>
+            onPress={handleRepeat}
+          >
             <Image
               source={isRepeat ? lightBulbBlack : lightbulbIcon}
               style={styles.imgBtn}
@@ -175,7 +180,8 @@ export default function QuotesContent({
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={openLink}
-            style={[styles.ctnBtn, styles.mgLeft]}>
+            style={[styles.ctnBtn, styles.mgLeft]}
+          >
             <Image source={searchWhiteIcon} style={styles.imgBtn} />
             <Text style={[styles.txtButton]}>Learn More</Text>
           </TouchableOpacity>
@@ -194,27 +200,35 @@ export default function QuotesContent({
       );
     }
     return null;
-  };
+  }
+  function renderWatermarkIcon(){
+    if(!isUserPremium()){
+      return(
+        <View style={styles.ctnBgWatermark}>
+
+        <Image source={themeUser.name === 'Theme 2' ? watertMark_gray : waterMark } style={styles.traceBg} />
+      </View>
+      )
+    }
+    return null
+  }
 
   return (
     <View style={styles.ctnWrapper}>
       {renderBackgroundImage()}
       <Animated.View
         style={{
-          width: '100%',
+          width: "100%",
           height: sizing.getDimensionHeight(1),
-          transform: [{translateY: translateX}],
-        }}>
+          transform: [{ translateY: translateX }],
+        }}
+      >
         <ImageBackground source={source} style={styles.ctnBackgroundImage}>
+          {renderWatermarkIcon()}
+         
           <View style={styles.ctnIcon}>
             <View style={styles.quotesWrapper}>
               <View style={styles.txtQuotesWrapper}>
-                <View style={styles.ctnBgTrace}>
-                  <Image
-                    source={isYellowTrace ? traceYellow : traceWhite}
-                    style={styles.traceBg}
-                  />
-                </View>
                 <Text
                   style={[
                     styles.ctnQuotes,
@@ -236,7 +250,8 @@ export default function QuotesContent({
                         : moderateScale(24),
                       // textShadowOffset: {width: 1, height: 1},
                     },
-                  ]}>
+                  ]}
+                >
                   {item.title}
                 </Text>
                 {item.author && (
@@ -260,7 +275,8 @@ export default function QuotesContent({
                           ? moderateScale(Number(themeUser.line_height))
                           : moderateScale(24),
                       },
-                    ]}>
+                    ]}
+                  >
                     - {item.author}
                   </Text>
                 )}
