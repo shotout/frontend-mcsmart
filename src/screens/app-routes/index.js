@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AdEventType, AppOpenAd } from "react-native-google-mobile-ads";
 import SplashScreen from "react-native-splash-screen";
 import Purchasely from "react-native-purchasely";
-import { AppState, Platform, View } from "react-native";
+import { AppState, Linking, Platform, View } from "react-native";
 import states from "./states";
 import dispatcher from "./dispatcher";
 import PropTypes from "prop-types";
@@ -23,12 +23,15 @@ import Register from "../register";
 import MainPage from "../main-page";
 import {
   fetchInitialData,
+  fetchListQuote,
   handleSetProfile,
   resetNotificationBadge,
   setInitialLoaderStatus,
+  setPaywallNotification,
 } from "../../store/defaultState/actions";
 import { getAppOpenID } from "../../shared/static/adsId";
 import {
+  handlePayment,
   handlePaymentBypass,
   handlePaymentTwo,
   handleUpdateTimezone,
@@ -45,6 +48,7 @@ import DeviceInfo from "react-native-device-info";
 import TimeZone from "react-native-timezone";
 import store from "../../store/configure-store";
 import { askTrackingPermission } from "../../helpers/eventTracking";
+import notifee, {EventType} from '@notifee/react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -56,7 +60,7 @@ const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
 });
 appOpenAd.load();
 
-function Routes({ registerData }) {
+function Routes({ registerData, userProfile }) {
   const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
   const [showAdsOverlay, setAdsOverlay] = useState(false);
@@ -135,6 +139,87 @@ function Routes({ registerData }) {
       setFcmToken(fcmToken);
     }, 200);
   };
+  const handleNotificationQuote = async (res, remoteMessage, getInitialURL) => {
+    let idQuote = null;
+    if (getInitialURL) {
+      const urlArr = getInitialURL.split('/');
+      if (urlArr[3]) {
+        idQuote = urlArr[3];
+      }
+    }
+    if (
+      (res?.subscription?.type === 1 && res?.themes[0]?.id !== 6) ||
+      remoteMessage?.data?.id ||
+      idQuote
+    ) {
+      await fetchListQuote({notif: remoteMessage?.data?.id || idQuote || null});
+      if (remoteMessage) {
+        handleDecrementBadgeCount();
+      } else {
+        resetNotificationBadge();
+      }
+    } else {
+      fetchListQuote();
+    }
+  };
+  const handleDecrementBadgeCount = () => {
+    notifee
+      .decrementBadgeCount()
+      .then(() => notifee.getBadgeCount())
+      .then(count => {
+        if (userProfile.token) {
+          updateProfile({
+            notif_count: count,
+            _method: 'PATCH',
+          });
+        }
+      });
+  };
+  const handleNotificationOpened = async () => {
+    if (userProfile?.token) {
+      const resProfile = await reloadUserProfile();
+      let isAbleToFetchQuote = true;
+      notifee.onForegroundEvent(async ({type, detail}) => {
+        if (type === EventType.ACTION_PRESS || type === EventType.PRESS) {
+          if (detail.notification.data?.id) {
+            isAbleToFetchQuote = false;
+            handleDecrementBadgeCount();
+            if (detail.notification.data?.id) {
+              await fetchListQuote({
+                notif: detail.notification.data?.id || null,
+              });
+              scrollToTopQuote();
+            }
+          }
+          if (detail.notification.data?.type === 'paywall') {
+            console.log('Check paywall data:', detail.notification.data);
+            if (loadingRef.current) {
+              console.log('masukkkk sini iyaaaa', detail.notification.data)
+              setPaywallNotification(detail.notification.data);
+              loadingRef.current = false;
+            } else {
+              console.log('masukkkk sini ga', detail.notification.data?.placement)
+              setTimeout(() => {
+                console.log('masukkkk sini', detail.notification.data?.placement)
+                handlePayment(detail.notification.data?.placement);
+              }, 1000);
+            }
+          }
+        }
+      });
+      setTimeout(async () => {
+        if (isAbleToFetchQuote) {
+          const getInitialURL = await Linking.getInitialURL();
+          handleNotificationQuote(resProfile, null, getInitialURL);
+        }
+      }, 2000);
+    } else {
+      console.log('masukkkk sini masaaaaa', JSON.stringify(userProfile))
+      goToFirstPage();
+    }
+    
+  };
+
   useEffect(() => {
     const getInitial = async () => {
       const resLogin = await AsyncStorage.getItem("isLogin");
@@ -155,6 +240,8 @@ function Routes({ registerData }) {
       setLoading(false);
     };
     getInitial();
+    
+    handleNotificationOpened()
     Purchasely.isReadyToPurchase(true);
 
     const unsubscribeAppOpenAds = appOpenAd.addAdEventListener(
@@ -225,8 +312,32 @@ function Routes({ registerData }) {
     };
   }, []);
 
+  useEffect(() => {
+    return notifee.onForegroundEvent(({ type, detail }) => {
+      switch (type) {
+        case EventType.DISMISSED:
+          console.log('Press dismissed notification', detail.notification);
+          break;
+        case EventType.PRESS:
+          console.log('Press pressed notification', detail.notification);
+          break;
+      }
+    });
+  }, []);
+  useEffect(() => {
+    return notifee.onBackgroundEvent(({ type, detail }) => {
+      switch (type) {
+        case EventType.DISMISSED:
+          console.log('Press dismissed notification', detail.notification);
+          break;
+        case EventType.PRESS:
+          console.log('Press pressed notification', detail.notification);
+          break;
+      }
+    });
+  }, []);
   function getInitialRoute() {
-    if (isLogin) {
+    if (userProfile?.token || registerData?.registerStep === 7) {
       return "MainPage";
     }
     if (registerData) {
@@ -266,12 +377,10 @@ function Routes({ registerData }) {
 }
 
 Routes.propTypes = {
-  userProfile: PropTypes.object.isRequired,
   activeVersion: PropTypes.any,
 };
 
 Routes.defaultProps = {
-  userProfile: {},
   activeVersion: null,
 };
 

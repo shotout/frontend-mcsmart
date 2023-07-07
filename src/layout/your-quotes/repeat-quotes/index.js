@@ -477,7 +477,7 @@ function RepeatQuotes({ contentRef, onClose, isVisible }) {
                     <IconBack width="100%" height="100%" />
                   </View>
                 </TouchableOpacity>
-                <View style={styles.titleWrap}>
+                <View style={{ flex: 1}}>
                   <Text ellipsizeMode="tail" style={styles.ctnTitle}>
                     Deep Learning (Repeated Facts)
                   </Text>
