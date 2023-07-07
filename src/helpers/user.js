@@ -298,7 +298,7 @@ export const handleBasicPaywall = async (cbPaywall) => {
   const paywallType =
     currentDate > endDate ? 
     "offer_no_purchase_after_onboarding_paywall_2nd"
-    : "offer_no_purchase_after_onboarding_paywall";;
+    : "offer_no_purchase_after_onboarding_paywall";
   await handlePayment(paywallType, cbPaywall);
 };
 

@@ -93,6 +93,7 @@ import { scrollToTopQuote } from "../../store/defaultState/selector";
 import ContentSubscription from "../../layout/setting/content-subscription";
 import dispatcher from "./dispatcher";
 import store from "../../store/configure-store";
+import moment from "moment";
 
 const adUnitId = getRewardedOutOfQuotesID();
 
@@ -263,10 +264,19 @@ function MainPage({
     }
   };
 
+  const checkInstall = async() => {
+    const getFirstInstall = await AsyncStorage.getItem('firstInstall');
+    const currentDate = moment().format('YYYY-MM-DD HH:mm:ss').toString();
+    if (getFirstInstall === null) {
+      await AsyncStorage.setItem('firstInstall', currentDate);
+    };
+  };
+
   useEffect(() => {
     // setSubcription({
     //   subscription_type: 1,
     // });
+    checkInstall();
     purchaselyListener();
     if (isFromOnboarding) {
       scrollToTopQuote();
@@ -427,7 +437,7 @@ function MainPage({
   }, [userProfile, isPremiumBefore]);
 
   const handleShowInterstialAds = async (activeQuote) => {
-   
+
     if (activeQuote?.item_type === "in_app_ads") {
       if (interstialAds.loaded) {
         interstialAds.show();
@@ -694,7 +704,7 @@ function MainPage({
           !isTutorial.visible &&
           runQuoteAnimation
         }
-        // source={require(themeUser.urlLocal)}
+      // source={require(themeUser.urlLocal)}
       />
     );
   };
@@ -1157,9 +1167,9 @@ function MainPage({
         onClose={() => {
           refCategory.current.hide();
         }}
-        // onCustomSelectCategory={(value) => {
-        //   handleFetch(value)
-        // }}
+      // onCustomSelectCategory={(value) => {
+      //   handleFetch(value)
+      // }}
       />
 
       <ModalRating
