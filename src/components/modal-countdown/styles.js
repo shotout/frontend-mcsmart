@@ -88,7 +88,7 @@ export default StyleSheet.create({
     flex: 1,
   },
   txtBtn: {
-    color: colors.tosca,
+    color: colors.gray,
     textAlign: 'center',
     fontFamily: fonts.InterSemiBold,
     fontSize: moderateScale(14),
