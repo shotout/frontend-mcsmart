@@ -159,7 +159,6 @@ export default StyleSheet.create({
   rowWrap: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '80%',
     paddingHorizontal: moderateScale(20),
     paddingVertical: moderateScale(15),
   },
@@ -180,8 +179,9 @@ export default StyleSheet.create({
   },
   ctnTitle: {
     fontFamily: fonts.InterExtraBold,
-    fontSize: moderateScale(14),
+    fontSize: moderateScale(20),
     marginLeft: 10,
     color: colors.black,
+    letterSpacing: -0.9
   },
 });

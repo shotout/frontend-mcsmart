@@ -15,7 +15,7 @@ import { networkDebugger } from "./shared/networkDebugger";
 import ModalFirstPremium from "./components/modal-first-premium";
 import ModalLock from "./layout/main-page/modal-lock";
 import { askTrackingPermission } from "./helpers/eventTracking";
-
+import notifee, {EventType} from '@notifee/react-native';
 LogBox.ignoreAllLogs();
 
 Purchasely.startWithAPIKey(
@@ -37,7 +37,7 @@ const App = () => {
     Adjust.create(adjustConfig);
     console.log("Finish set configtracker");
   };
-
+ 
   useEffect(() => {
     networkDebugger();
     if (Platform.OS === "android") {

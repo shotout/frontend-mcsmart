@@ -580,7 +580,6 @@ function MainPage({
       });
     }
   };
-
   const handleGesture = (evt) => {
     const { nativeEvent } = evt;
     if (nativeEvent.velocityX < -614) {
