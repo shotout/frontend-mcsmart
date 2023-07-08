@@ -31,6 +31,7 @@ import {
   RewardedAd,
   RewardedAdEventType,
 } from "react-native-google-mobile-ads";
+import messaging from '@react-native-firebase/messaging';
 import styles from "./styles";
 import { sizing } from "../../shared/styling";
 import { useBackgroundQuotes } from "../../helpers/hook/useBackgroundQuotes";
@@ -234,10 +235,17 @@ function MainPage({
   };
   const handleShowPaywall = async () => {
     const res = await getSetting();
-    const initNotification = await notifee.getInitialNotification();
-    const getInitialPlacement =
-      initNotification?.notification?.data || paywallNotifcation;
-    if (res.data.value === "true" && !isUserPremium() && !isFromOnboarding) {
+    // const initNotification = await notifee.getInitialNotification();
+    const initNotification = await messaging().getInitialNotification().then((notificationOpen) => {
+      if (notificationOpen) {
+        return notificationOpen;
+      } else {
+        return null;
+      };
+    });
+    const getInitialPlacement = initNotification?.data || paywallNotifcation;
+    
+    if (res.data.value === 'true' && !isUserPremium() && !isFromOnboarding) {
       // Paywall open apps
       if (getInitialPlacement) {
         const paywallNotifCb = () => {
@@ -245,13 +253,13 @@ function MainPage({
         };
         handlePayment(getInitialPlacement?.placement, paywallNotifCb);
       } else {
-        const getCurrentOpenApps = await AsyncStorage.getItem("latestOpenApps");
+        const getCurrentOpenApps = await AsyncStorage.getItem('latestOpenApps');
         const mainDate = reformatDate(parseFloat(getCurrentOpenApps));
         const isMoreThan3Hours = isMoreThanThreeHoursSinceLastTime(mainDate);
         const stringifyDate = Date.now().toString();
         if (!getCurrentOpenApps || isMoreThan3Hours) {
           handleBasicPaywall();
-          AsyncStorage.setItem("latestOpenApps", stringifyDate);
+          await AsyncStorage.setItem('latestOpenApps', stringifyDate);
         } else {
           setAnimationSlideStatus(true);
         }
