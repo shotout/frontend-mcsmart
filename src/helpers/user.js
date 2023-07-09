@@ -45,7 +45,7 @@ export const openImprint = () => {
 export const isUserPremium = () => {
   const profile = store.getState().defaultState.userProfile;
   if (profile?.data != undefined) {
-    const {type} = profile?.data?.subscription;
+    const { type } = profile?.data?.subscription;
     if (type === 1 || type === 5) {
       return false;
     }
@@ -211,54 +211,59 @@ export const reloadUserProfile = async () =>
       }
       resolve(res.data);
     } catch (err) {
-      const fcmToken = await messaging().getToken();
-      registerUserDefault(fcmToken)
+      registerUserDefault();
       reject("error get profile");
     }
   });
 
-export const registerUserDefault = async (fcmToken) => {
-  try {
-    const id = await Purchasely.getAnonymousUserId();
-    const deviceId = await DeviceInfo.getUniqueId()
+export const registerUserDefault = async () => {
+  DeviceInfo.getUniqueId().then(async deviceId => {
+    try {
+      const fcmToken = await messaging().getToken();
+      const id = await Purchasely.getAnonymousUserId();
+      try {
+        const timeZone = await TimeZone.getTimeZone();
+        const payload = {
+          icon: 1,
+          fcm_token: fcmToken,
+          purchasely_id: id,
+          device_id: deviceId,
+          purchaseId: id,
+          name: "User",
+          anytime: null,
+          often: 15,
+          start: "08:00",
+          end: "20:00",
+          gender: "",
+          timezone: timeZone,
 
-
-    const timeZone = await TimeZone.getTimeZone();
-    const payload = {
-      icon: 1,
-      fcm_token: fcmToken,
-      purchasely_id: id,
-      device_id: deviceId,
-      purchaseId: id,
-      name: "User",
-      anytime: null,
-      often: 15,
-      start: "08:00",
-      end: "20:00",
-      gender: "",
-      timezone: timeZone,
-
-      impress_friends: "yes",
-      impress_business: "yes",
-      impress_children: "yes",
-      impress_members: "yes",
-      commit_goal: "12",
-      // topics: values.selectedCategory,
-    };
-    const res = await postRegister(payload);
-    handleSetProfile(res);
-    await handlePaymentTwo("onboarding");
-    await AsyncStorage.setItem("isFinishTutorial", "yes");
-    await updateProfile({
-      ...payload,
-      _method: "PATCH",
-    });
-    setTimeout(() => {
-      reloadUserProfile();
-    }, 2000);
-  } catch (err) {
-    console.log("Error register:", err);
-  }
+          impress_friends: "yes",
+          impress_business: "yes",
+          impress_children: "yes",
+          impress_members: "yes",
+          commit_goal: "12",
+          // topics: values.selectedCategory,
+        };
+        const res = await postRegister(payload);
+        store.dispatch(
+          handleSetProfile(res)
+        );
+        await handlePaymentTwo("onboarding");
+        await AsyncStorage.setItem("isFinishTutorial", "yes");
+        await updateProfile({
+          ...payload,
+          _method: "PATCH",
+        });
+        setTimeout(() => {
+          reloadUserProfile();
+        }, 2000);
+      } catch (err) {
+        console.log("Error register:", err);
+      }
+    } catch (err) {
+      console.log('Err get device info:', err);
+    }
+  })
 }
 
 export const handleSubscriptionStatus = async (subscription = {}) => {
@@ -296,9 +301,9 @@ export const handleBasicPaywall = async (cbPaywall) => {
     .add(1, 'days')
     .format('YYYY-MM-DD HH:mm:ss');
   const paywallType =
-    currentDate > endDate ? 
-    "offer_no_purchase_after_onboarding_paywall_2nd"
-    : "offer_no_purchase_after_onboarding_paywall";
+    currentDate > endDate ?
+      "offer_no_purchase_after_onboarding_paywall_2nd"
+      : "offer_no_purchase_after_onboarding_paywall";
   await handlePayment(paywallType, cbPaywall);
 };
 
