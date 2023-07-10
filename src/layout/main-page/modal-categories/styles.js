@@ -76,7 +76,7 @@ export default StyleSheet.create({
   },
   btnStyle: {
     position: 'absolute',
-    right: 0,
+    left: 0,
     top: moderateScale(20),
   },
   ctnLabel: {
