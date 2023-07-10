@@ -211,7 +211,8 @@ export const reloadUserProfile = async () =>
       }
       resolve(res.data);
     } catch (err) {
-      registerUserDefault();
+      // Register Default User
+      // registerUserDefault();
       reject("error get profile");
     }
   });
