@@ -129,6 +129,10 @@ function ModalShare(props) {
       if(contains){
         const filteredArray = idLike.filter(item => item !== idQuote);
         setIdLike(filteredArray)
+        const payload = {
+          type: '1',
+        };
+        await dislikeQuotes(payload, idQuote);
       }else{
         setShowModalDislike(true);
         setIdLike(idLike.concat(idQuote))
@@ -233,7 +237,7 @@ function ModalShare(props) {
 
   const handleCopyText = () => {
     if (quoteText) {
-      Clipboard.setString(`“${quoteText}”\n\n${downloadText}`);
+      Clipboard.setString(`“${quoteText}”\n\n${downloadText}\n`);
     }
   };
 
