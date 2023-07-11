@@ -68,7 +68,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: colors.black,
+    backgroundColor: '#ED5267',
     marginLeft: moderateScale(6),
   },
   iconAds: {
@@ -78,7 +78,7 @@ export default StyleSheet.create({
     marginRight: moderateScale(4),
   },
   txtAds: {
-    color: colors.yellow,
+    color: colors.white,
     fontFamily: fonts.InterMedium,
     fontSize: moderateScale(12),
   },
