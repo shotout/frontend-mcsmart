@@ -50,6 +50,7 @@ import {downloadText} from '../../../shared/static';
 import LineGestureSlide from '../../../components/line-gesture-slide';
 import {sizing} from '../../../shared/styling';
 import {isIphone} from '../../../shared/devices';
+import { dislikeQuotes } from '../../../shared/request';
 
 function ModalShare(props) {
   const {
@@ -71,7 +72,7 @@ function ModalShare(props) {
   const [idLike, setIdLike] = useState([])
   const [idAdd, setIdAdd] = useState([])
   const base64CaptureImage = useRef(null);
-console.log(idLike)
+
   useEffect(() => {
     if (captureUri) {
       RNFS.readFile(captureUri, 'base64').then(res => {
@@ -123,17 +124,25 @@ console.log(idLike)
 
   const handleSubmit = async () => {
     try {
+      const contains = idLike.includes(idQuote);
 
-      setShowModalDislike(true);
-      setIdLike(idLike.concat(idQuote))
-      const payload = {
-        type: '2',
-      };
-      // await dislikeQuotes(payload, idQuote);
+      if(contains){
+        const filteredArray = idLike.filter(item => item !== idQuote);
+        setIdLike(filteredArray)
+      }else{
+        setShowModalDislike(true);
+        setIdLike(idLike.concat(idQuote))
+        console.log(idLike)
+        const payload = {
+          type: '2',
+        };
+        await dislikeQuotes(payload, idQuote);
+       
+        setTimeout(() => {
+          setShowModalDislike(false);
+        }, 1000);
+      }
      
-      setTimeout(() => {
-        setShowModalDislike(false);
-      }, 1000);
     } catch (err) {
       console.log('Error dislike:', err);
     }

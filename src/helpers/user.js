@@ -13,7 +13,7 @@ import {
   updateProfile,
 } from "../shared/request";
 import store from "../store/configure-store";
-import { handleSetProfile } from "../store/defaultState/actions";
+import { fetchCollection, handleSetProfile } from "../store/defaultState/actions";
 import { SUCCESS_FETCH_COLLECTION } from "../store/defaultState/types";
 import {
   CANCEL_SUBSCRIBE_AFTER_TRIAL,
@@ -211,7 +211,8 @@ export const reloadUserProfile = async () =>
       }
       resolve(res.data);
     } catch (err) {
-      registerUserDefault();
+      // Register Default User
+      // registerUserDefault();
       reject("error get profile");
     }
   });
@@ -265,7 +266,9 @@ export const registerUserDefault = async () => {
     }
   })
 }
-
+export const refetchCollection = () => {
+  store.dispatch(fetchCollection());
+};
 export const handleSubscriptionStatus = async (subscription = {}) => {
   const purchaseId = await Purchasely.getAnonymousUserId();
   if (subscription.type === 2 || subscription.type === 3) {
