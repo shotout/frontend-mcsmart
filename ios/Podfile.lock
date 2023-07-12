@@ -442,6 +442,8 @@ PODS:
     - React-Core
   - react-native-in-app-review (4.3.3):
     - React-Core
+  - react-native-notifications (4.3.5):
+    - React-Core
   - react-native-purchasely (2.7.0):
     - Purchasely (= 3.7.1)
     - React-Core
@@ -647,6 +649,7 @@ DEPENDENCIES:
   - "react-native-cameraroll (from `../node_modules/@react-native-camera-roll/camera-roll`)"
   - react-native-change-icon (from `../node_modules/react-native-change-icon`)
   - react-native-in-app-review (from `../node_modules/react-native-in-app-review`)
+  - react-native-notifications (from `../node_modules/react-native-notifications`)
   - react-native-purchasely (from `../node_modules/react-native-purchasely`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
@@ -770,6 +773,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-change-icon"
   react-native-in-app-review:
     :path: "../node_modules/react-native-in-app-review"
+  react-native-notifications:
+    :path: "../node_modules/react-native-notifications"
   react-native-purchasely:
     :path: "../node_modules/react-native-purchasely"
   react-native-safe-area-context:
@@ -897,6 +902,7 @@ SPEC CHECKSUMS:
   react-native-cameraroll: 755bcc628148a90a7c9cf3f817a252be3a601bc5
   react-native-change-icon: ea9bb7255b09e89f41cbf282df16eade91ab1833
   react-native-in-app-review: db8bb167a5f238e7ceca5c242d6b36ce8c4404a4
+  react-native-notifications: 504143d59f9628c3b0c22fd0ccf34b65b9182d01
   react-native-purchasely: 6611e165e98fa864cc781cc5de8a5019f68b12ee
   react-native-safe-area-context: 39c2d8be3328df5d437ac1700f4f3a4f75716acc
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
