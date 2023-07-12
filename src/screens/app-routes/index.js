@@ -240,8 +240,6 @@ function Routes({ registerData, userProfile }) {
       setLoading(false);
     };
     getInitial();
-    
-    handleNotificationOpened()
     Purchasely.isReadyToPurchase(true);
 
     const unsubscribeAppOpenAds = appOpenAd.addAdEventListener(

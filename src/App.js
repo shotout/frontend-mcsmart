@@ -16,6 +16,7 @@ import ModalFirstPremium from "./components/modal-first-premium";
 import ModalLock from "./layout/main-page/modal-lock";
 import { askTrackingPermission } from "./helpers/eventTracking";
 import notifee, {EventType} from '@notifee/react-native';
+import { Settings } from 'react-native-fbsdk-next';
 LogBox.ignoreAllLogs();
 
 Purchasely.startWithAPIKey(
@@ -37,8 +38,10 @@ const App = () => {
     Adjust.create(adjustConfig);
     console.log("Finish set configtracker");
   };
- 
+  Settings.initializeSDK();
+  Settings.setAppID('637815961525510');
   useEffect(() => {
+
     networkDebugger();
     if (Platform.OS === "android") {
       FullScreenChz.enable();
