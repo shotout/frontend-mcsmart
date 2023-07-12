@@ -16,6 +16,9 @@ import ModalFirstPremium from "./components/modal-first-premium";
 import ModalLock from "./layout/main-page/modal-lock";
 import { askTrackingPermission } from "./helpers/eventTracking";
 import notifee, {EventType} from '@notifee/react-native';
+import messaging from "@react-native-firebase/messaging";
+import { Notifications } from 'react-native-notifications';
+
 LogBox.ignoreAllLogs();
 
 Purchasely.startWithAPIKey(
@@ -26,7 +29,8 @@ Purchasely.startWithAPIKey(
   RunningMode.FULL
 );
 
-const App = () => {
+const App =  () => {
+ 
   const configTracker = () => {
     const adjustConfig = new AdjustConfig(
       "6qpsj2ssc03k",
@@ -38,7 +42,8 @@ const App = () => {
     console.log("Finish set configtracker");
   };
  
-  useEffect(() => {
+  useEffect(async() => {
+    Notifications.removeAllDeliveredNotifications();
     networkDebugger();
     if (Platform.OS === "android") {
       FullScreenChz.enable();
