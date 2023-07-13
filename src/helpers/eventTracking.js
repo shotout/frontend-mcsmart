@@ -1,7 +1,8 @@
 import {Adjust, AdjustEvent} from 'react-native-adjust';
 // import analytics from '@react-native-firebase/analytics';
 import {isIphone} from '../shared/devices';
-import { Settings } from 'react-native-fbsdk-next';
+import { Settings, AppEventsLogger } from 'react-native-fbsdk-next';
+
 export const ONBOARDING_COMPLETE = 'se2bvp';
 export const APP_INSTALLED = 'e6a5ns';
 export const SHOW_PAYWALL = 's2ei1x';
@@ -45,10 +46,12 @@ const getScreenName = id => {
 export const eventTracking = async (id, message) => {
   try {
     const adjustEvent = new AdjustEvent(id);
+    console.log('apa ini', getScreenName(id) + "====="+message)
     if (message) {
       adjustEvent.setCallbackId(message);
     }
     Adjust.trackEvent(adjustEvent);
+    AppEventsLogger.logEvent(getScreenName(id))
     // await analytics().logEvent(getScreenName(id), {
     //   id,
     // });
