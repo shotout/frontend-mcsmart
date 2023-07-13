@@ -163,7 +163,7 @@ function MainPage({
   const [modalRatingVisible, setModalRating] = useState(false);
   const [modalRepeat, setModalRepeat] = useState(false);
   const [scheduleTime] = useLocalNotif(userProfile);
-  const [showSharePopup, setShowSharePopup] = useState(false);
+  const [showSharePopup, setShowSharePopup] = useState(true);
   const [runQuoteAnimation, setRunQuoteAnimation] = useState(false);
   const [isUserHasScroll, setUserScrollQuotes] = useState(false);
   const [isShowTutorial, setShowNextTutorial] = useState(true);
@@ -193,6 +193,13 @@ function MainPage({
     }
     return null;
   };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSharePopup(false);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [showSharePopup]);
 
   // const handleFetch = async (id) => {
   //   console.log(id)
@@ -256,7 +263,6 @@ function MainPage({
       if (getInitialPlacement) {
         const paywallNotifCb = () => {
           setInitialLoaderStatus(false);
-          handleShowPopupShare();
         };
         handlePayment(getInitialPlacement?.placement, paywallNotifCb);
       } else {
@@ -265,7 +271,7 @@ function MainPage({
         const isMoreThan3Hours = isMoreThanThreeHoursSinceLastTime(mainDate);
         const stringifyDate = Date.now().toString();
         if (!getCurrentOpenApps || isMoreThan3Hours) {
-          handleBasicPaywall(handleShowPopupShare);
+          handleBasicPaywall();
           await AsyncStorage.setItem('latestOpenApps', stringifyDate);
         } else {
           setAnimationSlideStatus(true);
@@ -555,6 +561,7 @@ function MainPage({
   };
 
   const onMomentoumScrollEnd = (e) => {
+    handleShowPopupShare()
     const height = sizing.getDimensionHeight(1);
     const pageNumber = Math.min(
       Math.max(Math.floor(e.nativeEvent.contentOffset.y / height + 0.5) + 1, 0),
@@ -775,7 +782,6 @@ function MainPage({
     );
   }
   function renderSharePopup() {
-    console.log(!isUserPremium())
     if (showSharePopup && !isUserPremium()) {
       return (
         <View source={UnionImage} style={styles.ctnPopupShare}>
