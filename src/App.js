@@ -44,9 +44,7 @@ const App =  () => {
   };
   Settings.initializeSDK();
   Settings.setAppID('637815961525510');
-
-
- 
+  
   useEffect(async() => {
     Notifications.removeAllDeliveredNotifications();
     networkDebugger();
