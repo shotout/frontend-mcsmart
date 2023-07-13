@@ -179,7 +179,7 @@ function ModalChangeIcon({
                   <ImageBackground
                     source={icon.icon}
                     style={styles.ctnIconStyle}>
-                    {!isUserPremium() && icon.id !== 1 && (
+                    {!isUserPremium() && icon.id !== selectedIcon && (
                       <View style={styles.ctnSelectPremium}>
                         <View style={styles.ctnIconIndicator}>
                           <View style={styles.ctnIconItem}>
