@@ -786,10 +786,6 @@ function MainPage({
       return (
         <View source={UnionImage} style={styles.ctnPopupShare}>
           <ImageBackground source={UnionImage} style={styles.ctnUnion}>
-            <Text style={styles.txtPopupMedium}>Share 3 facts to get</Text>
-            <Text style={styles.txtPopupBold}>
-              {`1 month premium for\nfree!`}
-            </Text>
           </ImageBackground>
         </View>
       );
