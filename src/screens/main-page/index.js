@@ -9,6 +9,7 @@ import {
   Modal,
   StatusBar,
   Platform,
+  ImageBackground,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import notifee, { EventType } from "@notifee/react-native";
@@ -128,7 +129,7 @@ const arrowBottom = require("../../assets/icons/arrow-bottom.png");
 const learnMoreButton = require("../../assets/icons/tutorial/learn_more_button.json");
 const repeatButton = require("../../assets/icons/tutorial/repeat_button.json");
 const repeatClick = require("../../assets/icons/tutorial/repeat_click.json");
-
+const UnionImage = require('../../assets/images/union.png');
 const learnMoreClickLottie = require("../../assets/icons/tutorial/learn_more_click.json");
 
 let intervalTutorial = null;
@@ -162,7 +163,7 @@ function MainPage({
   const [modalRatingVisible, setModalRating] = useState(false);
   const [modalRepeat, setModalRepeat] = useState(false);
   const [scheduleTime] = useLocalNotif(userProfile);
-
+  const [showSharePopup, setShowSharePopup] = useState(false);
   const [runQuoteAnimation, setRunQuoteAnimation] = useState(false);
   const [isUserHasScroll, setUserScrollQuotes] = useState(false);
   const [isShowTutorial, setShowNextTutorial] = useState(true);
@@ -180,7 +181,12 @@ function MainPage({
   const refCategory = createRef();
   const firstStepTutorial = useRef();
   const buttonPressAnimationTutorial = useRef();
-
+  const handleShowPopupShare = () => {
+    setShowSharePopup(true);
+    setTimeout(() => {
+      setShowSharePopup(false);
+    }, 10000);
+  };
   const getActiveQuote = () => {
     if (quotes?.listData.length > 0 && quotes?.listData[activeSlide]) {
       return quotes?.listData[activeSlide];
@@ -250,6 +256,7 @@ function MainPage({
       if (getInitialPlacement) {
         const paywallNotifCb = () => {
           setInitialLoaderStatus(false);
+          handleShowPopupShare();
         };
         handlePayment(getInitialPlacement?.placement, paywallNotifCb);
       } else {
@@ -258,7 +265,7 @@ function MainPage({
         const isMoreThan3Hours = isMoreThanThreeHoursSinceLastTime(mainDate);
         const stringifyDate = Date.now().toString();
         if (!getCurrentOpenApps || isMoreThan3Hours) {
-          handleBasicPaywall();
+          handleBasicPaywall(handleShowPopupShare);
           await AsyncStorage.setItem('latestOpenApps', stringifyDate);
         } else {
           setAnimationSlideStatus(true);
@@ -767,6 +774,22 @@ function MainPage({
       </View>
     );
   }
+  function renderSharePopup() {
+    console.log(!isUserPremium())
+    if (showSharePopup && !isUserPremium()) {
+      return (
+        <View source={UnionImage} style={styles.ctnPopupShare}>
+          <ImageBackground source={UnionImage} style={styles.ctnUnion}>
+            <Text style={styles.txtPopupMedium}>Share 3 facts to get</Text>
+            <Text style={styles.txtPopupBold}>
+              {`1 month premium for\nfree!`}
+            </Text>
+          </ImageBackground>
+        </View>
+      );
+    }
+    return null;
+  }
 
   function renderButton() {
     const bgStyle = {
@@ -790,7 +813,7 @@ function MainPage({
         <View style={styles.subBottomWrapper}>
           <TouchableWithoutFeedback onPress={handleShare}>
             <View style={[styles.ctnRounded, bgStyle]}>
-              {/* {renderSharePopup()} */}
+              {renderSharePopup()}
               <IconShare width="90%" height="90%" />
             </View>
           </TouchableWithoutFeedback>
