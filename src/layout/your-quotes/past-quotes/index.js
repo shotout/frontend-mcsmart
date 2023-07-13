@@ -114,7 +114,7 @@ function PastQuotes({isVisible, onClose, userProfile, fetchPastQuotes}) {
 
   const handleShare = async text => {
     await Share.open({
-      message: `“${text}”\n\n${downloadText}`,
+      message: `“${text}”\n\n${downloadText}\n`,
     });
   };
 

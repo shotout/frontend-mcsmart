@@ -471,6 +471,8 @@ PODS:
     - React-Core
   - react-native-in-app-review (4.3.3):
     - React-Core
+  - react-native-notifications (4.3.5):
+    - React-Core
   - react-native-purchasely (2.7.0):
     - Purchasely (= 3.7.1)
     - React-Core
@@ -609,7 +611,7 @@ PODS:
   - RNScreens (3.20.0):
     - React-Core
     - React-RCTImage
-  - RNShare (9.2.1):
+  - RNShare (8.0.0):
     - React-Core
   - RNSVG (13.8.0):
     - React-Core
@@ -677,6 +679,7 @@ DEPENDENCIES:
   - react-native-change-icon (from `../node_modules/react-native-change-icon`)
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - react-native-in-app-review (from `../node_modules/react-native-in-app-review`)
+  - react-native-notifications (from `../node_modules/react-native-notifications`)
   - react-native-purchasely (from `../node_modules/react-native-purchasely`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
@@ -808,6 +811,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fbsdk-next"
   react-native-in-app-review:
     :path: "../node_modules/react-native-in-app-review"
+  react-native-notifications:
+    :path: "../node_modules/react-native-notifications"
   react-native-purchasely:
     :path: "../node_modules/react-native-purchasely"
   react-native-safe-area-context:
@@ -942,6 +947,7 @@ SPEC CHECKSUMS:
   react-native-change-icon: ea9bb7255b09e89f41cbf282df16eade91ab1833
   react-native-fbsdk-next: 5291a5d67aab4e649d072c50988033ff0d05b915
   react-native-in-app-review: db8bb167a5f238e7ceca5c242d6b36ce8c4404a4
+  react-native-notifications: 504143d59f9628c3b0c22fd0ccf34b65b9182d01
   react-native-purchasely: 6611e165e98fa864cc781cc5de8a5019f68b12ee
   react-native-safe-area-context: 39c2d8be3328df5d437ac1700f4f3a4f75716acc
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
@@ -974,7 +980,7 @@ SPEC CHECKSUMS:
   RNNotifee: bdc064c29f4d558046f51f0c3ae02bab4fd3cd85
   RNPermissions: df77613085e5cb11abbe34322bbf1f46c5a02fef
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
-  RNShare: e969d57543095d4018e256d0dab844574627b50a
+  RNShare: 36aa3e6958373a0ad1c95a1c960adef589da3794
   RNSVG: c1e76b81c76cdcd34b4e1188852892dc280eb902
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
