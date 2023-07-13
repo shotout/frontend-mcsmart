@@ -231,6 +231,7 @@ function ModalShare(props) {
   const moreShare = async () => {
     await Share.open({
       url: captureUri,
+      message: downloadText,
     });
     eventShare();
   };
@@ -262,20 +263,23 @@ function ModalShare(props) {
 
   const handleSaveImage = async () => {
     try {
-      if (Platform.OS === 'android' && (!await hasAndroidPermission())) {
-      
-       await CameraRoll.save(captureUri);
-       setShowModalSave(true);
-       setTimeout(() => {
-         setShowModalSave(false);
-       }, 1000);
+      if (Platform.OS === 'android') {
+        if (await hasAndroidPermission()) {
+          await CameraRoll.save(captureUri);
+          setShowModalSave(true);
+          setTimeout(() => {
+            setShowModalSave(false);
+          }, 1000);
+        } else {
+          return;
+        }
+      } else {
+        await CameraRoll.save(captureUri);
+        setShowModalSave(true);
+        setTimeout(() => {
+          setShowModalSave(false);
+        }, 1000);
       }
-
-      await CameraRoll.save(captureUri);
-      setShowModalSave(true);
-      setTimeout(() => {
-        setShowModalSave(false);
-      }, 1000);
     } catch (err) {
       console.log('Err save:', err);
     }
