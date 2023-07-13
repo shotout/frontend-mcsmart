@@ -249,14 +249,14 @@ export default StyleSheet.create({
   },
   txtPopupMedium:{
     fontFamily: fonts.InterMedium,
-    color: colors.white,
+    color: colors.black,
     fontSize: moderateScale(12),
     textAlign: 'center',
     marginTop: moderateScale(6)
   },
   txtPopupBold:{
     fontFamily: fonts.InterBold,
-    color: colors.white,
+    color: colors.black,
     fontSize: moderateScale(12),
     textAlign: 'center',
   },
