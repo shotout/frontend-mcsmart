@@ -234,6 +234,32 @@ export default StyleSheet.create({
   ctnPdAds: {
     paddingBottom: isIphoneXorAbove() ? moderateScale(70) : moderateScale(60),
   },
+  ctnPopupShare:{
+    position: 'absolute',
+    bottom: moderateScale(58),
+    right: moderateScale(-63),
+    aspectRatio: 249 / 93,
+    width: moderateScale(170),
+    overflow: 'visible'
+  },
+  ctnUnion:{
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain'
+  },
+  txtPopupMedium:{
+    fontFamily: fonts.InterMedium,
+    color: colors.white,
+    fontSize: moderateScale(12),
+    textAlign: 'center',
+    marginTop: moderateScale(6)
+  },
+  txtPopupBold:{
+    fontFamily: fonts.InterBold,
+    color: colors.white,
+    fontSize: moderateScale(12),
+    textAlign: 'center',
+  },
   ctnBannerAds: {
     position: 'absolute',
     width: '100%',
