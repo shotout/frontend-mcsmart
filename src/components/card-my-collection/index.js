@@ -131,7 +131,7 @@ export default function CardMyCollection({
         <TouchableWithoutFeedback
           onPress={() => {
             Share.open({
-              message: `“${quote}”\n\n${downloadText}`,
+              message: `“${quote}”\n\n${downloadText}\n`,
             });
           }}>
           <View style={styles.ctnRowMore}>

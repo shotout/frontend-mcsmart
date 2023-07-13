@@ -7251,6 +7251,11 @@ react-native-keyboard-aware-scroll-view@^0.9.5:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
 
+react-native-notifications@^4.3.5:
+  version "4.3.5"
+  resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-4.3.5.tgz#90c7f3b1b248f6628c8efc8cafab4fd464ce3e5a"
+  integrity sha512-tCKkPaauN8/RIwPTeWdyezHXt5i4iDJViZGZ7/EBBuHB9kl9Oq3UjKFZeDfnM4DmJt+m7K2FQ7NaAuh3Kg1FCA==
+
 react-native-paper@^5.5.1:
   version "5.5.1"
   resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-5.5.1.tgz#21ffd0f83f3dc8761f4a836f5e99b5ebeebc7838"
@@ -7308,10 +7313,10 @@ react-native-screens@^3.20.0:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
-react-native-share@9.2.1:
-  version "9.2.1"
-  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-9.2.1.tgz#d4f2b3363c119c190c830d3193fb6c30fffe4aa9"
-  integrity sha512-JK0StFndFE1WmjS0GEPiPDzEXYezsd2+I7jV2qgh0rqkEEQO+XGwo716eNNgLA6DUVFj3dsSTpHzwro1HC+4Kw==
+react-native-share@8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-8.0.0.tgz#95520a16fca151822ce8a3b00240cf3a17eacb97"
+  integrity sha512-IFUKcWQ1/VgtsQmuC3EKaIPMhKqssTblwCojtTB4dehWJ2ZUPsIstPXJGqcmWqg7/S3cLNfCLvxf/tVaZvptxw==
 
 react-native-size-matters@^0.4.0:
   version "0.4.0"

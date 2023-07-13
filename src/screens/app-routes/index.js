@@ -49,6 +49,7 @@ import TimeZone from "react-native-timezone";
 import store from "../../store/configure-store";
 import { askTrackingPermission } from "../../helpers/eventTracking";
 import notifee, {EventType} from '@notifee/react-native';
+import { Notifications } from 'react-native-notifications';
 
 const Stack = createNativeStackNavigator();
 
@@ -221,6 +222,7 @@ function Routes({ registerData, userProfile }) {
   };
 
   useEffect(() => {
+    Notifications.removeAllDeliveredNotifications();
     const getInitial = async () => {
       const resLogin = await AsyncStorage.getItem("isLogin");
       if (resLogin === "yes") {
