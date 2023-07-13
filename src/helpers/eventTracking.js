@@ -1,7 +1,7 @@
 import {Adjust, AdjustEvent} from 'react-native-adjust';
 // import analytics from '@react-native-firebase/analytics';
 import {isIphone} from '../shared/devices';
-
+import { Settings } from 'react-native-fbsdk-next';
 export const ONBOARDING_COMPLETE = 'se2bvp';
 export const APP_INSTALLED = 'e6a5ns';
 export const SHOW_PAYWALL = 's2ei1x';
@@ -88,13 +88,17 @@ export const askTrackingPermission = () => {
           console.log('The user denied access to IDFA');
           break;
         case 3:
+          Settings.setAdvertiserTrackingEnabled(true)
           // ATTrackingManagerAuthorizationStatusAuthorized case
           console.log('The user authorized access to IDFA');
+          
           break;
         default:
           console.log('The status is not available');
           break;
       }
     });
+  }else{
+    Settings.setAdvertiserTrackingEnabled(true)
   }
 };
