@@ -1,10 +1,10 @@
 // Prod version
-export const BACKEND_URL = 'https://backend-api.mcsmartapp.com';
-export const API_URL = 'https://backend-api.mcsmartapp.com/api/v1';
+// export const BACKEND_URL = 'https://backend-api.mcsmartapp.com';
+// export const API_URL = 'https://backend-api.mcsmartapp.com/api/v1';
 
 // dev version
-// export const BACKEND_URL = 'https://backend-api-dev.mcsmartapp.com';
-// export const API_URL = 'https://backend-api-dev.mcsmartapp.com/api/v1';
+export const BACKEND_URL = 'https://backend-api-dev.mcsmartapp.com';
+export const API_URL = 'https://backend-api-dev.mcsmartapp.com/api/v1';
 
 export const APP_VERSION = '1.0.3';
 export const STORE = {
