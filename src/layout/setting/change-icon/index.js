@@ -151,7 +151,7 @@ function ModalChangeIcon({
             <TouchableWithoutFeedback
               key={icon.id}
               disabled={loadingAds}
-              onPress={() => {
+              onPress={async () => {
                 if (!isUserPremium() && icon.id !== 1) {
                   selectedTemporary.current = icon;
                   if (rewarded.loaded) {
@@ -163,12 +163,11 @@ function ModalChangeIcon({
                       if (rewarded.loaded) {
                         rewarded.show();
                         setLoadingAds(false);
-                      }else{
+                      } else {
                         setLoadingAds(false);
                       }
-                    }, 2000);
+                    }, 3000);
                   }
-               
                 } else {
                   handleChangeIcon(icon);
                 }
