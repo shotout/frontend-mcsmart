@@ -163,9 +163,12 @@ function ModalChangeIcon({
                       if (rewarded.loaded) {
                         rewarded.show();
                         setLoadingAds(false);
+                      }else{
+                        setLoadingAds(false);
                       }
                     }, 2000);
                   }
+               
                 } else {
                   handleChangeIcon(icon);
                 }
