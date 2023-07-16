@@ -210,6 +210,11 @@ function MainPage({
   //   getActiveQuote()
   // }
 
+  useEffect(async() => {
+    const fcmToken = await messaging().getToken();
+    console.log('FCM TOKEN'+fcmToken)
+  }, [])
+
   const handleScreenshot = () => {
     captureRef.current.capture().then((uri) => {
       // setCaptureUri(`data:image/png;base64,${uri}`);
@@ -294,6 +299,7 @@ function MainPage({
   };
 
   useEffect(() => {
+
     // setSubcription({
     //   subscription_type: 1,
     // });

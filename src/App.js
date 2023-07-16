@@ -19,6 +19,8 @@ import notifee, {EventType} from '@notifee/react-native';
 import { Settings } from 'react-native-fbsdk-next';
 import messaging from "@react-native-firebase/messaging";
 import { Notifications } from 'react-native-notifications';
+import DeviceInfo from "react-native-device-info";
+import { checkDeviceRegister } from "./shared/request";
 
 LogBox.ignoreAllLogs();
 
@@ -47,6 +49,15 @@ const App =  () => {
   
   useEffect(async() => {
     Notifications.removeAllDeliveredNotifications();
+    DeviceInfo.getUniqueId().then(async uniqueId => {
+      try {
+      await checkDeviceRegister({
+        device_id: uniqueId
+      });
+      } catch (err) {
+        console.log('Err get device info:', err);
+      }
+    });
     networkDebugger();
     if (Platform.OS === "android") {
       FullScreenChz.enable();
