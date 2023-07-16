@@ -152,13 +152,16 @@ function ModalShare(props) {
     }
   };
 
+  const shareOptions = {
+    url: base64CaptureImage.current,
+    message: downloadText,
+    // message: downloadText,
+    social: Share.Social.WHATSAPP,
+    filename: 'Shared-McSmart-Fact' , 
+    title: 'Shared-McSmart-Fact' , 
+  }
   const handleWAShare = async () => {
-    Share.shareSingle({
-      url: base64CaptureImage.current,
-      message: downloadText,
-      // message: downloadText,
-      social: Share.Social.WHATSAPP,
-    });
+    Share.shareSingle(shareOptions);
     handleShowFreePremiumDaily();
     eventShare();
   };
