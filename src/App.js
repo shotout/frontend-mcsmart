@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import { LogBox, Platform, StatusBar } from "react-native";
@@ -21,6 +21,10 @@ import messaging from "@react-native-firebase/messaging";
 import { Notifications } from 'react-native-notifications';
 import DeviceInfo from "react-native-device-info";
 import { checkDeviceRegister } from "./shared/request";
+import { AdEventType, AppOpenAd } from "react-native-google-mobile-ads";
+import SplashScreen from "react-native-splash-screen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getAppOpenID } from "./shared/static/adsId";
 
 LogBox.ignoreAllLogs();
 
@@ -31,9 +35,17 @@ Purchasely.startWithAPIKey(
   Purchasely.logLevelDebug,
   RunningMode.FULL
 );
+const adUnitId = getAppOpenID();
+const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ["fashion", "clothing"],
+});
+appOpenAd.load();
 
 const App =  () => {
  
+  const [showAdsOverlay, setAdsOverlay] = useState(false);
+  const openAdsOpened = useRef(false);
   const configTracker = () => {
     const adjustConfig = new AdjustConfig(
       "6qpsj2ssc03k",
@@ -67,6 +79,8 @@ const App =  () => {
     configTracker();
   }, []);
 
+  
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -76,6 +90,7 @@ const App =  () => {
             <Navigator />
             <ModalFirstPremium />
             <ModalLock />
+            {showAdsOverlay && <AdsOverlay />}
           </PaperProvider>
         </PersistGate>
       </Provider>
