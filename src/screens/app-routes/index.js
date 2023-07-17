@@ -79,6 +79,7 @@ function Routes({ registerData, userProfile }) {
       if (appOpenAd.loaded && !isUserPremium()) {
         setAdsOverlay(true);
         appOpenAd.show();
+        setDisable(false)
       }
     }
   };
@@ -140,86 +141,6 @@ function Routes({ registerData, userProfile }) {
       console.log("Check fcmToken:", fcmToken);
       setFcmToken(fcmToken);
     }, 200);
-  };
-  const handleNotificationQuote = async (res, remoteMessage, getInitialURL) => {
-    let idQuote = null;
-    if (getInitialURL) {
-      const urlArr = getInitialURL.split('/');
-      if (urlArr[3]) {
-        idQuote = urlArr[3];
-      }
-    }
-    if (
-      (res?.subscription?.type === 1 && res?.themes[0]?.id !== 6) ||
-      remoteMessage?.data?.id ||
-      idQuote
-    ) {
-      await fetchListQuote({notif: remoteMessage?.data?.id || idQuote || null});
-      if (remoteMessage) {
-        handleDecrementBadgeCount();
-      } else {
-        resetNotificationBadge();
-      }
-    } else {
-      fetchListQuote();
-    }
-  };
-  const handleDecrementBadgeCount = () => {
-    notifee
-      .decrementBadgeCount()
-      .then(() => notifee.getBadgeCount())
-      .then(count => {
-        if (userProfile.token) {
-          updateProfile({
-            notif_count: count,
-            _method: 'PATCH',
-          });
-        }
-      });
-  };
-  const handleNotificationOpened = async () => {
-    if (userProfile?.token) {
-      const resProfile = await reloadUserProfile();
-      let isAbleToFetchQuote = true;
-      notifee.onForegroundEvent(async ({type, detail}) => {
-        if (type === EventType.ACTION_PRESS || type === EventType.PRESS) {
-          if (detail.notification.data?.id) {
-            isAbleToFetchQuote = false;
-            handleDecrementBadgeCount();
-            if (detail.notification.data?.id) {
-              await fetchListQuote({
-                notif: detail.notification.data?.id || null,
-              });
-              scrollToTopQuote();
-            }
-          }
-          if (detail.notification.data?.type === 'paywall') {
-            console.log('Check paywall data:', detail.notification.data);
-            if (loadingRef.current) {
-              console.log('masukkkk sini iyaaaa', detail.notification.data)
-              setPaywallNotification(detail.notification.data);
-              loadingRef.current = false;
-            } else {
-              console.log('masukkkk sini ga', detail.notification.data?.placement)
-              setTimeout(() => {
-                console.log('masukkkk sini', detail.notification.data?.placement)
-                handlePayment(detail.notification.data?.placement);
-              }, 1000);
-            }
-          }
-        }
-      });
-      setTimeout(async () => {
-        if (isAbleToFetchQuote) {
-          const getInitialURL = await Linking.getInitialURL();
-          handleNotificationQuote(resProfile, null, getInitialURL);
-        }
-      }, 2000);
-    } else {
-      console.log('masukkkk sini masaaaaa', JSON.stringify(userProfile))
-      goToFirstPage();
-    }
-    
   };
 
   useEffect(() => {
