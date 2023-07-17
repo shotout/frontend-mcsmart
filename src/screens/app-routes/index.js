@@ -65,6 +65,7 @@ function Routes({ registerData, userProfile }) {
   const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
   const [showAdsOverlay, setAdsOverlay] = useState(false);
+  const [disableNavigate, setDisable] = useState(true);
   const openAdsOpened = useRef(false);
   const loadingRef = useRef(true);
   const [getFcmToken, setFcmToken] = useState(null);
@@ -248,6 +249,7 @@ function Routes({ registerData, userProfile }) {
       AdEventType.CLOSED,
       () => {
         setAdsOverlay(false);
+        setDisable(false)
       }
     );
 
@@ -337,7 +339,7 @@ function Routes({ registerData, userProfile }) {
     });
   }, []);
   function getInitialRoute() {
-    if (userProfile?.token || registerData?.registerStep === 7) {
+    if (userProfile?.token && !disableNavigate  || registerData?.registerStep === 7 ) {
       return "MainPage";
     }
     if (registerData) {
