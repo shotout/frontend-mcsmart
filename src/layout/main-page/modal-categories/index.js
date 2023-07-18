@@ -133,7 +133,7 @@ function ModalCategories({
       curentCategory.push(id);
     }
     setCategoryValue(curentCategory);
-    reloadUserProfile();
+    fetchList(curentCategory);
   };
 
   function renderSubscription() {
