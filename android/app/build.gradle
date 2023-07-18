@@ -158,6 +158,10 @@ android {
 }
 
 dependencies {
+    // Google Play Billing
+    def billingVersion = "6.0.1"
+    implementation "com.android.billingclient:billing:$billingVersion"
+
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
