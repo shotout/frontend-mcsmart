@@ -84,56 +84,56 @@ function Routes({ registerData, userProfile }) {
     }
   };
 
-  const handleSubmit = async () => {
-    try {
-      const id = await Purchasely.getAnonymousUserId();
-      const deviceId = await DeviceInfo.getUniqueId();
-      const timeZone = await TimeZone.getTimeZone();
-      const resLogin = await AsyncStorage.getItem("isLogin");
-      const payload = {
-        icon: 1,
-        fcm_token: getFcmToken,
-        purchasely_id: id,
-        device_id: deviceId,
-        purchaseId: id,
-        name: "User",
-        anytime: null,
-        often: 15,
-        start: "08:00",
-        end: "20:00",
-        gender: "",
-        timezone: timeZone,
-        impress_friends: "yes",
-        impress_business: "yes",
-        impress_children: "yes",
-        impress_members: "yes",
-        commit_goal: "12",
-        // topics: values.selectedCategory,
-      };
-      const res = await postRegister(payload);
-      const currentUserProfile = store.getState().defaultState.userProfile;
+  // const handleSubmit = async () => {
+  //   try {
+  //     const id = await Purchasely.getAnonymousUserId();
+  //     const deviceId = await DeviceInfo.getUniqueId();
+  //     const timeZone = await TimeZone.getTimeZone();
+  //     const resLogin = await AsyncStorage.getItem("isLogin");
+  //     const payload = {
+  //       icon: 1,
+  //       fcm_token: getFcmToken,
+  //       purchasely_id: id,
+  //       device_id: deviceId,
+  //       purchaseId: id,
+  //       name: "User",
+  //       anytime: null,
+  //       often: 15,
+  //       start: "08:00",
+  //       end: "20:00",
+  //       gender: "",
+  //       timezone: timeZone,
+  //       impress_friends: "yes",
+  //       impress_business: "yes",
+  //       impress_children: "yes",
+  //       impress_members: "yes",
+  //       commit_goal: "12",
+  //       // topics: values.selectedCategory,
+  //     };
+  //     const res = await postRegister(payload);
+  //     const currentUserProfile = store.getState().defaultState.userProfile;
      
-      store.dispatch(
-        handleSetProfile({
-          ...res,
-        })
-      );
-      await updateProfile({
-        ...payload,
-        _method: "PATCH",
-      });
-      setTimeout(() => {
-        handlePaymentBypass("onboarding", () => {
-          reset("MainPage", { isFromOnboarding: true });
-        });
-      }, 200);
-      await AsyncStorage.setItem("isFinishTutorial", "yes");
-      AsyncStorage.setItem("isLogin", "yes");
-      fetchInitialData(resLogin === "yes", appOpenAd, loadingRef);
-    } catch (err) {
-      console.log("Error register:", err);
-    }
-  };
+  //     store.dispatch(
+  //       handleSetProfile({
+  //         ...res,
+  //       })
+  //     );
+  //     await updateProfile({
+  //       ...payload,
+  //       _method: "PATCH",
+  //     });
+  //     setTimeout(() => {
+  //       handlePaymentBypass("onboarding", () => {
+  //         reset("MainPage", { isFromOnboarding: true });
+  //       });
+  //     }, 200);
+  //     await AsyncStorage.setItem("isFinishTutorial", "yes");
+  //     AsyncStorage.setItem("isLogin", "yes");
+  //     fetchInitialData(resLogin === "yes", appOpenAd, loadingRef);
+  //   } catch (err) {
+  //     console.log("Error register:", err);
+  //   }
+  // };
 
   const getFcm = async () => {
     setTimeout(async () => {
@@ -144,8 +144,7 @@ function Routes({ registerData, userProfile }) {
   };
 
   useEffect(() => {
-    Notifications.removeAllDeliveredNotifications();
-    const getInitial = async () => {
+        const getInitial = async () => {
       const resLogin = await AsyncStorage.getItem("isLogin");
       if (resLogin === "yes") {
       
@@ -164,6 +163,7 @@ function Routes({ registerData, userProfile }) {
       setLoading(false);
     };
     getInitial();
+    Notifications.removeAllDeliveredNotifications();
     Purchasely.isReadyToPurchase(true);
 
     const unsubscribeAppOpenAds = appOpenAd.addAdEventListener(
@@ -235,30 +235,7 @@ function Routes({ registerData, userProfile }) {
     };
   }, []);
 
-  useEffect(() => {
-    return notifee.onForegroundEvent(({ type, detail }) => {
-      switch (type) {
-        case EventType.DISMISSED:
-          console.log('Press dismissed notification', detail.notification);
-          break;
-        case EventType.PRESS:
-          console.log('Press pressed notification', detail.notification);
-          break;
-      }
-    });
-  }, []);
-  useEffect(() => {
-    return notifee.onBackgroundEvent(({ type, detail }) => {
-      switch (type) {
-        case EventType.DISMISSED:
-          console.log('Press dismissed notification', detail.notification);
-          break;
-        case EventType.PRESS:
-          console.log('Press pressed notification', detail.notification);
-          break;
-      }
-    });
-  }, []);
+
   function getInitialRoute() {
     if (userProfile?.token && !disableNavigate  || registerData?.registerStep === 7 ) {
       return "MainPage";
