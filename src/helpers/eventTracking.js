@@ -46,20 +46,21 @@ const getScreenName = id => {
 export const eventTracking = async (id, message) => {
   try {
     const adjustEvent = new AdjustEvent(id);
-    console.log('apa ini', getScreenName(id) + "====="+message)
     if (message) {
       adjustEvent.setCallbackId(message);
     }
+    console.log('Success tracking:', Adjust.trackEvent(adjustEvent));
     Adjust.trackEvent(adjustEvent);
     AppEventsLogger.logEvent(getScreenName(id))
     // await analytics().logEvent(getScreenName(id), {
     //   id,
     // });
-    console.log('Success tracking:', getScreenName(id));
+   
   } catch (err) {
     console.log('Err tracking:', err);
   }
 };
+
 
 export const revenueTracking = async (price, currency) => {
   const adjustEvent = new AdjustEvent(REVENUE_TRACKING);

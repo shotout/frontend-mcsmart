@@ -62,6 +62,7 @@ import {
   thirdStepSelection,
 } from './categoriesArr';
 import {removeDuplicatesArray} from '../../helpers/arrayHandler';
+import { ONBOARDING_COMPLETE, eventTracking } from '../../helpers/eventTracking';
 
 const Convetti = require('../../assets/lottie/hello.json');
 
@@ -313,7 +314,7 @@ function Register({
     console.log('AFter register called');
     await fetchListQuote();
     await fetchCollection();
-
+    eventTracking(ONBOARDING_COMPLETE);
     handlePayment('onboarding', () => {
       reset('MainPage', {isFromOnboarding: true});
     });
@@ -350,6 +351,7 @@ function Register({
       setTimeout(() => {
         reloadUserProfile();
       }, 2000);
+      eventTracking(ONBOARDING_COMPLETE);
     } catch (err) {
       console.log('Error register:', err);
       setLoading(false);

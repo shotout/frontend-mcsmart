@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* mcsmartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* mcsmartTests.m */; };
 		012078F8BA0343F28E476F4C /* AbrilFatface-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 510C863D72354ADA861C3B09 /* AbrilFatface-Regular.ttf */; };
+		0677F8072A6648E400B9B652 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0677F8062A6648E400B9B652 /* AppTrackingTransparency.framework */; };
+		0677F8092A6648F800B9B652 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0677F8082A6648F800B9B652 /* AdSupport.framework */; };
+		0677F80B2A66490300B9B652 /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0677F80A2A66490300B9B652 /* AdServices.framework */; };
+		0677F80D2A66491000B9B652 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0677F80C2A66491000B9B652 /* iAd.framework */; };
 		0C80B921A6F3F58F76C31292 /* libPods-mcsmart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-mcsmart.a */; };
 		111D887A2A32F48600F46DEA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 111D88792A32F48500F46DEA /* GoogleService-Info.plist */; };
 		117AB5E52A4DD6B800932D93 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117AB5E42A4DD6B800932D93 /* StoreKit.framework */; };
@@ -102,6 +106,10 @@
 		00E356F21AD99517003FC87E /* mcsmartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mcsmartTests.m; sourceTree = "<group>"; };
 		0286EF4ABC784BEF8377824A /* Lobster-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lobster-Regular.ttf"; path = "../src/assets/fonts/Lobster-Regular.ttf"; sourceTree = "<group>"; };
 		0492267161BA4C7FAA06C282 /* Inter-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.ttf"; path = "../src/assets/fonts/Inter-Bold.ttf"; sourceTree = "<group>"; };
+		0677F8062A6648E400B9B652 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
+		0677F8082A6648F800B9B652 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		0677F80A2A66490300B9B652 /* AdServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdServices.framework; path = System/Library/Frameworks/AdServices.framework; sourceTree = SDKROOT; };
+		0677F80C2A66491000B9B652 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		067E078A427A49928FAD90F8 /* Koulen-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Koulen-Regular.ttf"; path = "../src/assets/fonts/Koulen-Regular.ttf"; sourceTree = "<group>"; };
 		0F9D7BD38A6C4A75B51C1508 /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraBold.ttf"; path = "../src/assets/fonts/Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
 		111D88792A32F48500F46DEA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -200,6 +208,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0677F80D2A66491000B9B652 /* iAd.framework in Frameworks */,
+				0677F80B2A66490300B9B652 /* AdServices.framework in Frameworks */,
+				0677F8092A6648F800B9B652 /* AdSupport.framework in Frameworks */,
+				0677F8072A6648E400B9B652 /* AppTrackingTransparency.framework in Frameworks */,
 				0C80B921A6F3F58F76C31292 /* libPods-mcsmart.a in Frameworks */,
 				117AB5E52A4DD6B800932D93 /* StoreKit.framework in Frameworks */,
 			);
@@ -258,6 +270,10 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0677F80C2A66491000B9B652 /* iAd.framework */,
+				0677F80A2A66490300B9B652 /* AdServices.framework */,
+				0677F8082A6648F800B9B652 /* AdSupport.framework */,
+				0677F8062A6648E400B9B652 /* AppTrackingTransparency.framework */,
 				117AB5E42A4DD6B800932D93 /* StoreKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				5DCACB8F33CDC322A6C60F78 /* libPods-mcsmart.a */,
@@ -812,7 +828,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mcsmart/mcsmart.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = PQ7KYCJA35;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mcsmart/Info.plist;
@@ -821,7 +837,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.7;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -842,7 +858,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mcsmart/mcsmart.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = PQ7KYCJA35;
 				INFOPLIST_FILE = mcsmart/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = McSmart;
@@ -850,7 +866,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.7;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
