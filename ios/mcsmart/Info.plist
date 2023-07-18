@@ -96,6 +96,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
 	<string>637815961525510</string>
+	<key>FacebookClientToken</key>
+	<string>7f9a55259a5d5e7521c2c9f63b997ae8</string>
 	<key>FacebookDisplayName</key>
 	<string>McSmart</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -126,8 +128,7 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>FacebookClientToken</key>
-	<string>7f9a55259a5d5e7521c2c9f63b997ae8</string>
+
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

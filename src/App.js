@@ -48,8 +48,8 @@ const App =  () => {
   const openAdsOpened = useRef(false);
   const configTracker = () => {
     const adjustConfig = new AdjustConfig(
-      "6qpsj2ssc03k",
-      AdjustConfig.EnvironmentSandbox
+      '6qpsj2ssc03k',
+      AdjustConfig.EnvironmentSandbox,
       // AdjustConfig.EnvironmentProduction,
     );
     adjustConfig.setLogLevel(AdjustConfig.LogLevelVerbose);
@@ -60,6 +60,8 @@ const App =  () => {
   Settings.setAppID('637815961525510');
   
   useEffect(async() => {
+    networkDebugger();
+    configTracker();
     Notifications.removeAllDeliveredNotifications();
     DeviceInfo.getUniqueId().then(async uniqueId => {
       try {
@@ -70,13 +72,13 @@ const App =  () => {
         console.log('Err get device info:', err);
       }
     });
-    networkDebugger();
+   
     if (Platform.OS === "android") {
       FullScreenChz.enable();
     } else {
       askTrackingPermission();
     }
-    configTracker();
+    
   }, []);
 
   
