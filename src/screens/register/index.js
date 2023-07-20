@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Platform,
   Text,
@@ -8,7 +8,7 @@ import {
   Keyboard,
   StatusBar,
 } from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import notifee from '@notifee/react-native';
 import DeviceInfo from 'react-native-device-info';
@@ -17,14 +17,15 @@ import Lottie from 'lottie-react-native';
 import TimeZone from 'react-native-timezone';
 import Purchasely from 'react-native-purchasely';
 
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {createAnimatableComponent} from 'react-native-animatable';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { createAnimatableComponent } from 'react-native-animatable';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Button from '../../components/button';
 import styles from './styles';
 import states from './states';
 import dispatcher from './dispatcher';
 import {
+  handleBasicPaywall,
   handlePayment,
   handlePaymentTwo,
   handleSubscriptionStatus,
@@ -33,7 +34,7 @@ import {
   reloadUserProfile,
 } from '../../helpers/user';
 import LoadingIndicator from '../../components/loading-indicator';
-import {isIphoneXorAbove} from '../../shared/devices';
+import { isIphoneXorAbove } from '../../shared/devices';
 import store from "../../store/configure-store";
 import HeaderStep from '../../layout/register/header-step';
 import ContentName from '../../layout/register/content-step-1';
@@ -46,23 +47,25 @@ import ContentTopic from '../../layout/register/content-topic';
 // import ChangeLife from '../../layout/register/change-life';
 import ChooseCommitment from '../../layout/register/choose-commitment';
 import Contract from '../../layout/register/contract';
-import {listTopic} from '../../shared/staticData';
-import {reset} from '../../shared/navigationRef';
+import { listTopic } from '../../shared/staticData';
+import { reset } from '../../shared/navigationRef';
 import {
   checkDeviceRegister,
   postRegister,
   updateProfile,
 } from '../../shared/request';
-import {storeRegistrationData} from '../../store/defaultState/actions';
-import {sizing} from '../../shared/styling';
+import { storeRegistrationData } from '../../store/defaultState/actions';
+import { sizing } from '../../shared/styling';
 import {
   firstStepSelection,
   forthStepSelection,
   secondStepSelection,
   thirdStepSelection,
 } from './categoriesArr';
-import {removeDuplicatesArray} from '../../helpers/arrayHandler';
+import { removeDuplicatesArray } from '../../helpers/arrayHandler';
 import { ONBOARDING_COMPLETE, eventTracking } from '../../helpers/eventTracking';
+import { reformatDate } from '../../helpers/user';
+import { isMoreThanThreeHoursSinceLastTime } from '../../helpers/timeHelpers';
 
 const Convetti = require('../../assets/lottie/hello.json');
 
@@ -267,11 +270,27 @@ function Register({
           handleSubscriptionStatus(res.data.subscription);
           fetchListQuote();
           fetchCollection();
-          setTimeout(() => {
-            handlePayment("onboarding", () => {
-              reset("MainPage", { isFromOnboarding: true });
-            });
-          }, 200);
+          const getCurrentOpenApps = await AsyncStorage.getItem('latestOpenApps');
+          const mainDate = reformatDate(parseFloat(getCurrentOpenApps));
+          const isMoreThan3Hours = isMoreThanThreeHoursSinceLastTime(mainDate);
+          const stringifyDate = Date.now().toString();
+          if (!getCurrentOpenApps || isMoreThan3Hours) {
+            await AsyncStorage.setItem('latestOpenApps', stringifyDate);
+            const isFinishTutorial = await AsyncStorage.getItem("isFinishTutorial");
+            setTimeout(() => {
+              if (isFinishTutorial === "yes") {
+                handleBasicPaywall(() => {
+                  reset("MainPage", { isFromOnboarding: true });
+                });
+              } else {
+                handlePayment("onboarding", () => {
+                  reset("MainPage", { isFromOnboarding: true });
+                });
+              }
+            }, 200);
+          } else {
+            reset("MainPage", { isFromOnboarding: true });
+          };
           await updateProfile({
             ...payload,
             _method: "PATCH",
@@ -316,7 +335,7 @@ function Register({
     await fetchCollection();
     eventTracking(ONBOARDING_COMPLETE);
     handlePayment('onboarding', () => {
-      reset('MainPage', {isFromOnboarding: true});
+      reset('MainPage', { isFromOnboarding: true });
     });
     AsyncStorage.setItem('isLogin', 'yes');
     setLoading(false);
@@ -789,7 +808,7 @@ function Register({
       <StatusBar
         barStyle="light-content"
         backgroundColor="#000"
-        // hidden={statusbarStatus}
+      // hidden={statusbarStatus}
       />
       {renderAnimation()}
       <KeyboardAvoidingView
@@ -817,9 +836,9 @@ function Register({
           {registerStep === 1 && substep === 'a'
             ? null
             : renderButton(
-                styles.mgBtm40,
-                registerStep === 1 && substep === 'b' ? 2500 : null,
-              )}
+              styles.mgBtm40,
+              registerStep === 1 && substep === 'b' ? 2500 : null,
+            )}
         </KeyboardAwareScrollView>
 
         {registerStep === 1 && substep === 'a' && renderButton()}

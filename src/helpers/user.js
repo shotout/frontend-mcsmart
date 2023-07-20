@@ -56,13 +56,13 @@ export const isUserPremium = () => {
 };
 
 export const handlePayment = async (vendorId, cb) =>
-  new Promise(async (resolve, reject) => {
-    try {
-      eventTracking(SHOW_PAYWALL);
-      let stringVendor = vendorId;
-      // const subscriptions = await Purchasely.userSubscriptions();
-      // console.log('Subscription status:', subscriptions);
-      const purchaseId = await Purchasely.getAnonymousUserId();
+new Promise(async (resolve, reject) => {
+  try {
+    eventTracking(SHOW_PAYWALL);
+    let stringVendor = vendorId;
+    // const subscriptions = await Purchasely.userSubscriptions();
+    // console.log('Subscription status:', subscriptions);
+    const purchaseId = await Purchasely.getAnonymousUserId();
       if (vendorId === "onboarding") {
         // await setSubcription({
         //   subscription_type: 1,
@@ -426,4 +426,24 @@ export const purchaselyListener = () => {
     // User has successfully purchased a product, reload content
     console.log("User has purchased", res);
   });
+};
+
+export const reformatDate = valueDate => {
+  if (valueDate) {
+    const formatYears = moment(valueDate).format('YYYY');
+    const formatMonth = moment(valueDate).format('MM');
+    const formatDay = moment(valueDate).format('DD');
+    const formatHours = moment(valueDate).format('HH');
+    const minutes = moment(valueDate).format('mm');
+    return new Date(
+      formatYears,
+      formatMonth - 1,
+      formatDay,
+      formatHours,
+      minutes,
+      0,
+      0,
+    );
+  }
+  return new Date();
 };

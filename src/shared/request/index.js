@@ -249,3 +249,10 @@ export const getSetting = () =>
     url: `/setting/paywall`,
     method: 'GET',
   });
+
+export const resetBadge = (data = {}) =>
+  Wrap({
+    url: `/notif/reset-badge`,
+    method: 'POST',
+    data,
+  });

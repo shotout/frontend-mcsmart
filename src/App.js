@@ -20,7 +20,7 @@ import { Settings } from 'react-native-fbsdk-next';
 import messaging from "@react-native-firebase/messaging";
 import { Notifications } from 'react-native-notifications';
 import DeviceInfo from "react-native-device-info";
-import { checkDeviceRegister } from "./shared/request";
+import { checkDeviceRegister, resetBadge } from "./shared/request";
 import { AdEventType, AppOpenAd } from "react-native-google-mobile-ads";
 import SplashScreen from "react-native-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -65,9 +65,9 @@ const App =  () => {
     Notifications.removeAllDeliveredNotifications();
     DeviceInfo.getUniqueId().then(async uniqueId => {
       try {
-      await checkDeviceRegister({
-        device_id: uniqueId
-      });
+        await resetBadge({
+          device_id: uniqueId
+        });
       } catch (err) {
         console.log('Err get device info:', err);
       }
