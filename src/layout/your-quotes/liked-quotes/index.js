@@ -138,7 +138,7 @@ function LikeQuotes({contentRef, onClose, isVisible}) {
 
   const handleShare = async quoteText => {
     await Share.open({
-      message: `“${quoteText}”\n\n${downloadText}`,
+      message: `“${quoteText}”\n\n${downloadText}\n`,
     });
   };
 

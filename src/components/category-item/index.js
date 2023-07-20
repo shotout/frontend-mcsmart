@@ -8,7 +8,9 @@ import styles from './styles';
 import ModalUnlockCategory from '../modal-unlock-ads';
 import {isUserPremium} from '../../helpers/user';
 import {colors} from '../../shared/styling';
-
+import { getListFactRegister } from '../../shared/request';
+import { fetchListQuoteFilter } from '../../store/defaultState/actions';
+import store from '../../store/configure-store';
 const adsIcon = require('../../assets/icons/ads_icon.png');
 const categoryAdsIcon = require('../../assets/icons/category_icon.png');
 
@@ -17,12 +19,19 @@ const CategoryItem = ({onPress, item, isSelected}) => {
   const isGeneralCategory = item.id === 1;
 
   const handlePressAds = () => {
-    if (item.is_free === 0 && !isUserPremium()) {
-      setUnlockByAds(true);
+    const data = isUserPremium()
+    if (item.is_free === 0 && !data) {
+      if (isSelected) {
+        onPress();
+      } else {
+        setUnlockByAds(true);
+      }
     } else {
       onPress();
     }
   };
+ 
+
 
   function renderSelectedBox() {
     if (!isUserPremium() && item.is_free === 0 && !isSelected) {
@@ -83,7 +92,7 @@ const CategoryItem = ({onPress, item, isSelected}) => {
       {showUnlockByAds && (
         <ModalUnlockCategory
           visible={showUnlockByAds}
-          handleClose={() => {
+          handleClose={(selectedCategory) => {
             setUnlockByAds(false);
           }}
           imgSource={categoryAdsIcon}

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Modal, View, Text, TouchableOpacity, Image} from 'react-native';
+import {Modal, View, Text, TouchableOpacity, Image, Linking, Platform} from 'react-native';
 import {connect} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {askRating} from '../../shared/askRating';
@@ -8,6 +8,7 @@ import dispatcher from './dispatcher';
 import IconClose from '../../assets/svg/icon_close.svg';
 import Button from '../button';
 import {giveRating} from '../../shared/request';
+import { STORE } from '../../shared/static';
 
 const ratingIcon = require('../../assets/icons/rating_star.png');
 const unSelectRatingStar = require('../../assets/icons/unselect_rating_star.png');
@@ -16,9 +17,21 @@ const bannerRating = require('../../assets/icons/banner_rating.png');
 function ModalRating({handleClose, visible}) {
   const [ratingSelected, setRatingSelected] = useState(0);
 
+  const linkIOS = STORE.appstore.replace("https", "itms-apps");
+
   const handleSubmit = () => {
     if (ratingSelected === 5 || ratingSelected === 4) {
-      askRating(ratingSelected);
+      // askRating(ratingSelected);
+      if (Platform.OS === 'ios'){
+        Linking.canOpenURL(linkIOS).then(
+          (supported) => {
+            supported && Linking.openURL(linkIOS);
+          },
+          (err) => console.log(err)
+        );
+      } else {
+        Linking.openURL(STORE.playstore);
+      }
     }
     giveRating({value: ratingSelected});
     handleClose();

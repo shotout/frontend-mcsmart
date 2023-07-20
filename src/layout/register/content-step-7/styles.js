@@ -32,6 +32,11 @@ export default StyleSheet.create({
     fontSize: moderateScale(18),
     lineHeight: moderateScale(28),
   },
+  sliderContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    transform: [{ translateX: -200 }], // Sesuaikan jarak swipe yang diinginkan
+  },
   txtDesc: {
     marginHorizontal: moderateScale(20),
     fontFamily: fonts.InterMedium,
@@ -112,7 +117,7 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Capriola-Regular',
     color: '#000',
-    fontSize: moderateScale(17),
+    fontSize: moderateScale(14),
     lineHeight: moderateScale(28),
   },
   ctnFlatlist: {

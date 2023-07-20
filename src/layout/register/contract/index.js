@@ -99,7 +99,7 @@ export default function Contract({values, substep, onLongPress, listCategory}) {
           return (
             <Fragment key={item}>
               {' '}
-              and <Text style={styles.txtBlue}>many more...</Text>
+              and <Text style={styles.txtBlue}>much more...</Text>
             </Fragment>
           );
         }

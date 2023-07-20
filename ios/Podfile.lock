@@ -5,6 +5,8 @@ PODS:
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
+  - FBAEMKit (15.0.0):
+    - FBSDKCoreKit_Basics (= 15.0.0)
   - FBLazyVector (0.71.4)
   - FBReactNativeSpec (0.71.4):
     - RCT-Folly (= 2021.07.22.00)
@@ -13,48 +15,62 @@ PODS:
     - React-Core (= 0.71.4)
     - React-jsi (= 0.71.4)
     - ReactCommon/turbomodule/core (= 0.71.4)
-  - Firebase (10.10.0):
-    - Firebase/Core (= 10.10.0)
-  - Firebase/Core (10.10.0):
+  - FBSDKCoreKit (15.0.0):
+    - FBAEMKit (= 15.0.0)
+    - FBSDKCoreKit_Basics (= 15.0.0)
+  - FBSDKCoreKit_Basics (15.0.0)
+  - FBSDKGamingServicesKit (15.0.0):
+    - FBSDKCoreKit (= 15.0.0)
+    - FBSDKCoreKit_Basics (= 15.0.0)
+    - FBSDKShareKit (= 15.0.0)
+  - FBSDKLoginKit (15.0.0):
+    - FBSDKCoreKit (= 15.0.0)
+  - FBSDKShareKit (15.0.0):
+    - FBSDKCoreKit (= 15.0.0)
+  - Firebase (10.3.0):
+    - Firebase/Core (= 10.3.0)
+  - Firebase/Analytics (10.3.0):
+    - Firebase/Core
+  - Firebase/Core (10.3.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 10.10.0)
-  - Firebase/CoreOnly (10.10.0):
-    - FirebaseCore (= 10.10.0)
-  - Firebase/Messaging (10.10.0):
+    - FirebaseAnalytics (~> 10.3.0)
+  - Firebase/CoreOnly (10.3.0):
+    - FirebaseCore (= 10.3.0)
+  - Firebase/Messaging (10.3.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 10.10.0)
-  - FirebaseAnalytics (10.10.0):
-    - FirebaseAnalytics/AdIdSupport (= 10.10.0)
+    - FirebaseMessaging (~> 10.3.0)
+  - FirebaseAnalytics (10.3.0):
+    - FirebaseAnalytics/AdIdSupport (= 10.3.0)
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseAnalytics/AdIdSupport (10.10.0):
+  - FirebaseAnalytics/AdIdSupport (10.3.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
-    - GoogleAppMeasurement (= 10.10.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - GoogleAppMeasurement (= 10.3.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseCore (10.10.0):
+  - FirebaseCore (10.3.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreExtension (10.10.0):
+  - FirebaseCoreExtension (10.3.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseCoreInternal (10.10.0):
+  - FirebaseCoreInternal (10.11.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseInstallations (10.10.0):
+  - FirebaseInstallations (10.11.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
-  - FirebaseMessaging (10.10.0):
+  - FirebaseMessaging (10.3.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
     - GoogleDataTransport (~> 9.2)
@@ -129,25 +145,25 @@ PODS:
   - Google-Mobile-Ads-SDK (10.6.0):
     - GoogleAppMeasurement (< 11.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
-  - GoogleAppMeasurement (10.10.0):
-    - GoogleAppMeasurement/AdIdSupport (= 10.10.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+  - GoogleAppMeasurement (10.3.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.3.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (10.10.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.10.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+  - GoogleAppMeasurement/AdIdSupport (10.3.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.3.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (10.10.0):
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.3.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - GoogleDataTransport (9.2.3):
     - GoogleUtilities/Environment (~> 7.7)
@@ -438,7 +454,24 @@ PODS:
     - React-Core
   - react-native-change-icon (4.0.0):
     - React-Core
+  - react-native-fbsdk-next (11.2.1):
+    - React-Core
+    - react-native-fbsdk-next/Core (= 11.2.1)
+    - react-native-fbsdk-next/Login (= 11.2.1)
+    - react-native-fbsdk-next/Share (= 11.2.1)
+  - react-native-fbsdk-next/Core (11.2.1):
+    - FBSDKCoreKit (~> 15.0.0)
+    - React-Core
+  - react-native-fbsdk-next/Login (11.2.1):
+    - FBSDKLoginKit (~> 15.0.0)
+    - React-Core
+  - react-native-fbsdk-next/Share (11.2.1):
+    - FBSDKGamingServicesKit (~> 15.0.0)
+    - FBSDKShareKit (~> 15.0.0)
+    - React-Core
   - react-native-in-app-review (4.3.3):
+    - React-Core
+  - react-native-notifications (4.3.5):
     - React-Core
   - react-native-purchasely (2.7.0):
     - Purchasely (= 3.7.1)
@@ -546,12 +579,16 @@ PODS:
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
-  - RNFBApp (18.0.0):
-    - Firebase/CoreOnly (= 10.10.0)
+  - RNFBAnalytics (16.7.0):
+    - Firebase/Analytics (= 10.3.0)
     - React-Core
-  - RNFBMessaging (18.0.0):
-    - Firebase/Messaging (= 10.10.0)
-    - FirebaseCoreExtension (= 10.10.0)
+    - RNFBApp
+  - RNFBApp (16.7.0):
+    - Firebase/CoreOnly (= 10.3.0)
+    - React-Core
+  - RNFBMessaging (16.7.0):
+    - Firebase/Messaging (= 10.3.0)
+    - FirebaseCoreExtension (= 10.3.0)
     - React-Core
     - RNFBApp
   - RNFS (2.20.0):
@@ -640,7 +677,9 @@ DEPENDENCIES:
   - react-native-adjust (from `../node_modules/react-native-adjust`)
   - "react-native-cameraroll (from `../node_modules/@react-native-camera-roll/camera-roll`)"
   - react-native-change-icon (from `../node_modules/react-native-change-icon`)
+  - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - react-native-in-app-review (from `../node_modules/react-native-in-app-review`)
+  - react-native-notifications (from `../node_modules/react-native-notifications`)
   - react-native-purchasely (from `../node_modules/react-native-purchasely`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
@@ -663,6 +702,7 @@ DEPENDENCIES:
   - "RNCClipboard (from `../node_modules/@react-native-clipboard/clipboard`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNFastImage (from `../node_modules/react-native-fast-image`)
+  - "RNFBAnalytics (from `../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNFS (from `../node_modules/react-native-fs`)
@@ -680,6 +720,12 @@ SPEC REPOS:
   trunk:
     - Adjust
     - CocoaAsyncSocket
+    - FBAEMKit
+    - FBSDKCoreKit
+    - FBSDKCoreKit_Basics
+    - FBSDKGamingServicesKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -761,8 +807,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-camera-roll/camera-roll"
   react-native-change-icon:
     :path: "../node_modules/react-native-change-icon"
+  react-native-fbsdk-next:
+    :path: "../node_modules/react-native-fbsdk-next"
   react-native-in-app-review:
     :path: "../node_modules/react-native-in-app-review"
+  react-native-notifications:
+    :path: "../node_modules/react-native-notifications"
   react-native-purchasely:
     :path: "../node_modules/react-native-purchasely"
   react-native-safe-area-context:
@@ -807,6 +857,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-device-info"
   RNFastImage:
     :path: "../node_modules/react-native-fast-image"
+  RNFBAnalytics:
+    :path: "../node_modules/@react-native-firebase/analytics"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBMessaging:
@@ -837,15 +889,21 @@ SPEC CHECKSUMS:
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
+  FBAEMKit: d8312d8451ead46282adc7f3565ffc4965e3a4a7
   FBLazyVector: 446e84642979fff0ba57f3c804c2228a473aeac2
   FBReactNativeSpec: 241709e132e3bf1526c1c4f00bc5384dd39dfba9
-  Firebase: facd334e557a979bd03a0b58d90fd56b52b8aba0
-  FirebaseAnalytics: 7bc7de519111dae802f5bc0c9c083918f8b8870d
-  FirebaseCore: d027ff503d37edb78db98429b11f580a24a7df2a
-  FirebaseCoreExtension: 8d93ebbf6838a874b4ed82a564c9d6705f8365dd
-  FirebaseCoreInternal: 971029061d326000d65bfdc21f5502c75c8b0893
-  FirebaseInstallations: 52153982b057d3afcb4e1fbb3eb0b6d00611e681
-  FirebaseMessaging: 8a3b9a8b98ce72a42d22e69865cf662e38d2d6f5
+  FBSDKCoreKit: 81879058dd06208c0820fc713d054ca54903e8ba
+  FBSDKCoreKit_Basics: eebc9bb69a0e5d133b92dca53a20716227faa454
+  FBSDKGamingServicesKit: e0766514d64d26a9f846e793c0a44bc4a236723b
+  FBSDKLoginKit: 11995469cd7da16fd4d5245e8d2ec61060479270
+  FBSDKShareKit: 9501792c3024580809f811a8a549868699d9bd32
+  Firebase: f92fc551ead69c94168d36c2b26188263860acd9
+  FirebaseAnalytics: 036232b6a1e2918e5f67572417be1173576245f3
+  FirebaseCore: 988754646ab3bd4bdcb740f1bfe26b9f6c0d5f2a
+  FirebaseCoreExtension: 93d252fabdc9696bf14a73b04d84877ab9b3a832
+  FirebaseCoreInternal: 9e46c82a14a3b3a25be4e1e151ce6d21536b89c0
+  FirebaseInstallations: 2a2c6859354cbec0a228a863d4daf6de7c74ced4
+  FirebaseMessaging: e345b219fd15d325f0cf2fef28cb8ce00d851b3f
   Flipper: 26fc4b7382499f1281eb8cb921e5c3ad6de91fe0
   Flipper-Boost-iOSX: fd1e2b8cbef7e662a122412d7ac5f5bea715403c
   Flipper-DoubleConversion: 2dc99b02f658daf147069aad9dbd29d8feb06d30
@@ -858,7 +916,7 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   Google-Mobile-Ads-SDK: 07599a44221fb3f00d111d5c2f4e27549f8dbf21
-  GoogleAppMeasurement: bbbfd4bcb2b40ae9b772c3b0823a58c1e3d618f9
+  GoogleAppMeasurement: c7d6fff39bf2d829587d74088d582e32d75133c3
   GoogleDataTransport: f0308f5905a745f94fb91fea9c6cbaf3831cb1bd
   GoogleUserMessagingPlatform: 5f8b30daf181805317b6b985bb51c1ff3beca054
   GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
@@ -887,7 +945,9 @@ SPEC CHECKSUMS:
   react-native-adjust: 5f5966b51459bf8cb074bf8ebc1307a2bfb7b1da
   react-native-cameraroll: 755bcc628148a90a7c9cf3f817a252be3a601bc5
   react-native-change-icon: ea9bb7255b09e89f41cbf282df16eade91ab1833
+  react-native-fbsdk-next: 5291a5d67aab4e649d072c50988033ff0d05b915
   react-native-in-app-review: db8bb167a5f238e7ceca5c242d6b36ce8c4404a4
+  react-native-notifications: 504143d59f9628c3b0c22fd0ccf34b65b9182d01
   react-native-purchasely: 6611e165e98fa864cc781cc5de8a5019f68b12ee
   react-native-safe-area-context: 39c2d8be3328df5d437ac1700f4f3a4f75716acc
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
@@ -910,8 +970,9 @@ SPEC CHECKSUMS:
   RNCClipboard: 3f0451a8100393908bea5c5c5b16f96d45f30bfc
   RNDeviceInfo: 749f2e049dcd79e2e44f134f66b73a06951b5066
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
-  RNFBApp: 10aa0ab560e30186c39a9756846945cac6499ea7
-  RNFBMessaging: a0cf20be8f41d89af98f5611d5db432c59371f68
+  RNFBAnalytics: 4cd20dd7d8332ee4560e522c60b38d4a7e53a005
+  RNFBApp: 1ee535dcb7773ca612d3a2e53a1f78f8f2fb6abf
+  RNFBMessaging: 04ecf12bae7543cd8df145f1b26d89d867594be7
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 071d7a9ad81e8b83fe7663b303d132406a7d8f39
   RNGoogleMobileAds: 12d55c39ba7d2dbaeebd119c538824fdd1eac7e4
@@ -929,4 +990,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: f7d82e2a643024675920a90d948998a7b3833f00
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.12.1

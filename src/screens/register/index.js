@@ -26,6 +26,7 @@ import states from './states';
 import dispatcher from './dispatcher';
 import {
   handlePayment,
+  handlePaymentTwo,
   handleSubscriptionStatus,
   openPrivacyPolicy,
   openTermsofUse,
@@ -33,7 +34,7 @@ import {
 } from '../../helpers/user';
 import LoadingIndicator from '../../components/loading-indicator';
 import {isIphoneXorAbove} from '../../shared/devices';
-
+import store from "../../store/configure-store";
 import HeaderStep from '../../layout/register/header-step';
 import ContentName from '../../layout/register/content-step-1';
 import ContentGender from '../../layout/register/content-step-2';
@@ -61,6 +62,7 @@ import {
   thirdStepSelection,
 } from './categoriesArr';
 import {removeDuplicatesArray} from '../../helpers/arrayHandler';
+import { ONBOARDING_COMPLETE, eventTracking } from '../../helpers/eventTracking';
 
 const Convetti = require('../../assets/lottie/hello.json');
 
@@ -131,7 +133,7 @@ function Register({
           setSubstep('b');
         }, 2300);
       }
-      await AsyncStorage.removeItem('isFinishTutorial');
+      // await AsyncStorage.removeItem('isFinishTutorial');
     };
 
     DeviceInfo.getUniqueId().then(async uniqueId => {
@@ -155,8 +157,43 @@ function Register({
     }, 3000);
   }, []);
 
+  const handleSubmitRegist = async () => {
+    try {
+      setLoading(true);
+      const timeZone = await TimeZone.getTimeZone();
+      const payload = {
+        ...mutateForm,
+        name: values.name,
+        anytime: values.isAnytime,
+        often: values.often,
+        start: moment(values.start_at).format('HH:mm'),
+        end: moment(values.end_at).format('HH:mm'),
+        gender: values.gender,
+        timezone: timeZone,
+
+        impress_friends: values.impress_friends,
+        impress_business: values.impress_business,
+        impress_children: values.impress_children,
+        impress_members: values.impress_members,
+        commit_goal: values.commit_goal,
+        // topics: values.selectedCategory,
+        fcm_token: getFcmToken,
+      };
+      const res = await postRegister(payload);
+      handleSetProfile(res);
+      fetchListQuote();
+      fetchCollection();
+      setTimeout(() => {
+        reloadUserProfile();
+      }, 2000);
+      AsyncStorage.setItem("isLogin", "yes");
+    } catch (err) {
+      console.log('Error register:', err);
+    }
+  };
+
   useEffect(() => {
-    if (registerStep === 8) {
+    if (registerStep === 7) {
       const getDeviceID = async () => {
         try {
           const timeZone = await TimeZone.getTimeZone();
@@ -165,8 +202,52 @@ function Register({
             name: values.name,
             anytime: values.isAnytime,
             often: values.often,
-            start: moment(values.start_at).format('HH:mm'),
-            end: moment(values.end_at).format('HH:mm'),
+            start: moment(values.start_at).format("HH:mm"),
+            end: moment(values.end_at).format("HH:mm"),
+            gender: values.gender,
+            timezone: timeZone,
+            impress_friends: values.impress_friends,
+            impress_business: values.impress_business,
+            impress_children: values.impress_children,
+            impress_members: values.impress_members,
+            commit_goal: values.commit_goal,
+            // topics: values.selectedCategory,
+            fcm_token: getFcmToken,
+          };
+          const res = await checkDeviceRegister({
+            device_id: mutateForm.device_id,
+          });
+          setHasRegister(true);
+          handleSetProfile(res);
+          handleSubscriptionStatus(res.data.subscription);
+          fetchListQuote();
+          fetchCollection();
+          handlePaymentTwo("onboarding");
+          await updateProfile({
+            ...payload,
+            _method: "PATCH",
+          });
+          setTimeout(() => {
+            reloadUserProfile();
+          }, 2000);
+          AsyncStorage.setItem("isLogin", "yes");
+        } catch (err) {
+          console.log("Device id not register");
+          handleSubmitRegist(true);
+        }
+      };
+      getDeviceID();
+    } else if (registerStep === 8) {
+      const getDeviceID = async () => {
+        try {
+          const timeZone = await TimeZone.getTimeZone();
+          const payload = {
+            ...mutateForm,
+            name: values.name,
+            anytime: values.isAnytime,
+            often: values.often,
+            start: moment(values.start_at).format("HH:mm"),
+            end: moment(values.end_at).format("HH:mm"),
             gender: values.gender,
             timezone: timeZone,
 
@@ -178,44 +259,33 @@ function Register({
             // topics: values.selectedCategory,
             fcm_token: getFcmToken,
           };
-          if (isHasRegister) {
-            setTimeout(() => {
-              handlePayment('onboarding', () => {
-                reset('MainPage', {isFromOnboarding: true});
-              });
-            }, 200);
-            await updateProfile({
-              ...payload,
-              _method: 'PATCH',
+          const res = await checkDeviceRegister({
+            device_id: mutateForm.device_id,
+          });
+          setHasRegister(true);
+          handleSetProfile(res);
+          handleSubscriptionStatus(res.data.subscription);
+          fetchListQuote();
+          fetchCollection();
+          setTimeout(() => {
+            handlePayment("onboarding", () => {
+              reset("MainPage", { isFromOnboarding: true });
             });
-            setTimeout(() => {
-              reloadUserProfile();
-            }, 2000);
-          } else {
-            handleSubmit(true);
-          }
-
-          AsyncStorage.setItem('isLogin', 'yes');
+          }, 200);
+          await updateProfile({
+            ...payload,
+            _method: "PATCH",
+          });
+          setTimeout(() => {
+            reloadUserProfile();
+          }, 2000);
+          AsyncStorage.setItem("isLogin", "yes");
         } catch (err) {
-          console.log('Device id not register');
+          console.log("Device id not register");
           handleSubmit(true);
         }
       };
       getDeviceID();
-    }
-    if (registerStep === 7) {
-      const setRegisterUser = async () => {
-        const res = await checkDeviceRegister({
-          device_id: mutateForm.device_id,
-        });
-        setHasRegister(true);
-        handleSetProfile(res);
-        handleSubscriptionStatus(res.data.subscription);
-        fetchListQuote();
-        fetchCollection();
-        AsyncStorage.setItem('isLogin', 'yes');
-      };
-      setRegisterUser();
     }
   }, [registerStep]);
 
@@ -244,7 +314,7 @@ function Register({
     console.log('AFter register called');
     await fetchListQuote();
     await fetchCollection();
-
+    eventTracking(ONBOARDING_COMPLETE);
     handlePayment('onboarding', () => {
       reset('MainPage', {isFromOnboarding: true});
     });
@@ -255,7 +325,6 @@ function Register({
   const handleSubmit = async () => {
     try {
       setLoading(true);
-
       const timeZone = await TimeZone.getTimeZone();
       const payload = {
         ...mutateForm,
@@ -282,6 +351,7 @@ function Register({
       setTimeout(() => {
         reloadUserProfile();
       }, 2000);
+      eventTracking(ONBOARDING_COMPLETE);
     } catch (err) {
       console.log('Error register:', err);
       setLoading(false);

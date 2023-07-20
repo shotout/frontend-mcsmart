@@ -119,11 +119,13 @@ function ModalCategoriesSearch({
     } else {
       curentCategory.push(id);
     }
-    setCategoryValue(curentCategory);
-    updateCategory({
-      categories: curentCategory,
-      _method: 'PATCH',
-    });
+    if (curentCategory?.length > 0 && curentCategory[0] != null) {
+      setCategoryValue(curentCategory);
+      updateCategory({
+        categories: curentCategory,
+        _method: 'PATCH',
+      });
+    }
   };
 
   const renderListCategory = ({item, index}) => {

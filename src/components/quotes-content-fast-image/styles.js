@@ -81,9 +81,18 @@ export default StyleSheet.create({
     color: colors.black
   },
   traceBg:{
-    width: moderateScale(220),
-    height: moderateScale(220),
+    width: moderateScale(50),
+    height: moderateScale(50),
     resizeMode: 'contain',
+  },
+  ctnBgWatermark:{
+    position: 'absolute',
+    top: moderateScale(60),
+    left: moderateScale(20),
+    tintColor: 'red'
+    // backgroundColor: 'gray',
+    // opacity: 0.4,
+    // padding: 5
   },
   ctnBgTrace:{
 
@@ -93,5 +102,15 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center'
-  }
+  },
+  ctnWatermark: {
+    position: 'absolute',
+    top: isIphoneXorAbove() ? moderateScale(130) : moderateScale(100),
+    alignSelf: 'center'
+  },
+  txtWatermark: {
+    fontFamily: fonts.InterMedium,
+    color: colors.watermark,
+    fontSize: moderateScale(16),
+  },
 });

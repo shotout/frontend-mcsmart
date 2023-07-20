@@ -1,6 +1,7 @@
 import {Adjust, AdjustEvent} from 'react-native-adjust';
 // import analytics from '@react-native-firebase/analytics';
 import {isIphone} from '../shared/devices';
+import { Settings, AppEventsLogger } from 'react-native-fbsdk-next';
 
 export const ONBOARDING_COMPLETE = 'se2bvp';
 export const APP_INSTALLED = 'e6a5ns';
@@ -48,15 +49,18 @@ export const eventTracking = async (id, message) => {
     if (message) {
       adjustEvent.setCallbackId(message);
     }
+    console.log('Success tracking:', Adjust.trackEvent(adjustEvent));
     Adjust.trackEvent(adjustEvent);
+    AppEventsLogger.logEvent(getScreenName(id))
     // await analytics().logEvent(getScreenName(id), {
     //   id,
     // });
-    console.log('Success tracking:', getScreenName(id));
+   
   } catch (err) {
     console.log('Err tracking:', err);
   }
 };
+
 
 export const revenueTracking = async (price, currency) => {
   const adjustEvent = new AdjustEvent(REVENUE_TRACKING);
@@ -88,13 +92,17 @@ export const askTrackingPermission = () => {
           console.log('The user denied access to IDFA');
           break;
         case 3:
+          Settings.setAdvertiserTrackingEnabled(true)
           // ATTrackingManagerAuthorizationStatusAuthorized case
           console.log('The user authorized access to IDFA');
+          
           break;
         default:
           console.log('The status is not available');
           break;
       }
     });
+  }else{
+    Settings.setAdvertiserTrackingEnabled(true)
   }
 };

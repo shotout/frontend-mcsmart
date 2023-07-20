@@ -89,6 +89,16 @@ function ModalSetting({contentRef, onClose, collections}) {
     );
   }
 
+  const checkIfFacebookAppIsInstalled = async () => {
+    const isAppInstalled = await Linking.canOpenURL('fb://');
+    if (isAppInstalled) {
+      // Aplikasi Facebook terinstal, buka aplikasi
+      Linking.openURL('fb://profile/111060891984207');
+    }else{
+      Linking.openURL('https://www.facebook.com/McSmartApp')
+    }
+  };
+
   function renderSubscription() {
     if (isUserPremium()) {
       return (
@@ -226,14 +236,14 @@ function ModalSetting({contentRef, onClose, collections}) {
             title="Instagram"
             icon={<IconIgBlack width="100%" height="100%" />}
             onPress={() => {
-              Linking.openURL('https://www.instagram.com/mcsmart_app/');
+              Linking.openURL('https://www.instagram.com/mcsmart_app');
             }}
           />
           <ListContent
             title="Facebook"
             icon={<IconFbBlack width="100%" height="100%" />}
             onPress={() => {
-              Linking.openURL('https://www.facebook.com/McSmartApp');
+              checkIfFacebookAppIsInstalled()
             }}
           />
           <View style={styles.ctnFooter}>

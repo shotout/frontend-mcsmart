@@ -20,7 +20,7 @@ if linkage != nil
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
   use_frameworks! :linkage => linkage.to_sym
 end
-
+production = ENV["PRODUCTION"] == "1"
 target 'mcsmart' do
   config = use_native_modules!
 
@@ -37,6 +37,7 @@ target 'mcsmart' do
     # Hermes is now enabled by default. Disable by setting this flag to false.
     # Upcoming versions of React Native may rely on get_default_flags(), but
     # we make it explicit here to aid in the React Native upgrade process.
+    :production => production,
     :hermes_enabled => false,
     :fabric_enabled => flags[:fabric_enabled],
     # Enables Flipper.

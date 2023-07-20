@@ -4,6 +4,8 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import "RNSplashScreen.h" // Tambahkan baris ini
+#import <FBSDKCoreKit/FBSDKCoreKit-swift.h> // <- Add This Import
+#import <React/RCTLinkingManager.h> 
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -17,10 +19,24 @@
   bool didFinish = [super application:application didFinishLaunchingWithOptions:launchOptions];
   
   [RNSplashScreen show];  // this needs to be called after [super application:application didFinishLaunchingWithOptions:launchOptions];
-  
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                       didFinishLaunchingWithOptions:launchOptions];
   return didFinish;
 }
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  if ([[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options]) {
+    return YES;
+  }
 
+  if ([RCTLinkingManager application:app openURL:url options:options]) {
+    return YES;
+  }
+
+  return NO;
+}
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
 #if DEBUG

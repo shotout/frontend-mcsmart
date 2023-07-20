@@ -80,7 +80,7 @@ export const defaultUser = {
       },
       {
         id: 3,
-        name: 'Food & Drink',
+        name: 'Food & Drinks',
         percentage: 0,
         status: 2,
         created_at: '2023-06-05T03:06:06.000000Z',

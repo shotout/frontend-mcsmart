@@ -24,7 +24,7 @@ export default StyleSheet.create({
     flex: 1,
     fontFamily: fonts.InterMedium,
     color: colors.black,
-    fontSize: moderateScale(14),
+    fontSize: moderateScale(13),
   },
   searchIcon: {
     width: moderateScale(20),
