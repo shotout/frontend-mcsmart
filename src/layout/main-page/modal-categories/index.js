@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import {
+  Alert,
   Animated,
   FlatList,
   Image,
@@ -8,30 +9,30 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
-} from 'react-native';
-import {Portal} from 'react-native-paper';
-import {connect} from 'react-redux';
+} from "react-native";
+import { Portal } from "react-native-paper";
+import { connect } from "react-redux";
 
-import PropTypes from 'prop-types';
-import SlidingUpPanel from 'rn-sliding-up-panel';
-import Search from '../../../components/search';
-import styles from './styles';
-import states from './states';
+import PropTypes from "prop-types";
+import SlidingUpPanel from "rn-sliding-up-panel";
+import Search from "../../../components/search";
+import styles from "./styles";
+import states from "./states";
 import {
   handleBasicPaywall,
   isUserPremium,
   reloadUserProfile,
-} from '../../../helpers/user';
-import {sizing} from '../../../shared/styling';
-import Button from '../../../components/button';
-import PremiumRocket from '../../../assets/svg/RocketPremiumBlack.svg';
-import {updateCategory} from '../../../shared/request';
-import CategoryItem from '../../../components/category-item';
-import ModalCategoriesSearch from '../modal-categories-search';
-import useDebounce from '../../../helpers/useDebounce';
-import {showModalPremium} from '../../../shared/globalContent';
-
-const iconClose = require('../../../assets/icons/close.png');
+} from "../../../helpers/user";
+import { sizing } from "../../../shared/styling";
+import Button from "../../../components/button";
+import PremiumRocket from "../../../assets/svg/RocketPremiumBlack.svg";
+import { updateCategory } from "../../../shared/request";
+import CategoryItem from "../../../components/category-item";
+import ModalCategoriesSearch from "../modal-categories-search";
+import useDebounce from "../../../helpers/useDebounce";
+import { showModalPremium } from "../../../shared/globalContent";
+import dispatcher from "./dispatcher";
+const iconClose = require("../../../assets/icons/close.png");
 
 function ModalCategories({
   onClose,
@@ -40,6 +41,7 @@ function ModalCategories({
   contentRef,
   fullSize,
   onCustomSelectCategory,
+  fetchListQuote,
 }) {
   const [categoryValue, setCategoryValue] = useState([]);
   const [showModalSearch, setModalSearch] = useState(false);
@@ -51,21 +53,71 @@ function ModalCategories({
     bottom: 0,
   };
   const [panelPositionVal] = useState(
-    new Animated.Value(draggableRange.bottom),
+    new Animated.Value(draggableRange.bottom)
   );
   const snappingPoints = [draggableRange.top, draggableRange.bottom];
 
   useEffect(() => {
-    const getInitialCategory = () => {
-      if (userProfile.data.categories?.length > 0) {
-        setCategoryValue(userProfile.data.categories.map(item => item.id));
+    const data = isUserPremium();
+    const getInitialCategory = async () => {
+
+      if (userProfile.data.categories?.length > 0 && data) {
+        setCategoryValue(userProfile.data.categories.map((item) => item.id));
+        console.log('disini 4', categoryValue)
+        fetchList(categoryValue)
+        console.log('masuk sini 3', categoryValue)
+      } else if (userProfile.data.categories?.length > 0) {
+        
+        let result;
+        if (categoryValue.includes(2)) {
+          result = [2, categoryValue[categoryValue.length - 1]];
+
+          if(categoryValue.length > 1 &&  categoryValue[categoryValue.length - 1] != 2){
+          
+            setCategoryValue(result);
+            fetchList(result)
+          }else{
+          
+            setCategoryValue(categoryValue);
+            fetchList(categoryValue)
+          }
+         
+        } else {
+          result = [categoryValue[categoryValue.length - 1]];
+          
+          setCategoryValue(result);
+          if(categoryValue[categoryValue.length - 1] != undefined){
+            fetchList(result)
+          }
+        }
+      } else if (userProfile.data.categories?.length === 0){
+      
+        fetchList([2])
       }
     };
     getInitialCategory();
   }, [userProfile.data.categories]);
 
-  const isDataSelected = value => {
-    const findItem = categoryValue.find(item => item === value);
+  const fetchList = async (value) => {
+    if (value.length > 0 && value[0] != null) {
+      await updateCategory({
+        categories: value,
+        _method: "PATCH",
+      });
+      console.log("ini current fetch" + value);
+      await fetchListQuote();
+    }
+   
+  }
+
+  useEffect(() => {
+    if (userProfile.data.categories?.length > 0 ) {
+      setCategoryValue(userProfile.data.categories.map((item) => item.id));
+    }
+  }, []);
+
+  const isDataSelected = (value) => {
+    const findItem = categoryValue.find((item) => item === value);
     if (findItem) return true;
     return false;
   };
@@ -73,16 +125,15 @@ function ModalCategories({
   const handleSelectCategory = async (id, isHasSelect) => {
     let curentCategory = [...categoryValue];
     if (isHasSelect) {
-      curentCategory = curentCategory.filter(cat => cat !== id);
+      curentCategory = curentCategory.filter((cat) => cat !== id);
+      if (curentCategory?.length === 0) {
+        curentCategory = [1];
+      }
     } else {
       curentCategory.push(id);
     }
     setCategoryValue(curentCategory);
-    await updateCategory({
-      categories: curentCategory,
-      _method: 'PATCH',
-    });
-    reloadUserProfile();
+    fetchList(curentCategory);
   };
 
   function renderSubscription() {
@@ -122,13 +173,14 @@ function ModalCategories({
         <View style={styles.ctnTextHeader}>
           <Text style={styles.boldHeader}>Categories</Text>
           <Text style={styles.txtDesc}>
-            {'Choose the topics that you\nwant to learn more about.'}
+            {"Choose the topics that you\nwant to learn more about."}
           </Text>
         </View>
         <TouchableOpacity
           onPress={() => {
             setModalSearch(true);
-          }}>
+          }}
+        >
           <Search isSelect placeholder="Search" />
         </TouchableOpacity>
       </View>
@@ -156,7 +208,7 @@ function ModalCategories({
     );
   }
 
-  const renderListCategory = ({item, index}) => {
+  const renderListCategory = ({ item, index }) => {
     const isSelected = isDataSelected(item.id);
     return (
       <CategoryItem
@@ -185,7 +237,7 @@ function ModalCategories({
         // onMomentumDragEnd={onMomentumDragEnd}
         // onDragStart={onDragStart}
       >
-        {dragHandler => (
+        {(dragHandler) => (
           <View style={styles.ctnRoot}>
             <TouchableWithoutFeedback onPress={onClose}>
               <View style={styles.ctnClose} />
@@ -203,7 +255,7 @@ function ModalCategories({
                   </>
                 )}
                 renderItem={renderListCategory}
-                keyExtractor={item => item.id}
+                keyExtractor={(item) => item.id}
                 showsVerticalScrollIndicator={false}
               />
 
@@ -229,6 +281,7 @@ function ModalCategories({
 ModalCategories.propTypes = {
   categories: PropTypes.object,
   userProfile: PropTypes.object.isRequired,
+  fetchListQuote: PropTypes.func.isRequired,
 };
 
 ModalCategories.defaultProps = {
@@ -238,4 +291,4 @@ ModalCategories.defaultProps = {
   },
 };
 
-export default connect(states)(ModalCategories);
+export default connect(states, dispatcher)(ModalCategories);

@@ -76,15 +76,17 @@ function CardCategories({
         categories: categoryArr,
         _method: 'PATCH',
       };
-      const res = await updateCategory(payload);
-      const updateObj = {
-        ...userProfile,
-        data: {
-          ...userProfile.data,
-          categories: res.data.categories,
-        },
-      };
-      handleSetProfile(updateObj);
+      if (payload?.categories?.length > 0 && payload?.categories[0] != null) {
+        const res = await updateCategory(payload);
+        const updateObj = {
+          ...userProfile,
+          data: {
+            ...userProfile.data,
+            categories: res.data.categories,
+          },
+        };
+        handleSetProfile(updateObj);
+      }
       fetchListQuote();
     } catch (err) {
       console.log('Error select:', err);

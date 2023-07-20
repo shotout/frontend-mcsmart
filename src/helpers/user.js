@@ -1,14 +1,20 @@
-import moment from 'moment';
-import {Linking, Platform} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import TimeZone from 'react-native-timezone';
+import moment from "moment";
+import { Linking, Platform } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import TimeZone from "react-native-timezone";
+import messaging from "@react-native-firebase/messaging";
+import Purchasely, { ProductResult } from "react-native-purchasely";
 
-import Purchasely, {ProductResult} from 'react-native-purchasely';
-
-import {getUserProfile, setSubcription, updateProfile} from '../shared/request';
-import store from '../store/configure-store';
-import {handleSetProfile} from '../store/defaultState/actions';
-import {SUCCESS_FETCH_COLLECTION} from '../store/defaultState/types';
+import {
+  checkDeviceRegister,
+  getUserProfile,
+  postRegister,
+  setSubcription,
+  updateProfile,
+} from "../shared/request";
+import store from "../store/configure-store";
+import { fetchCollection, handleSetProfile } from "../store/defaultState/actions";
+import { SUCCESS_FETCH_COLLECTION } from "../store/defaultState/types";
 import {
   CANCEL_SUBSCRIBE_AFTER_TRIAL,
   FREE_TRIAL,
@@ -16,33 +22,37 @@ import {
   SUBSCRIPTION_STARTED,
   eventTracking,
   revenueTracking,
-} from './eventTracking';
-import {reset} from '../shared/navigationRef';
+} from "./eventTracking";
+import { reset } from "../shared/navigationRef";
+import DeviceInfo from "react-native-device-info";
 
-export const dateToUnix = date => moment(date).unix();
+export const dateToUnix = (date) => moment(date).unix();
 export const getFutureDate = (defaultDate, day) =>
-  moment(defaultDate).add(day, 'days').format('YYYY-MM-DD');
+  moment(defaultDate).add(day, "days").format("YYYY-MM-DD");
 
 export const openPrivacyPolicy = () => {
-  Linking.openURL('https://mcsmartapp.com/privacy');
+  Linking.openURL("https://mcsmartapp.com/privacy");
 };
 
 export const openTermsofUse = () => {
-  Linking.openURL('https://mcsmartapp.com/terms');
+  Linking.openURL("https://mcsmartapp.com/terms");
 };
 
 export const openImprint = () => {
-  Linking.openURL('https://mcsmartapp.com/imprint');
+  Linking.openURL("https://mcsmartapp.com/imprint");
 };
 
 export const isUserPremium = () => {
   const profile = store.getState().defaultState.userProfile;
-  const {type} = profile.data.subscription;
-  if (type === 1) {
-    return false;
+  console.log('DATA PROFILE =',profile?.data?.subscription)
+  if (profile?.data != undefined) {
+    const { type } = profile?.data?.subscription;
+    if (type === 1 || type === 5) {
+      return false;
+    }
+    return true;
   }
   return true;
-  // true;
 };
 
 export const handlePayment = async (vendorId, cb) =>
@@ -53,35 +63,35 @@ export const handlePayment = async (vendorId, cb) =>
       // const subscriptions = await Purchasely.userSubscriptions();
       // console.log('Subscription status:', subscriptions);
       const purchaseId = await Purchasely.getAnonymousUserId();
-      if (vendorId === 'onboarding') {
+      if (vendorId === "onboarding") {
         // await setSubcription({
         //   subscription_type: 1,
         //   purchasely_id: purchaseId,
         // });
       } else if (!stringVendor) {
-        const currentDate = moment().format('YYYY-MM-DD');
-        const getInstallDate = await AsyncStorage.getItem('firstInstall');
+        const currentDate = moment().format("YYYY-MM-DD");
+        const getInstallDate = await AsyncStorage.getItem("firstInstall");
         if (getInstallDate === currentDate) {
-          stringVendor = 'offer_no_purchase_after_onboarding_paywall';
+          stringVendor = "offer_no_purchase_after_onboarding_paywall";
         } else {
-          stringVendor = 'offer_no_purchase_after_onboarding_paywall_2nd';
+          stringVendor = "offer_no_purchase_after_onboarding_paywall_2nd";
         }
       }
-      console.log('OPEN Purchasely', vendorId);
+      console.log("OPEN Purchasely", vendorId);
       const res = await Purchasely.presentPresentationForPlacement({
         placementVendorId:
-          stringVendor || 'offer_no_purchase_after_onboarding_paywall',
+          stringVendor || "offer_no_purchase_after_onboarding_paywall",
         isFullscreen: true,
       });
-      console.log('Purchasely result:', res.result);
+      console.log("Purchasely result:", res.result);
       const user = store.getState().defaultState.userProfile;
-      console.log('Check user data purchase:', user);
+      console.log("Check user data purchase:", user);
       switch (res.result) {
         case ProductResult.PRODUCT_RESULT_PURCHASED:
-          console.log('FINISH PURCHASED:', user.token);
+          console.log("FINISH PURCHASED:", user.token);
           if (user.token) {
             await setSubcription({
-              subscription_type: vendorId === 'one_month_free' ? 3 : 2,
+              subscription_type: vendorId === "one_month_free" ? 3 : 2,
               subscription_data: res,
               purchasely_id: purchaseId,
             });
@@ -91,7 +101,7 @@ export const handlePayment = async (vendorId, cb) =>
           eventTracking(FREE_TRIAL);
           break;
         case ProductResult.PRODUCT_RESULT_RESTORED:
-          console.log('Payment restored');
+          console.log("Payment restored");
           // let message = null;
           // if (res.plan != null) {
           //   console.log(`User purchased ${res.plan.name}`);
@@ -101,12 +111,12 @@ export const handlePayment = async (vendorId, cb) =>
           // eventTracking(RESTORE_PURCHASED, message);
           break;
         case ProductResult.PRODUCT_RESULT_CANCELLED:
-          console.log('Payment cancel');
-          if (Platform.OS === 'android') {
+          console.log("Payment cancel");
+          if (Platform.OS === "android") {
             if (
               !vendorId ||
-              vendorId === 'onboarding' ||
-              vendorId === 'offer_no_purchase_after_onboarding_paywall'
+              vendorId === "onboarding" ||
+              vendorId === "offer_no_purchase_after_onboarding_paywall"
             ) {
               // handlePayment(vendorId);
             }
@@ -119,16 +129,50 @@ export const handlePayment = async (vendorId, cb) =>
         default:
           break;
       }
-      if (typeof cb === 'function') cb();
+      if (typeof cb === "function") cb();
       resolve(res);
     } catch (err) {
-      console.log('error payment:', err);
+      console.log("error payment:", err);
     }
   });
 
 export const createUniqueID = () =>
   Date.now().toString(36) + Math.random().toString(36);
 
+export const handlePaymentTwo = async (vendorId, cb) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const purchaseId = await Purchasely.getAnonymousUserId();
+      if (vendorId === "onboarding") {
+        await setSubcription({
+          subscription_type: 1,
+          purchasely_id: purchaseId,
+        });
+      }
+      const user = store.getState().defaultState.userProfile;
+      if (user.token) {
+        await reloadUserProfile();
+      }
+    } catch (err) {
+      console.log("error payment:", err);
+    }
+  });
+
+
+export const handlePaymentBypass = async (vendorId, cb) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const purchaseId = await Purchasely.getAnonymousUserId();
+      if (vendorId === "onboarding") {
+        await setSubcription({
+          subscription_type: 1,
+          purchasely_id: purchaseId,
+        });
+      }
+    } catch (err) {
+      console.log("error payment:", err);
+    }
+  });
 export const reloadUserProfile = async () =>
   new Promise(async (resolve, reject) => {
     try {
@@ -138,7 +182,7 @@ export const reloadUserProfile = async () =>
         handleSetProfile({
           ...currentUserProfile,
           ...res,
-        }),
+        })
       );
       if (res.data.subscription.type !== 5) {
         if (currentUserProfile.data) {
@@ -153,12 +197,12 @@ export const reloadUserProfile = async () =>
               if (res.data.subscription.type !== 1) {
                 eventTracking(SUBSCRIPTION_STARTED);
                 const objPurchase = JSON.parse(
-                  res.data.subscription.purchasely_data,
+                  res.data.subscription.purchasely_data
                 );
                 if (objPurchase) {
                   revenueTracking(
                     objPurchase.plan_price_in_customer_currency,
-                    objPurchase.customer_currency,
+                    objPurchase.customer_currency
                   );
                 }
               }
@@ -168,17 +212,70 @@ export const reloadUserProfile = async () =>
       }
       resolve(res.data);
     } catch (err) {
-      reset('WelcomePage');
-      reject('error get profile');
+      // Register Default User
+      registerUserDefault();
+      reject("error get profile");
     }
   });
 
+export const registerUserDefault = async () => {
+  DeviceInfo.getUniqueId().then(async deviceId => {
+    try {
+      const fcmToken = await messaging().getToken();
+      const id = await Purchasely.getAnonymousUserId();
+      try {
+        const timeZone = await TimeZone.getTimeZone();
+        const payload = {
+          icon: 1,
+          fcm_token: fcmToken,
+          purchasely_id: id,
+          device_id: deviceId,
+          purchaseId: id,
+          name: "User",
+          anytime: null,
+          often: 15,
+          start: "08:00",
+          end: "20:00",
+          gender: "",
+          timezone: timeZone,
+
+          impress_friends: "yes",
+          impress_business: "yes",
+          impress_children: "yes",
+          impress_members: "yes",
+          commit_goal: "12",
+          // topics: values.selectedCategory,
+        };
+        const res = await postRegister(payload);
+        store.dispatch(
+          handleSetProfile(res)
+        );
+        await handlePaymentTwo("onboarding");
+        await AsyncStorage.setItem("isFinishTutorial", "yes");
+        await updateProfile({
+          ...payload,
+          _method: "PATCH",
+        });
+        setTimeout(() => {
+          reloadUserProfile();
+        }, 2000);
+      } catch (err) {
+        console.log("Error register:", err);
+      }
+    } catch (err) {
+      console.log('Err get device info:', err);
+    }
+  })
+}
+export const refetchCollection = () => {
+  store.dispatch(fetchCollection());
+};
 export const handleSubscriptionStatus = async (subscription = {}) => {
   const purchaseId = await Purchasely.getAnonymousUserId();
   if (subscription.type === 2 || subscription.type === 3) {
     const trialDay = subscription.type === 2 ? 3 : 30;
     const dateEndFreeTrial = getFutureDate(subscription.started, trialDay);
-    const nowaDay = moment().format('YYYY-MM-DD');
+    const nowaDay = moment().format("YYYY-MM-DD");
     const objPurchase = JSON.parse(subscription.purchasely_data);
     if (dateToUnix(dateEndFreeTrial) < dateToUnix(nowaDay)) {
       await setSubcription({
@@ -190,42 +287,46 @@ export const handleSubscriptionStatus = async (subscription = {}) => {
       if (objPurchase) {
         revenueTracking(
           objPurchase.plan_price_in_customer_currency,
-          objPurchase.customer_currency,
+          objPurchase.customer_currency
         );
       }
     }
   }
 };
 
-export const setCollectionData = payload => {
-  store.dispatch({type: SUCCESS_FETCH_COLLECTION, payload});
+export const setCollectionData = (payload) => {
+  store.dispatch({ type: SUCCESS_FETCH_COLLECTION, payload });
 };
 
-export const handleBasicPaywall = async cbPaywall => {
-  const profile = store.getState().defaultState.userProfile;
+export const handleBasicPaywall = async (cbPaywall) => {
+  const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
+  const getInstallDate = await AsyncStorage.getItem('firstInstall');
+  const endDate = moment(getInstallDate)
+    .add(1, 'days')
+    .format('YYYY-MM-DD HH:mm:ss');
   const paywallType =
-    profile?.data?.notif_count && profile?.data?.notif_count > 2
-      ? 'offer_no_purchase_after_onboarding_paywall_2nd'
-      : 'offer_no_purchase_after_onboarding_paywall';
+    currentDate > endDate ?
+      "offer_no_purchase_after_onboarding_paywall_2nd"
+      : "offer_no_purchase_after_onboarding_paywall";
   await handlePayment(paywallType, cbPaywall);
 };
 
 export const isCompletedOnboarding = () => {
   const profile = store.getState().defaultState.userProfile;
-  const {type} = profile.data.subscription;
+  const { type } = profile.data.subscription;
   if (type !== 5) {
     return true;
   }
   return false;
 };
 
-export const iconNameToId = name => {
+export const iconNameToId = (name) => {
   switch (name) {
-    case 'second':
+    case "second":
       return 2;
-    case 'third':
+    case "third":
       return 3;
-    case 'fourth':
+    case "fourth":
       return 4;
     default:
       return 1;
@@ -233,8 +334,8 @@ export const iconNameToId = name => {
 };
 
 export const checkIsHasLogin = async () => {
-  const resLogin = await AsyncStorage.getItem('isLogin');
-  return resLogin === 'yes';
+  const resLogin = await AsyncStorage.getItem("isLogin");
+  return resLogin === "yes";
 };
 
 export const handleUpdateTimezone = async () => {
@@ -244,7 +345,7 @@ export const handleUpdateTimezone = async () => {
     if (profile.data.schedule.timezone !== timeZone)
       await updateProfile({
         timezone: timeZone,
-        _method: 'PATCH',
+        _method: "PATCH",
       });
     setTimeout(() => {
       reloadUserProfile();
@@ -252,39 +353,39 @@ export const handleUpdateTimezone = async () => {
   }
 };
 
-export const handleRatingModal = async cbSuccess => {
+export const handleRatingModal = async (cbSuccess) => {
   // await AsyncStorage.removeItem('openAppsCounter');
   // await AsyncStorage.removeItem('skipRatingCount');
   const isHasRating = store.getState().defaultState.haveBeenAskRating;
-  const openAppsCounter = await AsyncStorage.getItem('openAppsCounter');
-  const skipCounter = await AsyncStorage.getItem('skipRatingCount');
+  const openAppsCounter = await AsyncStorage.getItem("openAppsCounter");
+  const skipCounter = await AsyncStorage.getItem("skipRatingCount");
   if (openAppsCounter) {
     const currentTotalOpenApps = Number(openAppsCounter);
     const skipCounterToNumber = skipCounter ? Number(skipCounter) : 0;
-    const currentDate = moment().format('YYYY-MM-DD');
+    const currentDate = moment().format("YYYY-MM-DD");
     if (currentTotalOpenApps % 3 === 0) {
       if (
         !skipCounterToNumber ||
         skipCounterToNumber < 3 ||
         (skipCounter >= 3 && currentDate === getFutureDate(isHasRating, 12))
       ) {
-        if (typeof cbSuccess === 'function') {
+        if (typeof cbSuccess === "function") {
           cbSuccess();
         }
         if (skipCounter >= 3 && currentDate === getFutureDate(new Date(), 12)) {
-          await AsyncStorage.removeItem('skipRatingCount');
+          await AsyncStorage.removeItem("skipRatingCount");
         }
       }
     }
     const counterToString = (currentTotalOpenApps + 1).toString();
-    await AsyncStorage.setItem('openAppsCounter', counterToString);
+    await AsyncStorage.setItem("openAppsCounter", counterToString);
   } else {
-    await AsyncStorage.setItem('openAppsCounter', '2');
+    await AsyncStorage.setItem("openAppsCounter", "2");
   }
 };
 
 export const isPremiumToday = () => {
-  const {freeUserPremium} = store.getState().defaultState;
+  const { freeUserPremium } = store.getState().defaultState;
   if (isUserPremium()) {
     return true;
   }
@@ -294,15 +395,15 @@ export const isPremiumToday = () => {
   return false;
 };
 
-const changeStatus = async res => {
+const changeStatus = async (res) => {
   const purchaseId = await Purchasely.getAnonymousUserId();
 
   const subscriptions = await Purchasely.userSubscriptions();
-  console.log('SUbscription status:', subscriptions);
+  console.log("SUbscription status:", subscriptions);
   if (subscriptions.length > 0 && !isUserPremium()) {
     const planData = subscriptions[0].plan;
     await setSubcription({
-      subscription_type: planData.vendorId === 'one_month_free' ? 3 : 2,
+      subscription_type: planData.vendorId === "one_month_free" ? 3 : 2,
       subscription_data: planData,
       purchasely_id: purchaseId,
     });
@@ -312,17 +413,17 @@ const changeStatus = async res => {
 };
 
 export const purchaselyListener = () => {
-  Purchasely.addEventListener(event => {
-    console.log('Purchasely listener', event);
-    if (event.name === 'RECEIPT_FAILED') {
+  Purchasely.addEventListener((event) => {
+    console.log("Purchasely listener", event);
+    if (event.name === "RECEIPT_FAILED") {
       setTimeout(() => {
         changeStatus(event.properties);
       }, 1000);
     }
   });
 
-  Purchasely.addPurchasedListener(res => {
+  Purchasely.addPurchasedListener((res) => {
     // User has successfully purchased a product, reload content
-    console.log('User has purchased', res);
+    console.log("User has purchased", res);
   });
 };

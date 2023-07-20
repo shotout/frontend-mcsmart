@@ -88,7 +88,7 @@ export default StyleSheet.create({
     flex: 1,
   },
   txtBtn: {
-    color: colors.tosca,
+    color: colors.gray,
     textAlign: 'center',
     fontFamily: fonts.InterSemiBold,
     fontSize: moderateScale(14),
@@ -100,7 +100,7 @@ export default StyleSheet.create({
     marginTop: 20,
   },
   txtStartAds: {
-    color: '#FFE55A',
+    color: colors.black,
   },
   ctnCountdown: {
     width: '100%',

@@ -151,8 +151,8 @@ export const renameCollection = (data, idCollection) => {
 
 export const removeQuoteCollection = ({idCollection, idQuote}) => {
   Wrap({
-    url: `/user/del-quote/${idCollection}/${idQuote}`,
-    method: 'POST',
+    url: `/collection/quote/${idCollection}/${idQuote}`,
+    method: 'DELETE',
   });
 };
 

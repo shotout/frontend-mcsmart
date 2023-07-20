@@ -13,7 +13,7 @@ export const colors = {
   defaultBorder: '#ccc',
   darkGray: '#262628',
   lightPurple: '#5B91F7',
-  watermark: '#AEB3BF',
+  watermark: '#c1c6d4',
   freePremiumColor: '#8084ad',
   pink: '#FC095A',
   darkBlue: '#498FC9',

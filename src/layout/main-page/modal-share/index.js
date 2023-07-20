@@ -29,9 +29,11 @@ import IconIg from '../../../assets/svg/icon_ig.svg';
 import IconStoryFb from '../../../assets/svg/icon_story_fb.svg';
 import IconFb from '../../../assets/svg/icon_fb.svg';
 import IconCollection from '../../../assets/svg/icon_add_collection.svg';
+import IconCollectionYellow from '../../../assets/svg/icon_add_collection_yellow.svg';
 import IconSave from '../../../assets/svg/icon_save.svg';
 import IconCopy from '../../../assets/svg/icon_copy.svg';
 import IconDislike from '../../../assets/svg/icon_dislike.svg';
+import IconDislikeYellow from '../../../assets/svg/icon_dislike_yellow.svg';
 import IconMore from '../../../assets/svg/icon_more.svg';
 import IconDislikeColor from '../../../assets/svg/icon_dislike_color_red.svg';
 import IconChecklistColor from '../../../assets/svg/icon_checklist_color_tosca.svg';
@@ -48,6 +50,7 @@ import {downloadText} from '../../../shared/static';
 import LineGestureSlide from '../../../components/line-gesture-slide';
 import {sizing} from '../../../shared/styling';
 import {isIphone} from '../../../shared/devices';
+import { dislikeQuotes } from '../../../shared/request';
 
 function ModalShare(props) {
   const {
@@ -64,6 +67,10 @@ function ModalShare(props) {
   const [showModalCopy, setShowModalCopy] = useState(false);
   const [showModalCollection, setShowModalCollection] = useState(false);
   const [showModalAddCollection, setShowModalAddCollection] = useState(false);
+  const [labelDislike, setLabelDislike] = useState('Dislike')
+  const [labelAdd, setLabelAdd] = useState('Add to collection')
+  const [idLike, setIdLike] = useState([])
+  const [idAdd, setIdAdd] = useState([])
   const base64CaptureImage = useRef(null);
 
   useEffect(() => {
@@ -90,7 +97,7 @@ function ModalShare(props) {
       if (premiumStatus) {
         const objStatus = JSON.parse(premiumStatus);
         if (objStatus.activeStatus === 3) {
-          await handleBasicPaywall();
+          await handlePayment('one_month_free');
           if (typeof onPremium === 'function') onPremium();
           onClose();
           const submitObj = {
@@ -117,26 +124,44 @@ function ModalShare(props) {
 
   const handleSubmit = async () => {
     try {
-      setShowModalDislike(true);
-      const payload = {
-        type: '2',
-      };
-      // await dislikeQuotes(payload, idQuote);
-      setTimeout(() => {
-        setShowModalDislike(false);
-      }, 1000);
+      const contains = idLike.includes(idQuote);
+
+      if(contains){
+        const filteredArray = idLike.filter(item => item !== idQuote);
+        setIdLike(filteredArray)
+        const payload = {
+          type: '1',
+        };
+        await dislikeQuotes(payload, idQuote);
+      }else{
+        setShowModalDislike(true);
+        setIdLike(idLike.concat(idQuote))
+        console.log(idLike)
+        const payload = {
+          type: '2',
+        };
+        await dislikeQuotes(payload, idQuote);
+       
+        setTimeout(() => {
+          setShowModalDislike(false);
+        }, 1000);
+      }
+     
     } catch (err) {
       console.log('Error dislike:', err);
     }
   };
 
+  const shareOptions = {
+    url: base64CaptureImage.current,
+    message: downloadText,
+    // message: downloadText,
+    social: Share.Social.WHATSAPP,
+    filename: 'Shared-McSmart-Fact' , 
+    title: 'Shared-McSmart-Fact' , 
+  }
   const handleWAShare = async () => {
-    Share.shareSingle({
-      url: base64CaptureImage.current,
-      message: downloadText,
-      // message: downloadText,
-      social: Share.Social.WHATSAPP,
-    });
+    Share.shareSingle(shareOptions);
     handleShowFreePremiumDaily();
     eventShare();
   };
@@ -180,13 +205,6 @@ function ModalShare(props) {
         appId: '637815961525510', // facebook appId
         social: Share.Social.FACEBOOK_STORIES,
       });
-      // await Share.shareSingle({
-      //   url: base64CaptureImage.current,
-      //   appId: '637815961525510', // facebook appId
-      //   backgroundBottomColor: '#fff',
-      //   backgroundTopColor: '#fff',
-      //   social: Share.Social.FACEBOOK,
-      // });
       eventShare();
     } catch (err) {
       console.log('Error post to story:', err);
@@ -216,13 +234,14 @@ function ModalShare(props) {
   const moreShare = async () => {
     await Share.open({
       url: captureUri,
+      message: downloadText,
     });
     eventShare();
   };
 
   const handleCopyText = () => {
     if (quoteText) {
-      Clipboard.setString(`“${quoteText}”\n\n${downloadText}`);
+      Clipboard.setString(`“${quoteText}”\n\n${downloadText}\n`);
     }
   };
 
@@ -247,15 +266,23 @@ function ModalShare(props) {
 
   const handleSaveImage = async () => {
     try {
-      if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
-        return;
+      if (Platform.OS === 'android') {
+        if (await hasAndroidPermission()) {
+          await CameraRoll.save(captureUri);
+          setShowModalSave(true);
+          setTimeout(() => {
+            setShowModalSave(false);
+          }, 1000);
+        } else {
+          return;
+        }
+      } else {
+        await CameraRoll.save(captureUri);
+        setShowModalSave(true);
+        setTimeout(() => {
+          setShowModalSave(false);
+        }, 1000);
       }
-
-      await CameraRoll.save(captureUri);
-      setShowModalSave(true);
-      setTimeout(() => {
-        setShowModalSave(false);
-      }, 1000);
     } catch (err) {
       console.log('Err save:', err);
     }
@@ -285,7 +312,7 @@ function ModalShare(props) {
           label="Instagram Stories"
           icon={<IconStoryIg width="100%" height="100%" />}
           onPress={() => {
-            Alert.alert('Don’t forget to tag us!\n@McSmartApp', '', [
+            Alert.alert('Don’t forget to tag us!\n@mcsmart_app', '', [
               {text: 'OK', onPress: handleIGStoryShare},
             ]);
           }}
@@ -297,7 +324,7 @@ function ModalShare(props) {
             handleCopyText();
             Alert.alert(
               'Copied to your pasteboard',
-              'Text and hastags ready to be pasted in\nyour caption.\n\nDon’t forget to tag us!\n@McSmartApp',
+              'Text and hastags ready to be pasted in\nyour caption.\n\nDon’t forget to tag us!\n@mcsmart_app',
               [{text: 'OK', onPress: handleShareInstagramDefault}],
             );
           }}
@@ -315,7 +342,12 @@ function ModalShare(props) {
         <Card
           label="Facebook"
           icon={<IconFb width="100%" height="100%" />}
-          onPress={handleShareFBDefault}
+          onPress={() => {
+            Alert.alert('“McSmart”\nWould Like to open “Facebook”', '', [
+              {text: 'Cancel', onPress: () => {}},
+              {text: 'OK', onPress: handleShareFBDefault},
+            ]);
+          }}
         />
       </View>
     );
@@ -333,8 +365,8 @@ function ModalShare(props) {
     return (
       <View style={styles.rowCard}>
         <Card
-          label="Add to collection"
-          icon={<IconCollection width="100%" height="100%" />}
+          label={idAdd.includes(idQuote) ? 'Added to collection' : labelAdd}
+          icon={idAdd.includes(idQuote)   ? <IconCollectionYellow width="100%" height="100%" /> : <IconCollection width="100%" height="100%" />}
           onPress={() => {
             renderOnPressCollection();
           }}
@@ -350,8 +382,8 @@ function ModalShare(props) {
           onPress={copyToClipboard}
         />
         <Card
-          label="Dislike"
-          icon={<IconDislike width="100%" height="100%" />}
+          label={idLike.includes(idQuote) ? 'Disliked' : labelDislike}
+          icon={idLike.includes(idQuote) ? <IconDislikeYellow width="100%" height="100%" /> : <IconDislike width="100%" height="100%" />}
           onPress={() => {
             handleSubmit();
           }}
@@ -469,6 +501,10 @@ function ModalShare(props) {
               setShowModalAddCollection(false);
             }}
             idQuote={idQuote}
+            update={(value) =>  {
+              setIdAdd(idAdd.concat(idQuote))
+            }
+            }
           />
 
           <ModalCollection

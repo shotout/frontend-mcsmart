@@ -156,4 +156,32 @@ export default StyleSheet.create({
   loading: {
     paddingVertical: moderateScale(20),
   },
+  rowWrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: moderateScale(20),
+    paddingVertical: moderateScale(15),
+  },
+  iconRight: {
+    width: moderateScale(18),
+    height: moderateScale(15),
+    resizeMode: 'contain',
+  },
+  rightText: {
+    fontFamily: fonts.InterMedium,
+    fontSize: moderateScale(18),
+    color: colors.black,
+  },
+  iconWrap: {
+    width: moderateScale(20),
+    height: moderateScale(20),
+    resizeMode: 'contain',
+  },
+  ctnTitle: {
+    fontFamily: fonts.InterExtraBold,
+    fontSize: moderateScale(20),
+    marginLeft: 10,
+    color: colors.black,
+    letterSpacing: -0.9
+  },
 });
