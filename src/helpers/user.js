@@ -44,7 +44,6 @@ export const openImprint = () => {
 
 export const isUserPremium = () => {
   const profile = store.getState().defaultState.userProfile;
-  console.log('DATA PROFILE =',profile?.data?.subscription)
   if (profile?.data != undefined) {
     const { type } = profile?.data?.subscription;
     if (type === 1 || type === 5) {
@@ -77,18 +76,16 @@ new Promise(async (resolve, reject) => {
           stringVendor = "offer_no_purchase_after_onboarding_paywall_2nd";
         }
       }
-      console.log("OPEN Purchasely", vendorId);
       const res = await Purchasely.presentPresentationForPlacement({
         placementVendorId:
           stringVendor || "offer_no_purchase_after_onboarding_paywall",
         isFullscreen: true,
       });
-      console.log("Purchasely result:", res.result);
       const user = store.getState().defaultState.userProfile;
-      console.log("Check user data purchase:", user);
       switch (res.result) {
         case ProductResult.PRODUCT_RESULT_PURCHASED:
           console.log("FINISH PURCHASED:", user.token);
+        
           if (user.token) {
             await setSubcription({
               subscription_type: vendorId === "one_month_free" ? 3 : 2,
@@ -101,6 +98,7 @@ new Promise(async (resolve, reject) => {
           eventTracking(FREE_TRIAL);
           break;
         case ProductResult.PRODUCT_RESULT_RESTORED:
+          
           console.log("Payment restored");
           // let message = null;
           // if (res.plan != null) {
@@ -111,6 +109,7 @@ new Promise(async (resolve, reject) => {
           // eventTracking(RESTORE_PURCHASED, message);
           break;
         case ProductResult.PRODUCT_RESULT_CANCELLED:
+         
           console.log("Payment cancel");
           if (Platform.OS === "android") {
             if (
@@ -132,6 +131,7 @@ new Promise(async (resolve, reject) => {
       if (typeof cb === "function") cb();
       resolve(res);
     } catch (err) {
+
       console.log("error payment:", err);
     }
   });
@@ -415,6 +415,11 @@ const changeStatus = async (res) => {
 export const purchaselyListener = () => {
   Purchasely.addEventListener((event) => {
     console.log("Purchasely listener", event);
+    console.log('name paywall', event.name)
+    if(event.name === 'PRESENTATION_CLOSED'){
+      AsyncStorage.setItem('paywallstatus', JSON.stringify(event.name))
+    }
+   
     if (event.name === "RECEIPT_FAILED") {
       setTimeout(() => {
         changeStatus(event.properties);

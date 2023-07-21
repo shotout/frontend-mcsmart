@@ -1065,7 +1065,11 @@ function MainPage({
     return (
       <TouchableOpacity
         style={styles.ctnFreeBadge}
-        onPress={handleBasicPaywall}
+        onPress={() => (
+          AsyncStorage.setItem('clickpremium', 'yes'),
+          handleBasicPaywall()
+        )
+        }
       >
         <View style={styles.ctnIconCrown}>
           <PremiumRocket width="100%" height="100%" />
