@@ -233,6 +233,7 @@ function Routes({ registerData, userProfile, props }) {
               handleLoadInAppAds();
             }
             if (Platform.OS === 'android') {
+              console.log('masuk disini', paywallStatus.current )
               handleLoadInAppAds();
             }
           } else {
