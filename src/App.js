@@ -81,8 +81,6 @@ const App =  () => {
     
   }, []);
 
-  
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
