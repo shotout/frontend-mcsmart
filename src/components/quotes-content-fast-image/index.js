@@ -16,6 +16,7 @@ import { colors, sizing } from "../../shared/styling";
 import { removeRepeat, repeatQuotes } from "../../shared/request";
 import { setAnimationCounter } from "../../store/defaultState/actions";
 import { isUserPremium } from "../../helpers/user";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const lightbulbIcon = require("../../assets/icons/lightbulb.png");
 const searchWhiteIcon = require("../../assets/icons/search_white.png");
@@ -106,6 +107,7 @@ export default function QuotesContent({
       const url = encodeURI(`https://www.google.com/search?q=${item.title}`);
       const isAvailable = await InAppBrowser.isAvailable();
       console.log("IS AVAILABLE", isAvailable, url);
+      AsyncStorage.setItem('interstial', 'yes');
       if (isAvailable) {
         const result = await InAppBrowser.open(url, {
           dismissButtonStyle: "done",
@@ -117,6 +119,7 @@ export default function QuotesContent({
           enableDefaultShare: false,
         });
         if (result.type === "cancel") {
+        
           setTimeout(() => {
             if (typeof handleShowInterstialAdsLearn === "function")
               handleShowInterstialAdsLearn();

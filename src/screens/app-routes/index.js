@@ -1,26 +1,30 @@
-import React, { useEffect, useRef, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React, {useEffect, useRef, useState} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 // Redux
-import { connect } from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AdEventType, AppOpenAd } from "react-native-google-mobile-ads";
-import SplashScreen from "react-native-splash-screen";
-import Purchasely from "react-native-purchasely";
-import { AppState, Linking, Platform, View } from "react-native";
-import states from "./states";
-import dispatcher from "./dispatcher";
-import PropTypes from "prop-types";
+import {connect} from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  AdEventType,
+  AppOpenAd,
+  InterstitialAd,
+} from 'react-native-google-mobile-ads';
+import SplashScreen from 'react-native-splash-screen';
+import Purchasely from 'react-native-purchasely';
+import {AppState, Linking, Platform, View} from 'react-native';
+import states from './states';
+import dispatcher from './dispatcher';
+import PropTypes from 'prop-types';
 // Ref routing
-import { navigationRef, reset } from "../../shared/navigationRef";
-import navigationData from "../../shared/navigationData";
-import messaging from "@react-native-firebase/messaging";
+import {navigationRef, reset} from '../../shared/navigationRef';
+import navigationData from '../../shared/navigationData';
+import messaging from '@react-native-firebase/messaging';
 // Screen
-import WelcomePage from "../welcome-page";
-import { navigationLinking } from "../../shared/navigationLinking";
-import Register from "../register";
-import MainPage from "../main-page";
+import WelcomePage from '../welcome-page';
+import {navigationLinking} from '../../shared/navigationLinking';
+import Register from '../register';
+import MainPage from '../main-page';
 import {
   fetchInitialData,
   fetchListQuote,
@@ -29,8 +33,8 @@ import {
   setAnimationSlideStatus,
   setInitialLoaderStatus,
   setPaywallNotification,
-} from "../../store/defaultState/actions";
-import { getAppOpenID } from "../../shared/static/adsId";
+} from '../../store/defaultState/actions';
+import {getAppOpenID, getRewardedInsterstialLearnMoreID} from '../../shared/static/adsId';
 import {
   handlePayment,
   handlePaymentBypass,
@@ -38,19 +42,20 @@ import {
   handleUpdateTimezone,
   isUserPremium,
   reloadUserProfile,
-} from "../../helpers/user";
-import AdsOverlay from "../../components/ads-overlay";
+} from '../../helpers/user';
+import AdsOverlay from '../../components/ads-overlay';
 import {
   getUserProfile,
   postRegister,
   updateProfile,
-} from "../../shared/request";
-import DeviceInfo from "react-native-device-info";
-import TimeZone from "react-native-timezone";
-import store from "../../store/configure-store";
-import { askTrackingPermission } from "../../helpers/eventTracking";
+} from '../../shared/request';
+import DeviceInfo from 'react-native-device-info';
+import TimeZone from 'react-native-timezone';
+import store from '../../store/configure-store';
+import {askTrackingPermission} from '../../helpers/eventTracking';
 import notifee, {EventType} from '@notifee/react-native';
-import { Notifications } from 'react-native-notifications';
+import {Notifications} from 'react-native-notifications';
+import { event } from 'react-native-reanimated';
 
 const Stack = createNativeStackNavigator();
 
@@ -58,11 +63,19 @@ const adUnitId = getAppOpenID();
 
 const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
-  keywords: ["fashion", "clothing"],
+  keywords: ['fashion', 'clothing'],
 });
 appOpenAd.load();
 
-function Routes({ registerData, userProfile, props }) {
+const interstialAdsLearn = InterstitialAd.createForAdRequest(
+  getRewardedInsterstialLearnMoreID(),
+  {
+    requestNonPersonalizedAdsOnly: true,
+    keywords: ["fashion", "clothing"],
+  }
+);
+interstialAdsLearn.load();
+function Routes({registerData, userProfile, props}) {
   const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
   const [showAdsOverlay, setAdsOverlay] = useState(false);
@@ -75,12 +88,12 @@ function Routes({ registerData, userProfile, props }) {
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
 
   const handleLoadInAppAds = async () => {
-    const isFinishTutorial = await AsyncStorage.getItem("isFinishTutorial");
-    if (isFinishTutorial === "yes") {
+    const isFinishTutorial = await AsyncStorage.getItem('isFinishTutorial');
+    if (isFinishTutorial === 'yes') {
       if (appOpenAd.loaded && !isUserPremium()) {
         setAdsOverlay(true);
         appOpenAd.show();
-        setDisable(false)
+        setDisable(false);
       }
     }
   };
@@ -113,7 +126,7 @@ function Routes({ registerData, userProfile, props }) {
   //     };
   //     const res = await postRegister(payload);
   //     const currentUserProfile = store.getState().defaultState.userProfile;
-     
+
   //     store.dispatch(
   //       handleSetProfile({
   //         ...res,
@@ -136,16 +149,9 @@ function Routes({ registerData, userProfile, props }) {
   //   }
   // };
 
-  const getFcm = async () => {
-    setTimeout(async () => {
-      const fcmToken = await messaging().getToken();
-      console.log("Check fcmToken:", fcmToken);
-      setFcmToken(fcmToken);
-    }, 200);
-  };
-  
   const purchaselyListener = () => {
     Purchasely.addEventListener(event => {
+      console.log('ada disni', event.name);
       paywallStatus.current = event.name;
       const animationStatus = store.getState().defaultState.runAnimationSlide;
       if (event.name === 'PRESENTATION_CLOSED') {
@@ -162,10 +168,9 @@ function Routes({ registerData, userProfile, props }) {
   };
 
   useEffect(() => {
-        const getInitial = async () => {
-      const resLogin = await AsyncStorage.getItem("isLogin");
-      if (resLogin === "yes") {
-      
+    const getInitial = async () => {
+      const resLogin = await AsyncStorage.getItem('isLogin');
+      if (resLogin === 'yes') {
         setLogin(true);
         // try {
         //   const res = await getUserProfile();
@@ -176,8 +181,8 @@ function Routes({ registerData, userProfile, props }) {
         //   handleSubmit();
         // }
       }
-      
-      fetchInitialData(resLogin === "yes", appOpenAd, loadingRef);
+
+      fetchInitialData(resLogin === 'yes', appOpenAd, loadingRef);
       setLoading(false);
     };
     getInitial();
@@ -188,18 +193,18 @@ function Routes({ registerData, userProfile, props }) {
       AdEventType.CLOSED,
       () => {
         setAdsOverlay(false);
-        setDisable(false)
-      }
+        setDisable(false);
+      },
     );
 
     const listenerOpenApps = appOpenAd.addAdEventListener(
       AdEventType.OPENED,
       () => {
-        console.log("OPEN ADS OPENED");
+        console.log('OPEN ADS OPENED');
         SplashScreen.hide();
         setAdsOverlay(true);
         openAdsOpened.current = true;
-      }
+      },
     );
 
     const listenerIAPAds = appOpenAd.addAdEventListener(
@@ -210,43 +215,48 @@ function Routes({ registerData, userProfile, props }) {
         if (loadingRef.current) {
           loadingRef.current = false;
         }
-      }
+      },
     );
+   
 
     const subscription = AppState.addEventListener(
-      "change",
-      async (nextAppState) => {
+      'change',
+      async nextAppState => {
         if (
           appState.current.match(/inactive|background/) &&
-          nextAppState === "active"
+          nextAppState === 'active'
         ) {
           resetNotificationBadge();
           handleUpdateTimezone();
         }
-        if (appState.current.match("background") && nextAppState === "active") {
+        console.log('masuk', nextAppState);
+        if (appState.current.match('background') && nextAppState === 'active') {
           appOpenAd.load();
+          console.log('masuk disini IOS NEW', paywallStatus.current);
           if (
             paywallStatus &&
-            paywallStatus.current !== "PRESENTATION_CLOSED"
+            paywallStatus.current !== 'PRESENTATION_CLOSED'
           ) {
-            if (Platform.OS === "ios") {
+            console.log('masuk disini IOS', paywallStatus.current);
+            if (Platform.OS === 'ios') {
               handleLoadInAppAds();
             }
-            if (Platform.OS === 'android') {
-              console.log('masuk disini', paywallStatus.current )
+            const data = await AsyncStorage.getItem('interstial');
+            console.log('intersial data', data);
+            if (Platform.OS === 'android' && data === null) {
               handleLoadInAppAds();
             }
           } else {
             appOpenAd.load();
           }
         } else {
-          paywallStatus.current = "READY";
+          paywallStatus.current = 'READY';
           appOpenAd.load();
         }
 
         appState.current = nextAppState;
         setAppStateVisible(appState.current);
-      }
+      },
     );
 
     return () => {
@@ -258,23 +268,25 @@ function Routes({ registerData, userProfile, props }) {
     };
   }, []);
 
-
   function getInitialRoute() {
-    if (userProfile?.token && !disableNavigate  || registerData?.registerStep === 7 ) {
-      return "MainPage";
+    if (
+      (userProfile?.token && !disableNavigate) ||
+      registerData?.registerStep === 7
+    ) {
+      return 'MainPage';
     }
     if (registerData) {
-      return "Register";
+      return 'Register';
     }
     if (Platform.OS === 'ios') {
       askTrackingPermission();
     }
-    return "WelcomePage";
+    return 'WelcomePage';
   }
 
   // if (isLoading) return null;
   return (
-    <View style={{ flex: 1, position: "relative" }}>
+    <View style={{flex: 1, position: 'relative'}}>
       <NavigationContainer ref={navigationRef} linking={navigationLinking}>
         <Stack.Navigator initialRouteName={getInitialRoute()}>
           <Stack.Screen

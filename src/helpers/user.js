@@ -44,7 +44,6 @@ export const openImprint = () => {
 
 export const isUserPremium = () => {
   const profile = store.getState().defaultState.userProfile;
-  console.log('DATA PROFILE =',profile?.data?.subscription)
   if (profile?.data != undefined) {
     const { type } = profile?.data?.subscription;
     if (type === 1 || type === 5) {
