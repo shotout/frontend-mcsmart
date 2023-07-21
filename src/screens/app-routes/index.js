@@ -26,6 +26,7 @@ import {
   fetchListQuote,
   handleSetProfile,
   resetNotificationBadge,
+  setAnimationSlideStatus,
   setInitialLoaderStatus,
   setPaywallNotification,
 } from "../../store/defaultState/actions";
@@ -61,7 +62,7 @@ const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
 });
 appOpenAd.load();
 
-function Routes({ registerData, userProfile }) {
+function Routes({ registerData, userProfile, props }) {
   const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
   const [showAdsOverlay, setAdsOverlay] = useState(false);
@@ -142,6 +143,23 @@ function Routes({ registerData, userProfile }) {
       setFcmToken(fcmToken);
     }, 200);
   };
+  
+  const purchaselyListener = () => {
+    Purchasely.addEventListener(event => {
+      paywallStatus.current = event.name;
+      const animationStatus = store.getState().defaultState.runAnimationSlide;
+      if (event.name === 'PRESENTATION_CLOSED') {
+        if (animationStatus === false) {
+          setAnimationSlideStatus(true);
+        }
+      }
+    });
+
+    Purchasely.addPurchasedListener(res => {
+      // User has successfully purchased a product, reload content
+      console.log('User has purchased', res);
+    });
+  };
 
   useEffect(() => {
         const getInitial = async () => {
@@ -165,7 +183,7 @@ function Routes({ registerData, userProfile }) {
     getInitial();
     Notifications.removeAllDeliveredNotifications();
     Purchasely.isReadyToPurchase(true);
-
+    purchaselyListener();
     const unsubscribeAppOpenAds = appOpenAd.addAdEventListener(
       AdEventType.CLOSED,
       () => {
@@ -214,6 +232,9 @@ function Routes({ registerData, userProfile }) {
             if (Platform.OS === "ios") {
               handleLoadInAppAds();
             }
+            if (Platform.OS === 'android') {
+              handleLoadInAppAds();
+            }
           } else {
             appOpenAd.load();
           }
@@ -229,6 +250,7 @@ function Routes({ registerData, userProfile }) {
 
     return () => {
       subscription.remove();
+      Purchasely.removeEventListener();
       unsubscribeAppOpenAds();
       listenerOpenApps();
       listenerIAPAds();

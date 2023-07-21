@@ -275,10 +275,10 @@ function Register({
           const isMoreThan3Hours = isMoreThanThreeHoursSinceLastTime(mainDate);
           const stringifyDate = Date.now().toString();
           if (!getCurrentOpenApps || isMoreThan3Hours) {
-            await AsyncStorage.setItem('latestOpenApps', stringifyDate);
             const isFinishTutorial = await AsyncStorage.getItem("isFinishTutorial");
-            setTimeout(() => {
+            setTimeout(async() => {
               if (isFinishTutorial === "yes") {
+                await AsyncStorage.setItem('latestOpenApps', stringifyDate);
                 handleBasicPaywall(() => {
                   reset("MainPage", { isFromOnboarding: true });
                 });
