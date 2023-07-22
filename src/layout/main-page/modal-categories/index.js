@@ -32,6 +32,7 @@ import ModalCategoriesSearch from "../modal-categories-search";
 import useDebounce from "../../../helpers/useDebounce";
 import { showModalPremium } from "../../../shared/globalContent";
 import dispatcher from "./dispatcher";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const iconClose = require("../../../assets/icons/close.png");
 
 function ModalCategories({

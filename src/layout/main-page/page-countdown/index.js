@@ -8,6 +8,7 @@ import {getRewardedOutOfQuotesID} from '../../../shared/static/adsId';
 import {setTodayAdsLimit} from '../../../store/defaultState/actions';
 import {loadRewarded} from '../../../helpers/loadReward';
 import {isIphoneXorAbove} from '../../../shared/devices';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const imgBg = require('../../../assets/icons/quote_bg.png');
 const bannerCountdown = require('../../../assets/icons/banner_img.png');
@@ -55,6 +56,7 @@ const PageCountDown = () => {
   }, []);
 
   const handleShowAds = async () => {
+    AsyncStorage.setItem('interstial', 'yes');
     setLoadingAds(true);
     const advert = await loadRewarded();
     const pageCountDownReward = advert.addAdEventListener(

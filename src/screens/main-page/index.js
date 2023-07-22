@@ -333,17 +333,22 @@ function MainPage({
     const unsubscribeEarned = rewarded.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
       (reward) => {
+        
         console.log("User earned reward of ", reward);
       }
     );
 
     const rewardedOpen = rewarded.addAdEventListener(AdEventType.OPENED, () => {
       setStatusBar(true);
+     
       console.log("LOAD ADS MODAL COUNTDOWN");
     });
     const rewardedClose = rewarded.addAdEventListener(
       AdEventType.CLOSED,
       () => {
+        setTimeout(() => {
+          AsyncStorage.removeItem('interstial')
+         }, 1000);
         setStatusBar(false);
         console.log("LOAD ADS MODAL COUNTDOWN");
       }
