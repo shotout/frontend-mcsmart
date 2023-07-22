@@ -38,10 +38,17 @@ const ModalUnlockCategory = ({
   const [loadingAds, setLoadingAds] = useState(false);
 
   useEffect(() => {
+    if (!rewarded.loaded){
+      setLoadingAds(true);
+    }
+  }, [200]);
+  
+  useEffect(() => {
     const unsubscribeLoaded = rewarded.addAdEventListener(
       RewardedAdEventType.LOADED,
       () => {
         console.log('LOAD ADS ModalUnlockCategory');
+        setLoadingAds(false);
       },
     );
     const unsubscribeEarned = rewarded.addAdEventListener(
@@ -57,6 +64,9 @@ const ModalUnlockCategory = ({
           );
         }
         handleClose(selectedCategory);
+        setTimeout(() => {
+          AsyncStorage.removeItem('interstial');
+        }, 1000);
       },
     );
 
