@@ -49,8 +49,8 @@ const App =  () => {
   const configTracker = () => {
     const adjustConfig = new AdjustConfig(
       '6qpsj2ssc03k',
-      // AdjustConfig.EnvironmentSandbox,
-      AdjustConfig.EnvironmentProduction,
+      AdjustConfig.EnvironmentSandbox,
+      // AdjustConfig.EnvironmentProduction,
     );
     adjustConfig.setLogLevel(AdjustConfig.LogLevelVerbose);
     Adjust.create(adjustConfig);
