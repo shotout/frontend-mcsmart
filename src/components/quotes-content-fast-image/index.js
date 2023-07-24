@@ -53,7 +53,6 @@ export default function QuotesContent({
   const translateX = useRef(new Animated.Value(0)).current;
   const counter = useRef(0);
   const activeStatus = useRef(false);
-
   useEffect(() => {
     if (isActive && isAnimationStart) {
       runAnimation();
@@ -215,7 +214,7 @@ export default function QuotesContent({
     }
     return null
   }
-
+console.log(themeUser.name +"======"+ item.title.length + item.title)
   return (
     <View style={styles.ctnWrapper}>
       {renderBackgroundImage()}
@@ -236,9 +235,9 @@ export default function QuotesContent({
                   style={[
                     styles.ctnQuotes,
                     {
-                      fontSize: themeUser.font_size
+                      fontSize: themeUser.font_size && item.title.length < 150
                         ? moderateScale(Number(themeUser.font_size))
-                        : moderateScale(18),
+                        : themeUser.name === 'Theme 2' && item.title.length > 170 ? moderateScale(15) :  moderateScale(18),
                       backgroundColor: themeUser.background_color || undefined,
                       color: themeUser.text_color || colors.white,
                       fontFamily: themeUser.font_family,
