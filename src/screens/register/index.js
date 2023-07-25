@@ -291,10 +291,10 @@ function Register({
           } else {
             reset("MainPage", { isFromOnboarding: true });
           };
-          await updateProfile({
-            ...payload,
-            _method: "PATCH",
-          });
+          // await updateProfile({
+          //   ...payload,
+          //   _method: "PATCH",
+          // });
           setTimeout(() => {
             reloadUserProfile();
           }, 2000);
@@ -333,7 +333,6 @@ function Register({
     console.log('AFter register called');
     await fetchListQuote();
     await fetchCollection();
-    eventTracking(ONBOARDING_COMPLETE);
     handlePayment('onboarding', () => {
       reset('MainPage', { isFromOnboarding: true });
     });
@@ -370,7 +369,6 @@ function Register({
       setTimeout(() => {
         reloadUserProfile();
       }, 2000);
-      eventTracking(ONBOARDING_COMPLETE);
     } catch (err) {
       console.log('Error register:', err);
       setLoading(false);

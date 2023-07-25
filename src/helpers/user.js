@@ -199,6 +199,7 @@ export const reloadUserProfile = async () =>
                   res.data.subscription.purchasely_data
                 );
                 if (objPurchase) {
+                  console.log(objPurchase)
                   revenueTracking(
                     objPurchase.plan_price_in_customer_currency,
                     objPurchase.customer_currency

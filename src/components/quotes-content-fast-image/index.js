@@ -165,7 +165,7 @@ export default function QuotesContent({
   function renderButtonOption() {
     if (showButtonOption) {
       return (
-        <View style={styles.ctnRowButton}>
+        <View style={themeUser.name === 'Theme 2' ? styles.ctnRowButton2 : styles.ctnRowButton}>
           <TouchableOpacity
             activeOpacity={0.7}
             style={[styles.ctnBtn, isRepeat && styles.bgYellow]}
@@ -237,19 +237,19 @@ console.log(themeUser.name +"======"+ item.title.length + item.title)
                     {
                       fontSize: themeUser.font_size && item.title.length < 150
                         ? moderateScale(Number(themeUser.font_size))
-                        : themeUser.name === 'Theme 2' && item.title.length > 170 ? moderateScale(15) :  moderateScale(18),
+                        : themeUser.name === 'Theme 2' && item.title.length > 170 ? moderateScale(16) :  moderateScale(18),
                       backgroundColor: themeUser.background_color || undefined,
                       color: themeUser.text_color || colors.white,
                       fontFamily: themeUser.font_family,
-                      // fontFamily: 'Iceberg-Regular',
+                      marginTop: themeUser.name === 'Theme 2' && item.title.length < 110 ? moderateScale(0) : themeUser.name === 'Theme 2' && item.title.length > 110 && item.title.length < 200 ? moderateScale(30) : moderateScale(70),
                       textShadowColor: themeUser.text_shadow,
                       textShadowOffset: themeUser.text_shadow_offset
                         ? JSON.parse(themeUser.text_shadow_offset)
                         : undefined,
                       textShadowRadius: themeUser.text_shadow ? 10 : undefined,
-                      lineHeight: themeUser.line_height
-                        ? moderateScale(Number(themeUser.line_height))
-                        : moderateScale(24),
+                      lineHeight: themeUser.line_height && item.title.length < 130
+                        ?  themeUser.name === 'Theme 2' ? moderateScale(30) : moderateScale(Number(themeUser.line_height))
+                        : themeUser.name === 'Theme 2' && item.title.length > 130 ?  moderateScale(30) : moderateScale(30),
                       // textShadowOffset: {width: 1, height: 1},
                     },
                   ]}
