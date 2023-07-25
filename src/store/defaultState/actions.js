@@ -474,10 +474,10 @@ const handleDecrementBadgeCount = () => {
 export const resetNotificationBadge = (isHasLogin) => {
   notifee.setBadgeCount(0).then(() => {
     if (isHasLogin) {
-      updateProfile({
-        notif_count: 0,
-        _method: "PATCH",
-      });
+      // updateProfile({
+      //   notif_count: 0,
+      //   _method: "PATCH",
+      // });
     }
   });
 };

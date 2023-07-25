@@ -95,6 +95,7 @@ import ContentSubscription from "../../layout/setting/content-subscription";
 import dispatcher from "./dispatcher";
 import store from "../../store/configure-store";
 import moment from "moment";
+import { ONBOARDING_COMPLETE, eventTracking } from "../../helpers/eventTracking";
 
 const adUnitId = getRewardedOutOfQuotesID();
 
@@ -210,6 +211,7 @@ function MainPage({
   // }
 
   useEffect(async() => {
+   
     const fcmToken = await messaging().getToken();
     console.log('FCM TOKEN'+fcmToken)
   }, [])
@@ -612,6 +614,7 @@ function MainPage({
     });
     if (isTutorial.step === 4) {
       await AsyncStorage.setItem("isFinishTutorial", "yes");
+      eventTracking(ONBOARDING_COMPLETE)
       setTutorial({
         visible: false,
         step: 1,
