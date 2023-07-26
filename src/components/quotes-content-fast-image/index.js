@@ -165,7 +165,7 @@ export default function QuotesContent({
   function renderButtonOption() {
     if (showButtonOption) {
       return (
-        <View style={themeUser.name === 'Theme 2' ? styles.ctnRowButton2 : styles.ctnRowButton}>
+        <View style={themeUser.name === 'Theme 2' && item.title.length > 170 ? styles.ctnRowButton2 : styles.ctnRowButton}>
           <TouchableOpacity
             activeOpacity={0.7}
             style={[styles.ctnBtn, isRepeat && styles.bgYellow]}
@@ -241,7 +241,7 @@ console.log(themeUser.name +"======"+ item.title.length + item.title)
                       backgroundColor: themeUser.background_color || undefined,
                       color: themeUser.text_color || colors.white,
                       fontFamily: themeUser.font_family,
-                      marginTop: themeUser.name === 'Theme 2' && item.title.length < 110 ? moderateScale(0) : themeUser.name === 'Theme 2' && item.title.length > 110 && item.title.length < 200 ? moderateScale(30) : moderateScale(70),
+                      marginTop: themeUser.name === 'Theme 2' && item.title.length < 110 ? moderateScale(0) : themeUser.name === 'Theme 2' && item.title.length > 110 && item.title.length < 200 ? moderateScale(30) : moderateScale(50),
                       textShadowColor: themeUser.text_shadow,
                       textShadowOffset: themeUser.text_shadow_offset
                         ? JSON.parse(themeUser.text_shadow_offset)
