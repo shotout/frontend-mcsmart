@@ -48,7 +48,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     // marginBottom: isIphoneXorAbove() ? moderateScale(80) : moderateScale(40),
     marginBottom: moderateScale(40),
-    marginTop: moderateScale(30)
+    marginTop: moderateScale(40)
   },
   ctnRowButton2:{
     flexDirection: 'row',
@@ -56,7 +56,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     // marginBottom: isIphoneXorAbove() ? moderateScale(80) : moderateScale(40),
     marginBottom: moderateScale(40),
-    marginTop: moderateScale(45)
+    marginTop: moderateScale(20)
   },
   ctnBtn:{
     flexDirection: 'row',
