@@ -239,7 +239,7 @@ export default function QuotesContent({
                       backgroundColor: themeUser.background_color || undefined,
                       color: themeUser.text_color || colors.white,
                       fontFamily: themeUser.font_family,
-                      marginTop: themeUser.name === 'Theme 2' && item.title.length < 110 ? moderateScale(0) : themeUser.name === 'Theme 2' && item.title.length > 110 && item.title.length < 200 ? moderateScale(30) : moderateScale(50),
+                      marginTop: themeUser.name === 'Theme 2' && item.title.length < 110 ? moderateScale(0) : themeUser.name === 'Theme 2' && item.title.length > 110 && item.title.length < 200 ? moderateScale(30) : themeUser.name === 'Theme 2' && item.title.length > 200 ? moderateScale(50) : null,
                       textShadowColor: themeUser.text_shadow,
                       textShadowOffset: themeUser.text_shadow_offset
                         ? JSON.parse(themeUser.text_shadow_offset)
