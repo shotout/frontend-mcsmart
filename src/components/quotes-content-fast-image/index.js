@@ -124,7 +124,6 @@ export default function QuotesContent({
               handleShowInterstialAdsLearn();
           }, 500);
         }
-        console.log("Check result:", result);
       } else Linking.openURL(url);
     } catch (error) {
       console.log("ERror open browser:", error);
@@ -214,7 +213,6 @@ export default function QuotesContent({
     }
     return null
   }
-console.log(themeUser.name +"======"+ item.title.length + item.title)
   return (
     <View style={styles.ctnWrapper}>
       {renderBackgroundImage()}
