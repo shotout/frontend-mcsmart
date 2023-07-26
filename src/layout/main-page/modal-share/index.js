@@ -266,11 +266,13 @@ function ModalShare(props) {
 
   const handleSaveImage = async () => {
     try {
-      if (Platform.OS === 'android') {
+      if (Platform.OS === 'android' && Platform.Version?.toString() < 30) {
+        AsyncStorage.setItem('interstial', 'yes');
         if (await hasAndroidPermission()) {
           await CameraRoll.save(captureUri);
           setShowModalSave(true);
           setTimeout(() => {
+            AsyncStorage.removeItem('interstial');
             setShowModalSave(false);
           }, 1000);
         } else {
