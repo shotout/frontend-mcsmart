@@ -655,6 +655,10 @@ namespace facebook {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, StringKind, "getColorScheme", @selector(getColorScheme), args, count);
     }
 
+    static facebook::jsi::Value __hostFunction_NativeAppearanceSpecJSI_setColorScheme(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "setColorScheme", @selector(setColorScheme:), args, count);
+    }
+
     static facebook::jsi::Value __hostFunction_NativeAppearanceSpecJSI_addListener(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "addListener", @selector(addListener:), args, count);
     }
@@ -667,6 +671,9 @@ namespace facebook {
       : ObjCTurboModule(params) {
         
         methodMap_["getColorScheme"] = MethodMetadata {0, __hostFunction_NativeAppearanceSpecJSI_getColorScheme};
+        
+        
+        methodMap_["setColorScheme"] = MethodMetadata {1, __hostFunction_NativeAppearanceSpecJSI_setColorScheme};
         
         
         methodMap_["addListener"] = MethodMetadata {1, __hostFunction_NativeAppearanceSpecJSI_addListener};
@@ -953,6 +960,43 @@ namespace facebook {
       : ObjCTurboModule(params) {
         
         methodMap_["loadBundle"] = MethodMetadata {1, __hostFunction_NativeDevSplitBundleLoaderSpecJSI_loadBundle};
+        
+    }
+  } // namespace react
+} // namespace facebook
+
+namespace facebook {
+  namespace react {
+    
+    static facebook::jsi::Value __hostFunction_NativeDevToolsSettingsManagerSpecJSI_setConsolePatchSettings(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "setConsolePatchSettings", @selector(setConsolePatchSettings:), args, count);
+    }
+
+    static facebook::jsi::Value __hostFunction_NativeDevToolsSettingsManagerSpecJSI_getConsolePatchSettings(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, StringKind, "getConsolePatchSettings", @selector(getConsolePatchSettings), args, count);
+    }
+
+    static facebook::jsi::Value __hostFunction_NativeDevToolsSettingsManagerSpecJSI_setProfilingSettings(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "setProfilingSettings", @selector(setProfilingSettings:), args, count);
+    }
+
+    static facebook::jsi::Value __hostFunction_NativeDevToolsSettingsManagerSpecJSI_getProfilingSettings(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, StringKind, "getProfilingSettings", @selector(getProfilingSettings), args, count);
+    }
+
+    NativeDevToolsSettingsManagerSpecJSI::NativeDevToolsSettingsManagerSpecJSI(const ObjCTurboModule::InitParams &params)
+      : ObjCTurboModule(params) {
+        
+        methodMap_["setConsolePatchSettings"] = MethodMetadata {1, __hostFunction_NativeDevToolsSettingsManagerSpecJSI_setConsolePatchSettings};
+        
+        
+        methodMap_["getConsolePatchSettings"] = MethodMetadata {0, __hostFunction_NativeDevToolsSettingsManagerSpecJSI_getConsolePatchSettings};
+        
+        
+        methodMap_["setProfilingSettings"] = MethodMetadata {1, __hostFunction_NativeDevToolsSettingsManagerSpecJSI_setProfilingSettings};
+        
+        
+        methodMap_["getProfilingSettings"] = MethodMetadata {0, __hostFunction_NativeDevToolsSettingsManagerSpecJSI_getProfilingSettings};
         
     }
   } // namespace react

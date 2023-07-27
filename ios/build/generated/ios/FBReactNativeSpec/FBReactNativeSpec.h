@@ -443,6 +443,7 @@ namespace facebook {
 @protocol NativeAppearanceSpec <RCTBridgeModule, RCTTurboModule>
 
 - (NSString * _Nullable)getColorScheme;
+- (void)setColorScheme:(NSString *)colorScheme;
 - (void)addListener:(NSString *)eventName;
 - (void)removeListeners:(double)count;
 
@@ -634,6 +635,26 @@ namespace facebook {
     class JSI_EXPORT NativeDevSplitBundleLoaderSpecJSI : public ObjCTurboModule {
     public:
       NativeDevSplitBundleLoaderSpecJSI(const ObjCTurboModule::InitParams &params);
+    };
+  } // namespace react
+} // namespace facebook
+
+@protocol NativeDevToolsSettingsManagerSpec <RCTBridgeModule, RCTTurboModule>
+
+- (void)setConsolePatchSettings:(NSString *)newConsolePatchSettings;
+- (NSString * _Nullable)getConsolePatchSettings;
+- (void)setProfilingSettings:(NSString *)newProfilingSettings;
+- (NSString * _Nullable)getProfilingSettings;
+
+@end
+namespace facebook {
+  namespace react {
+    /**
+     * ObjC++ class for module 'NativeDevToolsSettingsManager'
+     */
+    class JSI_EXPORT NativeDevToolsSettingsManagerSpecJSI : public ObjCTurboModule {
+    public:
+      NativeDevToolsSettingsManagerSpecJSI(const ObjCTurboModule::InitParams &params);
     };
   } // namespace react
 } // namespace facebook
@@ -2018,6 +2039,7 @@ inline JS::NativeBlobModule::Constants::Builder::Builder(const Input i) : _facto
 inline JS::NativeBlobModule::Constants::Builder::Builder(Constants i) : _factory(^{
   return i.unsafeRawValue();
 }) {}
+
 
 
 
