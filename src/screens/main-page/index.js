@@ -10,6 +10,7 @@ import {
   StatusBar,
   Platform,
   ImageBackground,
+  BackHandler,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import notifee, { EventType } from "@notifee/react-native";
@@ -200,6 +201,20 @@ function MainPage({
 
     return () => clearTimeout(timer);
   }, [showSharePopup]);
+
+  useEffect(() => {
+    const backAction = () => {
+      console.log('masukkk handler 1')
+      BackHandler.exitApp();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
 
   // const handleFetch = async (id) => {
   //   console.log(id)

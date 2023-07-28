@@ -11,7 +11,7 @@ import {getNotifQuotes} from './request';
 
 function useLocalNotif(userProfile) {
   const scheduleTime = userProfile.data?.schedule?.timer_local || [];
-  const scheduleObj = userProfile.data.schedule;
+  const scheduleObj = userProfile.data?.schedule;
   const [listTimer, setTimer] = useState(scheduleTime);
   const [currentTimezone, setTimezone] = useState(scheduleObj.timezone);
 

@@ -12,7 +12,7 @@ import {
 } from 'react-native-google-mobile-ads';
 import SplashScreen from 'react-native-splash-screen';
 import Purchasely from 'react-native-purchasely';
-import {AppState, Linking, Platform, View} from 'react-native';
+import {AppState, BackHandler, Linking, Platform, View} from 'react-native';
 import states from './states';
 import dispatcher from './dispatcher';
 import PropTypes from 'prop-types';
@@ -36,11 +36,13 @@ import {
 } from '../../store/defaultState/actions';
 import {getAppOpenID, getRewardedInsterstialLearnMoreID} from '../../shared/static/adsId';
 import {
+  handleBasicPaywall,
   handlePayment,
   handlePaymentBypass,
   handlePaymentTwo,
   handleUpdateTimezone,
   isUserPremium,
+  reformatDate,
   reloadUserProfile,
 } from '../../helpers/user';
 import AdsOverlay from '../../components/ads-overlay';
@@ -97,6 +99,70 @@ function Routes({registerData, userProfile, props}) {
       }
     }
   };
+  useEffect(() => {
+    const backAction = () => {
+      console.log('masukkk handler 0')
+      BackHandler.exitApp();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
+
+  const checkMinute = (start) => {
+    let timeNow = new Date();
+    let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
+  
+    if (timeRemaining > 600) { // Jika lebih dari 600 detik (10 menit)
+      console.log("Sudah lebih dari 10 menit sejak proses dimulai.");
+      return true
+    } else {
+      console.log("Belum lebih dari 10 menit sejak proses dimulai.");
+      return false
+    }
+  }
+
+  const checkDays = (start) => {
+    let timeNow = new Date();
+    let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
+  
+    if (timeRemaining > 86400) { // Jika lebih dari 600 detik (10 menit)
+      console.log("Sudah lebih dari 24 jam sejak proses dimulai.");
+      return true
+    } else {
+      console.log("Belum lebih dari 10 jam sejak proses dimulai.");
+      return false
+    }
+  }
+  useEffect(async() => {
+      if(!isUserPremium()){
+        checkingPaywall()
+      }
+  }, [])
+
+  const checkingPaywall = async() => {
+    const set10min = await AsyncStorage.getItem('set10min');
+    const main10 = reformatDate(parseFloat(set10min));
+    const data = checkMinute(main10)
+    if(data){
+      const data = checkDays(main10)
+      if(data){
+        handlePayment("24_hours_after_onboarding", () => {
+          reset("MainPage", { isFromOnboarding: true });
+        });
+      }else{
+        handlePayment("10_minutes_after_onboarding", () => {
+          reset("MainPage", { isFromOnboarding: true });
+        });
+      }
+    }else{
+      handlePayment("onboarding");
+    }
+  }
 
   // const handleSubmit = async () => {
   //   try {
@@ -155,6 +221,7 @@ function Routes({registerData, userProfile, props}) {
       paywallStatus.current = event.name;
       const animationStatus = store.getState().defaultState.runAnimationSlide;
       if (event.name === 'PRESENTATION_CLOSED') {
+        checkingPaywall()
         if (animationStatus === false) {
           setAnimationSlideStatus(true);
         }
