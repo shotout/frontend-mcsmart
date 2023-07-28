@@ -338,11 +338,15 @@ function Routes({registerData, userProfile, props}) {
     };
   }, []);
 
-  async function  getInitialRoute() {
+  const checking = async () => {
     const data = await AsyncStorage.getItem('version')
+    return data
+  }
+
+  function  getInitialRoute() {
     if (
       (userProfile?.token && !disableNavigate) ||
-      registerData?.registerStep === 7 || data === '0' && isUserPremium()
+      registerData?.registerStep === 7 || checking() === '0' && isUserPremium()
     ) {
       return 'MainPage';
     }
@@ -352,7 +356,7 @@ function Routes({registerData, userProfile, props}) {
     if (Platform.OS === 'ios') {
       askTrackingPermission();
     }
-    return 'WelcomePage';
+    // return 'WelcomePage';
   }
 
   // if (isLoading) return null;
@@ -360,11 +364,11 @@ function Routes({registerData, userProfile, props}) {
     <View style={{flex: 1, position: 'relative'}}>
       <NavigationContainer ref={navigationRef} linking={navigationLinking}>
         <Stack.Navigator initialRouteName={getInitialRoute()}>
-          <Stack.Screen
+          {/* <Stack.Screen
             options={navigationData.noHeader.options}
             name="WelcomePage"
             component={WelcomePage}
-          />
+          /> */}
           <Stack.Screen
             options={navigationData.noHeader.options}
             name="Register"

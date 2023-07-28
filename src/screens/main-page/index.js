@@ -225,11 +225,6 @@ function MainPage({
   //   getActiveQuote()
   // }
 
-  useEffect(async() => {
-   
-    const fcmToken = await messaging().getToken();
-    console.log('FCM TOKEN'+fcmToken)
-  }, [])
 
   const handleScreenshot = () => {
     captureRef.current.capture().then((uri) => {

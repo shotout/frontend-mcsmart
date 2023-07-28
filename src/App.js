@@ -72,11 +72,17 @@ const App =  () => {
     return () => backHandler.remove();
   }, []);
   
+  useEffect(() => {
+    async function check () {
+      const data = await checkVersion()
+      if(data?.status === 'success'){
+        AsyncStorage.setItem('version', JSON.stringify(data?.data[0].is_close_button))
+      }   
+    }
+    check()
+  }, [])
   useEffect(async() => {
-    const data = await checkVersion()
-    if(data?.status === 'success'){
-      AsyncStorage.setItem('version', JSON.stringify(data?.data[0].is_close_button))
-    }   
+   
     networkDebugger();
     configTracker();
     Notifications.removeAllDeliveredNotifications();
