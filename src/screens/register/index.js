@@ -343,10 +343,7 @@ function Register({
                       handlePayment("10_minutes_after_onboarding", () => {
                         reset("MainPage", { isFromOnboarding: true });
                       });
-                    
                     }
-                   
-                   
                   }else{
                     handlePayment("onboarding", () => {
                       reset("MainPage", { isFromOnboarding: true });
