@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
-import { LogBox, Platform, StatusBar } from "react-native";
+import { BackHandler, LogBox, Platform, StatusBar } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider as PaperProvider } from "react-native-paper";
 
@@ -58,6 +58,19 @@ const App =  () => {
   };
   Settings.initializeSDK();
   Settings.setAppID('637815961525510');
+  useEffect(() => {
+    const backAction = () => {
+      console.log('masukkk handler 55')
+      BackHandler.exitApp();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
   
   useEffect(async() => {
     networkDebugger();

@@ -311,6 +311,7 @@ export const handleBasicPaywall = async (cbPaywall) => {
   await handlePayment(paywallType, cbPaywall);
 };
 
+
 export const isCompletedOnboarding = () => {
   const profile = store.getState().defaultState.userProfile;
   const { type } = profile.data.subscription;
