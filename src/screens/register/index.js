@@ -103,7 +103,7 @@ function Register({
     end_at: moment(new Date(2018, 11, 24, 20, 0, 30, 0)).format(
       'YYYY-MM-DD HH:mm',
     ),
-    often: 15,
+    often: 3,
     selectedCategory: [],
     impress_friends: '',
     impress_business: '',

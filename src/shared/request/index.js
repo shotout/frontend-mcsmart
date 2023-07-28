@@ -1,5 +1,11 @@
 import Wrap from './axiosWrapper';
 
+export const checkVersion = () =>
+  Wrap({
+    url: '/list/versions',
+    method: 'GET',
+  });
+
 export const checkDeviceRegister = (data = {}) =>
   Wrap({
     url: '/auth/check-device',

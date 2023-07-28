@@ -139,7 +139,8 @@ function Routes({registerData, userProfile, props}) {
     }
   }
   useEffect(async() => {
-      if(!isUserPremium()){
+    const data = await AsyncStorage.getItem('version')
+      if(!isUserPremium() && data === '0'){
         checkingPaywall()
       }
   }, [])
@@ -216,12 +217,18 @@ function Routes({registerData, userProfile, props}) {
   // };
 
   const purchaselyListener = () => {
-    Purchasely.addEventListener(event => {
+    Purchasely.addEventListener(async event => {
       console.log('ada disni', event.name);
       paywallStatus.current = event.name;
       const animationStatus = store.getState().defaultState.runAnimationSlide;
+       const data = await AsyncStorage.getItem('version')
+        
       if (event.name === 'PRESENTATION_CLOSED') {
-        checkingPaywall()
+       
+        if(data === "0"){
+          checkingPaywall()
+        }
+       
         if (animationStatus === false) {
           setAnimationSlideStatus(true);
         }
@@ -296,20 +303,16 @@ function Routes({registerData, userProfile, props}) {
           resetNotificationBadge();
           handleUpdateTimezone();
         }
-        console.log('masuk', nextAppState);
         if (appState.current.match('background') && nextAppState === 'active') {
           appOpenAd.load();
-          console.log('masuk disini IOS NEW', paywallStatus.current);
           if (
             paywallStatus &&
             paywallStatus.current !== 'PRESENTATION_CLOSED'
           ) {
-            console.log('masuk disini IOS', paywallStatus.current);
             if (Platform.OS === 'ios') {
               handleLoadInAppAds();
             }
             const data = await AsyncStorage.getItem('interstial');
-            console.log('intersial data', data);
             if (Platform.OS === 'android' && data === null) {
               handleLoadInAppAds();
             }
@@ -335,10 +338,11 @@ function Routes({registerData, userProfile, props}) {
     };
   }, []);
 
-  function getInitialRoute() {
+  async function  getInitialRoute() {
+    const data = await AsyncStorage.getItem('version')
     if (
       (userProfile?.token && !disableNavigate) ||
-      registerData?.registerStep === 7
+      registerData?.registerStep === 7 || data === '0' && isUserPremium()
     ) {
       return 'MainPage';
     }
