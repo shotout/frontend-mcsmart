@@ -364,11 +364,11 @@ function Routes({registerData, userProfile, props}) {
     <View style={{flex: 1, position: 'relative'}}>
       <NavigationContainer ref={navigationRef} linking={navigationLinking}>
         <Stack.Navigator initialRouteName={getInitialRoute()}>
-          {/* <Stack.Screen
+          <Stack.Screen
             options={navigationData.noHeader.options}
             name="WelcomePage"
             component={WelcomePage}
-          /> */}
+          />
           <Stack.Screen
             options={navigationData.noHeader.options}
             name="Register"
