@@ -233,7 +233,7 @@ export const registerUserDefault = async () => {
           purchaseId: id,
           name: "User",
           anytime: null,
-          often: 15,
+          often: 3,
           start: "08:00",
           end: "20:00",
           gender: "",

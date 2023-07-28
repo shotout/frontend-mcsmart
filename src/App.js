@@ -20,7 +20,7 @@ import { Settings } from 'react-native-fbsdk-next';
 import messaging from "@react-native-firebase/messaging";
 import { Notifications } from 'react-native-notifications';
 import DeviceInfo from "react-native-device-info";
-import { checkDeviceRegister, resetBadge } from "./shared/request";
+import { checkDeviceRegister, checkVersion, resetBadge } from "./shared/request";
 import { AdEventType, AppOpenAd } from "react-native-google-mobile-ads";
 import SplashScreen from "react-native-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -73,6 +73,10 @@ const App =  () => {
   }, []);
   
   useEffect(async() => {
+    const data = await checkVersion()
+    if(data?.status === 'success'){
+      AsyncStorage.setItem('version', JSON.stringify(data?.data[0].is_close_button))
+    }   
     networkDebugger();
     configTracker();
     Notifications.removeAllDeliveredNotifications();
