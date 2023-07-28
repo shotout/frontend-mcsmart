@@ -356,7 +356,7 @@ function Routes({registerData, userProfile, props}) {
     if (Platform.OS === 'ios') {
       askTrackingPermission();
     }
-    // return 'WelcomePage';
+    return 'WelcomePage';
   }
 
   // if (isLoading) return null;
