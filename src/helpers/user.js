@@ -299,16 +299,19 @@ export const setCollectionData = (payload) => {
 };
 
 export const handleBasicPaywall = async (cbPaywall) => {
-  const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
-  const getInstallDate = await AsyncStorage.getItem('firstInstall');
-  const endDate = moment(getInstallDate)
+  const data = await AsyncStorage.getItem('version')
+  if (data !== '0') {
+    const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
+    const getInstallDate = await AsyncStorage.getItem('firstInstall');
+    const endDate = moment(getInstallDate)
     .add(1, 'days')
     .format('YYYY-MM-DD HH:mm:ss');
-  const paywallType =
+    const paywallType =
     currentDate > endDate ?
-      "offer_no_purchase_after_onboarding_paywall_2nd"
-      : "offer_no_purchase_after_onboarding_paywall";
-  await handlePayment(paywallType, cbPaywall);
+    "offer_no_purchase_after_onboarding_paywall_2nd"
+    : "offer_no_purchase_after_onboarding_paywall";
+    await handlePayment(paywallType, cbPaywall);
+  }
 };
 
 
