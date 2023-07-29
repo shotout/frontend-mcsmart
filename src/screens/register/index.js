@@ -270,7 +270,8 @@ function Register({
           fetchCollection();
           const stringifyDate = Date.now().toString();
           AsyncStorage.setItem('set10min', stringifyDate);
-          handlePaymentTwo("onboarding");
+          // handlePaymentTwo("onboarding");
+          AsyncStorage.setItem('afterOnboard', "yes");
           await updateProfile({
             ...payload,
             _method: "PATCH",
@@ -288,6 +289,7 @@ function Register({
     } else if (registerStep === 8) {
       const getDeviceID = async () => {
         try {
+          await AsyncStorage.removeItem('afterOnboard');
           const timeZone = await TimeZone.getTimeZone();
           const payload = {
             ...mutateForm,
@@ -345,6 +347,7 @@ function Register({
                       });
                     }
                   }else{
+                    await AsyncStorage.setItem('afterOnboard', 'yes');
                     handlePayment("onboarding", () => {
                       reset("MainPage", { isFromOnboarding: true });
                     });

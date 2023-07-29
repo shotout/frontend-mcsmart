@@ -58,6 +58,7 @@ import {askTrackingPermission} from '../../helpers/eventTracking';
 import notifee, {EventType} from '@notifee/react-native';
 import {Notifications} from 'react-native-notifications';
 import { event } from 'react-native-reanimated';
+import { isMoreThanThreeHoursSinceLastTime } from '../../helpers/timeHelpers';
 
 const Stack = createNativeStackNavigator();
 
@@ -139,17 +140,22 @@ function Routes({registerData, userProfile, props}) {
     }
   }
   useEffect(async() => {
-    const data = await AsyncStorage.getItem('version')
-      if(!isUserPremium() && data === '0'){
+      if(!isUserPremium()){
         checkingPaywall()
       }
   }, [])
 
   const checkingPaywall = async() => {
+    const dataVersion = await AsyncStorage.getItem('version')
     const set10min = await AsyncStorage.getItem('set10min');
+    const afterOnboard = await AsyncStorage.getItem('afterOnboard');
     const main10 = reformatDate(parseFloat(set10min));
-    const data = checkMinute(main10)
-    if(data){
+
+    if (afterOnboard !== 'yes'){
+      handlePayment("onboarding");
+      await AsyncStorage.setItem('afterOnboard', 'yes');
+    } else {
+    if(dataVersion === '0'){
       const data = checkDays(main10)
       if(data){
         handlePayment("24_hours_after_onboarding", () => {
@@ -160,9 +166,21 @@ function Routes({registerData, userProfile, props}) {
           reset("MainPage", { isFromOnboarding: true });
         });
       }
-    }else{
-      handlePayment("onboarding");
-    }
+    } else {
+      const getCurrentOpenApps = await AsyncStorage.getItem('latestOpenApps');
+      const mainDate = reformatDate(parseFloat(getCurrentOpenApps));
+      const isMoreThan3Hours = isMoreThanThreeHoursSinceLastTime(mainDate);
+      const stringifyDate = Date.now().toString();
+      if (!getCurrentOpenApps || isMoreThan3Hours) {
+        handleBasicPaywall(() => {
+          reset("MainPage", { isFromOnboarding: true })}
+        )
+        await AsyncStorage.setItem('latestOpenApps', stringifyDate);
+      } else {
+        setAnimationSlideStatus(true);
+      }
+    }  
+  }
   }
 
   // const handleSubmit = async () => {
@@ -221,13 +239,13 @@ function Routes({registerData, userProfile, props}) {
       console.log('ada disni', event.name);
       paywallStatus.current = event.name;
       const animationStatus = store.getState().defaultState.runAnimationSlide;
-       const data = await AsyncStorage.getItem('version')
+      // const data = await AsyncStorage.getItem('version')
         
       if (event.name === 'PRESENTATION_CLOSED') {
        
-        if(data === "0"){
-          checkingPaywall()
-        }
+        // if(data === "0"){
+        //   checkingPaywall()
+        // }
        
         if (animationStatus === false) {
           setAnimationSlideStatus(true);
@@ -346,7 +364,8 @@ function Routes({registerData, userProfile, props}) {
   function  getInitialRoute() {
     if (
       (userProfile?.token && !disableNavigate) ||
-      registerData?.registerStep === 7 || checking() === '0' && isUserPremium()
+      (registerData?.registerStep === 7 || registerData?.registerStep === 8) && 
+      checking() !== '0' && !isUserPremium()
     ) {
       return 'MainPage';
     }
