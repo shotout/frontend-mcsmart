@@ -16,6 +16,7 @@ import { colors, sizing } from "../../shared/styling";
 import { removeRepeat, repeatQuotes } from "../../shared/request";
 import { setAnimationCounter } from "../../store/defaultState/actions";
 import { isUserPremium } from "../../helpers/user";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const lightbulbIcon = require("../../assets/icons/lightbulb.png");
 const searchWhiteIcon = require("../../assets/icons/search_white.png");
@@ -52,7 +53,6 @@ export default function QuotesContent({
   const translateX = useRef(new Animated.Value(0)).current;
   const counter = useRef(0);
   const activeStatus = useRef(false);
-
   useEffect(() => {
     if (isActive && isAnimationStart) {
       runAnimation();
@@ -106,6 +106,7 @@ export default function QuotesContent({
       const url = encodeURI(`https://www.google.com/search?q=${item.title}`);
       const isAvailable = await InAppBrowser.isAvailable();
       console.log("IS AVAILABLE", isAvailable, url);
+      AsyncStorage.setItem('interstial', 'yes');
       if (isAvailable) {
         const result = await InAppBrowser.open(url, {
           dismissButtonStyle: "done",
@@ -117,12 +118,12 @@ export default function QuotesContent({
           enableDefaultShare: false,
         });
         if (result.type === "cancel") {
+        
           setTimeout(() => {
             if (typeof handleShowInterstialAdsLearn === "function")
               handleShowInterstialAdsLearn();
           }, 500);
         }
-        console.log("Check result:", result);
       } else Linking.openURL(url);
     } catch (error) {
       console.log("ERror open browser:", error);
@@ -163,7 +164,7 @@ export default function QuotesContent({
   function renderButtonOption() {
     if (showButtonOption) {
       return (
-        <View style={styles.ctnRowButton}>
+        <View style={themeUser.name === 'Theme 2' && item.title.length > 170 ? styles.ctnRowButton2 : styles.ctnRowButton}>
           <TouchableOpacity
             activeOpacity={0.7}
             style={[styles.ctnBtn, isRepeat && styles.bgYellow]}
@@ -212,7 +213,6 @@ export default function QuotesContent({
     }
     return null
   }
-
   return (
     <View style={styles.ctnWrapper}>
       {renderBackgroundImage()}
@@ -233,21 +233,21 @@ export default function QuotesContent({
                   style={[
                     styles.ctnQuotes,
                     {
-                      fontSize: themeUser.font_size
+                      fontSize: themeUser.font_size && item.title.length < 150
                         ? moderateScale(Number(themeUser.font_size))
-                        : moderateScale(18),
+                        : themeUser.name === 'Theme 2' && item.title.length > 170 ? moderateScale(16) :  moderateScale(18),
                       backgroundColor: themeUser.background_color || undefined,
                       color: themeUser.text_color || colors.white,
                       fontFamily: themeUser.font_family,
-                      // fontFamily: 'Iceberg-Regular',
+                      marginTop: themeUser.name === 'Theme 2' && item.title.length < 110 ? moderateScale(0) : themeUser.name === 'Theme 2' && item.title.length > 110 && item.title.length < 200 ? moderateScale(30) : themeUser.name === 'Theme 2' && item.title.length > 200 ? moderateScale(50) : null,
                       textShadowColor: themeUser.text_shadow,
                       textShadowOffset: themeUser.text_shadow_offset
                         ? JSON.parse(themeUser.text_shadow_offset)
                         : undefined,
                       textShadowRadius: themeUser.text_shadow ? 10 : undefined,
-                      lineHeight: themeUser.line_height
-                        ? moderateScale(Number(themeUser.line_height))
-                        : moderateScale(24),
+                      lineHeight: themeUser.line_height && item.title.length < 130
+                        ?  themeUser.name === 'Theme 2' ? moderateScale(30) : moderateScale(Number(themeUser.line_height))
+                        : themeUser.name === 'Theme 2' && item.title.length > 130 ?  moderateScale(30) : moderateScale(30),
                       // textShadowOffset: {width: 1, height: 1},
                     },
                   ]}

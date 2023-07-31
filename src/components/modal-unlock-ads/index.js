@@ -13,6 +13,7 @@ import styles from './styles';
 import Button from '../button';
 import {handleBasicPaywall, handlePayment} from '../../helpers/user';
 import {getRewardedCategoryID} from '../../shared/static/adsId';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const categoryImg = require('../../assets/icons/unlock_category.png');
 const crownIcon = require('../../assets/icons/crown_icon.png');
@@ -37,10 +38,17 @@ const ModalUnlockCategory = ({
   const [loadingAds, setLoadingAds] = useState(false);
 
   useEffect(() => {
+    if (!rewarded.loaded){
+      setLoadingAds(true);
+    }
+  }, [200]);
+  
+  useEffect(() => {
     const unsubscribeLoaded = rewarded.addAdEventListener(
       RewardedAdEventType.LOADED,
       () => {
         console.log('LOAD ADS ModalUnlockCategory');
+        setLoadingAds(false);
       },
     );
     const unsubscribeEarned = rewarded.addAdEventListener(
@@ -56,6 +64,9 @@ const ModalUnlockCategory = ({
           );
         }
         handleClose(selectedCategory);
+        setTimeout(() => {
+          AsyncStorage.removeItem('interstial');
+        }, 1000);
       },
     );
 
@@ -123,6 +134,7 @@ const ModalUnlockCategory = ({
                 }
                 isLoading={loadingAds}
                 onPress={() => {
+                  AsyncStorage.setItem('interstial', 'yes');
                   if (rewarded.loaded) {
                     rewarded.show();
                   } else {

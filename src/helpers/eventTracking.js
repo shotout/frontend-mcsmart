@@ -44,6 +44,7 @@ const getScreenName = id => {
 };
 
 export const eventTracking = async (id, message) => {
+ console.log('Success tracking event:',id);
   try {
     const adjustEvent = new AdjustEvent(id);
     if (message) {
@@ -63,11 +64,13 @@ export const eventTracking = async (id, message) => {
 
 
 export const revenueTracking = async (price, currency) => {
+  console.log(price, currency)
   const adjustEvent = new AdjustEvent(REVENUE_TRACKING);
 
   adjustEvent.setRevenue(price, currency);
 
   Adjust.trackEvent(adjustEvent);
+  AppEventsLogger.logPurchase(price, currency, { param: price });
   // await analytics().logEvent(getScreenName(REVENUE_TRACKING), {
   //   id: REVENUE_TRACKING,
   //   item: `PRICE ${price}, currency ${currency}`,
@@ -93,6 +96,8 @@ export const askTrackingPermission = () => {
           break;
         case 3:
           Settings.setAdvertiserTrackingEnabled(true)
+          Settings.setAdvertiserIDCollectionEnabled(true)
+          Settings.setAutoLogAppEventsEnabled(true)
           // ATTrackingManagerAuthorizationStatusAuthorized case
           console.log('The user authorized access to IDFA');
           
@@ -104,5 +109,8 @@ export const askTrackingPermission = () => {
     });
   }else{
     Settings.setAdvertiserTrackingEnabled(true)
+       Settings.setAdvertiserIDCollectionEnabled(true)
+       Settings.setAutoLogAppEventsEnabled(true)
+
   }
 };

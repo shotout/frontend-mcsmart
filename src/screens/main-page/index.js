@@ -10,6 +10,7 @@ import {
   StatusBar,
   Platform,
   ImageBackground,
+  BackHandler,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import notifee, { EventType } from "@notifee/react-native";
@@ -56,7 +57,6 @@ import {
   handleRatingModal,
   isPremiumToday,
   isUserPremium,
-  purchaselyListener,
 } from "../../helpers/user";
 import {
   changeAskRatingParameter,
@@ -96,6 +96,7 @@ import ContentSubscription from "../../layout/setting/content-subscription";
 import dispatcher from "./dispatcher";
 import store from "../../store/configure-store";
 import moment from "moment";
+import { ONBOARDING_COMPLETE, eventTracking } from "../../helpers/eventTracking";
 
 const adUnitId = getRewardedOutOfQuotesID();
 
@@ -201,6 +202,20 @@ function MainPage({
     return () => clearTimeout(timer);
   }, [showSharePopup]);
 
+  useEffect(() => {
+    const backAction = () => {
+      console.log('masukkk handler 1')
+      BackHandler.exitApp();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
+
   // const handleFetch = async (id) => {
   //   console.log(id)
   //   const params = {
@@ -210,10 +225,6 @@ function MainPage({
   //   getActiveQuote()
   // }
 
-  useEffect(async() => {
-    const fcmToken = await messaging().getToken();
-    console.log('FCM TOKEN'+fcmToken)
-  }, [])
 
   const handleScreenshot = () => {
     captureRef.current.capture().then((uri) => {
@@ -304,7 +315,6 @@ function MainPage({
     //   subscription_type: 1,
     // });
     checkInstall();
-    purchaselyListener();
     if (isFromOnboarding) {
       scrollToTopQuote();
     }
@@ -335,21 +345,40 @@ function MainPage({
     const unsubscribeEarned = rewarded.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
       (reward) => {
+        
         console.log("User earned reward of ", reward);
       }
     );
 
     const rewardedOpen = rewarded.addAdEventListener(AdEventType.OPENED, () => {
       setStatusBar(true);
+     
       console.log("LOAD ADS MODAL COUNTDOWN");
     });
     const rewardedClose = rewarded.addAdEventListener(
       AdEventType.CLOSED,
       () => {
+        setTimeout(() => {
+          AsyncStorage.removeItem('interstial')
+         }, 1000);
         setStatusBar(false);
         console.log("LOAD ADS MODAL COUNTDOWN");
       }
     );
+    const interstialListenerAds = interstialAds.addAdEventListener(AdEventType.CLOSED,  () => {
+      // Do not allow AppOpenAd to show right after InterstitialAd is closed.
+      // We can depend on this as it's called soon enough before AppState event fires.
+     setTimeout(() => {
+      AsyncStorage.removeItem('interstial')
+     }, 1000);
+    });
+    const interstialListener = interstialAdsLearn.addAdEventListener(AdEventType.CLOSED,  () => {
+      // Do not allow AppOpenAd to show right after InterstitialAd is closed.
+      // We can depend on this as it's called soon enough before AppState event fires.
+     setTimeout(() => {
+      AsyncStorage.removeItem('interstial')
+     }, 1000);
+    });
     rewarded.load();
     interstialAds.load();
     interstialAdsLearn.load();
@@ -361,6 +390,8 @@ function MainPage({
       unsubscribeEarned();
       rewardedOpen();
       rewardedClose();
+      interstialListener();
+      interstialListenerAds();
     };
   }, []);
 
@@ -405,7 +436,11 @@ function MainPage({
       // }
 
       if (!isUserPremium()) {
-        handleShowInterstialAds(activeQuote, activeSlide);
+        AsyncStorage.setItem('interstial', 'yes');
+        setTimeout(() => {
+          handleShowInterstialAds(activeQuote, activeSlide);
+        }, 200);
+       
       }
       if (!interstialAds.loaded) {
         interstialAds.load();
@@ -486,7 +521,9 @@ function MainPage({
         interstialAdsLearn.show();
       } else {
         const cbFinish = () => {
+
           setLoadingInterstial(false);
+          console.log('finiiis')
         };
         setLoadingInterstial(true);
         await loadInterstialAds(interstialAdsLearn, cbFinish);
@@ -497,6 +534,7 @@ function MainPage({
 
   const showInterStialAds = async () => {
     console.log("TRY SHOW INTERSTIAL ADS", interstialAds.loaded);
+    AsyncStorage.setItem('interstial', 'yes')
     if (!isUserPremium()) {
       if (interstialAds.loaded) {
         interstialAds.show();
@@ -586,6 +624,7 @@ function MainPage({
     });
     if (isTutorial.step === 4) {
       await AsyncStorage.setItem("isFinishTutorial", "yes");
+      eventTracking(ONBOARDING_COMPLETE)
       setTutorial({
         visible: false,
         step: 1,

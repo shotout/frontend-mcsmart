@@ -106,16 +106,16 @@ export default function ContentStep3({values, handleChangeValue, contentStep}) {
           </View>
           <TouchableOpacity
             style={styles.ctnSelect}
-            disabled={values.often === 15}
+            disabled={values.often === 3}
             onPress={() => {
-              if (values.often < 15) {
+              if (values.often < 3) {
                 handleChangeValue('often', values.often + 1);
               }
             }}>
             <Text
               style={[
                 styles.txtIncrease,
-                {color: values.often === 15 ? colors.gray : colors.black},
+                {color: values.often === 3 ? colors.gray : colors.black},
               ]}>
               +
             </Text>

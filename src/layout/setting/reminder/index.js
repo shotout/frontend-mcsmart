@@ -35,7 +35,7 @@ function Reminder({isVisible, onClose, userProfile}) {
     end_at: moment(new Date(2018, 11, 24, 20, 0, 30, 0)).format(
       'YYYY-MM-DD HH:mm',
     ),
-    often: 15,
+    often: 3,
   });
 
   const handleSaveReminder = async () => {
@@ -169,16 +169,16 @@ function Reminder({isVisible, onClose, userProfile}) {
           </View>
           <TouchableOpacity
             style={styles.ctnSelect}
-            disabled={values.often === 15}
+            disabled={values.often === 3}
             onPress={() => {
-              if (values.often < 15) {
+              if (values.often < 3) {
                 handleChangeValue('often', values.often + 1);
               }
             }}>
             <Text
               style={[
                 styles.txtIncrease,
-                {color: values.often === 15 ? colors.gray : colors.yellow},
+                {color: values.often === 3 ? colors.gray : colors.yellow},
               ]}>
               +
             </Text>

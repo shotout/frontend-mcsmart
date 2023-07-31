@@ -19,6 +19,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   ctnQuotesIcon: {
     width: moderateScale(80),
@@ -29,6 +30,7 @@ export default StyleSheet.create({
   txtQuotesWrapper: {
     paddingHorizontal: moderateScale(30),
     position:'relative',
+ 
   },
   ctnQuotes: {
     fontSize: moderateScale(18),
@@ -36,9 +38,19 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontFamily: fonts.QuotesText,
     lineHeight: moderateScale(24),
-    padding: moderateScale(4)
+    padding: moderateScale(4),
+    
+    
   },
   ctnRowButton:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    // marginBottom: isIphoneXorAbove() ? moderateScale(80) : moderateScale(40),
+    marginBottom: moderateScale(40),
+    marginTop: moderateScale(40)
+  },
+  ctnRowButton2:{
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
