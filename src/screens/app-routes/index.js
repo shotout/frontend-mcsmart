@@ -59,6 +59,7 @@ import notifee, {EventType} from '@notifee/react-native';
 import {Notifications} from 'react-native-notifications';
 import { event } from 'react-native-reanimated';
 import { isMoreThanThreeHoursSinceLastTime } from '../../helpers/timeHelpers';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const Stack = createNativeStackNavigator();
 
@@ -140,6 +141,7 @@ function Routes({registerData, userProfile, props}) {
     }
   }
   useEffect(async() => {
+    crashlytics().log('App Route');
       if(!isUserPremium()){
         checkingPaywall()
       }

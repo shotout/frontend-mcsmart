@@ -27,6 +27,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAppOpenID } from "./shared/static/adsId";
 import * as Sentry from '@sentry/react-native';
 import { SENTRY_DSN } from "./shared/static";
+import crashlytics from '@react-native-firebase/crashlytics';
+
 
 LogBox.ignoreAllLogs();
 
@@ -89,7 +91,7 @@ const App =  () => {
     check()
   }, [])
   useEffect(async() => {
-   
+    crashlytics().log('App Index');
     networkDebugger();
     configTracker();
     Notifications.removeAllDeliveredNotifications();

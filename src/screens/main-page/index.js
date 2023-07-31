@@ -97,6 +97,7 @@ import dispatcher from "./dispatcher";
 import store from "../../store/configure-store";
 import moment from "moment";
 import { ONBOARDING_COMPLETE, eventTracking } from "../../helpers/eventTracking";
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const adUnitId = getRewardedOutOfQuotesID();
 
@@ -310,7 +311,7 @@ function MainPage({
   };
 
   useEffect(() => {
-
+    crashlytics().log('Main Page');
     // setSubcription({
     //   subscription_type: 1,
     // });

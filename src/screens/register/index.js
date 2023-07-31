@@ -68,6 +68,8 @@ import { removeDuplicatesArray } from '../../helpers/arrayHandler';
 import { ONBOARDING_COMPLETE, eventTracking } from '../../helpers/eventTracking';
 import { reformatDate } from '../../helpers/user';
 import { isMoreThanThreeHoursSinceLastTime } from '../../helpers/timeHelpers';
+import crashlytics from '@react-native-firebase/crashlytics';
+
 
 const Convetti = require('../../assets/lottie/hello.json');
 
@@ -120,6 +122,7 @@ function Register({
   });
 
   useEffect(() => {
+    crashlytics().log('Register Screen');
     const handleInitial = async () => {
       setSubstep(registerData?.substep || substep);
       setRegisterStep(registerData?.registerStep || registerStep);
