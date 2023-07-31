@@ -25,6 +25,8 @@ import { AdEventType, AppOpenAd } from "react-native-google-mobile-ads";
 import SplashScreen from "react-native-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAppOpenID } from "./shared/static/adsId";
+import * as Sentry from '@sentry/react-native';
+import { SENTRY_DSN } from "./shared/static";
 
 LogBox.ignoreAllLogs();
 
@@ -43,7 +45,12 @@ const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
 appOpenAd.load();
 
 const App =  () => {
- 
+   // if (Platform.OS !== 'ios') {
+    Sentry.init({
+      dsn: SENTRY_DSN,
+      tracesSampleRate: 1.0,
+    });
+  // }
   const [showAdsOverlay, setAdsOverlay] = useState(false);
   const openAdsOpened = useRef(false);
   const configTracker = () => {
@@ -121,4 +128,4 @@ const App =  () => {
   );
 };
 
-export default App;
+export default Sentry.wrap(App);
