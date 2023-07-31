@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
-import { LogBox, Platform, StatusBar } from "react-native";
+import { BackHandler, LogBox, Platform, StatusBar } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider as PaperProvider } from "react-native-paper";
 
@@ -20,7 +20,7 @@ import { Settings } from 'react-native-fbsdk-next';
 import messaging from "@react-native-firebase/messaging";
 import { Notifications } from 'react-native-notifications';
 import DeviceInfo from "react-native-device-info";
-import { checkDeviceRegister } from "./shared/request";
+import { checkDeviceRegister, checkVersion, resetBadge } from "./shared/request";
 import { AdEventType, AppOpenAd } from "react-native-google-mobile-ads";
 import SplashScreen from "react-native-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -49,8 +49,8 @@ const App =  () => {
   const configTracker = () => {
     const adjustConfig = new AdjustConfig(
       '6qpsj2ssc03k',
-      // AdjustConfig.EnvironmentSandbox,
-      AdjustConfig.EnvironmentProduction,
+      AdjustConfig.EnvironmentSandbox,
+      // AdjustConfig.EnvironmentProduction,
     );
     adjustConfig.setLogLevel(AdjustConfig.LogLevelVerbose);
     Adjust.create(adjustConfig);
@@ -58,16 +58,39 @@ const App =  () => {
   };
   Settings.initializeSDK();
   Settings.setAppID('637815961525510');
+  useEffect(() => {
+    const backAction = () => {
+      console.log('masukkk handler 55')
+      BackHandler.exitApp();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
   
+  useEffect(() => {
+    async function check () {
+      const data = await checkVersion()
+      if(data?.status === 'success'){
+        AsyncStorage.setItem('version', JSON.stringify(data?.data[0].is_close_button))
+      }   
+    }
+    check()
+  }, [])
   useEffect(async() => {
+   
     networkDebugger();
     configTracker();
     Notifications.removeAllDeliveredNotifications();
     DeviceInfo.getUniqueId().then(async uniqueId => {
       try {
-      await checkDeviceRegister({
-        device_id: uniqueId
-      });
+        await resetBadge({
+          device_id: uniqueId
+        });
       } catch (err) {
         console.log('Err get device info:', err);
       }
@@ -80,8 +103,6 @@ const App =  () => {
     }
     
   }, []);
-
-  
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

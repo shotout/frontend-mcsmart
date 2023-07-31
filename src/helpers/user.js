@@ -44,7 +44,6 @@ export const openImprint = () => {
 
 export const isUserPremium = () => {
   const profile = store.getState().defaultState.userProfile;
-  console.log('DATA PROFILE =',profile?.data?.subscription)
   if (profile?.data != undefined) {
     const { type } = profile?.data?.subscription;
     if (type === 1 || type === 5) {
@@ -56,13 +55,13 @@ export const isUserPremium = () => {
 };
 
 export const handlePayment = async (vendorId, cb) =>
-  new Promise(async (resolve, reject) => {
-    try {
-      eventTracking(SHOW_PAYWALL);
-      let stringVendor = vendorId;
-      // const subscriptions = await Purchasely.userSubscriptions();
-      // console.log('Subscription status:', subscriptions);
-      const purchaseId = await Purchasely.getAnonymousUserId();
+new Promise(async (resolve, reject) => {
+  try {
+    eventTracking(SHOW_PAYWALL);
+    let stringVendor = vendorId;
+    // const subscriptions = await Purchasely.userSubscriptions();
+    // console.log('Subscription status:', subscriptions);
+    const purchaseId = await Purchasely.getAnonymousUserId();
       if (vendorId === "onboarding") {
         // await setSubcription({
         //   subscription_type: 1,
@@ -200,6 +199,7 @@ export const reloadUserProfile = async () =>
                   res.data.subscription.purchasely_data
                 );
                 if (objPurchase) {
+                  console.log(objPurchase)
                   revenueTracking(
                     objPurchase.plan_price_in_customer_currency,
                     objPurchase.customer_currency
@@ -233,7 +233,7 @@ export const registerUserDefault = async () => {
           purchaseId: id,
           name: "User",
           anytime: null,
-          often: 15,
+          often: 3,
           start: "08:00",
           end: "20:00",
           gender: "",
@@ -299,17 +299,21 @@ export const setCollectionData = (payload) => {
 };
 
 export const handleBasicPaywall = async (cbPaywall) => {
-  const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
-  const getInstallDate = await AsyncStorage.getItem('firstInstall');
-  const endDate = moment(getInstallDate)
+  const data = await AsyncStorage.getItem('version')
+  if (data !== '0') {
+    const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
+    const getInstallDate = await AsyncStorage.getItem('firstInstall');
+    const endDate = moment(getInstallDate)
     .add(1, 'days')
     .format('YYYY-MM-DD HH:mm:ss');
-  const paywallType =
+    const paywallType =
     currentDate > endDate ?
-      "offer_no_purchase_after_onboarding_paywall_2nd"
-      : "offer_no_purchase_after_onboarding_paywall";
-  await handlePayment(paywallType, cbPaywall);
+    "offer_no_purchase_after_onboarding_paywall_2nd"
+    : "offer_no_purchase_after_onboarding_paywall";
+    await handlePayment(paywallType, cbPaywall);
+  }
 };
+
 
 export const isCompletedOnboarding = () => {
   const profile = store.getState().defaultState.userProfile;
@@ -426,4 +430,24 @@ export const purchaselyListener = () => {
     // User has successfully purchased a product, reload content
     console.log("User has purchased", res);
   });
+};
+
+export const reformatDate = valueDate => {
+  if (valueDate) {
+    const formatYears = moment(valueDate).format('YYYY');
+    const formatMonth = moment(valueDate).format('MM');
+    const formatDay = moment(valueDate).format('DD');
+    const formatHours = moment(valueDate).format('HH');
+    const minutes = moment(valueDate).format('mm');
+    return new Date(
+      formatYears,
+      formatMonth - 1,
+      formatDay,
+      formatHours,
+      minutes,
+      0,
+      0,
+    );
+  }
+  return new Date();
 };

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Platform,
   Text,
@@ -7,8 +7,9 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   StatusBar,
+  BackHandler,
 } from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import notifee from '@notifee/react-native';
 import DeviceInfo from 'react-native-device-info';
@@ -17,23 +18,25 @@ import Lottie from 'lottie-react-native';
 import TimeZone from 'react-native-timezone';
 import Purchasely from 'react-native-purchasely';
 
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {createAnimatableComponent} from 'react-native-animatable';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { createAnimatableComponent } from 'react-native-animatable';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Button from '../../components/button';
 import styles from './styles';
 import states from './states';
 import dispatcher from './dispatcher';
 import {
+  handleBasicPaywall,
   handlePayment,
   handlePaymentTwo,
   handleSubscriptionStatus,
+  isUserPremium,
   openPrivacyPolicy,
   openTermsofUse,
   reloadUserProfile,
 } from '../../helpers/user';
 import LoadingIndicator from '../../components/loading-indicator';
-import {isIphoneXorAbove} from '../../shared/devices';
+import { isIphoneXorAbove } from '../../shared/devices';
 import store from "../../store/configure-store";
 import HeaderStep from '../../layout/register/header-step';
 import ContentName from '../../layout/register/content-step-1';
@@ -46,23 +49,25 @@ import ContentTopic from '../../layout/register/content-topic';
 // import ChangeLife from '../../layout/register/change-life';
 import ChooseCommitment from '../../layout/register/choose-commitment';
 import Contract from '../../layout/register/contract';
-import {listTopic} from '../../shared/staticData';
-import {reset} from '../../shared/navigationRef';
+import { listTopic } from '../../shared/staticData';
+import { reset } from '../../shared/navigationRef';
 import {
   checkDeviceRegister,
   postRegister,
   updateProfile,
 } from '../../shared/request';
-import {storeRegistrationData} from '../../store/defaultState/actions';
-import {sizing} from '../../shared/styling';
+import { storeRegistrationData } from '../../store/defaultState/actions';
+import { sizing } from '../../shared/styling';
 import {
   firstStepSelection,
   forthStepSelection,
   secondStepSelection,
   thirdStepSelection,
 } from './categoriesArr';
-import {removeDuplicatesArray} from '../../helpers/arrayHandler';
+import { removeDuplicatesArray } from '../../helpers/arrayHandler';
 import { ONBOARDING_COMPLETE, eventTracking } from '../../helpers/eventTracking';
+import { reformatDate } from '../../helpers/user';
+import { isMoreThanThreeHoursSinceLastTime } from '../../helpers/timeHelpers';
 
 const Convetti = require('../../assets/lottie/hello.json');
 
@@ -98,7 +103,7 @@ function Register({
     end_at: moment(new Date(2018, 11, 24, 20, 0, 30, 0)).format(
       'YYYY-MM-DD HH:mm',
     ),
-    often: 15,
+    often: 3,
     selectedCategory: [],
     impress_friends: '',
     impress_business: '',
@@ -192,6 +197,47 @@ function Register({
     }
   };
 
+  const checkMinute = (start) => {
+    let timeNow = new Date();
+    let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
+  
+    if (timeRemaining > 600) { // Jika lebih dari 600 detik (10 menit)
+      console.log("Sudah lebih dari 10 menit sejak proses dimulai.");
+      return true
+    } else {
+      console.log("Belum lebih dari 10 menit sejak proses dimulai.");
+      return false
+    }
+  }
+
+  const checkDays = (start) => {
+    let timeNow = new Date();
+    let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
+  
+    if (timeRemaining > 86400) { // Jika lebih dari 600 detik (10 menit)
+      console.log("Sudah lebih dari 24 jam sejak proses dimulai.");
+      return true
+    } else {
+      console.log("Belum lebih dari 10 jam sejak proses dimulai.");
+      return false
+    }
+  }
+
+  useEffect(() => {
+    const backAction = () => {
+      console.log('handler 3')
+      BackHandler.exitApp();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
+  
+
   useEffect(() => {
     if (registerStep === 7) {
       const getDeviceID = async () => {
@@ -222,7 +268,10 @@ function Register({
           handleSubscriptionStatus(res.data.subscription);
           fetchListQuote();
           fetchCollection();
-          handlePaymentTwo("onboarding");
+          const stringifyDate = Date.now().toString();
+          AsyncStorage.setItem('set10min', stringifyDate);
+          // handlePaymentTwo("onboarding");
+          AsyncStorage.setItem('afterOnboard', "yes");
           await updateProfile({
             ...payload,
             _method: "PATCH",
@@ -240,6 +289,7 @@ function Register({
     } else if (registerStep === 8) {
       const getDeviceID = async () => {
         try {
+          await AsyncStorage.removeItem('afterOnboard');
           const timeZone = await TimeZone.getTimeZone();
           const payload = {
             ...mutateForm,
@@ -267,15 +317,54 @@ function Register({
           handleSubscriptionStatus(res.data.subscription);
           fetchListQuote();
           fetchCollection();
-          setTimeout(() => {
-            handlePayment("onboarding", () => {
-              reset("MainPage", { isFromOnboarding: true });
-            });
-          }, 200);
-          await updateProfile({
-            ...payload,
-            _method: "PATCH",
-          });
+          const getCurrentOpenApps = await AsyncStorage.getItem('latestOpenApps');
+          const mainDate = reformatDate(parseFloat(getCurrentOpenApps));
+          const isMoreThan3Hours = isMoreThanThreeHoursSinceLastTime(mainDate);
+          const stringifyDate = Date.now().toString();
+          if (!getCurrentOpenApps || isMoreThan3Hours) {
+            const isFinishTutorial = await AsyncStorage.getItem("isFinishTutorial");
+            setTimeout(async() => {
+              if (isFinishTutorial === "yes") {
+                await AsyncStorage.setItem('latestOpenApps', stringifyDate);
+                console.log('ada ko ini')
+                handleBasicPaywall(() => {
+                  reset("MainPage", { isFromOnboarding: true });
+                });
+              } else {
+                if(!isUserPremium()){
+                  const set10min = await AsyncStorage.getItem('set10min');
+                  const main10 = reformatDate(parseFloat(set10min));
+                  const data = checkMinute(main10)
+                  if(data){
+                    const data = checkDays(main10)
+                    if(data){
+                      handlePayment("24_hours_after_onboarding", () => {
+                        reset("MainPage", { isFromOnboarding: true });
+                      });
+                    }else{
+                      handlePayment("10_minutes_after_onboarding", () => {
+                        reset("MainPage", { isFromOnboarding: true });
+                      });
+                    }
+                  }else{
+                    await AsyncStorage.setItem('afterOnboard', 'yes');
+                    handlePayment("onboarding", () => {
+                      reset("MainPage", { isFromOnboarding: true });
+                    });
+                  }
+                }else{
+               
+                  reset("MainPage", { isFromOnboarding: true });
+                }
+              }
+            }, 200);
+          } else {
+            reset("MainPage", { isFromOnboarding: true });
+          };
+          // await updateProfile({
+          //   ...payload,
+          //   _method: "PATCH",
+          // });
           setTimeout(() => {
             reloadUserProfile();
           }, 2000);
@@ -314,9 +403,8 @@ function Register({
     console.log('AFter register called');
     await fetchListQuote();
     await fetchCollection();
-    eventTracking(ONBOARDING_COMPLETE);
     handlePayment('onboarding', () => {
-      reset('MainPage', {isFromOnboarding: true});
+      reset('MainPage', { isFromOnboarding: true });
     });
     AsyncStorage.setItem('isLogin', 'yes');
     setLoading(false);
@@ -351,7 +439,6 @@ function Register({
       setTimeout(() => {
         reloadUserProfile();
       }, 2000);
-      eventTracking(ONBOARDING_COMPLETE);
     } catch (err) {
       console.log('Error register:', err);
       setLoading(false);
@@ -456,6 +543,8 @@ function Register({
       }
     } else if (registerStep === 7) {
       console.log('NOTHING');
+      const stringifyDate = Date.now().toString();
+      AsyncStorage.setItem('set10min', stringifyDate);
       setRegisterStep(8);
     } else {
       setRegisterStep(registerStep + 1);
@@ -789,7 +878,7 @@ function Register({
       <StatusBar
         barStyle="light-content"
         backgroundColor="#000"
-        // hidden={statusbarStatus}
+      // hidden={statusbarStatus}
       />
       {renderAnimation()}
       <KeyboardAvoidingView
@@ -817,9 +906,9 @@ function Register({
           {registerStep === 1 && substep === 'a'
             ? null
             : renderButton(
-                styles.mgBtm40,
-                registerStep === 1 && substep === 'b' ? 2500 : null,
-              )}
+              styles.mgBtm40,
+              registerStep === 1 && substep === 'b' ? 2500 : null,
+            )}
         </KeyboardAwareScrollView>
 
         {registerStep === 1 && substep === 'a' && renderButton()}
