@@ -283,6 +283,7 @@ function Routes({registerData, userProfile, props}) {
     Notifications.removeAllDeliveredNotifications();
     Purchasely.isReadyToPurchase(true);
     purchaselyListener();
+    crashlytics().log('OPEN ADS')
     const unsubscribeAppOpenAds = appOpenAd.addAdEventListener(
       AdEventType.CLOSED,
       () => {
@@ -352,7 +353,7 @@ function Routes({registerData, userProfile, props}) {
     return () => {
       subscription.remove();
       Purchasely.removeEventListener();
-      unsubscribeAppOpenAds();
+      unsubscribeAppOpenAds.remove();
       listenerOpenApps();
       listenerIAPAds();
     };
