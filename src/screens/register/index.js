@@ -69,6 +69,7 @@ import { ONBOARDING_COMPLETE, eventTracking } from '../../helpers/eventTracking'
 import { reformatDate } from '../../helpers/user';
 import { isMoreThanThreeHoursSinceLastTime } from '../../helpers/timeHelpers';
 import crashlytics from '@react-native-firebase/crashlytics';
+import { STATIC_ONBOARD } from '../../shared/static';
 
 
 const Convetti = require('../../assets/lottie/hello.json');
@@ -226,19 +227,6 @@ function Register({
     }
   }
 
-  useEffect(() => {
-    const backAction = () => {
-      console.log('handler 3')
-      BackHandler.exitApp();
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
-    return () => backHandler.remove();
-  }, []);
   
 
   useEffect(() => {
@@ -266,6 +254,7 @@ function Register({
           const res = await checkDeviceRegister({
             device_id: mutateForm.device_id,
           });
+
           setHasRegister(true);
           handleSetProfile(res);
           handleSubscriptionStatus(res.data.subscription);
@@ -273,6 +262,9 @@ function Register({
           fetchCollection();
           const stringifyDate = Date.now().toString();
           AsyncStorage.setItem('set10min', stringifyDate);
+          const stringifyDateNow = new Date();
+          let strTanggalSekarang = stringifyDateNow.getDate().toString();
+          AsyncStorage.setItem('setToday', strTanggalSekarang);
           // handlePaymentTwo("onboarding");
           AsyncStorage.setItem('afterOnboard', "yes");
           await updateProfile({
@@ -315,6 +307,10 @@ function Register({
           const res = await checkDeviceRegister({
             device_id: mutateForm.device_id,
           });
+          const stringifyDateTime = new Date();
+          let strTanggalSekarang = stringifyDateTime.getDate().toString();
+            AsyncStorage.setItem('setToday', strTanggalSekarang);
+    
           setHasRegister(true);
           handleSetProfile(res);
           handleSubscriptionStatus(res.data.subscription);
@@ -345,13 +341,13 @@ function Register({
                         reset("MainPage", { isFromOnboarding: true });
                       });
                     }else{
-                      handlePayment("10_minutes_after_onboarding", () => {
-                        reset("MainPage", { isFromOnboarding: true });
-                      });
+                      // handlePayment("10_minutes_after_onboarding", () => {
+                      //   reset("MainPage", { isFromOnboarding: true });
+                      // });
                     }
                   }else{
                     await AsyncStorage.setItem('afterOnboard', 'yes');
-                    handlePayment("onboarding", () => {
+                    handlePayment(STATIC_ONBOARD, () => {
                       reset("MainPage", { isFromOnboarding: true });
                     });
                   }

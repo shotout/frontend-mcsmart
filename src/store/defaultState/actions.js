@@ -19,12 +19,14 @@ import { APP_VERSION } from "../../shared/static";
 import store from "../configure-store";
 import * as types from "./types";
 import {
+  checkHours,
   checkIsHasLogin,
   handlePayment,
   handleSubscriptionStatus,
   handleUpdateTimezone,
   isPremiumToday,
   isUserPremium,
+  reformatDate,
   reloadUserProfile,
 } from "../../helpers/user";
 import { handleModalFirstPremium } from "../../shared/globalContent";
@@ -90,7 +92,9 @@ export const fetchListQuoteFilter =
         if (quote.data?.length > 0) {
           // let overallData = [...restPas, ...quote.data];
           let overallData = [];
-          if (!isFreeUserPremium && !isPassPremium) {
+
+          if (!isPassPremium) {
+            console.log(!isPassPremium)
             overallData = [
               ...[{ item_type: "countdown_page" }],
               ...restPas,
@@ -159,108 +163,122 @@ export const fetchListQuoteFilter =
         reject(err);
       }
     });
+    
 export const fetchListQuote = (params, isPassPremium) => async (dispatch) =>
   new Promise(async (resolve, reject) => {
-    try {
-      const { freeUserPremium } = store.getState().defaultState;
-      let isFreeUserPremium = isPremiumToday();
-      const todayDate = moment().format("YYYY-MM-DD");
-      if (
-        isPremiumToday() &&
-        !isUserPremium() &&
-        todayDate !== freeUserPremium
-      ) {
-        isFreeUserPremium = false;
-      }
-    
-      dispatch({ type: types.START_FETCH_QUOTES });
-      const quote = await getListQuotes({
-        length: isFreeUserPremium || isPassPremium ? 1000 : 15,
-        page: 1,
-        ...params,
-      });
-      let restPas = [];
-      if (isUserPremium()) {
-        const pastQuote = await getListPastQuotes({
-          length: 5,
+    const stringifyDate = new Date();
+    let strTanggalSekarang = stringifyDate.getDate().toString();
+    const value = await AsyncStorage.getItem('setToday');
+      try {
+        const { freeUserPremium } = store.getState().defaultState;
+  
+        let isFreeUserPremium = isPremiumToday();
+        const todayDate = moment().format("YYYY-MM-DD");
+        if (
+          isPremiumToday() &&
+          !isUserPremium() &&
+          todayDate === freeUserPremium
+        ) {
+          isFreeUserPremium = false;
+        }
+      
+        dispatch({ type: types.START_FETCH_QUOTES });
+        const set10min = await AsyncStorage.getItem('set10min');
+        const main10 = reformatDate(parseFloat(set10min));
+        const data = checkHours(main10)
+        console.log('ini data tanggal berapa'+data)
+        if(value != strTanggalSekarang || isUserPremium()){
+        const quote = await getListQuotes({
+          length: isPassPremium ? 1000 : data ? 3 : 10,
           page: 1,
+          ...params,
         });
-        restPas = isArray(pastQuote?.data)
-          ? pastQuote?.data
-          : pastQuote?.data?.data || dummyPastQuotes;
-      }
-      if (quote.data?.data?.length > 0) {
-        let overallData = [...restPas, ...quote.data.data];
-        if (!isFreeUserPremium && !isPassPremium) {
-          overallData = [
-            ...[{ item_type: "countdown_page" }],
-            ...restPas,
-            ...quote.data.data,
-            ...[{ item_type: "countdown_page" }],
-          ];
-          overallData = overallData.map((ctn, itemIndex) => {
-            if (
-              itemIndex === 2 ||
-              itemIndex === 5 ||
-              itemIndex === 8 ||
-              itemIndex === 12
-            ) {
-              return {
-                ...ctn,
-                item_type: "in_app_ads",
-              };
-            }
-            return ctn;
+        let restPas = [];
+        // AsyncStorage.setItem('setToday', strTanggalSekarang);
+        if (isUserPremium()) {
+          const pastQuote = await getListPastQuotes({
+            length: 5,
+            page: 1,
           });
-        } else if (!isUserPremium()) {
-          overallData = overallData.map((ctn, itemIndex) => {
-            if (
-              itemIndex === 2 ||
-              itemIndex === 5 ||
-              itemIndex === 8 ||
-              itemIndex === 12 ||
-              itemIndex === 16
-            ) {
-              return {
-                ...ctn,
-                item_type: "in_app_ads",
-              };
-            }
-            if (itemIndex > 16) {
-              if (itemIndex % 4 === 0) {
+          restPas = isArray(pastQuote?.data)
+            ? pastQuote?.data
+            : pastQuote?.data?.data || dummyPastQuotes;
+        }
+        if (quote.data?.data?.length > 0) {
+          let overallData = [...restPas, ...quote.data.data];
+          if (!isPassPremium) {
+            overallData = [
+              ...[{ item_type: "countdown_page" }],
+              ...restPas,
+              ...quote.data.data,
+              ...[{ item_type: "countdown_page" }],
+            ];
+            overallData = overallData.map((ctn, itemIndex) => {
+              if (
+                itemIndex === 2 ||
+                itemIndex === 5 ||
+                itemIndex === 8 ||
+                itemIndex === 12
+              ) {
                 return {
                   ...ctn,
                   item_type: "in_app_ads",
                 };
               }
-            }
-
-            return {
-              ...ctn,
-              item_type: "normal_quote",
-            };
+              return ctn;
+            });
+          } else if (!isUserPremium()) {
+            overallData = overallData.map((ctn, itemIndex) => {
+              if (
+                itemIndex === 2 ||
+                itemIndex === 5 ||
+                itemIndex === 8 ||
+                itemIndex === 12 ||
+                itemIndex === 16
+              ) {
+                return {
+                  ...ctn,
+                  item_type: "in_app_ads",
+                };
+              }
+              if (itemIndex > 16) {
+                if (itemIndex % 4 === 0) {
+                  return {
+                    ...ctn,
+                    item_type: "in_app_ads",
+                  };
+                }
+              }
+  
+              return {
+                ...ctn,
+                item_type: "normal_quote",
+              };
+            });
+          }
+          dispatch({
+            type: types.SUCCESS_FETCH_QUOTE,
+            payload: quote.data,
+            arrData: overallData,
+            listBasicQuote:
+              isFreeUserPremium || isPassPremium ? [] : quote.data.data,
+            restPassLength: restPas?.length,
+            isPassPremium,
+            isFreeUserPremium:
+              isFreeUserPremium || isPassPremium ? todayDate : null,
           });
         }
-        dispatch({
-          type: types.SUCCESS_FETCH_QUOTE,
-          payload: quote.data,
-          arrData: overallData,
-          listBasicQuote:
-            isFreeUserPremium || isPassPremium ? [] : quote.data.data,
-          restPassLength: restPas?.length,
-          isPassPremium,
-          isFreeUserPremium:
-            isFreeUserPremium || isPassPremium ? todayDate : null,
-        });
+        resolve(quote);
       }
-      resolve(quote);
-    } catch (err) {
-      console.log("ERr fetch quote:", err);
-      dispatch({ type: types.ERROR_FETCH_QUOTES });
-      reject(err);
-    }
+      } catch (err) {
+        console.log("ERr fetch quote:", err);
+        dispatch({ type: types.ERROR_FETCH_QUOTES });
+        reject(err);
+      }
+    
+   
   });
-
+  
 export const fetchCollection = () => async (dispatch) =>
   new Promise(async (resolve, reject) => {
     try {

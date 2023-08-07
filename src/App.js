@@ -28,6 +28,7 @@ import { getAppOpenID } from "./shared/static/adsId";
 import * as Sentry from '@sentry/react-native';
 import { SENTRY_DSN } from "./shared/static";
 import crashlytics from '@react-native-firebase/crashlytics';
+import { fetchListQuote } from "./store/defaultState/actions";
 
 
 LogBox.ignoreAllLogs();
@@ -59,8 +60,8 @@ const App =  () => {
   const configTracker = () => {
     const adjustConfig = new AdjustConfig(
       '6qpsj2ssc03k',
-      // AdjustConfig.EnvironmentSandbox,
-      AdjustConfig.EnvironmentProduction,
+      AdjustConfig.EnvironmentSandbox,
+      // AdjustConfig.EnvironmentProduction,
     );
     adjustConfig.setLogLevel(AdjustConfig.LogLevelVerbose);
     Adjust.create(adjustConfig);
@@ -83,6 +84,7 @@ const App =  () => {
   }, []);
   
   useEffect(() => {
+   
     async function check () {
       const data = await checkVersion()
       if(data?.status === 'success'){

@@ -9,6 +9,7 @@ import {setTodayAdsLimit} from '../../../store/defaultState/actions';
 import {loadRewarded} from '../../../helpers/loadReward';
 import {isIphoneXorAbove} from '../../../shared/devices';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PremiumRocket from "../../../assets/svg/PremiumRocketWhite.svg";
 
 const imgBg = require('../../../assets/icons/quote_bg.png');
 const bannerCountdown = require('../../../assets/icons/banner_img.png');
@@ -23,13 +24,20 @@ const rewarded = RewardedAd.createForAdRequest(adUnitId, {
   keywords: ['fashion', 'clothing'],
 });
 
-const PageCountDown = () => {
+const PageCountDown = ({ handleLoad,  loading }) => {
   const [loadingAds, setLoadingAds] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     hour: 0,
     minutes: 0,
     second: 0,
   });
+
+  useEffect(() => {
+    if(loading === false){
+      setLoadingAds(false)
+    }
+
+  }, [loading])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,11 +72,12 @@ const PageCountDown = () => {
       reward => {
         console.log('Earn page countdown reward:', reward);
         if (reward) {
-          setTodayAdsLimit();
+            handleLoad()
         }
         setLoadingAds(false);
       },
     );
+    
   };
 
   return (
@@ -123,16 +132,16 @@ const PageCountDown = () => {
               </View>
             </View>
             <Button
-              type="black"
+              type="green"
               txtStyle={styles.txtBtnStyle}
               btnStyle={[styles.btnIcon, styles.mgRight]}
               prependIcon={
-                <View style={styles.ctnIcon}>
-                  <Image source={crownIcon} style={styles.btnImgStyle} />
+                <View style={styles.ctnIconCrown}>
+                   <PremiumRocket width="100%" height="100%" />
                 </View>
               }
               onPress={handleBasicPaywall}
-              label="Go Premium!"
+              label={`Get McSmart\nPremium!`}
             />
           </View>
           <View style={styles.ctnSwipe}>

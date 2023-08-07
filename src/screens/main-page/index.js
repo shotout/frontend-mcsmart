@@ -11,13 +11,14 @@ import {
   Platform,
   ImageBackground,
   BackHandler,
+  SafeAreaView,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import notifee, { EventType } from "@notifee/react-native";
 
 import AnimatedLottieView from "lottie-react-native";
 import { createAnimatableComponent } from "react-native-animatable";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import ViewShot from "react-native-view-shot";
 import RNFS from "react-native-fs";
 import {
@@ -52,6 +53,7 @@ import ModalTheme from "../../layout/main-page/modal-theme";
 import ModalSetting from "../../layout/main-page/modal-setting";
 import ModalShare from "../../layout/main-page/modal-share";
 import {
+  checkHours,
   handleBasicPaywall,
   handlePayment,
   handleRatingModal,
@@ -70,6 +72,7 @@ import ModalCategories from "../../layout/main-page/modal-categories";
 import {
   addPastQuotes,
   dislikeQuotes,
+  getListQuotes,
   getRatingStatus,
   getSetting,
   setSubcription,
@@ -97,8 +100,8 @@ import dispatcher from "./dispatcher";
 import store from "../../store/configure-store";
 import moment from "moment";
 import { ONBOARDING_COMPLETE, eventTracking } from "../../helpers/eventTracking";
-import crashlytics from '@react-native-firebase/crashlytics';
-
+import crashlytics from '@react-native-firebase/crashlytics'
+import { SUCCESS_FETCH_QUOTE } from "../../store/defaultState/types";
 const adUnitId = getRewardedOutOfQuotesID();
 
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
@@ -135,7 +138,7 @@ const UnionImage = require('../../assets/images/union.png');
 const learnMoreClickLottie = require("../../assets/icons/tutorial/learn_more_click.json");
 
 let intervalTutorial = null;
-const limitIndex = 6;
+const limitIndex = 1;
 
 function MainPage({
   quotes,
@@ -174,7 +177,10 @@ function MainPage({
   const [statusbarStatus, setStatusBar] = useState(false);
   const [isLoadingInterstial, setLoadingInterstial] = useState(false);
   const [showModalCountdown, setModalCountdown] = useState(false);
+  const [loadingAds, setLoadingAds] = useState(true);
   const [isPremiumBefore, setPremiumBefore] = useState(isUserPremium());
+  const [dataQuote, setQuoteList] = useState(quotes)
+  const [page, setPage] = useState(2)
 
   const refThemes = useRef();
   const refSetting = createRef();
@@ -189,9 +195,10 @@ function MainPage({
       setShowSharePopup(false);
     }, 10000);
   };
+
   const getActiveQuote = () => {
-    if (quotes?.listData.length > 0 && quotes?.listData[activeSlide]) {
-      return quotes?.listData[activeSlide];
+    if (dataQuote?.listData?.length > 0 && dataQuote?.listData[activeSlide]) {
+      return dataQuote?.listData[activeSlide];
     }
     return null;
   };
@@ -203,19 +210,6 @@ function MainPage({
     return () => clearTimeout(timer);
   }, [showSharePopup]);
 
-  useEffect(() => {
-    const backAction = () => {
-      console.log('masukkk handler 1')
-      BackHandler.exitApp();
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
-    return () => backHandler.remove();
-  }, []);
 
   // const handleFetch = async (id) => {
   //   console.log(id)
@@ -226,6 +220,48 @@ function MainPage({
   //   getActiveQuote()
   // }
 
+  useEffect(async() => {
+    const stringifyDate = new Date();
+    let strTanggalSekarang = stringifyDate.getDate().toString();
+    const value = await AsyncStorage.getItem('setToday');
+    const set10min = await AsyncStorage.getItem('set10min');
+    const main10 = reformatDate(parseFloat(set10min));
+    const data = checkHours(main10)
+    const hitvalue = await AsyncStorage.getItem('hit6hours');
+    if(data && hitvalue === null){
+      const response = await getListQuotes({
+        length: 3,
+        page: 4,
+      });
+      dataQuote.listData = [{ item_type: "countdown_page" }, ...response.data.data, { item_type: "countdown_page" }];
+     console.log('data bew', dataQuote.listData)
+      store.dispatch({
+        type: SUCCESS_FETCH_QUOTE,
+        payload: dataQuote,
+        arrData:  dataQuote?.listData,
+      });
+      AsyncStorage.setItem('hit6hours', 'yes');
+    }
+    if(value != null){
+      if(value != strTanggalSekarang){
+        const response = await getListQuotes({
+          length: 3,
+          page: strTanggalSekarang,
+        });
+        dataQuote.listData = [{ item_type: "countdown_page" }, ...response.data.data, { item_type: "countdown_page" }];
+       console.log('data bew', dataQuote.listData)
+        store.dispatch({
+          type: SUCCESS_FETCH_QUOTE,
+          payload: dataQuote,
+          arrData:  dataQuote?.listData,
+        });
+        AsyncStorage.setItem('setToday', strTanggalSekarang);
+      }
+    }
+    
+
+ 
+}, [])
 
   const handleScreenshot = () => {
     captureRef.current.capture().then((uri) => {
@@ -234,7 +270,7 @@ function MainPage({
       const nameToChange = uriArray[uriArray.length - 1];
       const renamedURI = uri.replace(
         nameToChange,
-        `McSmart - ${(quotes?.listData[activeSlide].title || "").substring(
+        `McSmart - ${(dataQuote?.listData[activeSlide].title || "").substring(
           0,
           10
         )}.png`
@@ -310,8 +346,20 @@ function MainPage({
     };
   };
 
+  const checkToday = async() => {
+    const stringifyDate = new Date();
+    let strTanggalSekarang = stringifyDate.getDate().toString();
+    // let strTanggalSet = tanggalSet.toISOString().slice(0,10);
+    const value = await AsyncStorage.getItem('setToday');
+    if(value === null){
+      AsyncStorage.setItem('setToday', strTanggalSekarang);
+    }
+  }
+
   useEffect(() => {
+    
     crashlytics().log('Main Page');
+    // checkToday()
     // setSubcription({
     //   subscription_type: 1,
     // });
@@ -351,7 +399,7 @@ function MainPage({
       }
     );
 
-    const rewardedOpen = rewarded.addAdEventListener(AdEventType.OPENED, () => {
+    const rewardedOpen = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
       setStatusBar(true);
      
       console.log("LOAD ADS MODAL COUNTDOWN");
@@ -400,10 +448,10 @@ function MainPage({
     const handleAddPastQuotes = async (currentSlideId) => {
       try {
         if (
-          quotes.listData[currentSlideId] &&
-          quotes.listData[currentSlideId]?.id
+          dataQuote.listData[currentSlideId] &&
+          dataQuote.listData[currentSlideId]?.id
         ) {
-          await addPastQuotes(quotes.listData[currentSlideId].id);
+          await addPastQuotes(dataQuote.listData[currentSlideId].id);
         }
       } catch (err) {
         console.log("Error add past quotes:", err);
@@ -438,14 +486,14 @@ function MainPage({
 
       if (!isUserPremium()) {
         AsyncStorage.setItem('interstial', 'yes');
-        setTimeout(() => {
-          handleShowInterstialAds(activeQuote, activeSlide);
-        }, 200);
+        // setTimeout(() => {
+        //   handleShowInterstialAds(activeQuote, activeSlide);
+        // }, 200);
        
       }
-      if (!interstialAds.loaded) {
-        interstialAds.load();
-      }
+      // if (!interstialAds.loaded) {
+      //   interstialAds.load();
+      // }
       if (!interstialAdsLearn.loaded) {
         interstialAdsLearn.load();
       }
@@ -460,7 +508,7 @@ function MainPage({
           activeSlide === 13 ||
           activeSlide === 16
         ) {
-          setModalCountdown(true);
+          // setModalCountdown(true);
         }
       }
     }
@@ -517,10 +565,12 @@ function MainPage({
 
   const handleShowInterstialAdsLearn = async () => {
     console.log("TRY SHOW INTERSTIAL ADS", interstialAdsLearn.loaded);
+    interstialAdsLearn.load()
     if (!isUserPremium()) {
       if (interstialAdsLearn.loaded) {
         interstialAdsLearn.show();
-      } else {
+      }
+
         const cbFinish = () => {
 
           setLoadingInterstial(false);
@@ -529,7 +579,7 @@ function MainPage({
         setLoadingInterstial(true);
         await loadInterstialAds(interstialAdsLearn, cbFinish);
         cbFinish();
-      }
+      
     }
   };
 
@@ -558,15 +608,15 @@ function MainPage({
   };
 
   const handleQuoteActive = () => {
-    if (quotes?.listData.length > 0) {
-      return quotes?.listData[activeSlide]?.title;
+    if (dataQuote?.listData?.length > 0) {
+      return dataQuote?.listData[activeSlide]?.title;
     }
     return null;
   };
 
   const handleIdQuoteActive = () => {
-    if (quotes?.listData.length > 0 && quotes?.listData[activeSlide]) {
-      return quotes?.listData[activeSlide].id;
+    if (dataQuote?.listData?.length > 0 && dataQuote?.listData[activeSlide]) {
+      return dataQuote?.listData[activeSlide].id;
     }
     return null;
   };
@@ -610,8 +660,9 @@ function MainPage({
     const height = sizing.getDimensionHeight(1);
     const pageNumber = Math.min(
       Math.max(Math.floor(e.nativeEvent.contentOffset.y / height + 0.5) + 1, 0),
-      quotes?.listData?.length || 0
+      dataQuote?.listData?.length || 0
     );
+    setLoadingAds(false);
     setActiveSlide(pageNumber - 1);
     if (pageNumber - 1 !== activeSlide && !isUserHasScroll) {
       setUserScrollQuotes(true);
@@ -741,11 +792,32 @@ function MainPage({
     return null;
   }
 
+  const handleLoadMore = async () => {
+   
+    const quote = await getListQuotes({
+      length: 5,
+      page: page + 1,
+    });
+    // dataQuote.listData = [{ item_type: "countdown_page" }, ...dataQuote.listData];
+    // dataQuote.listData = [{ item_type: "countdown_page" }, ...dataQuote.listData, { item_type: "countdown_page" }];
+    dataQuote?.listData?.splice(dataQuote?.listData?.length - 1, 0, ...quote.data.data);
+    console.log('data new banget', dataQuote.listData)
+    store.dispatch({
+      type: SUCCESS_FETCH_QUOTE,
+      payload: dataQuote,
+      arrData:  dataQuote?.listData,
+    });
+    if(activeSlide != 1){
+      setActiveSlide(activeSlide + 1);//
+    }
+   
+  }
+
   const renderFactItem = ({ item, index, disableAnimation }) => {
     const getImageContent = themeUser?.imgLocal;
     const listWhiteYellowTrace = [2, 3];
     if (item?.item_type === "countdown_page") {
-      return <PageCountDown />;
+      return <PageCountDown handleLoad={() => handleLoadMore()} loading={loadingAds} />;
     }
     return (
       <QuotesContent
@@ -788,7 +860,7 @@ function MainPage({
   }
 
   function renderScreenshot() {
-    if (quotes?.listData?.length > 0) {
+    if (dataQuote?.listData?.length > 0) {
       return (
         <ViewShot
           style={styles.ctnViewShot}
@@ -800,7 +872,7 @@ function MainPage({
           }}
         >
           {renderFactItem({
-            item: quotes?.listData[activeSlide],
+            item: dataQuote?.listData[activeSlide],
             index: activeSlide,
             disableAnimation: true,
           })}
@@ -1151,7 +1223,7 @@ function MainPage({
           <FlatList
             ref={setQuoteRef}
             style={styles.ctnRoot}
-            data={quotes?.listData || []}
+            data={dataQuote?.listData || []}
             pagingEnabled
             onMomentumScrollEnd={onMomentoumScrollEnd}
             scrollsToTop={false}
@@ -1186,6 +1258,7 @@ function MainPage({
         backgroundColor={isDarkTheme ? "#000" : "#fff"}
         hidden={statusbarStatus}
       />
+     
       {renderScreenshot()}
       {renderFlatList()}
       {renderButton()}
@@ -1264,7 +1337,7 @@ function MainPage({
         }}
       />
 
-      <ModalCountDown
+      {/* <ModalCountDown
         adsRef={rewarded}
         hideStatusbar={() => {
           setStatusBar(true);
@@ -1276,7 +1349,7 @@ function MainPage({
         handleClose={() => {
           setModalCountdown(false);
         }}
-      />
+      /> */}
 
       <ContentSubscription
         isVisible={showModalSubscribe}
