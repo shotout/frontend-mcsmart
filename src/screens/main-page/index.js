@@ -228,25 +228,25 @@ function MainPage({
     const main10 = reformatDate(parseFloat(set10min));
     const data = checkHours(main10)
     const hitvalue = await AsyncStorage.getItem('hit6hours');
-    if(data && hitvalue === null){
+  
+    if(isUserPremium()){
       const response = await getListQuotes({
-        length: 3,
-        page: 4,
+        length: 1000,
+        page: 1,
       });
-      dataQuote.listData = [{ item_type: "countdown_page" }, ...response.data.data, { item_type: "countdown_page" }];
-     console.log('data bew', dataQuote.listData)
+      dataQuote.listData = [...response.data.data,];
+      console.log('data masukkk nih', dataQuote.listData)
       store.dispatch({
         type: SUCCESS_FETCH_QUOTE,
         payload: dataQuote,
         arrData:  dataQuote?.listData,
       });
-      AsyncStorage.setItem('hit6hours', 'yes');
     }
-    if(value != null){
-      if(value != strTanggalSekarang){
+    if(!isUserPremium()){
+      if(data && hitvalue === null){
         const response = await getListQuotes({
           length: 3,
-          page: strTanggalSekarang,
+          page: 4,
         });
         dataQuote.listData = [{ item_type: "countdown_page" }, ...response.data.data, { item_type: "countdown_page" }];
        console.log('data bew', dataQuote.listData)
@@ -255,9 +255,26 @@ function MainPage({
           payload: dataQuote,
           arrData:  dataQuote?.listData,
         });
-        AsyncStorage.setItem('setToday', strTanggalSekarang);
+        AsyncStorage.setItem('hit6hours', 'yes');
+      }
+      if(value != null){
+        if(value != strTanggalSekarang){
+          const response = await getListQuotes({
+            length: 3,
+            page: strTanggalSekarang,
+          });
+          dataQuote.listData = [{ item_type: "countdown_page" }, ...response.data.data, { item_type: "countdown_page" }];
+         console.log('data bew', dataQuote.listData)
+          store.dispatch({
+            type: SUCCESS_FETCH_QUOTE,
+            payload: dataQuote,
+            arrData:  dataQuote?.listData,
+          });
+          AsyncStorage.setItem('setToday', strTanggalSekarang);
+        }
       }
     }
+   
     
 
  
@@ -816,7 +833,7 @@ function MainPage({
   const renderFactItem = ({ item, index, disableAnimation }) => {
     const getImageContent = themeUser?.imgLocal;
     const listWhiteYellowTrace = [2, 3];
-    if (item?.item_type === "countdown_page") {
+    if (item?.item_type === "countdown_page" && !isUserPremium()) {
       return <PageCountDown handleLoad={() => handleLoadMore()} loading={loadingAds} />;
     }
     return (

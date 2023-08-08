@@ -73,9 +73,12 @@ export const fetchListQuoteFilter =
         ) {
           isFreeUserPremium = false;
         }
+        const set10min = await AsyncStorage.getItem('set10min');
+        const main10 = reformatDate(parseFloat(set10min));
+        const data = checkHours(main10)
         dispatch({ type: types.START_FETCH_QUOTES });
         const quote = await getListQuotes({
-          length: isFreeUserPremium || isPassPremium ? 1000 : 15,
+          length: isPassPremium ? 1000 : data ? 3 : 10,
           page: 1,
           ...params,
         });
