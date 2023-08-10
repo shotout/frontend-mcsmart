@@ -47,6 +47,7 @@ export default StyleSheet.create({
     borderRadius: moderateScale(50 / 2),
     padding: moderateScale(12),
     marginHorizontal: moderateScale(12),
+    marginBottom: moderateScale(15),
     justifyContent: 'center',
     alignItems: 'center',
   },

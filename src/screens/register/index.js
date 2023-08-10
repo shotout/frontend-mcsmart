@@ -124,6 +124,9 @@ function Register({
 
   useEffect(() => {
     crashlytics().log('Register Screen');
+    setTimeout(() => {
+      AsyncStorage.removeItem('allowTracking')
+    }, 500); 
     const handleInitial = async () => {
       setSubstep(registerData?.substep || substep);
       setRegisterStep(registerData?.registerStep || registerStep);

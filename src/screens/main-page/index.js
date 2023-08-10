@@ -110,7 +110,7 @@ const rewarded = RewardedAd.createForAdRequest(adUnitId, {
 });
 
 const interstialAds = InterstitialAd.createForAdRequest(
-  getRewardedInsterstialID(),
+  getRewardedInsterstialLearnMoreID(),
   {
     requestNonPersonalizedAdsOnly: true,
     keywords: ["fashion", "clothing"],
@@ -434,9 +434,11 @@ function MainPage({
     const interstialListenerAds = interstialAds.addAdEventListener(AdEventType.CLOSED,  () => {
       // Do not allow AppOpenAd to show right after InterstitialAd is closed.
       // We can depend on this as it's called soon enough before AppState event fires.
+      interstialAds.load();
      setTimeout(() => {
       AsyncStorage.removeItem('interstial')
      }, 1000);
+    
     });
     const interstialListener = interstialAdsLearn.addAdEventListener(AdEventType.CLOSED,  () => {
       // Do not allow AppOpenAd to show right after InterstitialAd is closed.
@@ -564,11 +566,11 @@ function MainPage({
     }
   }, [userProfile, isPremiumBefore]);
 
-  const handleShowInterstialAds = async (activeQuote) => {
-
-    if (activeQuote?.item_type === "in_app_ads") {
+  const handleShowInterstialAds = async () => {
+    console.log("TRY SHOW INTERSTIAL ADS", interstialAds.loaded);
+    if (!isUserPremium()) {
       if (interstialAds.loaded) {
-        interstialAds.show();
+        interstialAds.show().catch(error => console.warn(error));
       } else {
         const cbFinish = () => {
           setLoadingInterstial(false);
@@ -585,8 +587,9 @@ function MainPage({
     interstialAdsLearn.load()
     if (!isUserPremium()) {
       if (interstialAdsLearn.loaded) {
-        interstialAdsLearn.show();
-      }
+        interstialAdsLearn.show().catch(error => console.warn(error));
+
+      }else{
 
         const cbFinish = () => {
 
@@ -598,6 +601,7 @@ function MainPage({
         cbFinish();
       
     }
+  }
   };
 
   const showInterStialAds = async () => {
@@ -844,7 +848,7 @@ function MainPage({
           showInterStialAds();
         }}
         handleShowInterstialAdsLearn={() => {
-          handleShowInterstialAdsLearn();
+          handleShowInterstialAds();
         }}
         themeUser={themeUser}
         source={getImageContent}

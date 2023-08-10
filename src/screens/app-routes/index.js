@@ -279,15 +279,33 @@ function Routes({registerData, userProfile, props}) {
       setAdsOverlay(false);
       setDisable(false);
     });
+    const listenerLoadApps = appOpenAd.addAdEventListener(
+      AdEventType.LOADED,
+      async () => {
+        
+        const allow = await AsyncStorage.getItem('allowTracking')
+        if(allow === null && Platform.OS === 'ios'){
+          console.log('OPEN ADS OPENED', openAdsOpened.current);
+          SplashScreen.hide();
+          appOpenAd.show();
+          setAdsOverlay(true);
+          openAdsOpened.current = true;
+        }
+      },
+    );
 
-    const listenerOpenApps = appOpenAd.addAdEventListener(
+    const listenerOpenApps =  appOpenAd.addAdEventListener(
       AdEventType.OPENED,
-      () => {
-        console.log('OPEN ADS OPENED');
-        SplashScreen.hide();
-        appOpenAd.show();
-        setAdsOverlay(true);
-        openAdsOpened.current = true;
+      async () => {
+        const allow = await AsyncStorage.getItem('allowTracking')
+        if(allow === null){
+          console.log('OPEN ADS OPENED', openAdsOpened.current);
+          SplashScreen.hide();
+          appOpenAd.show();
+          setAdsOverlay(true);
+          openAdsOpened.current = true;
+        }
+       
       },
     );
 
@@ -319,6 +337,7 @@ function Routes({registerData, userProfile, props}) {
             paywallStatus &&
             paywallStatus.current !== 'PRESENTATION_CLOSED'
           ) {
+           
             if (Platform.OS === 'ios') {
               handleLoadInAppAds();
             }
@@ -345,6 +364,7 @@ function Routes({registerData, userProfile, props}) {
       listenerOpenApps();
       listenerIAPAds();
       unsubscribeAppOpenAds();
+      listenerLoadApps();
     };
   }, []);
 

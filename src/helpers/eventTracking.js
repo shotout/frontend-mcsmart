@@ -1,7 +1,9 @@
 import {Adjust, AdjustEvent} from 'react-native-adjust';
 // import analytics from '@react-native-firebase/analytics';
 import {isIphone} from '../shared/devices';
-import { Settings, AppEventsLogger } from 'react-native-fbsdk-next';
+import { Settings, AppEventsLogger, AEMReporterIOS } from 'react-native-fbsdk-next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 
 export const ONBOARDING_COMPLETE = 'se2bvp';
 export const APP_INSTALLED = 'e6a5ns';
@@ -63,22 +65,28 @@ export const eventTracking = async (id, message) => {
 };
 
 
-export const revenueTracking = async (price, currency) => {
-  console.log(price, currency)
+export const revenueTracking = async (purchaseAmount, currencyCode) => {
+  console.log(purchaseAmount, currencyCode)
   const adjustEvent = new AdjustEvent(REVENUE_TRACKING);
 
-  adjustEvent.setRevenue(price, currency);
+  adjustEvent.setRevenue(purchaseAmount, currencyCode);
 
   Adjust.trackEvent(adjustEvent);
-  AppEventsLogger.logPurchase(price, currency, { param: price });
+  AppEventsLogger.logPurchase(5, currencyCode, { parameters: 5 });
+  AppEventsLogger.logEvent('fb_mobile_purchase', currencyCode, { parameters: 5 });
+  if(Platform.OS === 'ios'){
+    AEMReporterIOS.logAEMEvent('fb_mobile_purchase', 5, currencyCode, { parameters: 5 });
+  }
+  
   // await analytics().logEvent(getScreenName(REVENUE_TRACKING), {
   //   id: REVENUE_TRACKING,
   //   item: `PRICE ${price}, currency ${currency}`,
   // });
-  console.log('Revenue tracked:', price, currency);
+  console.log('Revenue tracked:', purchaseAmount, currency);
 };
 
 export const askTrackingPermission = () => {
+  AsyncStorage.setItem('allowTracking', 'yes')
   if (isIphone) {
     Adjust.requestTrackingAuthorizationWithCompletionHandler(status => {
       switch (status) {
@@ -89,10 +97,16 @@ export const askTrackingPermission = () => {
         case 1:
           // ATTrackingManagerAuthorizationStatusRestricted case
           console.log('The user device is restricted');
+          setTimeout(() => {
+            AsyncStorage.removeItem('allowTracking')
+          }, 200); 
           break;
         case 2:
           // ATTrackingManagerAuthorizationStatusDenied case
           console.log('The user denied access to IDFA');
+          setTimeout(() => {
+            AsyncStorage.removeItem('allowTracking')
+          }, 200); 
           break;
         case 3:
           Settings.setAdvertiserTrackingEnabled(true)
@@ -100,7 +114,9 @@ export const askTrackingPermission = () => {
           Settings.setAutoLogAppEventsEnabled(true)
           // ATTrackingManagerAuthorizationStatusAuthorized case
           console.log('The user authorized access to IDFA');
-          
+          setTimeout(() => {
+            AsyncStorage.removeItem('allowTracking')
+          }, 200); 
           break;
         default:
           console.log('The status is not available');
@@ -108,9 +124,10 @@ export const askTrackingPermission = () => {
       }
     });
   }else{
+    
     Settings.setAdvertiserTrackingEnabled(true)
        Settings.setAdvertiserIDCollectionEnabled(true)
        Settings.setAutoLogAppEventsEnabled(true)
-
+      
   }
 };

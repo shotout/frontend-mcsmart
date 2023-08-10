@@ -1,7 +1,7 @@
 // Prod version
 // export const BACKEND_URL = 'https://backend-api.mcsmartapp.com';
 // export const API_URL = 'https://backend-api.mcsmartapp.com/api/v1';
-//export const STATIC_ONBOARD = 'onboarding'
+// export const STATIC_ONBOARD = 'onboarding'
 // dev version
 export const BACKEND_URL = 'https://backend-api-dev.mcsmartapp.com';
 export const API_URL = 'https://backend-api-dev.mcsmartapp.com/api/v1';
