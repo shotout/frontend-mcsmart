@@ -31,7 +31,7 @@ export default StyleSheet.create({
     resizeMode: 'contain',
   },
   btnWrapper: {
-    paddingBottom: isIphoneXorAbove() ? moderateScale(20) : 0,
+    paddingBottom: isIphoneXorAbove() ? moderateScale(10) : 0,
     position: 'absolute',
     bottom: 0,
     width: '100%',

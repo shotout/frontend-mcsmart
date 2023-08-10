@@ -47,7 +47,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     // marginBottom: isIphoneXorAbove() ? moderateScale(80) : moderateScale(40),
-    marginBottom: moderateScale(40),
+    marginBottom: moderateScale(15),
     marginTop: moderateScale(40)
   },
   ctnRowButton2:{
@@ -55,7 +55,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     // marginBottom: isIphoneXorAbove() ? moderateScale(80) : moderateScale(40),
-    marginBottom: moderateScale(40),
+    marginBottom: moderateScale(15),
     marginTop: moderateScale(20)
   },
   ctnBtn:{
@@ -124,5 +124,33 @@ export default StyleSheet.create({
     fontFamily: fonts.InterMedium,
     color: colors.watermark,
     fontSize: moderateScale(16),
+  },
+  subBottomWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ctnRounded: {
+    width: moderateScale(50),
+    height: moderateScale(50),
+    borderRadius: moderateScale(50 / 2),
+    padding: moderateScale(12),
+    marginHorizontal: moderateScale(12),
+    marginBottom: moderateScale(20),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ctnPopupShare:{
+    position: 'absolute',
+    bottom: moderateScale(-65),
+    right: moderateScale(-63),
+    aspectRatio: 249 / 93,
+    width: moderateScale(170),
+    overflow: 'visible'
+  },
+  ctnUnion:{
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain'
   },
 });

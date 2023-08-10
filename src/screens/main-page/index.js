@@ -276,7 +276,9 @@ function MainPage({
     }
    
     
-
+    
+      interstialAds.load();
+    
  
 }, [])
 
@@ -329,6 +331,7 @@ function MainPage({
     const getInitialPlacement = initNotification?.data || paywallNotifcation;
     
     if (res.data.value === 'true' && !isUserPremium() && !isFromOnboarding) {
+      console.log('open notification =')
       // Paywall open apps
       if (getInitialPlacement) {
         const paywallNotifCb = () => {
@@ -513,9 +516,9 @@ function MainPage({
       // if (!interstialAds.loaded) {
       //   interstialAds.load();
       // }
-      if (!interstialAdsLearn.loaded) {
-        interstialAdsLearn.load();
-      }
+      // if (!interstialAdsLearn.loaded) {
+      //   interstialAdsLearn.load();
+      // }
     }
     if (!isPremiumToday()) {
       if (currentSlide === 16 || activeSlide === 16) {
@@ -531,6 +534,9 @@ function MainPage({
         }
       }
     }
+      if (!interstialAds.loaded) {
+        interstialAds.load();
+      }
   }, [activeSlide]);
 
   useEffect(() => {
@@ -554,6 +560,7 @@ function MainPage({
 
   useEffect(() => {
     if (finishInitialLoader && !isTutorial.visible) {
+      console.log('masuk sini')
       handleShowPaywall();
     }
   }, [finishInitialLoader]);
@@ -569,16 +576,15 @@ function MainPage({
   const handleShowInterstialAds = async () => {
     console.log("TRY SHOW INTERSTIAL ADS", interstialAds.loaded);
     if (!isUserPremium()) {
-      if (interstialAds.loaded) {
-        interstialAds.show().catch(error => console.warn(error));
-      } else {
+      // if (interstialAds.loaded) {
+        interstialAds.show().catch(error => console.warn('ERRROR INTER'+error));
+      // }
         const cbFinish = () => {
           setLoadingInterstial(false);
         };
         setLoadingInterstial(true);
         await loadInterstialAds(interstialAds, cbFinish);
         cbFinish();
-      }
     }
   };
 
@@ -864,6 +870,10 @@ function MainPage({
           !isTutorial.visible &&
           runQuoteAnimation
         }
+        handleShare={handleShare}
+        handleLike={handleLike}
+        showSharePopup={showSharePopup}
+        quoteLikeStatus={quoteLikeStatus}
       // source={require(themeUser.urlLocal)}
       />
     );
@@ -932,6 +942,36 @@ function MainPage({
     return null;
   }
 
+  const renderButtonShare = () => {
+     const bgStyle = {
+      // backgroundColor:
+      //   themeUser.id === 4 || themeUser.id === 2
+      //     ? 'rgba(255, 255, 255, 0.2)'
+      //     : 'rgba(0, 0, 0, 0.7)',
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
+    };
+    return(
+      <View style={styles.subBottomWrapper}>
+          <TouchableWithoutFeedback onPress={handleShare}>
+            <View style={[styles.ctnRounded, bgStyle]}>
+           
+              <IconShare width="90%" height="90%" />
+              {renderSharePopup()}
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={handleLike}>
+            <View style={[styles.ctnRounded, bgStyle]}>
+              {quoteLikeStatus ? (
+                <IconLove width="80%" height="80%" />
+              ) : (
+                <IconLike width="80%" height="80%" />
+              )}
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
+    )
+  }
+
   function renderButton() {
     const bgStyle = {
       // backgroundColor:
@@ -951,23 +991,7 @@ function MainPage({
         ]}
       >
         {renderArrowSwipe()}
-        <View style={styles.subBottomWrapper}>
-          <TouchableWithoutFeedback onPress={handleShare}>
-            <View style={[styles.ctnRounded, bgStyle]}>
-              {renderSharePopup()}
-              <IconShare width="90%" height="90%" />
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={handleLike}>
-            <View style={[styles.ctnRounded, bgStyle]}>
-              {quoteLikeStatus ? (
-                <IconLove width="80%" height="80%" />
-              ) : (
-                <IconLike width="80%" height="80%" />
-              )}
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
+        
         <View style={styles.ctnRow}>
           <View style={styles.rowLef}>
             <ButtonIcon

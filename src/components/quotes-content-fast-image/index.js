@@ -6,6 +6,7 @@ import {
   Linking,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { moderateScale } from "react-native-size-matters";
@@ -17,6 +18,9 @@ import { removeRepeat, repeatQuotes } from "../../shared/request";
 import { setAnimationCounter } from "../../store/defaultState/actions";
 import { isUserPremium } from "../../helpers/user";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import IconLove from "../../assets/svg/icon_love_tap.svg";
+import IconLike from "../../assets/svg/icon_like.svg";
+import IconShare from "../../assets/svg/icon_share.svg";
 
 const lightbulbIcon = require("../../assets/icons/lightbulb.png");
 const searchWhiteIcon = require("../../assets/icons/search_white.png");
@@ -25,7 +29,7 @@ const traceWhite = require("../../assets/icons/background_trace_white.png");
 const traceYellow = require("../../assets/icons/background_trace_yellow.png");
 const waterMark = require("../../assets/icons/watermark.png");
 const watertMark_gray = require("../../assets/icons/watermark_new2.png");
-
+const UnionImage = require('../../assets/images/union.png');
 export default function QuotesContent({
   item,
   themeUser,
@@ -37,6 +41,10 @@ export default function QuotesContent({
   onPressRating,
   handleShowInterstialAdsLearn,
   main,
+  handleShare,
+  handleLike,
+  showSharePopup,
+  quoteLikeStatus
 }) {
   const [isRepeat, setRepeat] = useState(
     item?.repeat?.time != undefined ? true : false
@@ -213,6 +221,47 @@ export default function QuotesContent({
     }
     return null
   }
+  function renderSharePopup() {
+    if (showSharePopup && !isUserPremium()) {
+      return (
+        <View source={UnionImage} style={styles.ctnPopupShare}>
+          <ImageBackground source={UnionImage} style={styles.ctnUnion}>
+          </ImageBackground>
+        </View>
+      );
+    }
+    return null;
+  }
+
+  const renderButtonShare = () => {
+     const bgStyle = {
+      // backgroundColor:
+      //   themeUser.id === 4 || themeUser.id === 2
+      //     ? 'rgba(255, 255, 255, 0.2)'
+      //     : 'rgba(0, 0, 0, 0.7)',
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
+    };
+    return(
+      <View style={styles.subBottomWrapper}>
+          <TouchableWithoutFeedback onPress={handleShare}>
+            <View style={[styles.ctnRounded, bgStyle]}>
+           
+              <IconShare width="90%" height="90%" />
+              {renderSharePopup()}
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={handleLike}>
+            <View style={[styles.ctnRounded, bgStyle]}>
+              {quoteLikeStatus ? (
+                <IconLove width="80%" height="80%" />
+              ) : (
+                <IconLike width="80%" height="80%" />
+              )}
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
+    )
+  }
   return (
     <View style={styles.ctnWrapper}>
       {renderBackgroundImage()}
@@ -282,6 +331,7 @@ export default function QuotesContent({
                 )}
               </View>
               {renderButtonOption()}
+              {renderButtonShare()}
             </View>
             {main ? null : renderWaterMark()}
           </View>
