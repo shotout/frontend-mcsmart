@@ -178,11 +178,12 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         quotes: {
-          ...state.quotes,
+          quotes: null,
           listData: action.payload,
         },
       };
     case types.SUCCESS_FETCH_QUOTE:
+      console.log('SET REDUX', JSON.stringify(action.arrData))
       return {
         ...state,
         freeUserPremium: action.isFreeUserPremium,

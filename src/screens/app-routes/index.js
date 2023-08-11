@@ -59,6 +59,7 @@ import notifee, {EventType} from '@notifee/react-native';
 import {Notifications} from 'react-native-notifications';
 import { event } from 'react-native-reanimated';
 import { isMoreThanThreeHoursSinceLastTime } from '../../helpers/timeHelpers';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const Stack = createNativeStackNavigator();
 
@@ -100,19 +101,6 @@ function Routes({registerData, userProfile, props}) {
       }
     }
   };
-  useEffect(() => {
-    const backAction = () => {
-      console.log('masukkk handler 0')
-      BackHandler.exitApp();
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
-    return () => backHandler.remove();
-  }, []);
 
   const checkMinute = (start) => {
     let timeNow = new Date();
@@ -139,10 +127,15 @@ function Routes({registerData, userProfile, props}) {
       return false
     }
   }
-  useEffect(async() => {
+  useEffect(() => {
+    async function fetchData() {
+      crashlytics().log('App Route');
       if(!isUserPremium()){
         checkingPaywall()
       }
+    }
+    fetchData()
+   
   }, [])
 
   const checkingPaywall = async() => {
@@ -281,19 +274,18 @@ function Routes({registerData, userProfile, props}) {
     Notifications.removeAllDeliveredNotifications();
     Purchasely.isReadyToPurchase(true);
     purchaselyListener();
-    const unsubscribeAppOpenAds = appOpenAd.addAdEventListener(
-      AdEventType.CLOSED,
-      () => {
-        setAdsOverlay(false);
-        setDisable(false);
-      },
-    );
+    crashlytics().log('OPEN ADS')
+    const unsubscribeAppOpenAds = appOpenAd.addAdEventListener(AdEventType.CLOSED, () => {
+      setAdsOverlay(false);
+      setDisable(false);
+    });
 
     const listenerOpenApps = appOpenAd.addAdEventListener(
       AdEventType.OPENED,
       () => {
         console.log('OPEN ADS OPENED');
         SplashScreen.hide();
+        appOpenAd.show();
         setAdsOverlay(true);
         openAdsOpened.current = true;
       },
@@ -350,9 +342,9 @@ function Routes({registerData, userProfile, props}) {
     return () => {
       subscription.remove();
       Purchasely.removeEventListener();
-      unsubscribeAppOpenAds();
       listenerOpenApps();
       listenerIAPAds();
+      unsubscribeAppOpenAds();
     };
   }, []);
 

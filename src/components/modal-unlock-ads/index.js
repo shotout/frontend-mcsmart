@@ -38,8 +38,9 @@ const ModalUnlockCategory = ({
   const [loadingAds, setLoadingAds] = useState(false);
 
   useEffect(() => {
+    console.log('rewarded.loaded')
     if (!rewarded.loaded){
-      setLoadingAds(true);
+      // setLoadingAds(true);
     }
   }, [200]);
   
@@ -49,6 +50,7 @@ const ModalUnlockCategory = ({
       () => {
         console.log('LOAD ADS ModalUnlockCategory');
         setLoadingAds(false);
+        rewarded.show();
       },
     );
     const unsubscribeEarned = rewarded.addAdEventListener(

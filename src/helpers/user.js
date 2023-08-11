@@ -25,6 +25,7 @@ import {
 } from "./eventTracking";
 import { reset } from "../shared/navigationRef";
 import DeviceInfo from "react-native-device-info";
+import { STATIC_ONBOARD } from "../shared/static";
 
 export const dateToUnix = (date) => moment(date).unix();
 export const getFutureDate = (defaultDate, day) =>
@@ -62,7 +63,7 @@ new Promise(async (resolve, reject) => {
     // const subscriptions = await Purchasely.userSubscriptions();
     // console.log('Subscription status:', subscriptions);
     const purchaseId = await Purchasely.getAnonymousUserId();
-      if (vendorId === "onboarding") {
+      if (vendorId === STATIC_ONBOARD) {
         // await setSubcription({
         //   subscription_type: 1,
         //   purchasely_id: purchaseId,
@@ -114,7 +115,7 @@ new Promise(async (resolve, reject) => {
           if (Platform.OS === "android") {
             if (
               !vendorId ||
-              vendorId === "onboarding" ||
+              vendorId === STATIC_ONBOARD ||
               vendorId === "offer_no_purchase_after_onboarding_paywall"
             ) {
               // handlePayment(vendorId);
@@ -142,7 +143,7 @@ export const handlePaymentTwo = async (vendorId, cb) =>
   new Promise(async (resolve, reject) => {
     try {
       const purchaseId = await Purchasely.getAnonymousUserId();
-      if (vendorId === "onboarding") {
+      if (vendorId === STATIC_ONBOARD) {
         await setSubcription({
           subscription_type: 1,
           purchasely_id: purchaseId,
@@ -162,7 +163,7 @@ export const handlePaymentBypass = async (vendorId, cb) =>
   new Promise(async (resolve, reject) => {
     try {
       const purchaseId = await Purchasely.getAnonymousUserId();
-      if (vendorId === "onboarding") {
+      if (vendorId === STATIC_ONBOARD) {
         await setSubcription({
           subscription_type: 1,
           purchasely_id: purchaseId,
@@ -250,7 +251,7 @@ export const registerUserDefault = async () => {
         store.dispatch(
           handleSetProfile(res)
         );
-        await handlePaymentTwo("onboarding");
+        await handlePaymentTwo(STATIC_ONBOARD);
         await AsyncStorage.setItem("isFinishTutorial", "yes");
         await updateProfile({
           ...payload,
@@ -431,6 +432,18 @@ export const purchaselyListener = () => {
     console.log("User has purchased", res);
   });
 };
+export const checkHours = (start) => {
+  let timeNow = new Date();
+  let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
+
+  if (timeRemaining > 21600) { // Jika lebih dari 600 detik (10 menit)
+    console.log("Sudah lebih dari 6 jam sejak proses dimulai.");
+    return true
+  } else {
+    console.log("Belum lebih dari 6 jam sejak proses dimulai.");
+    return false
+  }
+}
 
 export const reformatDate = valueDate => {
   if (valueDate) {

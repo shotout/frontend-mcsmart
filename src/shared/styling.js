@@ -9,6 +9,7 @@ export const colors = {
   blue: '#00C2CB',
   red: '#ED5267',
   tosca: '#00C2CB',
+  green: '#009A37',
   ligthTosca: '#E2F9FA',
   defaultBorder: '#ccc',
   darkGray: '#262628',

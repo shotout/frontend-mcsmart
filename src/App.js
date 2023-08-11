@@ -25,6 +25,11 @@ import { AdEventType, AppOpenAd } from "react-native-google-mobile-ads";
 import SplashScreen from "react-native-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAppOpenID } from "./shared/static/adsId";
+import * as Sentry from '@sentry/react-native';
+import { SENTRY_DSN } from "./shared/static";
+import crashlytics from '@react-native-firebase/crashlytics';
+import { fetchListQuote } from "./store/defaultState/actions";
+
 
 LogBox.ignoreAllLogs();
 
@@ -43,14 +48,20 @@ const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
 appOpenAd.load();
 
 const App =  () => {
- 
+   // if (Platform.OS !== 'ios') {
+    Sentry.init({
+      environment: 'production',
+      dsn: SENTRY_DSN,
+      tracesSampleRate: 1.0,
+    });
+  // }
   const [showAdsOverlay, setAdsOverlay] = useState(false);
   const openAdsOpened = useRef(false);
   const configTracker = () => {
     const adjustConfig = new AdjustConfig(
       '6qpsj2ssc03k',
-      AdjustConfig.EnvironmentSandbox,
-      // AdjustConfig.EnvironmentProduction,
+      //AdjustConfig.EnvironmentSandbox,
+       AdjustConfig.EnvironmentProduction,
     );
     adjustConfig.setLogLevel(AdjustConfig.LogLevelVerbose);
     Adjust.create(adjustConfig);
@@ -73,6 +84,7 @@ const App =  () => {
   }, []);
   
   useEffect(() => {
+   
     async function check () {
       const data = await checkVersion()
       if(data?.status === 'success'){
@@ -82,7 +94,7 @@ const App =  () => {
     check()
   }, [])
   useEffect(async() => {
-   
+    crashlytics().log('App Index');
     networkDebugger();
     configTracker();
     Notifications.removeAllDeliveredNotifications();
@@ -121,4 +133,4 @@ const App =  () => {
   );
 };
 
-export default App;
+export default Sentry.wrap(App);

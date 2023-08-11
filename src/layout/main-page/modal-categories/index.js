@@ -64,9 +64,21 @@ function ModalCategories({
 
       if (userProfile.data.categories?.length > 0 && data) {
         setCategoryValue(userProfile.data.categories.map((item) => item.id));
-        console.log('disini 4', categoryValue)
-        fetchList(categoryValue)
-        console.log('masuk sini 3', categoryValue)
+        // fetchList(categoryValue)
+        // if(isUserPremium()){
+          fetchList(categoryValue)
+        // }else{
+        //   const stringifyDate = new Date();
+        //   let strTanggalSekarang = stringifyDate.toISOString().slice(0,10);
+        //   const value = await AsyncStorage.getItem('setToday');
+        //   console.log('tanggal sama', value+"===="+strTanggalSekarang)
+        //   if(value != strTanggalSekarang){
+        //     fetchList(categoryValue)
+        //   }else{
+        //     console.log('tanggal sama', value+"===="+strTanggalSekarang)
+        //   }
+         
+        // }
       } else if (userProfile.data.categories?.length > 0) {
         
         let result;
@@ -76,11 +88,43 @@ function ModalCategories({
           if(categoryValue.length > 1 &&  categoryValue[categoryValue.length - 1] != 2){
           
             setCategoryValue(result);
-            fetchList(result)
+            if(isUserPremium()){
+              console.log('ini user premium', isUserPremium)
+              fetchList(result)
+            }else{
+              const stringifyDate = new Date();
+              let strTanggalSekarang = stringifyDate.getDate().toString();
+              const value = await AsyncStorage.getItem('setToday');
+              console.log('tanggal sama modal', value+"===="+strTanggalSekarang)
+              if(value != strTanggalSekarang){
+                fetchList(result)
+                console.log('tanggal sama modal new', value+"===="+strTanggalSekarang)
+                // AsyncStorage.setItem('setToday', strTanggalSekarang);
+              }else{
+                // fetchList(result)
+                console.log('tanggal sama NIH', value+"===="+strTanggalSekarang)
+              }
+             
+            }
+           
           }else{
           
             setCategoryValue(categoryValue);
-            fetchList(categoryValue)
+            if(isUserPremium()){
+              fetchList(categoryValue)
+            }else{
+              const stringifyDate = new Date();
+              let strTanggalSekarang = stringifyDate.getDate().toString();
+              const value = await AsyncStorage.getItem('setToday');
+              console.log('tanggal sama', value+"===="+strTanggalSekarang)
+              if(value != strTanggalSekarang){
+                fetchList(categoryValue)
+              
+              }else{
+                console.log('tanggal sama', value+"===="+strTanggalSekarang)
+              }
+             
+            }
           }
          
         } else {
@@ -88,12 +132,40 @@ function ModalCategories({
           
           setCategoryValue(result);
           if(categoryValue[categoryValue.length - 1] != undefined){
-            fetchList(result)
+            if(isUserPremium()){
+              fetchList(result)
+            }else{
+              const stringifyDate = new Date();
+              let strTanggalSekarang = stringifyDate.getDate().toString();
+              const value = await AsyncStorage.getItem('setToday');
+              console.log('tanggal sama', value+"===="+strTanggalSekarang)
+              if(value != strTanggalSekarang){
+                fetchList(result)
+                // AsyncStorage.setItem('setToday', strTanggalSekarang);
+              }else{
+                console.log('tanggal sama', value+"===="+strTanggalSekarang)
+              }
+             
+            }
           }
         }
       } else if (userProfile.data.categories?.length === 0){
       
-        fetchList([2])
+       
+        if(isUserPremium()){
+          fetchList([2])
+        }else{
+          const stringifyDate = new Date();
+          let strTanggalSekarang = stringifyDate.getDate().toString();
+          const value = await AsyncStorage.getItem('setToday');
+          console.log('tanggal sama', value+"===="+strTanggalSekarang)
+          if(value != strTanggalSekarang){
+            fetchList([2])
+          }else{
+            console.log('tanggal sama', value+"===="+strTanggalSekarang)
+          }
+         
+        }
       }
     };
     getInitialCategory();
@@ -102,10 +174,10 @@ function ModalCategories({
   const fetchList = async (value) => {
     if (value.length > 0 && value[0] != null) {
       await updateCategory({
-        categories: value,
+        categories: [2,4],
         _method: "PATCH",
       });
-      console.log("ini current fetch" + value);
+      console.log("ini current update quote" + value);
       await fetchListQuote();
     }
    
@@ -293,3 +365,4 @@ ModalCategories.defaultProps = {
 };
 
 export default connect(states, dispatcher)(ModalCategories);
+

@@ -42,6 +42,8 @@ export default function Button({
 
   function getTextColor() {
     switch (type) {
+      case 'green':
+        return {color: colors.white};
       case 'white-button':
         return {color: colors.black};
       case 'black':

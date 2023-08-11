@@ -79,6 +79,7 @@ export default StyleSheet.create({
   txtBtnStyle: {
     fontFamily: fonts.InterMedium,
     fontSize: moderateScale(16),
+    color: colors.white
   },
   icnPlay: {
     width: moderateScale(26),
@@ -89,6 +90,12 @@ export default StyleSheet.create({
   mgRight: {
     marginTop: 0,
     backgroundColor: '#8F8DB0',
+  },
+  ctnIconCrown: {
+    width: moderateScale(26),
+    height: moderateScale(26),
+    marginRight: moderateScale(6),
+    resizeMode: 'contain',
   },
   ctnFree: {
     backgroundColor: colors.black,
