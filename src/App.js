@@ -93,11 +93,7 @@ const App =  () => {
     }
     check()
   }, [])
-  useEffect(async() => {
-    crashlytics().log('App Index');
-    networkDebugger();
-    configTracker();
-    Notifications.removeAllDeliveredNotifications();
+  const firstChecking = async () => {
     DeviceInfo.getUniqueId().then(async uniqueId => {
       try {
         await resetBadge({
@@ -107,6 +103,14 @@ const App =  () => {
         console.log('Err get device info:', err);
       }
     });
+  }
+
+  useEffect(() => {
+    crashlytics().log('App Index');
+    networkDebugger();
+    configTracker();
+    Notifications.removeAllDeliveredNotifications();
+    firstChecking()
    
     if (Platform.OS === "android") {
       FullScreenChz.enable();

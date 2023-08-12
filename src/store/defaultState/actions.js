@@ -527,34 +527,34 @@ const handleNotificationQuote = async (res, remoteMessage, getInitialURL) => {
 
 const handleNotificationOpened = (resProfile, loadingRef) => {
   let isAbleToFetchQuote = true;
-  notifee.onForegroundEvent(async ({ type, detail }) => {
-    if (type === EventType.ACTION_PRESS || type === EventType.PRESS) {
-      if (detail.notification.data?.id) {
-        isAbleToFetchQuote = false;
-        handleDecrementBadgeCount();
-        if (detail.notification.data?.id) {
-          await store.dispatch(
-            fetchListQuote({
-              notif: detail.notification.data?.id || null,
-            })
-          );
-          scrollToTopQuote();
-        }
-      }
-      if (detail.notification.data?.type === "paywall") {
-        console.log("Check paywall data:", detail.notification.data);
-        if (loadingRef.current) {
-          setPaywallNotification(detail.notification.data);
-          loadingRef.current = false;
-        } else {
-          setTimeout(() => {
-            handlePayment(detail.notification.data?.placement);
-          }, 1000);
-        }
-        eventTracking(OPEN_OFFER_NOTIFICATION);
-      }
-    }
-  });
+  // notifee.onForegroundEvent(async ({ type, detail }) => {
+  //   if (type === EventType.ACTION_PRESS || type === EventType.PRESS) {
+  //     if (detail.notification.data?.id) {
+  //       isAbleToFetchQuote = false;
+  //       handleDecrementBadgeCount();
+  //       if (detail.notification.data?.id) {
+  //         await store.dispatch(
+  //           fetchListQuote({
+  //             notif: detail.notification.data?.id || null,
+  //           })
+  //         );
+  //         scrollToTopQuote();
+  //       }
+  //     }
+  //     // if (detail.notification.data?.type === "paywall") {
+  //     //   console.log("Check paywall data:", detail.notification.data);
+  //     //   if (loadingRef.current) {
+  //     //     setPaywallNotification(detail.notification.data);
+  //     //     loadingRef.current = false;
+  //     //   } else {
+  //     //     setTimeout(() => {
+  //     //       handlePayment(detail.notification.data?.placement);
+  //     //     }, 1000);
+  //     //   }
+  //     //   eventTracking(OPEN_OFFER_NOTIFICATION);
+  //     // }
+  //   }
+  // });
   setTimeout(async () => {
     if (isAbleToFetchQuote) {
       const getInitialURL = await Linking.getInitialURL();

@@ -54,7 +54,7 @@ import {
 import DeviceInfo from 'react-native-device-info';
 import TimeZone from 'react-native-timezone';
 import store from '../../store/configure-store';
-import {askTrackingPermission} from '../../helpers/eventTracking';
+import {OPEN_OFFER_NOTIFICATION, askTrackingPermission, eventTracking} from '../../helpers/eventTracking';
 import notifee, {EventType} from '@notifee/react-native';
 import {Notifications} from 'react-native-notifications';
 import { event } from 'react-native-reanimated';
@@ -252,6 +252,45 @@ function Routes({registerData, userProfile, props}) {
     });
   };
 
+  const callOnce = (function() {
+    let isCalled = false;
+
+    return function() {
+        if (!isCalled) {
+          notifee.onForegroundEvent(async ({ type, detail }) => {
+            if (type === EventType.ACTION_PRESS || type === EventType.PRESS) {
+              if (detail.notification.data?.type === "paywall") {
+                console.log("Check paywall data new banget:", detail.notification.data);
+                  setTimeout(() => {
+                    handlePayment(detail.notification.data?.placement);
+                  }, 1000);
+                eventTracking(OPEN_OFFER_NOTIFICATION);
+              }
+            }
+          });
+            isCalled = true;
+        }
+    }
+})();
+  const fetchNotif = async () => {
+    callOnce()
+    // const initNotification = await messaging().getInitialNotification().then((notificationOpen) => {
+    //   console.log('masuk open notif new', JSON.stringify(notificationOpen))
+    //   if (notificationOpen) {
+    //     return notificationOpen;
+    //   } else {
+    //     return null;
+    //   };
+    // });
+    // const getInitialPlacement = initNotification?.data;
+    // console.log('data notif new', JSON.stringify(getInitialPlacement))
+    // if (getInitialPlacement) {
+    //   const paywallNotifCb = () => {
+    //     setInitialLoaderStatus(false);
+    //   };
+    //   handlePayment(getInitialPlacement?.placement, paywallNotifCb);
+    // } 
+  }
   useEffect(() => {
     const getInitial = async () => {
       const resLogin = await AsyncStorage.getItem('isLogin');
@@ -332,6 +371,10 @@ function Routes({registerData, userProfile, props}) {
           handleUpdateTimezone();
         }
         if (appState.current.match('background') && nextAppState === 'active') {
+        
+            fetchNotif()
+        
+         
           appOpenAd.load();
           if (
             paywallStatus &&

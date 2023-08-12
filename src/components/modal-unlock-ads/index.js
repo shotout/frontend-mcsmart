@@ -3,6 +3,7 @@ import {
   Alert,
   Image,
   Platform,
+  StatusBar,
   Text,
   TouchableOpacity,
   View,
@@ -36,7 +37,7 @@ const ModalUnlockCategory = ({
   successMessage,
 }) => {
   const [loadingAds, setLoadingAds] = useState(false);
-
+  const [statusbarStatus, setStatusBar] = useState(false);
   useEffect(() => {
     console.log('rewarded.loaded')
     if (!rewarded.loaded){
@@ -48,6 +49,7 @@ const ModalUnlockCategory = ({
     const unsubscribeLoaded = rewarded.addAdEventListener(
       RewardedAdEventType.LOADED,
       () => {
+        setStatusBar(true);
         console.log('LOAD ADS ModalUnlockCategory');
         setLoadingAds(false);
         rewarded.show();
@@ -66,6 +68,7 @@ const ModalUnlockCategory = ({
           );
         }
         handleClose(selectedCategory);
+        setStatusBar(false);
         setTimeout(() => {
           AsyncStorage.removeItem('interstial');
         }, 1000);
@@ -91,8 +94,17 @@ const ModalUnlockCategory = ({
       </TouchableOpacity>
     );
   }
+  const isDarkTheme = [
+    4, 9, 11, 14, 17, 17, 19, 6, 8, 22, 24, 7, 25, 26, 27, 29, 31, 32,
+  ].includes(4);
   return (
-    <Portal>
+    <View>
+       <StatusBar
+        barStyle={isDarkTheme ? "light-content" : "dark-content"}
+        backgroundColor={isDarkTheme ? "#000" : "#fff"}
+        hidden={statusbarStatus}
+      />
+        <Portal>
       <Modal
         onDismiss={handleClose}
         contentContainerStyle={{justifyContent: 'center'}}
@@ -162,6 +174,8 @@ const ModalUnlockCategory = ({
         </View>
       </Modal>
     </Portal>
+    </View>
+  
   );
 };
 

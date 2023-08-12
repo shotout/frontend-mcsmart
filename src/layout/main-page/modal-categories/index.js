@@ -26,13 +26,15 @@ import {
 import { sizing } from "../../../shared/styling";
 import Button from "../../../components/button";
 import PremiumRocket from "../../../assets/svg/RocketPremiumBlack.svg";
-import { updateCategory } from "../../../shared/request";
+import { getListQuotes, updateCategory } from "../../../shared/request";
 import CategoryItem from "../../../components/category-item";
 import ModalCategoriesSearch from "../modal-categories-search";
 import useDebounce from "../../../helpers/useDebounce";
 import { showModalPremium } from "../../../shared/globalContent";
 import dispatcher from "./dispatcher";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SUCCESS_FETCH_QUOTE } from "../../../store/defaultState/types";
+import store from "../../../store/configure-store";
 const iconClose = require("../../../assets/icons/close.png");
 
 function ModalCategories({
@@ -43,8 +45,11 @@ function ModalCategories({
   fullSize,
   onCustomSelectCategory,
   fetchListQuote,
+  dataQuoteLength,
+  updateList
 }) {
   const [categoryValue, setCategoryValue] = useState([]);
+  const [dataQuote, setQuoteList] = useState([])
   const [showModalSearch, setModalSearch] = useState(false);
   const debounceReloadCategory = useDebounce(categoryValue, 5000);
   const draggableRange = {
@@ -158,7 +163,6 @@ function ModalCategories({
           const stringifyDate = new Date();
           let strTanggalSekarang = stringifyDate.getDate().toString();
           const value = await AsyncStorage.getItem('setToday');
-          console.log('tanggal sama', value+"===="+strTanggalSekarang)
           if(value != strTanggalSekarang){
             fetchList([2])
           }else{
@@ -174,11 +178,12 @@ function ModalCategories({
   const fetchList = async (value) => {
     if (value.length > 0 && value[0] != null) {
       await updateCategory({
-        categories: [2,4],
+        categories: value,
         _method: "PATCH",
       });
       console.log("ini current update quote" + value);
-      await fetchListQuote();
+      updateList()
+     
     }
    
   }

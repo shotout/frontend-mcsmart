@@ -102,6 +102,7 @@ import moment from "moment";
 import { ONBOARDING_COMPLETE, eventTracking } from "../../helpers/eventTracking";
 import crashlytics from '@react-native-firebase/crashlytics'
 import { SUCCESS_FETCH_QUOTE } from "../../store/defaultState/types";
+import { useIsFocused } from "@react-navigation/native";
 const adUnitId = getRewardedOutOfQuotesID();
 
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
@@ -181,7 +182,7 @@ function MainPage({
   const [isPremiumBefore, setPremiumBefore] = useState(isUserPremium());
   const [dataQuote, setQuoteList] = useState(quotes)
   const [page, setPage] = useState(2)
-
+  const isFocused = useIsFocused();
   const refThemes = useRef();
   const refSetting = createRef();
   const refShare = createRef();
@@ -210,6 +211,28 @@ function MainPage({
     return () => clearTimeout(timer);
   }, [showSharePopup]);
 
+  // useEffect(() => {
+  //   async function fetchNotif () {
+  //     const initNotification = await messaging().getInitialNotification().then((notificationOpen) => {
+  //       console.log('masuk open notif', JSON.stringify(initNotification))
+  //       if (notificationOpen) {
+  //         return notificationOpen;
+  //       } else {
+  //         return null;
+  //       };
+  //     });
+  //     const getInitialPlacement = initNotification?.data || paywallNotifcation;
+  //     if (getInitialPlacement) {
+  //       const paywallNotifCb = () => {
+  //         setInitialLoaderStatus(false);
+  //       };
+  //       handlePayment(getInitialPlacement?.placement, paywallNotifCb);
+  //     } 
+  //   }
+  //   fetchNotif()
+    
+  // }, [isFocused])
+
 
   // const handleFetch = async (id) => {
   //   console.log(id)
@@ -220,66 +243,63 @@ function MainPage({
   //   getActiveQuote()
   // }
 
-  useEffect(async() => {
-    const stringifyDate = new Date();
-    let strTanggalSekarang = stringifyDate.getDate().toString();
-    const value = await AsyncStorage.getItem('setToday');
-    const set10min = await AsyncStorage.getItem('set10min');
-    const main10 = reformatDate(parseFloat(set10min));
-    const data = checkHours(main10)
-    const hitvalue = await AsyncStorage.getItem('hit6hours');
-  
-    if(isUserPremium()){
-      const response = await getListQuotes({
-        length: 1000,
-        page: 1,
-      });
-      dataQuote.listData = [...response.data.data,];
-      console.log('data masukkk nih', dataQuote.listData)
-      store.dispatch({
-        type: SUCCESS_FETCH_QUOTE,
-        payload: dataQuote,
-        arrData:  dataQuote?.listData,
-      });
-    }
-    if(!isUserPremium()){
-      if(data && hitvalue === null){
+  const fetchInitial = async () => {
+    
+      const stringifyDate = new Date();
+      let strTanggalSekarang = stringifyDate.getDate().toString();
+      const value = await AsyncStorage.getItem('setToday');
+      const set10min = await AsyncStorage.getItem('set10min');
+      const main10 = reformatDate(parseFloat(set10min));
+      const data = checkHours(main10)
+      const hitvalue = await AsyncStorage.getItem('hit6hours');
+    
+      if(isUserPremium()){
         const response = await getListQuotes({
-          length: 3,
-          page: 4,
+          length: 1000,
+          page: 1,
         });
-        dataQuote.listData = [{ item_type: "countdown_page" }, ...response.data.data, { item_type: "countdown_page" }];
-       console.log('data bew', dataQuote.listData)
+        dataQuote.listData = [...response.data.data,];
         store.dispatch({
           type: SUCCESS_FETCH_QUOTE,
           payload: dataQuote,
           arrData:  dataQuote?.listData,
         });
-        AsyncStorage.setItem('hit6hours', 'yes');
       }
-      if(value != null){
-        if(value != strTanggalSekarang){
+      if(!isUserPremium()){
+        if(data && hitvalue === null){
           const response = await getListQuotes({
             length: 3,
-            page: strTanggalSekarang,
+            page: 4,
           });
           dataQuote.listData = [{ item_type: "countdown_page" }, ...response.data.data, { item_type: "countdown_page" }];
-         console.log('data bew', dataQuote.listData)
           store.dispatch({
             type: SUCCESS_FETCH_QUOTE,
             payload: dataQuote,
             arrData:  dataQuote?.listData,
           });
-          AsyncStorage.setItem('setToday', strTanggalSekarang);
+          AsyncStorage.setItem('hit6hours', 'yes');
+        }
+        if(value != null){
+          if(value != strTanggalSekarang){
+            const response = await getListQuotes({
+              length: 3,
+              page: strTanggalSekarang,
+            });
+            dataQuote.listData = [{ item_type: "countdown_page" }, ...response.data.data, { item_type: "countdown_page" }];
+            store.dispatch({
+              type: SUCCESS_FETCH_QUOTE,
+              payload: dataQuote,
+              arrData:  dataQuote?.listData,
+            });
+            AsyncStorage.setItem('setToday', strTanggalSekarang);
+          }
         }
       }
-    }
    
-    
-    
-      interstialAds.load();
-    
- 
+  }
+
+  useEffect(() => {
+    fetchInitial()
 }, [])
 
   const handleScreenshot = () => {
@@ -331,13 +351,12 @@ function MainPage({
     const getInitialPlacement = initNotification?.data || paywallNotifcation;
     
     if (res.data.value === 'true' && !isUserPremium() && !isFromOnboarding) {
-      console.log('open notification =')
       // Paywall open apps
       if (getInitialPlacement) {
-        const paywallNotifCb = () => {
-          setInitialLoaderStatus(false);
-        };
-        handlePayment(getInitialPlacement?.placement, paywallNotifCb);
+        // const paywallNotifCb = () => {
+        //   setInitialLoaderStatus(false);
+        // };
+        // handlePayment(getInitialPlacement?.placement, paywallNotifCb);
       } else {
         const getCurrentOpenApps = await AsyncStorage.getItem('latestOpenApps');
         const mainDate = reformatDate(parseFloat(getCurrentOpenApps));
@@ -590,17 +609,20 @@ function MainPage({
 
   const handleShowInterstialAdsLearn = async () => {
     console.log("TRY SHOW INTERSTIAL ADS", interstialAdsLearn.loaded);
-    interstialAdsLearn.load()
     if (!isUserPremium()) {
       if (interstialAdsLearn.loaded) {
         interstialAdsLearn.show().catch(error => console.warn(error));
-
+        setTimeout(async() => {
+          const cbFinish = () => {
+            setLoadingInterstial(false);
+          };
+          setLoadingInterstial(true);
+          await loadInterstialAds(interstialAdsLearn, cbFinish);
+          cbFinish();
+        }, 200);
       }else{
-
         const cbFinish = () => {
-
           setLoadingInterstial(false);
-          console.log('finiiis')
         };
         setLoadingInterstial(true);
         await loadInterstialAds(interstialAdsLearn, cbFinish);
@@ -732,6 +754,32 @@ function MainPage({
       refThemes.current.show();
     }
   };
+  const fectListCategory = async () => {
+     if(isUserPremium()){
+        const response = await getListQuotes({
+          length: 1000,
+          page: 1,
+        });
+        dataQuote.listData = [...response.data.data,];
+        store.dispatch({
+          type: SUCCESS_FETCH_QUOTE,
+          payload: dataQuote,
+          arrData:  dataQuote?.listData,
+        });
+      }
+      if(!isUserPremium()){
+          const response = await getListQuotes({
+            length: dataQuote?.listData?.length - 2,
+            page: 1,
+          });
+          dataQuote.listData = [{ item_type: "countdown_page" }, ...response.data.data, { item_type: "countdown_page" }];
+          store.dispatch({
+            type: SUCCESS_FETCH_QUOTE,
+            payload: dataQuote,
+            arrData:  dataQuote?.listData,
+          });
+        }
+  }
 
   const onDoubleTap = (event) => {
     if (!isUserHasScroll && event.nativeEvent.state === State.BEGAN) {
@@ -854,7 +902,7 @@ function MainPage({
           showInterStialAds();
         }}
         handleShowInterstialAdsLearn={() => {
-          handleShowInterstialAds();
+          handleShowInterstialAdsLearn();
         }}
         themeUser={themeUser}
         source={getImageContent}
@@ -1352,6 +1400,7 @@ function MainPage({
       />
 
       <ModalCategories
+        dataQuoteLength={dataQuote}
         refPanel={refCategory}
         contentRef={(c) => {
           if (c) {
@@ -1363,6 +1412,7 @@ function MainPage({
         onClose={() => {
           refCategory.current.hide();
         }}
+        updateList={() => fectListCategory()}
       // onCustomSelectCategory={(value) => {
       //   handleFetch(value)
       // }}

@@ -91,7 +91,14 @@ def reactNativeArchitectures() {
 
 android {
     ndkVersion rootProject.ext.ndkVersion
-
+    packagingOptions {
+       pickFirst 'lib/x86/libc++_shared.so'
+       pickFirst 'lib/x86_64/libjsc.so'
+       pickFirst 'lib/arm64-v8a/libjsc.so'
+       pickFirst 'lib/arm64-v8a/libc++_shared.so'
+       pickFirst 'lib/x86_64/libc++_shared.so'
+       pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     namespace "apps.mcsmart"
@@ -158,6 +165,10 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation "org.webkit:android-jsc:+"
+    implementation "com.facebook.react:react-native:+"
     // Google Play Billing
     def billingVersion = "6.0.1"
     implementation "com.android.billingclient:billing:$billingVersion"
