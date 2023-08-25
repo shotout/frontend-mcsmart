@@ -66,17 +66,24 @@ const PageCountDown = ({ handleLoad,  loading }) => {
   const handleShowAds = async () => {
     AsyncStorage.setItem('interstial', 'yes');
     setLoadingAds(true);
-    const advert = await loadRewarded();
+    try {
+      const advert = await loadRewarded();
     const pageCountDownReward = advert.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
       reward => {
         console.log('Earn page countdown reward:', reward);
         if (reward) {
             handleLoad()
+            setLoadingAds(false);
         }
         setLoadingAds(false);
       },
     );
+    } catch (error) {
+      setLoadingAds(false);
+      // handleLoad()
+    }
+    
     
   };
 

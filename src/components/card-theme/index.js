@@ -24,6 +24,7 @@ import {handleShuffleTheme} from '../../shared/useBackgroundQuotes';
 // import ModalUnlockCategory from '../modal-unlock-ads';
 import {getArrThemes, listTheme} from '../../shared/static-data/listTheme';
 import ModalUnlockCategory from '../modal-unlock-ads';
+import { getRewardedCategoryID, getRewardedThemeID } from '../../shared/static/adsId';
 
 const themesArr = getArrThemes();
 
@@ -292,6 +293,7 @@ function CardTheme({
 
       {showUnlockCardAds && (
         <ModalUnlockCategory
+          idAds={getRewardedThemeID()}
           visible={showUnlockCardAds}
           handleClose={() => {
             setUnlockCards(false);

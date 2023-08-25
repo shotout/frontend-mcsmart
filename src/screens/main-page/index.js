@@ -73,6 +73,7 @@ import {
   addPastQuotes,
   dislikeQuotes,
   getListQuotes,
+  getListRepeat,
   getRatingStatus,
   getSetting,
   setSubcription,
@@ -99,10 +100,11 @@ import ContentSubscription from "../../layout/setting/content-subscription";
 import dispatcher from "./dispatcher";
 import store from "../../store/configure-store";
 import moment from "moment";
-import { ONBOARDING_COMPLETE, eventTracking } from "../../helpers/eventTracking";
+import { ONBOARDING_COMPLETE, QUOTE_LIKED, eventTracking } from "../../helpers/eventTracking";
 import crashlytics from '@react-native-firebase/crashlytics'
 import { SUCCESS_FETCH_QUOTE } from "../../store/defaultState/types";
 import { useIsFocused } from "@react-navigation/native";
+import { Item } from "react-native-paper/lib/typescript/src/components/Drawer/Drawer";
 const adUnitId = getRewardedOutOfQuotesID();
 
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
@@ -189,6 +191,7 @@ function MainPage({
   const captureRef = useRef();
   const refCategory = createRef();
   const firstStepTutorial = useRef();
+  const flatListRef = useRef();
   const buttonPressAnimationTutorial = useRef();
   const handleShowPopupShare = () => {
     setShowSharePopup(true);
@@ -300,7 +303,36 @@ function MainPage({
 
   useEffect(() => {
     fetchInitial()
+    fetchRepeat()
 }, [])
+
+const fetchRepeat = async () => {
+  const params = {
+    length: 100,
+    page: 1,
+  };
+  const res = await getListRepeat(params);
+  const existingId = dataQuote?.listData?.map(obj => obj.id);
+  console.log('ini id'+JSON.stringify(existingId))
+  const newObjSecond = res?.data?.data
+    ?.filter(obj => !existingId.includes(obj.id))
+    ?.map(obj => ({ ...obj, isRepeat: true }));
+  
+ 
+  console.log('INI DATA'+JSON.stringify(newObjSecond))
+  if(!isUserPremium()){
+    dataQuote?.listData?.splice(1, 0, ...newObjSecond);
+  }else{
+    dataQuote?.listData?.splice(0, 0, ...newObjSecond);
+  }
+ 
+  
+  store.dispatch({
+    type: SUCCESS_FETCH_QUOTE,
+    payload: dataQuote,
+    arrData:  dataQuote?.listData,
+  })
+}
 
   const handleScreenshot = () => {
     captureRef.current.capture().then((uri) => {
@@ -486,12 +518,14 @@ function MainPage({
   }, []);
 
   useEffect(() => {
+    console.log('active'+activeSlide)
     const handleAddPastQuotes = async (currentSlideId) => {
       try {
         if (
           dataQuote.listData[currentSlideId] &&
           dataQuote.listData[currentSlideId]?.id
         ) {
+          console.log('passs quote'+dataQuote.listData[currentSlideId].id)
           await addPastQuotes(dataQuote.listData[currentSlideId].id);
         }
       } catch (err) {
@@ -499,7 +533,9 @@ function MainPage({
       }
     };
     const activeQuote = getActiveQuote();
+    console.log('active quote'+JSON.stringify(activeQuote))
     if (activeSlide > currentSlide) {
+      console.log('set curent slide'+currentSlide)
       setCurrentSlide(activeSlide);
       handleAddPastQuotes(currentSlide);
     }
@@ -539,20 +575,20 @@ function MainPage({
       //   interstialAdsLearn.load();
       // }
     }
-    if (!isPremiumToday()) {
-      if (currentSlide === 16 || activeSlide === 16) {
-        if (
-          activeSlide === 0 ||
-          activeSlide === 3 ||
-          activeSlide === 7 ||
-          activeSlide === 10 ||
-          activeSlide === 13 ||
-          activeSlide === 16
-        ) {
-          // setModalCountdown(true);
-        }
-      }
-    }
+    // if (!isPremiumToday()) {
+    //   if (currentSlide === 16 || activeSlide === 16) {
+    //     if (
+    //       activeSlide === 0 ||
+    //       activeSlide === 3 ||
+    //       activeSlide === 7 ||
+    //       activeSlide === 10 ||
+    //       activeSlide === 13 ||
+    //       activeSlide === 16
+    //     ) {
+    //       // setModalCountdown(true);
+    //     }
+    //   }
+    // }
       if (!interstialAds.loaded) {
         interstialAds.load();
       }
@@ -579,7 +615,6 @@ function MainPage({
 
   useEffect(() => {
     if (finishInitialLoader && !isTutorial.visible) {
-      console.log('masuk sini')
       handleShowPaywall();
     }
   }, [finishInitialLoader]);
@@ -697,6 +732,9 @@ function MainPage({
       const payload = {
         type: isLiked ? "2" : "1",
       };
+      if(isLiked){
+        eventTracking(QUOTE_LIKED)
+      } 
       await dislikeQuotes(payload, activeQuote.id);
       changeQuoteLikeStatus(activeQuote.id);
     } catch (err) {
@@ -779,6 +817,7 @@ function MainPage({
             arrData:  dataQuote?.listData,
           });
         }
+        fetchRepeat()
   }
 
   const onDoubleTap = (event) => {
@@ -876,19 +915,24 @@ function MainPage({
     // dataQuote.listData = [{ item_type: "countdown_page" }, ...dataQuote.listData];
     // dataQuote.listData = [{ item_type: "countdown_page" }, ...dataQuote.listData, { item_type: "countdown_page" }];
     dataQuote?.listData?.splice(dataQuote?.listData?.length - 1, 0, ...quote.data.data);
-    console.log('data new banget', dataQuote.listData)
     store.dispatch({
       type: SUCCESS_FETCH_QUOTE,
       payload: dataQuote,
       arrData:  dataQuote?.listData,
     });
-    if(activeSlide != 1){
-      setActiveSlide(activeSlide + 1);//
-    }
    
+    if(activeSlide != 0){
+      console.log('active slide sini='+activeSlide)
+      setActiveSlide(activeSlide + 1);//
+    }else{
+       console.log('active slide sini dong='+dataQuote?.listData?.length - 6)
+      setActiveSlide(dataQuote?.listData?.length - 6);
+      flatListRef.current?.scrollToIndex({ index: dataQuote?.listData?.length - 6, animated: true });  
+    }
   }
 
   const renderFactItem = ({ item, index, disableAnimation }) => {
+  
     const getImageContent = themeUser?.imgLocal;
     const listWhiteYellowTrace = [2, 3];
     if (item?.item_type === "countdown_page" && !isUserPremium()) {
@@ -1314,7 +1358,7 @@ function MainPage({
       >
         <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={3}>
           <FlatList
-            ref={setQuoteRef}
+            ref={flatListRef}
             style={styles.ctnRoot}
             data={dataQuote?.listData || []}
             pagingEnabled

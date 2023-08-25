@@ -30,7 +30,9 @@ import IconDislike from "../../../assets/svg/icon_dislike.svg";
 import LoadingIndicator from "../../../components/loading-indicator";
 import { downloadText } from "../../../shared/static";
 import IconBack from "../../../assets/svg/icon_back.svg";
-function RepeatQuotes({ contentRef, onClose, isVisible }) {
+import store from "../../../store/configure-store";
+import { SUCCESS_FETCH_QUOTE } from "../../../store/defaultState/types";
+function RepeatQuotes({ contentRef, onClose, isVisible, quotes }) {
   const [showModalAddCollection, setShowModalAddCollection] = useState(false);
   const [activeQuote, setActiveQuote] = useState();
   const [isLoading, setLoading] = useState(false); // utk button
@@ -50,6 +52,7 @@ function RepeatQuotes({ contentRef, onClose, isVisible }) {
     column: "",
     total: 0,
   });
+  
 
   const resetList = () => {
     setLikeData({
@@ -146,11 +149,18 @@ function RepeatQuotes({ contentRef, onClose, isVisible }) {
   const handleDelete = async (idQuote) => {
     try {
       removeRepeat(idQuote);
+
       setLikeData({
         ...likeData,
         listLike: likeData.listLike.filter((item) => item.id !== idQuote),
         total: likeData.total - 1,
       });
+      quotes?.listData?.filter((item) => item.id !== idQuote),
+      store.dispatch({
+        type: SUCCESS_FETCH_QUOTE,
+        payload: quotes,
+        arrData:  quotes?.listData,
+      })
     } catch (err) {
       console.log("Error new collection:", err);
     }

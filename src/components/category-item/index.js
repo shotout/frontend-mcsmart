@@ -11,6 +11,7 @@ import {colors} from '../../shared/styling';
 import { getListFactRegister } from '../../shared/request';
 import { fetchListQuoteFilter } from '../../store/defaultState/actions';
 import store from '../../store/configure-store';
+import { getRewardedCategoryID } from '../../shared/static/adsId';
 const adsIcon = require('../../assets/icons/ads_icon.png');
 const categoryAdsIcon = require('../../assets/icons/category_icon.png');
 
@@ -91,6 +92,7 @@ const CategoryItem = ({onPress, item, isSelected}) => {
 
       {showUnlockByAds && (
         <ModalUnlockCategory
+          idAds={getRewardedCategoryID()}
           visible={showUnlockByAds}
           handleClose={(selectedCategory) => {
             setUnlockByAds(false);

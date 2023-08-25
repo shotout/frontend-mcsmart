@@ -1083,7 +1083,7 @@ export const listTheme = [
         name: "Theme 40",
         flag: null,
         is_free: 0,
-        font_family: "Fredoka One",
+        font_family: "Fredoka SemiBold",
         font_size: 24,
         line_height: 38,
         text_color: "#FFD600",

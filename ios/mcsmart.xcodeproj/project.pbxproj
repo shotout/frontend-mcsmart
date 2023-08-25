@@ -33,6 +33,7 @@
 		224B72059DDA4E9CBDE70665 /* RussoOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A1E250C22C74D5894F5BF24 /* RussoOne-Regular.ttf */; };
 		23055731560E42C3AAB56AD6 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E3FFBF1AE37146E68F9DEF4E /* Inter-Light.ttf */; };
 		23606D84866C46C2AE735F5B /* IbarraRealNova-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC74D61BE5254DB98ADD8363 /* IbarraRealNova-VariableFont_wght.ttf */; };
+		2C4B33D04CA34109BE218F19 /* Fredoka SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 238E25F411F7401FA0F8AABE /* Fredoka SemiBold.ttf */; };
 		2F02992DF68445DABCD839D7 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38DA4F007C4C4F93B0C4F991 /* Montserrat-ExtraBold.ttf */; };
 		35F2318AC4A74F7C84A8AC90 /* Girassol-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9231AB9B139E44528B4AB309 /* Girassol-Regular.ttf */; };
 		400282EF724F4B0FB913CEE9 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF5DD189D3044A6DA6BD847C /* Inter-Black.ttf */; };
@@ -134,6 +135,7 @@
 		14F4A85DB7F0437F8F210B32 /* Inter-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraLight.ttf"; path = "../src/assets/fonts/Inter-ExtraLight.ttf"; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-mcsmart-mcsmartTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mcsmart-mcsmartTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C14FC8E98A34F248CF9172B /* Kreon-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Kreon-Regular.ttf"; path = "../src/assets/fonts/Kreon-Regular.ttf"; sourceTree = "<group>"; };
+		238E25F411F7401FA0F8AABE /* Fredoka SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Fredoka SemiBold.ttf"; path = "../src/assets/fonts/Fredoka SemiBold.ttf"; sourceTree = "<group>"; };
 		240CA1601B904351BC2F4B0D /* Optima-ExtraBlack.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Optima-ExtraBlack.otf"; path = "../src/assets/fonts/Optima-ExtraBlack.otf"; sourceTree = "<group>"; };
 		2F7B80F1D38C426E82CC24AE /* Fondamento-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Fondamento-Regular.ttf"; path = "../src/assets/fonts/Fondamento-Regular.ttf"; sourceTree = "<group>"; };
 		332DC56B05FA458C9E5101B8 /* AnticDidone-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AnticDidone-Regular.ttf"; path = "../src/assets/fonts/AnticDidone-Regular.ttf"; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				9A1E250C22C74D5894F5BF24 /* RussoOne-Regular.ttf */,
 				9A116E96EF1742379B754B56 /* Signika-Bold.ttf */,
 				435FD694E5FD4E2997BEAF6E /* Tinos-Bold.ttf */,
+				238E25F411F7401FA0F8AABE /* Fredoka SemiBold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				224B72059DDA4E9CBDE70665 /* RussoOne-Regular.ttf in Resources */,
 				128C31E764F64E449A5A9E9E /* Signika-Bold.ttf in Resources */,
 				AEA4C985559743CFB8343703 /* Tinos-Bold.ttf in Resources */,
+				2C4B33D04CA34109BE218F19 /* Fredoka SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,7 +847,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mcsmart/mcsmart.entitlements;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = PQ7KYCJA35;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mcsmart/Info.plist;
@@ -873,7 +877,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mcsmart/mcsmart.entitlements;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = PQ7KYCJA35;
 				INFOPLIST_FILE = mcsmart/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = McSmart;

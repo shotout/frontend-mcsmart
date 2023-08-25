@@ -47,7 +47,7 @@ export default function QuotesContent({
   quoteLikeStatus
 }) {
   const [isRepeat, setRepeat] = useState(
-    item?.repeat?.time != undefined ? true : false
+    item?.repeat?.time != undefined || item?.isRepeat ? true : false
   );
   const handleRepeat = () => {
     setRepeat(!isRepeat);

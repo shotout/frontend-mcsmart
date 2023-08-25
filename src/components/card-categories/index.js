@@ -21,6 +21,7 @@ import {
 } from '../../helpers/user';
 import {scrollToTopQuote} from '../../store/defaultState/selector';
 import ModalUnlockCategory from '../modal-unlock-ads';
+import { getRewardedCategoryID, getRewardedThemeID } from '../../shared/static/adsId';
 
 const emptyImage = require('../../assets/icons/not_found.png');
 const adsIcon = require('../../assets/icons/ads_icon.png');
@@ -421,6 +422,7 @@ function CardCategories({
       )}
       {showUnlockByAds && (
         <ModalUnlockCategory
+          idAds={getRewardedCategoryID()}
           visible={showUnlockByAds}
           handleClose={() => {
             setUnlockByAds(false);

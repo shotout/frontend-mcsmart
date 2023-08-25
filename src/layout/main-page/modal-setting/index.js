@@ -186,7 +186,7 @@ function ModalSetting({contentRef, onClose, collections}) {
     return (
       <View style={styles.wrapper}>
         <View style={[styles.titleWrap, styles.mg20]}>
-          <Text style={styles.ctnTittle}>Your quotes</Text>
+          <Text style={styles.ctnTittle}>Your Facts</Text>
         </View>
         <View style={styles.listCardWrap}>
           <ListContent

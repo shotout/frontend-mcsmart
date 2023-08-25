@@ -21,10 +21,7 @@ const crownIcon = require('../../assets/icons/crown_icon.png');
 const playIcon = require('../../assets/icons/play_black.png');
 const iconClose = require('../../assets/icons/close.png');
 
-const rewarded = RewardedAd.createForAdRequest(getRewardedCategoryID(), {
-  requestNonPersonalizedAdsOnly: true,
-  keywords: ['fashion', 'clothing'],
-});
+
 
 const ModalUnlockCategory = ({
   visible,
@@ -35,57 +32,100 @@ const ModalUnlockCategory = ({
   title,
   label,
   successMessage,
+  idAds
 }) => {
   const [loadingAds, setLoadingAds] = useState(false);
   const [statusbarStatus, setStatusBar] = useState(false);
-  useEffect(() => {
-    console.log('rewarded.loaded')
-    if (!rewarded.loaded){
-      // setLoadingAds(true);
-    }
-  }, [200]);
+  const [clikAble, setClick] = useState(false);
+  const rewardedAds = RewardedAd.createForAdRequest(idAds, {
+    requestNonPersonalizedAdsOnly: true,
+    keywords: ['fashion', 'clothing'],
+  });
+  // useEffect(() => {
+  //   if (!rewarded.loaded){
+  //     // setLoadingAds(true);
+  //   }
+  // }, [200]);
   
   useEffect(() => {
-    const unsubscribeLoaded = rewarded.addAdEventListener(
-      RewardedAdEventType.LOADED,
-      () => {
-        setStatusBar(true);
-        console.log('LOAD ADS ModalUnlockCategory');
-        setLoadingAds(false);
-        rewarded.show();
-      },
-    );
-    const unsubscribeEarned = rewarded.addAdEventListener(
-      RewardedAdEventType.EARNED_REWARD,
-      reward => {
-        handleUnlock();
-        if (Platform.OS === 'ios') {
-          Alert.alert(
-            successMessage ||
-              'Congrats! You have unlocked the selected Premium Category.',
-            null,
-            [{text: 'OK'}],
-          );
-        }
-        handleClose(selectedCategory);
-        setStatusBar(false);
-        setTimeout(() => {
-          AsyncStorage.removeItem('interstial');
-        }, 1000);
-      },
-    );
-
-    return () => {
-      unsubscribeLoaded();
-      unsubscribeEarned();
-    };
-  }, [selectedCategory]);
-
-  useEffect(() => {
-    if (visible) {
-      rewarded.load();
+  
+    if(clikAble){
+      console.log('ada siniiii loh')
+      const unsubscribeLoaded = rewardedAds.addAdEventListener(
+        RewardedAdEventType.LOADED,
+        () => {
+  
+         
+            setStatusBar(true);
+            console.log('LOAD ADS ModalUnlockCategory');
+            setLoadingAds(false);
+            rewardedAds.show();
+        
+         
+        },
+      );
+  
+      const unsubscribeEarned = rewardedAds.addAdEventListener(
+        RewardedAdEventType.EARNED_REWARD,
+        reward => {
+            handleUnlock();
+            if (Platform.OS === 'ios') {
+            
+              Alert.alert(
+                successMessage ||
+                  'Congrats! You have unlocked the selected Premium Category.',
+                null,
+                [{text: 'OK'}],
+              );
+            }
+            handleClose(selectedCategory);
+            setStatusBar(false);
+            setTimeout(() => {
+              AsyncStorage.removeItem('interstial');
+            }, 1000);
+          
+          console.log('masukkk iiiiii')
+          setClick(false)
+          
+        },
+      );
+  
+       rewardedAds.load()
+       return () => {
+        unsubscribeLoaded();
+        unsubscribeEarned();
+       }
+      
     }
-  }, [visible]);
+  }, [clikAble]);
+
+  // useEffect(() => {
+  //   if(loadingAds){
+  //     rewardedAds.load()
+
+  //     setTimeout(() => {
+  //       if(!rewardedAds.loaded){
+  //         rewardedAds.show()
+  //       }else{
+  //         rewardedAds.show()
+  //       }
+       
+  //     }, 1000);
+  //     console.log('apa '+rewardedAds.loaded)
+  //     // if(!rewardedAds.loaded){
+  //     //   rewardedAds.show()
+  //     // }
+  //     //  rewardedAds.load()
+  //     // if(!rewardedAds.loaded){
+  //     //   rewardedAds.show()
+  //     //   console.log('apa niiiii'+rewardedAds.loaded)
+  //     // }else{
+  //     //   console.log(' niiiii'+rewardedAds.loaded)
+  //     //   rewardedAds.show()
+  //     // }
+     
+  //   }
+  // }, [loadingAds])
 
   function renderIconClose() {
     return (
@@ -148,19 +188,34 @@ const ModalUnlockCategory = ({
                 }
                 isLoading={loadingAds}
                 onPress={() => {
+                  setClick(true)
+                  setLoadingAds(true);
+                
                   AsyncStorage.setItem('interstial', 'yes');
-                  if (rewarded.loaded) {
-                    rewarded.show();
-                  } else {
-                    setLoadingAds(true);
-                    rewarded.load();
-                    setTimeout(() => {
-                      if (rewarded.loaded) {
-                        rewarded.show();
-                        setLoadingAds(false);
-                      }
-                    }, 2000);
-                  }
+                  rewardedAds.load()
+                  // setTimeout(() => {
+                  //   rewardedAds.show();
+                  // }, 200);
+                  // if (rewardedAds.loaded) {
+                  //   rewardedAds.show();
+                  //   setTimeout(() => {
+                       
+                  //     if (rewardedAds.loaded) {
+                  //       rewardedAds.show();
+                  //       setLoadingAds(false);
+                  //     }
+                  //   }, 100);
+                  // } else {
+                  //   setLoadingAds(true);
+                  //   // rewardedAds.load();
+                  //   setTimeout(() => {
+                  //     if (rewardedAds.loaded) {
+                  //       console.log('masuk kesini ya')
+                  //       rewardedAds.show();
+                  //       setLoadingAds(false);
+                  //     }
+                  //   }, 100);
+                  // }
                 }}
                 label="Watch Video!"
               />

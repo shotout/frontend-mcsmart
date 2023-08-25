@@ -128,9 +128,8 @@
 			</dict>
 		</dict>
 	</dict>
-
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Our application needs permission to share images.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -402,6 +401,7 @@
 		<string>RussoOne-Regular.ttf</string>
 		<string>Signika-Bold.ttf</string>
 		<string>Tinos-Bold.ttf</string>
+		<string>Fredoka SemiBold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
