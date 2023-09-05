@@ -50,7 +50,7 @@ appOpenAd.load();
 const App =  () => {
    // if (Platform.OS !== 'ios') {
     Sentry.init({
-      environment: 'development',
+      environment: 'production', // development
       dsn: SENTRY_DSN,
       tracesSampleRate: 1.0,
     });
@@ -60,8 +60,8 @@ const App =  () => {
   const configTracker = () => {
     const adjustConfig = new AdjustConfig(
       '6qpsj2ssc03k',
-      AdjustConfig.EnvironmentSandbox,
-      // AdjustConfig.EnvironmentProduction,
+      //AdjustConfig.EnvironmentSandbox,
+      AdjustConfig.EnvironmentProduction,
     );
     adjustConfig.setLogLevel(AdjustConfig.LogLevelVerbose);
     Adjust.create(adjustConfig);
@@ -71,7 +71,6 @@ const App =  () => {
   Settings.setAppID('637815961525510');
   useEffect(() => {
     const backAction = () => {
-      console.log('masukkk handler 55')
       BackHandler.exitApp();
       return true;
     };
