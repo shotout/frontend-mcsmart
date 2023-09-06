@@ -169,16 +169,16 @@ function Reminder({isVisible, onClose, userProfile}) {
           </View>
           <TouchableOpacity
             style={styles.ctnSelect}
-            disabled={values.often === 3}
+            disabled={values.often === 15}
             onPress={() => {
-              if (values.often < 3) {
+              if (values.often < 15) {
                 handleChangeValue('often', values.often + 1);
               }
             }}>
             <Text
               style={[
                 styles.txtIncrease,
-                {color: values.often === 3 ? colors.gray : colors.yellow},
+                {color: values.often === 15 ? colors.gray : colors.yellow},
               ]}>
               +
             </Text>
