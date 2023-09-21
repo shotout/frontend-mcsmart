@@ -118,15 +118,25 @@ function Routes({registerData, userProfile, props}) {
   const checkDays = (start) => {
     let timeNow = new Date();
     let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
-  
-    if (timeRemaining > 86400) { // Jika lebih dari 600 detik (10 menit)
+    // Jika lebih dari 2 hari
+  if (timeRemaining > 86400 && timeRemaining < 2 * 86400) { // Jika lebih dari 600 detik (10 menit)
       console.log("Sudah lebih dari 24 jam sejak proses dimulai.");
       return true
-    } else {
-      console.log("Belum lebih dari 10 jam sejak proses dimulai.");
+    } else if (timeRemaining < 600) {
+      console.log("Belum lebih dari 10 menit sejak proses dimulai.");
       return false
     }
   }
+  const checkMinues = (start) => {
+    let timeNow = new Date();
+    let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
+    // Jika lebih dari 2 hari
+  if (timeRemaining < 86400) {
+      console.log("Belum lebih dari 10 menit sejak proses dimulai.");
+      return true
+    }
+  }
+
   useEffect(() => {
     async function fetchData() {
       crashlytics().log('App Route');
@@ -149,15 +159,23 @@ function Routes({registerData, userProfile, props}) {
       await AsyncStorage.setItem('afterOnboard', 'yes');
     } else {
     if(dataVersion === '0'){
+     
       const data = checkDays(main10)
+      const value = checkMinues(main10)
+      console.log('INI DATA APA'+value)
+      if(value){
+        handlePayment("10_minutes_after_onboarding", () => {
+          reset("MainPage", { isFromOnboarding: true });
+        });
+      }
       if(data){
         handlePayment("24_hours_after_onboarding", () => {
           reset("MainPage", { isFromOnboarding: true });
         });
       }else{
-        handlePayment("10_minutes_after_onboarding", () => {
-          reset("MainPage", { isFromOnboarding: true });
-        });
+        handleBasicPaywall(() => {
+          reset("MainPage", { isFromOnboarding: true })}
+        )
       }
     } else {
       const getCurrentOpenApps = await AsyncStorage.getItem('latestOpenApps');
@@ -232,13 +250,13 @@ function Routes({registerData, userProfile, props}) {
       console.log('ada disni', event.name);
       paywallStatus.current = event.name;
       const animationStatus = store.getState().defaultState.runAnimationSlide;
-      // const data = await AsyncStorage.getItem('version')
+       const data = await AsyncStorage.getItem('version')
         
       if (event.name === 'PRESENTATION_CLOSED') {
        
-        // if(data === "0"){
-        //   checkingPaywall()
-        // }
+        if(data === "0" && Platform.OS === 'android'){
+          checkingPaywall()
+        }
        
         if (animationStatus === false) {
           setAnimationSlideStatus(true);
@@ -432,6 +450,7 @@ function Routes({registerData, userProfile, props}) {
     }
     return 'WelcomePage';
   }
+
 
   // if (isLoading) return null;
   return (

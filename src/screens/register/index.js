@@ -617,6 +617,8 @@ function Register({
     }
   };
 
+
+
   function renderContent() {
     if (registerStep === 8) {
       return <LoadingIndicator fullscreen />;

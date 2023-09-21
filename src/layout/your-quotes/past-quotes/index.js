@@ -31,7 +31,7 @@ import IconLove from '../../../assets/svg/icon_love_tap.svg';
 import PopupDelete from '../../../components/popup-delete';
 import LoadingIndicator from '../../../components/loading-indicator';
 import {
-  handleBasicPaywall,
+  handleBasicPaywallPress,
   handlePayment,
   isUserPremium,
 } from '../../../helpers/user';
@@ -175,7 +175,7 @@ function PastQuotes({isVisible, onClose, userProfile, fetchPastQuotes}) {
         onPress={onClose}
         rightText={!isUserPremium()}
         labelRight="View all"
-        onRightText={handleBasicPaywall}
+        onRightText={handleBasicPaywallPress}
       />
     );
   }
@@ -296,7 +296,7 @@ function PastQuotes({isVisible, onClose, userProfile, fetchPastQuotes}) {
         <Button
           label="See older quotes"
           btnStyle={styles.btnMoreStyle}
-          onPress={handleBasicPaywall}
+          onPress={handleBasicPaywallPress}
         />
       );
     }

@@ -26,7 +26,9 @@ target 'mcsmart' do
 
   # Flags change depending on the env values.
   flags = get_default_flags()
- 
+  target 'ImageNotification' do
+    pod 'Firebase/Messaging', '~> 6.31.0' # eg 6.31.0
+  end
   pod 'Firebase', :modular_headers => true
   pod 'FirebaseCore', :modular_headers => true
   pod 'GoogleUtilities', :modular_headers => true

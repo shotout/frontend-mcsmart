@@ -43,7 +43,7 @@ import PastQuotes from '../../your-quotes/past-quotes';
 import LikeQuotes from '../../your-quotes/liked-quotes';
 import AccountPreference from '../../setting/account-preference';
 import {
-  handleBasicPaywall,
+  handleBasicPaywallPress,
   isUserPremium,
   openPrivacyPolicy,
   openTermsofUse,
@@ -113,7 +113,7 @@ function ModalSetting({contentRef, onClose, collections}) {
     }
     return (
       <View style={styles.ctnBgWrap}>
-        <TouchableWithoutFeedback onPress={handleBasicPaywall}>
+        <TouchableWithoutFeedback onPress={handleBasicPaywallPress}>
           <View style={styles.ctnRow}>
             <View style={styles.ctnRowLeft}>
               <Text style={styles.titleStyle}>Go Premium</Text>

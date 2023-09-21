@@ -15,21 +15,20 @@ import { networkDebugger } from "./shared/networkDebugger";
 import ModalFirstPremium from "./components/modal-first-premium";
 import ModalLock from "./layout/main-page/modal-lock";
 import { askTrackingPermission } from "./helpers/eventTracking";
-import notifee, {EventType} from '@notifee/react-native';
-import { Settings } from 'react-native-fbsdk-next';
+import notifee, { EventType } from "@notifee/react-native";
+import { Settings } from "react-native-fbsdk-next";
 import messaging from "@react-native-firebase/messaging";
-import { Notifications } from 'react-native-notifications';
+import { Notifications } from "react-native-notifications";
 import DeviceInfo from "react-native-device-info";
 import { checkDeviceRegister, checkVersion, resetBadge } from "./shared/request";
 import { AdEventType, AppOpenAd } from "react-native-google-mobile-ads";
 import SplashScreen from "react-native-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAppOpenID } from "./shared/static/adsId";
-import * as Sentry from '@sentry/react-native';
+import * as Sentry from "@sentry/react-native";
 import { SENTRY_DSN } from "./shared/static";
-import crashlytics from '@react-native-firebase/crashlytics';
+import crashlytics from "@react-native-firebase/crashlytics";
 import { fetchListQuote } from "./store/defaultState/actions";
-
 
 LogBox.ignoreAllLogs();
 
@@ -47,81 +46,80 @@ const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
 });
 appOpenAd.load();
 
-const App =  () => {
-   // if (Platform.OS !== 'ios') {
-    Sentry.init({
-      environment: 'production', // development
-      dsn: SENTRY_DSN,
-      tracesSampleRate: 1.0,
-    });
+const App = () => {
+  // if (Platform.OS !== 'ios') {
+  Sentry.init({
+    environment: "production", // production development
+    dsn: SENTRY_DSN,
+    tracesSampleRate: 1.0,
+  });
   // }
   const [showAdsOverlay, setAdsOverlay] = useState(false);
   const openAdsOpened = useRef(false);
   const configTracker = () => {
     const adjustConfig = new AdjustConfig(
-      '6qpsj2ssc03k',
-      //AdjustConfig.EnvironmentSandbox,
-      AdjustConfig.EnvironmentProduction,
+      "6qpsj2ssc03k",
+      // AdjustConfig.EnvironmentSandbox,
+      AdjustConfig.EnvironmentProduction
     );
     adjustConfig.setLogLevel(AdjustConfig.LogLevelVerbose);
     Adjust.create(adjustConfig);
     console.log("Finish set configtracker");
   };
   Settings.initializeSDK();
-  Settings.setAppID('637815961525510');
-  useEffect(() => {
-    const backAction = () => {
-      BackHandler.exitApp();
-      return true;
-    };
+  Settings.setAppID("637815961525510");
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     BackHandler.exitApp();
+  //     return true;
+  //   };
 
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
-    return () => backHandler.remove();
-  }, []);
-  
+  //   const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
+  //   return () => backHandler.remove();
+  // }, []);
+
   useEffect(() => {
-   
-    async function check () {
-      const data = await checkVersion()
-      if(data?.status === 'success'){
-        AsyncStorage.setItem('version', JSON.stringify(data?.data[0].is_close_button))
-      }   
+    async function check() {
+      const data = await AsyncStorage.getItem("version");
+      if (data === null) {
+        const resp = await checkVersion();
+        // alert(JSON.stringify(resp))
+        if (resp?.status === "success") {
+          AsyncStorage.setItem("version", JSON.stringify(resp?.data[0].is_close_button));
+        }
+      }
     }
-    check()
-  }, [])
+    check();
+  }, []);
   const firstChecking = async () => {
-    DeviceInfo.getUniqueId().then(async uniqueId => {
+    DeviceInfo.getUniqueId().then(async (uniqueId) => {
       try {
         await resetBadge({
-          device_id: uniqueId
+          device_id: uniqueId,
         });
       } catch (err) {
-        console.log('Err get device info:', err);
+        console.log("Err get device info:", err);
       }
     });
-  }
+  };
 
   useEffect(() => {
-    crashlytics().log('App Index');
+    crashlytics().log("App Index");
     networkDebugger();
     configTracker();
     Notifications.removeAllDeliveredNotifications();
-    firstChecking()
-   
+    firstChecking();
+
     if (Platform.OS === "android") {
       FullScreenChz.enable();
     } else {
       askTrackingPermission();
     }
-    
   }, []);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <StatusBar barStyle='dark-content' backgroundColor='#fff' />
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <PaperProvider>
