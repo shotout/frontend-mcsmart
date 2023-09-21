@@ -299,8 +299,19 @@ export const setCollectionData = (payload) => {
   store.dispatch({ type: SUCCESS_FETCH_COLLECTION, payload });
 };
 
+  export const checkDays = (start) => {
+    let timeNow = new Date();
+    let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
+    // Jika lebih dari 2 hari
+  if (timeRemaining > 86400 && timeRemaining < 2 * 86400) { // Jika lebih dari 600 detik (10 menit)
+      console.log("Sudah lebih dari 24 jam sejak proses dimulai.");
+      return true
+    } else if (timeRemaining < 600) {
+      console.log("Belum lebih dari 10 menit sejak proses dimulai.");
+      return false
+    }
+  }
 export const handleBasicPaywall = async (cbPaywall) => {
-  const data = await AsyncStorage.getItem('version')
   if (data !== '0') {
     const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
     const getInstallDate = await AsyncStorage.getItem('firstInstall');
@@ -315,6 +326,18 @@ export const handleBasicPaywall = async (cbPaywall) => {
   }
 };
 
+export const handleBasicPaywallPress = async (cbPaywall) => {
+    const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
+    const getInstallDate = await AsyncStorage.getItem('firstInstall');
+    const endDate = moment(getInstallDate)
+    .add(1, 'days')
+    .format('YYYY-MM-DD HH:mm:ss');
+    const paywallType =
+    currentDate > endDate ?
+    "offer_no_purchase_after_onboarding_paywall_2nd"
+    : "offer_no_purchase_after_onboarding_paywall";
+    await handlePayment(paywallType, cbPaywall);
+};
 
 export const isCompletedOnboarding = () => {
   const profile = store.getState().defaultState.userProfile;

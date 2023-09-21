@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {ImageBackground, View, Text, Image, ScrollView} from 'react-native';
 import {RewardedAd, RewardedAdEventType} from 'react-native-google-mobile-ads';
 import styles from './styles';
-import {handleBasicPaywall, handlePayment} from '../../../helpers/user';
+import {handleBasicPaywallPress, handlePayment} from '../../../helpers/user';
 import Button from '../../../components/button';
 import {getRewardedOutOfQuotesID} from '../../../shared/static/adsId';
 import {setTodayAdsLimit} from '../../../store/defaultState/actions';
@@ -147,7 +147,7 @@ const PageCountDown = ({ handleLoad,  loading }) => {
                    <PremiumRocket width="100%" height="100%" />
                 </View>
               }
-              onPress={handleBasicPaywall}
+              onPress={handleBasicPaywallPress}
               label={`Get McSmart\nPremium!`}
             />
           </View>

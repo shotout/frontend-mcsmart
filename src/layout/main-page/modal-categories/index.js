@@ -19,7 +19,7 @@ import Search from "../../../components/search";
 import styles from "./styles";
 import states from "./states";
 import {
-  handleBasicPaywall,
+  handleBasicPaywallPress,
   isUserPremium,
   reloadUserProfile,
 } from "../../../helpers/user";
@@ -220,7 +220,7 @@ function ModalCategories({
     }
     return (
       <View style={styles.ctnBgWrap}>
-        <TouchableWithoutFeedback onPress={handleBasicPaywall}>
+        <TouchableWithoutFeedback onPress={handleBasicPaywallPress}>
           <View style={styles.ctnRow}>
             <View style={styles.ctnRowLeft}>
               <Text style={styles.titleStyle}>Go Premium</Text>

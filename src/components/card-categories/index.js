@@ -15,7 +15,7 @@ import states from './states';
 import dispatcher from './dispatcher';
 import {updateCategory} from '../../shared/request';
 import {
-  handleBasicPaywall,
+  handleBasicPaywallPress,
   handlePayment,
   isUserPremium,
 } from '../../helpers/user';
@@ -263,7 +263,7 @@ function CardCategories({
               </View>
             </View>
             <Button
-              onPress={handleBasicPaywall}
+              onPress={handleBasicPaywallPress}
               btnStyle={styles.btnGoPremiun}
               label="Go Premium"
             />
@@ -416,7 +416,7 @@ function CardCategories({
       {!isUserPremium() && (
         <Button
           btnStyle={styles.btnGoPremiun}
-          onPress={handleBasicPaywall}
+          onPress={handleBasicPaywallPress}
           label={buttonLabel || 'Unlock all'}
         />
       )}

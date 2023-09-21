@@ -12,7 +12,7 @@ import {Modal, Portal} from 'react-native-paper';
 import {RewardedAd, RewardedAdEventType} from 'react-native-google-mobile-ads';
 import styles from './styles';
 import Button from '../button';
-import {handleBasicPaywall, handlePayment} from '../../helpers/user';
+import {handleBasicPaywallPress, handlePayment} from '../../helpers/user';
 import {getRewardedCategoryID} from '../../shared/static/adsId';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -170,7 +170,7 @@ const ModalUnlockCategory = ({
                   <Image source={crownIcon} style={styles.btnImgStyle} />
                 </View>
               }
-              onPress={handleBasicPaywall}
+              onPress={handleBasicPaywallPress}
               label="Go Premium!"
             />
             <View style={styles.ctnWatch}>

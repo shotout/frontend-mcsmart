@@ -8,7 +8,7 @@ import styles from './styles';
 import {getListCategory, updateCategory} from '../../../shared/request';
 import useDebounce from '../../../helpers/useDebounce';
 import {
-  handleBasicPaywall,
+  handleBasicPaywallPress,
   isUserPremium,
   reloadUserProfile,
 } from '../../../helpers/user';
@@ -97,7 +97,7 @@ function ModalCategoriesSearch({
           {!isUserPremium() && (
             <TouchableOpacity
               style={styles.ctnJustifyEnd}
-              onPress={handleBasicPaywall}>
+              onPress={handleBasicPaywallPress}>
               <Text style={styles.txtHeaderBtn}>Unlock all</Text>
             </TouchableOpacity>
           )}

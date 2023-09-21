@@ -55,6 +55,7 @@ import ModalShare from "../../layout/main-page/modal-share";
 import {
   checkHours,
   handleBasicPaywall,
+  handleBasicPaywallPress,
   handlePayment,
   handleRatingModal,
   isPremiumToday,
@@ -1314,7 +1315,7 @@ const fetchRepeat = async () => {
     return (
       <TouchableOpacity
         style={styles.ctnFreeBadge}
-        onPress={handleBasicPaywall}
+        onPress={handleBasicPaywallPress}
       >
         <View style={styles.ctnIconCrown}>
           <PremiumRocket width="100%" height="100%" />
