@@ -119,7 +119,7 @@ function Routes({registerData, userProfile, props}) {
     let timeNow = new Date();
     let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
     // Jika lebih dari 2 hari
-  if (timeRemaining > 86400 && timeRemaining < 2 * 86400) { // Jika lebih dari 600 detik (10 menit)
+  if (timeRemaining > 86400 || timeRemaining < 2 * 86400) { // Jika lebih dari 600 detik (10 menit)
       console.log("Sudah lebih dari 24 jam sejak proses dimulai.");
       return true
     } else if (timeRemaining < 600) {
@@ -162,13 +162,11 @@ function Routes({registerData, userProfile, props}) {
      
       const data = checkDays(main10)
       const value = checkMinues(main10)
-      console.log('INI DATA APA'+value)
       if(value){
         handlePayment("10_minutes_after_onboarding", () => {
           reset("MainPage", { isFromOnboarding: true });
         });
-      }
-      if(data){
+      }else if(data){
         handlePayment("24_hours_after_onboarding", () => {
           reset("MainPage", { isFromOnboarding: true });
         });
