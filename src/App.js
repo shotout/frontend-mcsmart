@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
-import { BackHandler, LogBox, Platform, StatusBar } from "react-native";
+import { Alert, BackHandler, LogBox, Modal, Platform, StatusBar, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider as PaperProvider } from "react-native-paper";
 
@@ -29,6 +29,7 @@ import * as Sentry from "@sentry/react-native";
 import { SENTRY_DSN } from "./shared/static";
 import crashlytics from "@react-native-firebase/crashlytics";
 import { fetchListQuote } from "./store/defaultState/actions";
+import JailMonkey from "jail-monkey";
 
 LogBox.ignoreAllLogs();
 
@@ -55,6 +56,7 @@ const App = () => {
   });
   // }
   const [showAdsOverlay, setAdsOverlay] = useState(false);
+  const [isVisible, setVisible] = useState(false);
   const openAdsOpened = useRef(false);
   const configTracker = () => {
     const adjustConfig = new AdjustConfig(
@@ -64,19 +66,16 @@ const App = () => {
     );
     adjustConfig.setLogLevel(AdjustConfig.LogLevelVerbose);
     Adjust.create(adjustConfig);
-    console.log("Finish set configtracker");
+    //console.log("Finish set configtracker");
   };
   Settings.initializeSDK();
   Settings.setAppID("637815961525510");
-  // useEffect(() => {
-  //   const backAction = () => {
-  //     BackHandler.exitApp();
-  //     return true;
-  //   };
-
-  //   const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
-  //   return () => backHandler.remove();
-  // }, []);
+  useEffect(() => {
+    if (JailMonkey.isJailBroken()) {
+      setVisible(true)
+      // Alternative behaviour for jail-broken/rooted devices.
+    }
+  }, []);
 
   useEffect(() => {
     async function check() {
@@ -98,7 +97,7 @@ const App = () => {
           device_id: uniqueId,
         });
       } catch (err) {
-        console.log("Err get device info:", err);
+        //  console.log("Err get device info:", err);
       }
     });
   };
@@ -120,6 +119,13 @@ const App = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar barStyle='dark-content' backgroundColor='#fff' />
+      <Modal visible={isVisible} animationType='slide' transparent >
+        <View style={{ flex: 1, backgroundColor: "white", alignItems: 'center',  justifyContent: 'center'}}>
+          <View >
+            <Text >Your Device root</Text>
+          </View>
+        </View>
+      </Modal>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <PaperProvider>

@@ -200,7 +200,7 @@ function Register({
       }, 2000);
       AsyncStorage.setItem("isLogin", "yes");
     } catch (err) {
-      console.log('Error register:', err);
+     // console.log('Error register:', err);
     }
   };
 
@@ -209,10 +209,10 @@ function Register({
     let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
   
     if (timeRemaining > 600) { // Jika lebih dari 600 detik (10 menit)
-      console.log("Sudah lebih dari 10 menit sejak proses dimulai.");
+     // console.log("Sudah lebih dari 10 menit sejak proses dimulai.");
       return true
     } else {
-      console.log("Belum lebih dari 10 menit sejak proses dimulai.");
+    //  console.log("Belum lebih dari 10 menit sejak proses dimulai.");
       return false
     }
   }
@@ -222,10 +222,10 @@ function Register({
     let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
   
     if (timeRemaining > 86400) { // Jika lebih dari 600 detik (10 menit)
-      console.log("Sudah lebih dari 24 jam sejak proses dimulai.");
+    //  console.log("Sudah lebih dari 24 jam sejak proses dimulai.");
       return true
     } else {
-      console.log("Belum lebih dari 10 jam sejak proses dimulai.");
+    //  console.log("Belum lebih dari 10 jam sejak proses dimulai.");
       return false
     }
   }
@@ -328,7 +328,7 @@ function Register({
             setTimeout(async() => {
               if (isFinishTutorial === "yes") {
                 await AsyncStorage.setItem('latestOpenApps', stringifyDate);
-                console.log('ada ko ini')
+               // console.log('ada ko ini')
                 handleBasicPaywall(() => {
                   reset("MainPage", { isFromOnboarding: true });
                 });
@@ -372,7 +372,7 @@ function Register({
           }, 2000);
           AsyncStorage.setItem("isLogin", "yes");
         } catch (err) {
-          console.log("Device id not register");
+          //console.log("Device id not register");
           handleSubmit(true);
         }
       };
@@ -402,7 +402,7 @@ function Register({
   ]);
 
   const handleAfterRegister = async () => {
-    console.log('AFter register called');
+   // console.log('AFter register called');
     await fetchListQuote();
     await fetchCollection();
     handlePayment('onboarding', () => {
@@ -442,7 +442,7 @@ function Register({
         reloadUserProfile();
       }, 2000);
     } catch (err) {
-      console.log('Error register:', err);
+     // console.log('Error register:', err);
       setLoading(false);
     }
   };
@@ -544,7 +544,7 @@ function Register({
         setRegisterStep(7);
       }
     } else if (registerStep === 7) {
-      console.log('NOTHING');
+   //   console.log('NOTHING');
       const stringifyDate = Date.now().toString();
       AsyncStorage.setItem('set10min', stringifyDate);
       setRegisterStep(8);

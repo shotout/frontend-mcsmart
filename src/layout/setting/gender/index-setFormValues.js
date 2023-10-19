@@ -28,7 +28,7 @@ function ModalGender({isVisible, onClose, userProfile}) {
         reloadUserProfile();
       }, 1000);
     } catch (err) {
-      console.log('Error select:', err);
+     // console.log('Error select:', err);
     }
   };
 

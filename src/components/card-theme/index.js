@@ -94,7 +94,7 @@ function CardTheme({
       setLoading(null);
       if (typeof onClose === 'function') onClose();
     } catch (err) {
-      console.log('Error select:', err);
+    //  console.log('Error select:', err);
     }
   };
 

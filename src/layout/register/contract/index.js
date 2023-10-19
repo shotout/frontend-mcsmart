@@ -41,12 +41,6 @@ export default function Contract({values, substep, onLongPress, listCategory}) {
     }, 100);
     await Animated.timing(contractAnimation).stop();
     await Animated.timing(placeholderAnimation).stop();
-    console.log(
-      'Check press:',
-      currentSec,
-      4300 - currentSec,
-      3400 - currentSec,
-    );
     Animated.timing(contractAnimation, {
       toValue: 1,
       duration: currentSec ? 4000 - currentSec : 4000,

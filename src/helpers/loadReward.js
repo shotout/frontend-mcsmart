@@ -30,7 +30,7 @@ export const loadRewarded = async (handleOpen, onFailed) =>
             if (onFailed && typeof onFailed === 'function') {
               onFailed();
             }
-            console.log('ADLOAD FAILED');
+            //console.log('ADLOAD FAILED');
             // eslint-disable-next-line prefer-promise-reject-errors
             reject('failed-ad');
           }
@@ -66,7 +66,7 @@ export const loadInterstialAds = async (advert, onFailed) =>
             if (onFailed && typeof onFailed === 'function') {
               onFailed();
             }
-            console.log('ADLOAD FAILED');
+            //console.log('ADLOAD FAILED');
             // eslint-disable-next-line prefer-promise-reject-errors
             reject('failed-ad');
           }
@@ -76,7 +76,7 @@ export const loadInterstialAds = async (advert, onFailed) =>
       if (onFailed && typeof onFailed === 'function') {
         onFailed();
       }
-      console.log('failed load ad', e);
+      //console.log('failed load ad', e);
     }
   });
 
@@ -113,6 +113,6 @@ export const loadOpenAddsReward = async (advert, onFailed) =>
       if (onFailed && typeof onFailed === 'function') {
         onFailed();
       }
-      console.log('failed load ad', e);
+      //console.log('failed load ad', e);
     }
   });

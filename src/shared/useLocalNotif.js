@@ -17,7 +17,7 @@ function useLocalNotif(userProfile) {
 
   const cancelAllNotification = () => {
     notifee.getTriggerNotificationIds().then(async ids => {
-      console.log('Clear all notification', ids);
+      //console.log('Clear all notification', ids);
       if (ids.length > 0) {
         ids.forEach(idNotification => {
           notifee.cancelTriggerNotification(idNotification);
@@ -65,7 +65,7 @@ function useLocalNotif(userProfile) {
         trigger,
       );
     } catch (err) {
-      console.log('Error schedule:', err, userTime);
+      //console.log('Error schedule:', err, userTime);
     }
   };
 
@@ -99,14 +99,14 @@ function useLocalNotif(userProfile) {
             ).format('YYYY-MM-DD HH:mm');
             const notificationTime = new Date(normalizeDate);
             if (notificationTime > today) {
-              console.log('Trigger notif at:', item);
+             // console.log('Trigger notif at:', item);
               triggerNotification(notificationTime, quoteObj);
             }
           });
         }
       }
     } catch (err) {
-      console.log('ERROR SETSCHEDULE NOTIF:', err);
+    //  console.log('ERROR SETSCHEDULE NOTIF:', err);
     }
   };
 
@@ -135,7 +135,7 @@ function useLocalNotif(userProfile) {
               setTimezone(userProfile.data.schedule.timezone);
             }
             AsyncStorage.setItem('lastLocalNotifSet', currentDate);
-            console.log('NOTIF SETTED');
+           // console.log('NOTIF SETTED');
             setTimer(userProfile.data?.schedule?.timer_local);
             setScheduleNotif();
           }
@@ -147,7 +147,7 @@ function useLocalNotif(userProfile) {
           // setTimer(userProfile.data?.schedule?.timer_local);
           // setScheduleNotif();
         } catch (err) {
-          console.log('Error handleLocalNotification:', err);
+       //   console.log('Error handleLocalNotification:', err);
         }
       };
       handleLocalNotification();

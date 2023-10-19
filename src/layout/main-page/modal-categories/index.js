@@ -94,20 +94,20 @@ function ModalCategories({
           
             setCategoryValue(result);
             if(isUserPremium()){
-              console.log('ini user premium', isUserPremium)
+             // console.log('ini user premium', isUserPremium)
               fetchList(result)
             }else{
               const stringifyDate = new Date();
               let strTanggalSekarang = stringifyDate.getDate().toString();
               const value = await AsyncStorage.getItem('setToday');
-              console.log('tanggal sama modal', value+"===="+strTanggalSekarang)
+            //  console.log('tanggal sama modal', value+"===="+strTanggalSekarang)
               if(value != strTanggalSekarang){
                 fetchList(result)
-                console.log('tanggal sama modal new', value+"===="+strTanggalSekarang)
+               // console.log('tanggal sama modal new', value+"===="+strTanggalSekarang)
                 // AsyncStorage.setItem('setToday', strTanggalSekarang);
               }else{
                 // fetchList(result)
-                console.log('tanggal sama NIH', value+"===="+strTanggalSekarang)
+                //console.log('tanggal sama NIH', value+"===="+strTanggalSekarang)
               }
              
             }
@@ -121,12 +121,12 @@ function ModalCategories({
               const stringifyDate = new Date();
               let strTanggalSekarang = stringifyDate.getDate().toString();
               const value = await AsyncStorage.getItem('setToday');
-              console.log('tanggal sama', value+"===="+strTanggalSekarang)
+           //   console.log('tanggal sama', value+"===="+strTanggalSekarang)
               if(value != strTanggalSekarang){
                 fetchList(categoryValue)
               
               }else{
-                console.log('tanggal sama', value+"===="+strTanggalSekarang)
+              //  console.log('tanggal sama', value+"===="+strTanggalSekarang)
               }
              
             }
@@ -143,12 +143,12 @@ function ModalCategories({
               const stringifyDate = new Date();
               let strTanggalSekarang = stringifyDate.getDate().toString();
               const value = await AsyncStorage.getItem('setToday');
-              console.log('tanggal sama', value+"===="+strTanggalSekarang)
+            //  console.log('tanggal sama', value+"===="+strTanggalSekarang)
               if(value != strTanggalSekarang){
                 fetchList(result)
                 // AsyncStorage.setItem('setToday', strTanggalSekarang);
               }else{
-                console.log('tanggal sama', value+"===="+strTanggalSekarang)
+             //   console.log('tanggal sama', value+"===="+strTanggalSekarang)
               }
              
             }
@@ -166,7 +166,7 @@ function ModalCategories({
           if(value != strTanggalSekarang){
             fetchList([2])
           }else{
-            console.log('tanggal sama', value+"===="+strTanggalSekarang)
+           // console.log('tanggal sama', value+"===="+strTanggalSekarang)
           }
          
         }
@@ -181,7 +181,7 @@ function ModalCategories({
         categories: value,
         _method: "PATCH",
       });
-      console.log("ini current update quote" + value);
+    //  console.log("ini current update quote" + value);
       updateList()
      
     }

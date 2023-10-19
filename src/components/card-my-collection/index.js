@@ -69,7 +69,7 @@ export default function CardMyCollection({
       <TouchableWithoutFeedback
         onPress={() => {
           if (typeof onPresLiked === 'function') onPresLiked(likeStatus);
-          console.log('Check final status:', !likeStatus);
+         // console.log('Check final status:', !likeStatus);
           setStatus(!likeStatus);
         }}>
         <View style={styles.ctnIconAction}>

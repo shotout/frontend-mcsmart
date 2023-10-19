@@ -128,7 +128,7 @@ export default function FormInputCustomWidget({
       <WidgetDetail
         openTheme={() => {
           refChangeTheme.current.show();
-          console.log('OPEN THEME:');
+          //console.log('OPEN THEME:');
         }}
         openCategory={() => {
           refChangeCategory.current.show();

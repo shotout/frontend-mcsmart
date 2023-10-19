@@ -113,7 +113,7 @@ export default function QuotesContent({
     try {
       const url = encodeURI(`https://www.google.com/search?q=${item.title}`);
       const isAvailable = await InAppBrowser.isAvailable();
-      console.log("IS AVAILABLE", isAvailable, url);
+      //console.log("IS AVAILABLE", isAvailable, url);
       AsyncStorage.setItem('interstial', 'yes');
       if (isAvailable) {
         const result = await InAppBrowser.open(url, {
@@ -134,7 +134,7 @@ export default function QuotesContent({
         }
       } else Linking.openURL(url);
     } catch (error) {
-      console.log("ERror open browser:", error);
+     // console.log("ERror open browser:", error);
     }
   };
 
@@ -142,13 +142,13 @@ export default function QuotesContent({
     if (activeStatus.current) {
       activeStatus.current = false;
       setTimeout(() => {
-        console.log("RESET ANIMATION");
+        //console.log("RESET ANIMATION");
         Animated.timing(translateX, {
           toValue: 0,
           duration: 300,
           useNativeDriver: true,
         }).start(() => {
-          console.log("SUCCESS RESET ANIMATION");
+        //  console.log("SUCCESS RESET ANIMATION");
 
           translateX.setValue(0);
           Animated.timing(translateX).stop();

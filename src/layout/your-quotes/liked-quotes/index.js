@@ -151,7 +151,7 @@ function LikeQuotes({contentRef, onClose, isVisible}) {
         total: likeData.total - 1,
       });
     } catch (err) {
-      console.log('Error new collection:', err);
+     // console.log('Error new collection:', err);
     }
   };
 
@@ -235,7 +235,7 @@ function LikeQuotes({contentRef, onClose, isVisible}) {
       page: 1,
     };
     const res = await getListLiked(params);
-    console.log(res.data);
+   // console.log(res.data);
     setLikeData({
       ...likeData,
       listLike: res.data.data,
@@ -256,7 +256,7 @@ function LikeQuotes({contentRef, onClose, isVisible}) {
         setShowModalLike(false);
       }, 100);
     } catch (err) {
-      console.log('Error dislike:', err);
+     // console.log('Error dislike:', err);
     }
   };
 

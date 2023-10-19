@@ -49,7 +49,7 @@ function ModalAddCollection({
       onClose();
       setLoading(false);
     } catch (err) {
-      console.log("Error select:", err);
+     // console.log("Error select:", err);
       setLoading(false);
     }
   };

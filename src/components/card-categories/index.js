@@ -90,7 +90,7 @@ function CardCategories({
       }
       fetchListQuote();
     } catch (err) {
-      console.log('Error select:', err);
+   //   console.log('Error select:', err);
     }
   };
 

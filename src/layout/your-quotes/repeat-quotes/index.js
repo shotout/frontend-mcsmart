@@ -162,7 +162,7 @@ function RepeatQuotes({ contentRef, onClose, isVisible, quotes }) {
         arrData:  quotes?.listData,
       })
     } catch (err) {
-      console.log("Error new collection:", err);
+    //  console.log("Error new collection:", err);
     }
   };
 
@@ -246,7 +246,7 @@ function RepeatQuotes({ contentRef, onClose, isVisible, quotes }) {
       page: 1,
     };
     const res = await getListRepeat(params);
-    console.log(res.data);
+   // console.log(res.data);
     setLikeData({
       ...likeData,
       listLike: res.data.data,
@@ -272,7 +272,7 @@ function RepeatQuotes({ contentRef, onClose, isVisible, quotes }) {
         }, 200);
       }
     } catch (err) {
-      console.log("Error dislike:", err);
+     // console.log("Error dislike:", err);
     }
   };
 

@@ -77,18 +77,18 @@ new Promise(async (resolve, reject) => {
           stringVendor = "offer_no_purchase_after_onboarding_paywall_2nd";
         }
       }
-      console.log("OPEN Purchasely", vendorId);
+     // console.log("OPEN Purchasely", vendorId);
       const res = await Purchasely.presentPresentationForPlacement({
         placementVendorId:
           stringVendor || "offer_no_purchase_after_onboarding_paywall",
         isFullscreen: true,
       });
-      console.log("Purchasely result:", res.result);
+   //   console.log("Purchasely result:", res.result);
       const user = store.getState().defaultState.userProfile;
-      console.log("Check user data purchase:", user);
+      //console.log("Check user data purchase:", user);
       switch (res.result) {
         case ProductResult.PRODUCT_RESULT_PURCHASED:
-          console.log("FINISH PURCHASED:", user.token);
+         // console.log("FINISH PURCHASED:", user.token);
           if (user.token) {
             await setSubcription({
               subscription_type: vendorId === "one_month_free" ? 3 : 2,
@@ -101,7 +101,7 @@ new Promise(async (resolve, reject) => {
           eventTracking(FREE_TRIAL);
           break;
         case ProductResult.PRODUCT_RESULT_RESTORED:
-          console.log("Payment restored");
+        //  console.log("Payment restored");
           // let message = null;
           // if (res.plan != null) {
           //   console.log(`User purchased ${res.plan.name}`);
@@ -132,7 +132,7 @@ new Promise(async (resolve, reject) => {
       if (typeof cb === "function") cb();
       resolve(res);
     } catch (err) {
-      console.log("error payment:", err);
+      //console.log("error payment:", err);
     }
   });
 
@@ -154,7 +154,7 @@ export const handlePaymentTwo = async (vendorId, cb) =>
         await reloadUserProfile();
       }
     } catch (err) {
-      console.log("error payment:", err);
+      //console.log("error payment:", err);
     }
   });
 
@@ -170,7 +170,7 @@ export const handlePaymentBypass = async (vendorId, cb) =>
         });
       }
     } catch (err) {
-      console.log("error payment:", err);
+      //console.log("error payment:", err);
     }
   });
 export const reloadUserProfile = async () =>
@@ -261,10 +261,10 @@ export const registerUserDefault = async () => {
           reloadUserProfile();
         }, 2000);
       } catch (err) {
-        console.log("Error register:", err);
+       // console.log("Error register:", err);
       }
     } catch (err) {
-      console.log('Err get device info:', err);
+      //console.log('Err get device info:', err);
     }
   })
 }
@@ -304,10 +304,10 @@ export const setCollectionData = (payload) => {
     let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
     // Jika lebih dari 2 hari
   if (timeRemaining > 86400 && timeRemaining < 2 * 86400) { // Jika lebih dari 600 detik (10 menit)
-      console.log("Sudah lebih dari 24 jam sejak proses dimulai.");
+     // console.log("Sudah lebih dari 24 jam sejak proses dimulai.");
       return true
     } else if (timeRemaining < 600) {
-      console.log("Belum lebih dari 10 menit sejak proses dimulai.");
+     // console.log("Belum lebih dari 10 menit sejak proses dimulai.");
       return false
     }
   }
@@ -427,7 +427,7 @@ const changeStatus = async (res) => {
   const purchaseId = await Purchasely.getAnonymousUserId();
 
   const subscriptions = await Purchasely.userSubscriptions();
-  console.log("SUbscription status:", subscriptions);
+  //console.log("SUbscription status:", subscriptions);
   if (subscriptions.length > 0 && !isUserPremium()) {
     const planData = subscriptions[0].plan;
     await setSubcription({
@@ -442,7 +442,7 @@ const changeStatus = async (res) => {
 
 export const purchaselyListener = () => {
   Purchasely.addEventListener((event) => {
-    console.log("Purchasely listener", event);
+    //console.log("Purchasely listener", event);
     if (event.name === "RECEIPT_FAILED") {
       setTimeout(() => {
         changeStatus(event.properties);
@@ -452,7 +452,7 @@ export const purchaselyListener = () => {
 
   Purchasely.addPurchasedListener((res) => {
     // User has successfully purchased a product, reload content
-    console.log("User has purchased", res);
+   // console.log("User has purchased", res);
   });
 };
 export const checkHours = (start) => {
@@ -460,10 +460,10 @@ export const checkHours = (start) => {
   let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
 
   if (timeRemaining > 21600) { // Jika lebih dari 600 detik (10 menit)
-    console.log("Sudah lebih dari 6 jam sejak proses dimulai.");
+   // console.log("Sudah lebih dari 6 jam sejak proses dimulai.");
     return true
   } else {
-    console.log("Belum lebih dari 6 jam sejak proses dimulai.");
+   // console.log("Belum lebih dari 6 jam sejak proses dimulai.");
     return false
   }
 }

@@ -107,10 +107,10 @@ function Routes({registerData, userProfile, props}) {
     let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
   
     if (timeRemaining > 600) { // Jika lebih dari 600 detik (10 menit)
-      console.log("Sudah lebih dari 10 menit sejak proses dimulai.");
+    //  console.log("Sudah lebih dari 10 menit sejak proses dimulai.");
       return true
     } else {
-      console.log("Belum lebih dari 10 menit sejak proses dimulai.");
+    //  console.log("Belum lebih dari 10 menit sejak proses dimulai.");
       return false
     }
   }
@@ -120,10 +120,10 @@ function Routes({registerData, userProfile, props}) {
     let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
     // Jika lebih dari 2 hari
   if (timeRemaining > 86400 || timeRemaining < 2 * 86400) { // Jika lebih dari 600 detik (10 menit)
-      console.log("Sudah lebih dari 24 jam sejak proses dimulai.");
+    //  console.log("Sudah lebih dari 24 jam sejak proses dimulai.");
       return true
     } else if (timeRemaining < 600) {
-      console.log("Belum lebih dari 10 menit sejak proses dimulai.");
+   //   console.log("Belum lebih dari 10 menit sejak proses dimulai.");
       return false
     }
   }
@@ -132,7 +132,7 @@ function Routes({registerData, userProfile, props}) {
     let timeRemaining = (timeNow - start) / 1000; // Waktu dalam detik
     // Jika lebih dari 2 hari
   if (timeRemaining < 86400) {
-      console.log("Belum lebih dari 10 menit sejak proses dimulai.");
+    //  console.log("Belum lebih dari 10 menit sejak proses dimulai.");
       return true
     }
   }
@@ -245,7 +245,7 @@ function Routes({registerData, userProfile, props}) {
 
   const purchaselyListener = () => {
     Purchasely.addEventListener(async event => {
-      console.log('ada disni', event.name);
+     // console.log('ada disni', event.name);
       paywallStatus.current = event.name;
       const animationStatus = store.getState().defaultState.runAnimationSlide;
        const data = await AsyncStorage.getItem('version')
@@ -264,7 +264,7 @@ function Routes({registerData, userProfile, props}) {
 
     Purchasely.addPurchasedListener(res => {
       // User has successfully purchased a product, reload content
-      console.log('User has purchased', res);
+     // console.log('User has purchased', res);
     });
   };
 
@@ -275,12 +275,16 @@ function Routes({registerData, userProfile, props}) {
         if (!isCalled) {
           notifee.onForegroundEvent(async ({ type, detail }) => {
             if (type === EventType.ACTION_PRESS || type === EventType.PRESS) {
-              if (detail.notification.data?.type === "paywall") {
-                console.log("Check paywall data new banget:", detail.notification.data);
-                  setTimeout(() => {
-                    handlePayment(detail.notification.data?.placement);
-                  }, 1000);
-                eventTracking(OPEN_OFFER_NOTIFICATION);
+              const data = await AsyncStorage.getItem("version");
+              if (data === '0') {
+              }else{
+                if (detail.notification.data?.type === "paywall") {
+                 // console.log("Check paywall data new banget:", detail.notification.data);
+                    setTimeout(() => {
+                      handlePayment(detail.notification.data?.placement);
+                    }, 1000);
+                  eventTracking(OPEN_OFFER_NOTIFICATION);
+                }
               }
             }
           });
@@ -338,13 +342,13 @@ function Routes({registerData, userProfile, props}) {
       AdEventType.LOADED,
       async () => {
         
-        const allow = await AsyncStorage.getItem('allowTracking')
-        if(allow === null && Platform.OS === 'ios'){
-          console.log('OPEN ADS OPENED', openAdsOpened.current);
-          SplashScreen.hide();
-          appOpenAd.show();
-          setAdsOverlay(true);
-          openAdsOpened.current = true;
+        const isFinishTutorial = await AsyncStorage.getItem('isFinishTutorial');
+        if (isFinishTutorial === 'yes' && Platform.OS === 'ios') {
+            SplashScreen.hide();
+            appOpenAd.show();
+            setAdsOverlay(true);
+            openAdsOpened.current = true;
+
         }
       },
     );
@@ -352,14 +356,14 @@ function Routes({registerData, userProfile, props}) {
     const listenerOpenApps =  appOpenAd.addAdEventListener(
       AdEventType.OPENED,
       async () => {
-        const allow = await AsyncStorage.getItem('allowTracking')
-        if(allow === null){
-          console.log('OPEN ADS OPENED', openAdsOpened.current);
-          SplashScreen.hide();
-          appOpenAd.show();
-          setAdsOverlay(true);
-          openAdsOpened.current = true;
-        }
+        const isFinishTutorial = await AsyncStorage.getItem('isFinishTutorial');
+        if (isFinishTutorial === 'yes') {
+            SplashScreen.hide();
+            appOpenAd.show();
+            setAdsOverlay(true);
+            openAdsOpened.current = true;
+          }
+        // }
        
       },
     );

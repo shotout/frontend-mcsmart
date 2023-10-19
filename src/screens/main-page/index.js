@@ -460,21 +460,21 @@ const fetchRepeat = async () => {
     const unsubscribeLoaded = rewarded.addAdEventListener(
       RewardedAdEventType.LOADED,
       () => {
-        console.log("LOAD ADS FROM MAIN PAGE REWARD");
+       // console.log("LOAD ADS FROM MAIN PAGE REWARD");
       }
     );
     const unsubscribeEarned = rewarded.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
       (reward) => {
         
-        console.log("User earned reward of ", reward);
+       // console.log("User earned reward of ", reward);
       }
     );
 
     const rewardedOpen = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
       setStatusBar(true);
      
-      console.log("LOAD ADS MODAL COUNTDOWN");
+     // console.log("LOAD ADS MODAL COUNTDOWN");
     });
     const rewardedClose = rewarded.addAdEventListener(
       AdEventType.CLOSED,
@@ -483,7 +483,7 @@ const fetchRepeat = async () => {
           AsyncStorage.removeItem('interstial')
          }, 1000);
         setStatusBar(false);
-        console.log("LOAD ADS MODAL COUNTDOWN");
+        //console.log("LOAD ADS MODAL COUNTDOWN");
       }
     );
     const interstialListenerAds = interstialAds.addAdEventListener(AdEventType.CLOSED,  () => {
@@ -519,24 +519,24 @@ const fetchRepeat = async () => {
   }, []);
 
   useEffect(() => {
-    console.log('active'+activeSlide)
+    //console.log('active'+activeSlide)
     const handleAddPastQuotes = async (currentSlideId) => {
       try {
         if (
           dataQuote.listData[currentSlideId] &&
           dataQuote.listData[currentSlideId]?.id
         ) {
-          console.log('passs quote'+dataQuote.listData[currentSlideId].id)
+         // console.log('passs quote'+dataQuote.listData[currentSlideId].id)
           await addPastQuotes(dataQuote.listData[currentSlideId].id);
         }
       } catch (err) {
-        console.log("Error add past quotes:", err);
+      //  console.log("Error add past quotes:", err);
       }
     };
     const activeQuote = getActiveQuote();
-    console.log('active quote'+JSON.stringify(activeQuote))
+ //   console.log('active quote'+JSON.stringify(activeQuote))
     if (activeSlide > currentSlide) {
-      console.log('set curent slide'+currentSlide)
+   //   console.log('set curent slide'+currentSlide)
       setCurrentSlide(activeSlide);
       handleAddPastQuotes(currentSlide);
     }
@@ -629,7 +629,7 @@ const fetchRepeat = async () => {
   }, [userProfile, isPremiumBefore]);
 
   const handleShowInterstialAds = async () => {
-    console.log("TRY SHOW INTERSTIAL ADS", interstialAds.loaded);
+   // console.log("TRY SHOW INTERSTIAL ADS", interstialAds.loaded);
     if (!isUserPremium()) {
       // if (interstialAds.loaded) {
         interstialAds.show().catch(error => console.warn('ERRROR INTER'+error));
@@ -644,7 +644,7 @@ const fetchRepeat = async () => {
   };
 
   const handleShowInterstialAdsLearn = async () => {
-    console.log("TRY SHOW INTERSTIAL ADS", interstialAdsLearn.loaded);
+   // console.log("TRY SHOW INTERSTIAL ADS", interstialAdsLearn.loaded);
     if (!isUserPremium()) {
       if (interstialAdsLearn.loaded) {
         interstialAdsLearn.show().catch(error => console.warn(error));
@@ -669,7 +669,7 @@ const fetchRepeat = async () => {
   };
 
   const showInterStialAds = async () => {
-    console.log("TRY SHOW INTERSTIAL ADS", interstialAds.loaded);
+   // console.log("TRY SHOW INTERSTIAL ADS", interstialAds.loaded);
     AsyncStorage.setItem('interstial', 'yes')
     if (!isUserPremium()) {
       if (interstialAds.loaded) {
@@ -739,7 +739,7 @@ const fetchRepeat = async () => {
       await dislikeQuotes(payload, activeQuote.id);
       changeQuoteLikeStatus(activeQuote.id);
     } catch (err) {
-      console.log("Error liked:", err);
+     // console.log("Error liked:", err);
     }
   };
 
@@ -853,7 +853,7 @@ const fetchRepeat = async () => {
       } else {
         // Waktu saat ini belum mencapai 4 jam
         // Lakukan sesuatu di sini jika waktu belum mencapai 4 jam
-        console.log("Waktu belum mencapai 4 jam: false");
+       // console.log("Waktu belum mencapai 4 jam: false");
       }
     }
   };
@@ -923,10 +923,10 @@ const fetchRepeat = async () => {
     });
    
     if(activeSlide != 0){
-      console.log('active slide sini='+activeSlide)
+     // console.log('active slide sini='+activeSlide)
       setActiveSlide(activeSlide + 1);//
     }else{
-       console.log('active slide sini dong='+dataQuote?.listData?.length - 6)
+      // console.log('active slide sini dong='+dataQuote?.listData?.length - 6)
       setActiveSlide(dataQuote?.listData?.length - 6);
       flatListRef.current?.scrollToIndex({ index: dataQuote?.listData?.length - 6, animated: true });  
     }
@@ -1377,7 +1377,7 @@ const fetchRepeat = async () => {
               index,
             })}
             onScrollToIndexFailed={() => {
-              console.log("FAILED SCROLL TO INDEX", 5);
+              //console.log("FAILED SCROLL TO INDEX", 5);
             }}
           />
         </TapGestureHandler>

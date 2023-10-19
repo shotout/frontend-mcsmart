@@ -134,7 +134,7 @@ function MyCollectionDetail({
         refetchCollection();
       }, 1000);
     } catch (err) {
-      console.log('Error new collection:', err);
+     // console.log('Error new collection:', err);
     }
   };
 
@@ -160,7 +160,7 @@ function MyCollectionDetail({
         }, 200);
       }
     } catch (err) {
-      console.log('Error dislike:', err);
+     // console.log('Error dislike:', err);
     }
   };
 
@@ -191,7 +191,7 @@ function MyCollectionDetail({
         refetchCollection();
       }, 1000);
     } catch (err) {
-      console.log('Error new collection:', err);
+    //  console.log('Error new collection:', err);
       setLoading(false);
     }
   };

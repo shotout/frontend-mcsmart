@@ -5,18 +5,15 @@ export const askRating = async (ratingSelected = 5) => {
 
   // Give you result if version of device supported to rate app or not!
   const isAvailable = await InAppReview.isAvailable();
-  console.log('IS AVAILABLE RATING:', isAvailable);
+ // console.log('IS AVAILABLE RATING:', isAvailable);
   // trigger UI InAppreview
   InAppReview.RequestInAppReview()
     .then(hasFlowFinishedSuccessfully => {
       // when return true in android it means user finished or close review flow
-      console.log('InAppReview in android', hasFlowFinishedSuccessfully);
+      //console.log('InAppReview in android', hasFlowFinishedSuccessfully);
 
       // when return true in ios it means review flow lanuched to user.
-      console.log(
-        'InAppReview in ios has launched successfully',
-        hasFlowFinishedSuccessfully,
-      );
+     
 
       // 1- you have option to do something ex: (navigate Home page) (in android).
       // 2- you have option to do something,
@@ -42,6 +39,6 @@ export const askRating = async (ratingSelected = 5) => {
       // we continue our app flow.
       // we have some error could happen while lanuching InAppReview,
       // Check table for errors and code number that can return in catch.
-      console.log(error);
+     // console.log(error);
     });
 };

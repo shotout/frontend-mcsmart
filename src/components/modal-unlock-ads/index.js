@@ -50,7 +50,7 @@ const ModalUnlockCategory = ({
   useEffect(() => {
   
     if(clikAble){
-      console.log('ada siniiii loh')
+      //console.log('ada siniiii loh')
       const unsubscribeLoaded = rewardedAds.addAdEventListener(
         RewardedAdEventType.LOADED,
         () => {
@@ -84,7 +84,7 @@ const ModalUnlockCategory = ({
               AsyncStorage.removeItem('interstial');
             }, 1000);
           
-          console.log('masukkk iiiiii')
+         // console.log('masukkk iiiiii')
           setClick(false)
           
         },

@@ -28,7 +28,7 @@ function ModalNewCollection({isVisible, onClose, fetchCollection, closeModal}) {
       closeModal();
       setLoading(false);
     } catch (err) {
-      console.log('Error new collection:', err);
+      //console.log('Error new collection:', err);
       setLoading(false);
     }
   };

@@ -161,7 +161,7 @@ export const fetchListQuoteFilter =
         }
         resolve(quote);
       } catch (err) {
-        console.log("ERr fetch quote:", err);
+       // console.log("ERr fetch quote:", err);
         dispatch({ type: types.ERROR_FETCH_QUOTES });
         reject(err);
       }
@@ -189,7 +189,7 @@ export const fetchListQuote = (params, isPassPremium) => async (dispatch) =>
         const set10min = await AsyncStorage.getItem('set10min');
         const main10 = reformatDate(parseFloat(set10min));
         const data = checkHours(main10)
-        console.log('ini data tanggal berapa'+data)
+       // console.log('ini data tanggal berapa'+data)
         if(value != strTanggalSekarang || isUserPremium()){
         const quote = await getListQuotes({
           length: isPassPremium ? 1000 : data ? 3 : 10,
@@ -274,7 +274,7 @@ export const fetchListQuote = (params, isPassPremium) => async (dispatch) =>
         resolve(quote);
       }
       } catch (err) {
-        console.log("ERr fetch quote:", err);
+      //  console.log("ERr fetch quote:", err);
         dispatch({ type: types.ERROR_FETCH_QUOTES });
         reject(err);
       }
@@ -293,7 +293,7 @@ export const fetchCollection = () => async (dispatch) =>
       });
       resolve(collection);
     } catch (err) {
-      console.log("ERr fetch collections:", err);
+    //  console.log("ERr fetch collections:", err);
       dispatch({ type: types.ERROR_FETCH_COLLECTION });
       reject(err);
     }
@@ -321,7 +321,7 @@ export const fetchCollection = () => async (dispatch) =>
       }
       resolve(pastQuote);
     } catch (err) {
-      console.log('ERr fetch past quotes:', err);
+     // console.log('ERr fetch past quotes:', err);
       dispatch({type: types.ERROR_PAST_QUOTES});
       reject(err);
     }
@@ -338,7 +338,7 @@ export const fetchListLiked = (params) => async (dispatch) =>
       });
       resolve(like);
     } catch (err) {
-      console.log("ERr fetch past quotes:", err);
+   //   console.log("ERr fetch past quotes:", err);
       dispatch({ type: types.ERROR_LIKE_QUOTE });
       reject(err);
     }
@@ -362,7 +362,7 @@ export const getInitialData = (isHasLogin) => async (dispatch) =>
       });
       resolve("success");
     } catch (err) {
-      console.log("Err fetch data:", err);
+   //   console.log("Err fetch data:", err);
       reject(err);
     }
   });
@@ -573,9 +573,9 @@ const handleShowAds = async (appOpenAd) => {
       const cbFinishOpenAds = () => {
         SplashScreen.hide();
         setInitialLoaderStatus(true);
-        console.log("CALLBACK FINISH CALLED");
+      //  console.log("CALLBACK FINISH CALLED");
       };
-      console.log("LOAD IN APP ADS VIA FORCE LOAD");
+     // console.log("LOAD IN APP ADS VIA FORCE LOAD");
       // cbFinishOpenAds();
       loadOpenAddsReward(appOpenAd, cbFinishOpenAds);
     }

@@ -54,7 +54,7 @@ function QuoteCollections({isVisible, onClose, collections}) {
     useState(initialModalName);
 
   const closeRow = (rowMap, rowKey) => {
-    console.log('CHeck close row:', rowMap, rowKey);
+   // console.log('CHeck close row:', rowMap, rowKey);
     if (rowMap[rowKey]) {
       rowMap[rowKey].closeRow();
     }
@@ -79,7 +79,7 @@ function QuoteCollections({isVisible, onClose, collections}) {
         closeRow(showModalChangeName.rowMap, showModalChangeName.content?.id);
       }, 1000);
     } catch (err) {
-      console.log('Error rename:', err);
+    //  console.log('Error rename:', err);
       setShowModalChangeName(initialModalName);
     }
   };
@@ -93,7 +93,7 @@ function QuoteCollections({isVisible, onClose, collections}) {
   };
 
   const onRowDidOpen = rowKey => {
-    console.log('This row opened', rowKey);
+  //  console.log('This row opened', rowKey);
   };
 
   const handleEditPress = (data, rowMap) => {

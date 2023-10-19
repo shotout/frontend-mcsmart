@@ -83,7 +83,7 @@ function ModalChangeIcon({
       const isSetBefore = await AsyncStorage.getItem("customIcon");
 
       const resIcon = await getIcon();
-      console.log("Check resIcon", resIcon);
+    //  console.log("Check resIcon", resIcon);
       if (isSetBefore) {
         setSelectedIcon(iconNameToId(isSetBefore));
       }
@@ -92,7 +92,7 @@ function ModalChangeIcon({
     const unsubscribeLoaded = rewarded.addAdEventListener(
       RewardedAdEventType.LOADED,
       () => {
-        console.log("LOAD ADS change icon");
+       // console.log("LOAD ADS change icon");
       }
     );
     const unsubscribeEarned = rewarded.addAdEventListener(
@@ -123,7 +123,7 @@ function ModalChangeIcon({
       await updateProfile(payload);
       reloadUserProfile();
     } catch (err) {
-      console.log("Error select:", err);
+      //console.log("Error select:", err);
     }
   };
 
@@ -137,7 +137,7 @@ function ModalChangeIcon({
       })
       .catch((e) => {
         Alert.alert("Sorry, can't change icon at this time.");
-        console.log("Error change icon:", e.message);
+      //  console.log("Error change icon:", e.message);
       });
 
   };

@@ -95,7 +95,7 @@ function Reminder({isVisible, onClose, userProfile}) {
       const mainData = userProfile.data.schedule;
       const startTime = mainData?.start.split(':');
       const endTime = mainData?.end.split(':');
-      console.log('CHECK SCHEDULE', mainData);
+     // console.log('CHECK SCHEDULE', mainData);
       setFormValues({
         start_at: moment(
           new Date(2018, 11, 24, startTime[0], startTime[1], startTime[2], 0),

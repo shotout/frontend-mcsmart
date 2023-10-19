@@ -9,7 +9,7 @@ const requestAdsTracking = () => {
   request(PERMISSIONS.IOS.APP_TRACKING_TRANSPARENCY).then(reqResult => {
     switch (reqResult) {
       case RESULTS.GRANTED:
-        console.log('The permission request is granted');
+       // console.log('The permission request is granted');
         // now you can make ad requests
         setAdsConversion();
         break;

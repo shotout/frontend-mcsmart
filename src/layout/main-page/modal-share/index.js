@@ -136,7 +136,7 @@ function ModalShare(props) {
       }else{
         setShowModalDislike(true);
         setIdLike(idLike.concat(idQuote))
-        console.log(idLike)
+       // console.log(idLike)
         const payload = {
           type: '2',
         };
@@ -148,7 +148,7 @@ function ModalShare(props) {
       }
      
     } catch (err) {
-      console.log('Error dislike:', err);
+     // console.log('Error dislike:', err);
     }
   };
 
@@ -177,7 +177,7 @@ function ModalShare(props) {
       handleShowFreePremiumDaily();
       eventShare();
     } catch (err) {
-      console.log('Error share ig story:', err);
+      //console.log('Error share ig story:', err);
     }
   };
 
@@ -192,7 +192,7 @@ function ModalShare(props) {
         social: Share.Social.INSTAGRAM,
       });
     } catch (err) {
-      console.log('Err share default ig:', err);
+     // console.log('Err share default ig:', err);
     }
   };
 
@@ -207,7 +207,7 @@ function ModalShare(props) {
       });
       eventShare();
     } catch (err) {
-      console.log('Error post to story:', err);
+     // console.log('Error post to story:', err);
     }
   };
 
@@ -225,7 +225,7 @@ function ModalShare(props) {
       });
       eventShare();
     } catch (err) {
-      console.log('Err fb default:', err);
+      //console.log('Err fb default:', err);
     }
   };
 
@@ -286,7 +286,7 @@ function ModalShare(props) {
         }, 1000);
       }
     } catch (err) {
-      console.log('Err save:', err);
+      //console.log('Err save:', err);
     }
   };
 

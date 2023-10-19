@@ -108,7 +108,7 @@ function PastQuotes({isVisible, onClose, userProfile, fetchPastQuotes}) {
         }, 200);
       }
     } catch (err) {
-      console.log('Error dislike:', err);
+    //  console.log('Error dislike:', err);
     }
   };
 
@@ -144,7 +144,7 @@ function PastQuotes({isVisible, onClose, userProfile, fetchPastQuotes}) {
         }
       }, 200);
     } catch (err) {
-      console.log('Error new collection:', err);
+      //console.log('Error new collection:', err);
     }
   };
 

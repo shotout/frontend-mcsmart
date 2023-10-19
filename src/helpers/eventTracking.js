@@ -46,13 +46,13 @@ const getScreenName = id => {
 };
 
 export const eventTracking = async (id, message) => {
- console.log('Success tracking event:',id);
+ //console.log('Success tracking event:',id);
   try {
     const adjustEvent = new AdjustEvent(id);
     if (message) {
       adjustEvent.setCallbackId(message);
     }
-    console.log('Success tracking:', Adjust.trackEvent(adjustEvent));
+    //console.log('Success tracking:', Adjust.trackEvent(adjustEvent));
     Adjust.trackEvent(adjustEvent);
     AppEventsLogger.logEvent(getScreenName(id))
     // await analytics().logEvent(getScreenName(id), {
@@ -60,13 +60,13 @@ export const eventTracking = async (id, message) => {
     // });
    
   } catch (err) {
-    console.log('Err tracking:', err);
+    //console.log('Err tracking:', err);
   }
 };
 
 
 export const revenueTracking = async (purchaseAmount, currencyCode) => {
-  console.log(purchaseAmount, currencyCode)
+  //console.log(purchaseAmount, currencyCode)
   const adjustEvent = new AdjustEvent(REVENUE_TRACKING);
 
   adjustEvent.setRevenue(purchaseAmount, currencyCode);
@@ -82,7 +82,7 @@ export const revenueTracking = async (purchaseAmount, currencyCode) => {
   //   id: REVENUE_TRACKING,
   //   item: `PRICE ${price}, currency ${currency}`,
   // });
-  console.log('Revenue tracked:', purchaseAmount, currency);
+  //console.log('Revenue tracked:', purchaseAmount, currency);
 };
 
 export const askTrackingPermission = () => {
@@ -92,18 +92,18 @@ export const askTrackingPermission = () => {
       switch (status) {
         case 0:
           // ATTrackingManagerAuthorizationStatusNotDetermined case
-          console.log("The user hasn't been asked yet");
+          //console.log("The user hasn't been asked yet");
           break;
         case 1:
           // ATTrackingManagerAuthorizationStatusRestricted case
-          console.log('The user device is restricted');
+          //console.log('The user device is restricted');
           setTimeout(() => {
             AsyncStorage.removeItem('allowTracking')
           }, 200); 
           break;
         case 2:
           // ATTrackingManagerAuthorizationStatusDenied case
-          console.log('The user denied access to IDFA');
+          //console.log('The user denied access to IDFA');
           setTimeout(() => {
             AsyncStorage.removeItem('allowTracking')
           }, 200); 
@@ -113,13 +113,13 @@ export const askTrackingPermission = () => {
           Settings.setAdvertiserIDCollectionEnabled(true)
           Settings.setAutoLogAppEventsEnabled(true)
           // ATTrackingManagerAuthorizationStatusAuthorized case
-          console.log('The user authorized access to IDFA');
+          //console.log('The user authorized access to IDFA');
           setTimeout(() => {
             AsyncStorage.removeItem('allowTracking')
           }, 200); 
           break;
         default:
-          console.log('The status is not available');
+          //console.log('The status is not available');
           break;
       }
     });
