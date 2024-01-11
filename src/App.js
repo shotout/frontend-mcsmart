@@ -72,8 +72,14 @@ const App = () => {
   Settings.setAppID("637815961525510");
   useEffect(() => {
     if (JailMonkey.isJailBroken()) {
-      setVisible(true)
-      // Alternative behaviour for jail-broken/rooted devices.
+      Alert.alert('Your Device Root', '', [
+        {
+          text: 'Ok',
+          onPress: () => {
+            BackHandler.exitApp()
+          },
+        },
+      ]);
     }
   }, []);
 
@@ -119,13 +125,6 @@ const App = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar barStyle='dark-content' backgroundColor='#fff' />
-      <Modal visible={isVisible} animationType='slide' transparent >
-        <View style={{ flex: 1, backgroundColor: "white", alignItems: 'center',  justifyContent: 'center'}}>
-          <View >
-            <Text >Your Device root</Text>
-          </View>
-        </View>
-      </Modal>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <PaperProvider>
