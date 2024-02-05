@@ -279,7 +279,8 @@ function Routes({registerData, userProfile, props}) {
               if (data === '0') {
               }else{
                 if (detail.notification.data?.type === "paywall") {
-                 // console.log("Check paywall data new banget:", detail.notification.data);
+                  alert('oiiiii')
+                  console.log("Check paywall data new banget:", detail.notification.data);
                     setTimeout(() => {
                       handlePayment(detail.notification.data?.placement);
                     }, 1000);
