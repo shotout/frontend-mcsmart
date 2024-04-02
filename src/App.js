@@ -50,7 +50,8 @@ appOpenAd.load();
 const App = () => {
   // if (Platform.OS !== 'ios') {
   Sentry.init({
-    environment: "production", // production development
+    // environment: "production", // production development
+    environment: "development", // pr
     dsn: SENTRY_DSN,
     tracesSampleRate: 1.0,
   });
@@ -61,8 +62,8 @@ const App = () => {
   const configTracker = () => {
     const adjustConfig = new AdjustConfig(
       "6qpsj2ssc03k",
-      // AdjustConfig.EnvironmentSandbox,
-      AdjustConfig.EnvironmentProduction
+      AdjustConfig.EnvironmentSandbox,
+      // AdjustConfig.EnvironmentProduction
     );
     adjustConfig.setLogLevel(AdjustConfig.LogLevelVerbose);
     Adjust.create(adjustConfig);
