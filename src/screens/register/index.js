@@ -120,6 +120,7 @@ function Register({
     specific_goal: null,
     important_change: null,
     is_impress: null,
+    platform: Platform.OS
   });
 
   useEffect(() => {
