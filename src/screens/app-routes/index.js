@@ -80,6 +80,7 @@ const interstialAdsLearn = InterstitialAd.createForAdRequest(
 );
 interstialAdsLearn.load();
 function Routes({registerData, userProfile, props}) {
+  console.log(JSON.stringify(userProfile))
   const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
   const [showAdsOverlay, setAdsOverlay] = useState(false);
@@ -279,7 +280,6 @@ function Routes({registerData, userProfile, props}) {
               if (data === '0') {
               }else{
                 if (detail.notification.data?.type === "paywall") {
-                  alert('oiiiii')
                   console.log("Check paywall data new banget:", detail.notification.data);
                     setTimeout(() => {
                       handlePayment(detail.notification.data?.placement);

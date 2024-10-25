@@ -17,7 +17,7 @@ import messaging from '@react-native-firebase/messaging';
 import Lottie from 'lottie-react-native';
 import TimeZone from 'react-native-timezone';
 import Purchasely from 'react-native-purchasely';
-
+import { sign } from "react-native-pure-jwt";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createAnimatableComponent } from 'react-native-animatable';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -91,6 +91,7 @@ function Register({
   const [isLoading, setLoading] = useState(false);
   const [isHasRegister, setHasRegister] = useState(false);
   const [getFcmToken, setFcmToken] = useState(null);
+  const [token, setToken] = useState('');
   const [mutateForm, setMutateForm] = useState({
     icon: 1,
     fcm_token: null,
@@ -123,7 +124,31 @@ function Register({
     platform: Platform.OS
   });
 
+  
+  const createToken = async() => {
+    try {
+      const token = await sign(
+        {
+          
+        },
+        'pEsR74eADk6PTuvcOwPtUt16f8=', // Secret Key
+        {
+          alg: "HS256", // Algoritma
+        }
+      );
+      setToken(token)
+      return token;
+    } catch (error) {
+
+      console.error("Error generating token:", error);
+    }
+  }
+  
+  // Panggil fungsi untuk membuat token
+
   useEffect(() => {
+
+    createToken();
     crashlytics().log('Register Screen');
     setTimeout(() => {
       AsyncStorage.removeItem('allowTracking')
@@ -183,7 +208,7 @@ function Register({
         end: moment(values.end_at).format('HH:mm'),
         gender: values.gender,
         timezone: timeZone,
-
+        platform: Platform.OS,
         impress_friends: values.impress_friends,
         impress_business: values.impress_business,
         impress_children: values.impress_children,
@@ -191,6 +216,7 @@ function Register({
         commit_goal: values.commit_goal,
         // topics: values.selectedCategory,
         fcm_token: getFcmToken,
+        token: token
       };
       const res = await postRegister(payload);
       handleSetProfile(res);
@@ -201,7 +227,7 @@ function Register({
       }, 2000);
       AsyncStorage.setItem("isLogin", "yes");
     } catch (err) {
-     // console.log('Error register:', err);
+     console.log('Error register:', err);
     }
   };
 
@@ -254,6 +280,7 @@ function Register({
             commit_goal: values.commit_goal,
             // topics: values.selectedCategory,
             fcm_token: getFcmToken,
+           
           };
           const res = await checkDeviceRegister({
             device_id: mutateForm.device_id,
@@ -311,6 +338,7 @@ function Register({
           const res = await checkDeviceRegister({
             device_id: mutateForm.device_id,
           });
+          console.log(JSON.stringify(res))
           const stringifyDateTime = new Date();
           let strTanggalSekarang = stringifyDateTime.getDate().toString();
             AsyncStorage.setItem('setToday', strTanggalSekarang);
@@ -432,9 +460,12 @@ function Register({
         impress_children: values.impress_children,
         impress_members: values.impress_members,
         commit_goal: values.commit_goal,
+        platform: Platform.OS,
         // topics: values.selectedCategory,
         fcm_token: getFcmToken,
+        token: token
       };
+     
       const res = await postRegister(payload);
       handleSetProfile(res);
       setHasRegister(true);

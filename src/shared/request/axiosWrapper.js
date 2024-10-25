@@ -11,11 +11,12 @@ import axios from 'axios';
 import {userCredentialSelector} from '../../store/defaultState/selector';
 import {API_URL} from '../static';
 import store from '../../store/configure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
  * Request Wrapper with default success/error actions
  */
-const request = options => {
+const request = async options => {
   /**
    * Create an Axios Client with defaults
    */
@@ -33,15 +34,18 @@ const request = options => {
   const userCredential = userCredentialSelector(appState);
   // const userCredential = null;
   let tokenParam = {};
+  const data = await AsyncStorage.getItem('auth')
+  
   // console.log('Check userCredential', userCredential);
   if (userCredential) {
     tokenParam = {
       Authorization: `Bearer ${userCredential.token}`,
     };
   }
+  
   const client = axios.create({
     baseURL: options.MAIN_URL || API_URL,
-    headers: {...requestHeaders, ...tokenParam},
+    headers: {...requestHeaders, ...tokenParam,},
   });
 
   const onSuccess = response => response.data;
