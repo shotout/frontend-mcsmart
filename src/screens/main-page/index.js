@@ -155,6 +155,7 @@ function MainPage({
   finishInitialLoader,
   fetchListQuote,
 }) {
+
   const [isTutorial, setTutorial] = useState({
     visible: false,
     step: 1,
@@ -194,6 +195,7 @@ function MainPage({
   const firstStepTutorial = useRef();
   const flatListRef = useRef();
   const buttonPressAnimationTutorial = useRef();
+  // console.log(JSON.stringify(dataQuote))
   const handleShowPopupShare = () => {
     setShowSharePopup(true);
     setTimeout(() => {
@@ -314,13 +316,13 @@ const fetchRepeat = async () => {
   };
   const res = await getListRepeat(params);
   const existingId = dataQuote?.listData?.map(obj => obj.id);
-  console.log('ini id'+JSON.stringify(existingId))
+
   const newObjSecond = res?.data?.data
     ?.filter(obj => !existingId.includes(obj.id))
     ?.map(obj => ({ ...obj, isRepeat: true }));
   
  
-  console.log('INI DATA'+JSON.stringify(newObjSecond))
+ 
   if(!isUserPremium()){
     dataQuote?.listData?.splice(1, 0, ...newObjSecond);
   }else{
@@ -502,19 +504,19 @@ const fetchRepeat = async () => {
       AsyncStorage.removeItem('interstial')
      }, 1000);
     });
-    rewarded.load();
-    interstialAds.load();
-    interstialAdsLearn.load();
+    // rewarded.load();
+    // interstialAds.load();
+    // interstialAdsLearn.load();
     if (Platform.OS === "ios") {
       checkAdsTracking();
     }
     return () => {
-      unsubscribeLoaded();
-      unsubscribeEarned();
-      rewardedOpen();
-      rewardedClose();
-      interstialListener();
-      interstialListenerAds();
+      // unsubscribeLoaded();
+      // unsubscribeEarned();
+      // rewardedOpen();
+      // rewardedClose();
+      // interstialListener();
+      // interstialListenerAds();
     };
   }, []);
 
@@ -590,9 +592,9 @@ const fetchRepeat = async () => {
     //     }
     //   }
     // }
-      if (!interstialAds.loaded) {
-        interstialAds.load();
-      }
+      // if (!interstialAds.loaded) {
+      //   interstialAds.load();
+      // }
   }, [activeSlide]);
 
   useEffect(() => {
@@ -609,9 +611,9 @@ const fetchRepeat = async () => {
   }, [runAnimationSlide, isUserHasScroll, isTutorial]);
 
   useEffect(() => {
-    setTimeout(() => {
-      rewarded.load();
-    }, 2000);
+    // setTimeout(() => {
+    //   rewarded.load();
+    // }, 2000);
   }, [todayAdsLimit]);
 
   useEffect(() => {
@@ -944,10 +946,10 @@ const fetchRepeat = async () => {
         item={item}
         onPressRating={() => pressRepeat()}
         handleShowInterstialAds={() => {
-          showInterStialAds();
+          // showInterStialAds();
         }}
         handleShowInterstialAdsLearn={() => {
-          handleShowInterstialAdsLearn();
+          // handleShowInterstialAdsLearn();
         }}
         themeUser={themeUser}
         source={getImageContent}
@@ -1359,6 +1361,9 @@ const fetchRepeat = async () => {
       >
         <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={3}>
           <FlatList
+            windowSize={5} // mengatur jumlah batch item yang dirender saat melakukan scrolling
+            initialNumToRender={20}
+            removeClippedSubviews={true}
             ref={flatListRef}
             style={styles.ctnRoot}
             data={dataQuote?.listData || []}

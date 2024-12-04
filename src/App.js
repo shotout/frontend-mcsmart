@@ -45,7 +45,7 @@ const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
   keywords: ["fashion", "clothing"],
 });
-appOpenAd.load();
+// appOpenAd.load();
 
 const App = () => {
   // if (Platform.OS !== 'ios') {
@@ -89,9 +89,9 @@ const App = () => {
       const data = await AsyncStorage.getItem("version");
       if (data === null) {
         const resp = await checkVersion();
-        // alert(JSON.stringify(resp))
+        // console.log('check version',JSON.stringify(resp))
         if (resp?.status === "success") {
-          AsyncStorage.setItem("version", JSON.stringify(resp?.data[0].is_close_button));
+          AsyncStorage.setItem("version", JSON.stringify(resp?.data[0]?.is_close_button));
         }
       }
     }

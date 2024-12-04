@@ -47,10 +47,11 @@ const request = async options => {
     baseURL: options.MAIN_URL || API_URL,
     headers: {...requestHeaders, ...tokenParam,},
   });
-
+ 
   const onSuccess = response => response.data;
 
   const onError = error => {
+    // console.log('Error Message:', error);
     if (error.response) {
       if (options.handles && error.response.status) {
         if (options.handles.includes(error.response.status)) {

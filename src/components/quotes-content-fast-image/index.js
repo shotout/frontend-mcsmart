@@ -21,6 +21,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import IconLove from "../../assets/svg/icon_love_tap.svg";
 import IconLike from "../../assets/svg/icon_like.svg";
 import IconShare from "../../assets/svg/icon_share.svg";
+import FastImage from "react-native-fast-image";
 
 const lightbulbIcon = require("../../assets/icons/lightbulb.png");
 const searchWhiteIcon = require("../../assets/icons/search_white.png");
@@ -160,7 +161,7 @@ export default function QuotesContent({
   function renderBackgroundImage() {
     if (isActive) {
       return (
-        <Image
+        <FastImage
           source={source}
           style={[styles.ctnBackgroundImage, styles.ctnAbsolute]}
         />

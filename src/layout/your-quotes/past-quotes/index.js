@@ -320,7 +320,7 @@ function PastQuotes({isVisible, onClose, userProfile, fetchPastQuotes}) {
           renderItem={({item, index}) => renderContent(item, index)}
           keyExtractor={item => item.id}
           ListFooterComponent={renderFooter()}
-          onEndReached={handleLoadMore}
+          onEndReached={handleLoadMore()}
           onEndReachedThreshold={0.09}
           // ListEmptyComponent={renderNoList()}
         />

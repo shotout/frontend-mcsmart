@@ -5,6 +5,7 @@ export const getAppOpenID = () => {
   if (__DEV__) {
     return TestIds.APP_OPEN;
   } else if (Platform.OS === 'ios') {
+   
     return 'ca-app-pub-1891825795064804/5459829097';
   } else {
     return 'ca-app-pub-1891825795064804/1271764500';
@@ -15,6 +16,7 @@ export const getAdaptiveBannerID = () => {
   if (__DEV__) {
     return TestIds.GAM_BANNER;
   } else if (Platform.OS === 'ios') {
+   
     return 'ca-app-pub-1891825795064804/5998562713';
   } else {
     return 'ca-app-pub-1891825795064804/8992445613';
@@ -25,6 +27,7 @@ export const getRewardedCategoryID = () => {
   if (__DEV__) {
     return TestIds.REWARDED;
   } else if (Platform.OS === 'ios') {
+   
     return 'ca-app-pub-1891825795064804/9207502414';
   } else {
     return 'ca-app-pub-1891825795064804/4576568782';

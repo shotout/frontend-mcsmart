@@ -57,7 +57,6 @@ const ModalUnlockCategory = ({
   
          
             setStatusBar(true);
-            console.log('LOAD ADS ModalUnlockCategory');
             setLoadingAds(false);
             rewardedAds.show();
         

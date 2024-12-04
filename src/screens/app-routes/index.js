@@ -69,7 +69,7 @@ const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
   keywords: ['fashion', 'clothing'],
 });
-appOpenAd.load();
+// appOpenAd.load();
 
 const interstialAdsLearn = InterstitialAd.createForAdRequest(
   getRewardedInsterstialLearnMoreID(),
@@ -95,11 +95,11 @@ function Routes({registerData, userProfile, props}) {
   const handleLoadInAppAds = async () => {
     const isFinishTutorial = await AsyncStorage.getItem('isFinishTutorial');
     if (isFinishTutorial === 'yes') {
-      if (appOpenAd.loaded && !isUserPremium()) {
-        setAdsOverlay(true);
-        appOpenAd.show();
-        setDisable(false);
-      }
+      // if (appOpenAd.loaded && !isUserPremium()) {
+      //   setAdsOverlay(true);
+      //   appOpenAd.show();
+      //   setDisable(false);
+      // }
     }
   };
 
@@ -396,7 +396,7 @@ function Routes({registerData, userProfile, props}) {
             fetchNotif()
         
          
-          appOpenAd.load();
+          // appOpenAd.load();
           if (
             paywallStatus &&
             paywallStatus.current !== 'PRESENTATION_CLOSED'
@@ -410,11 +410,11 @@ function Routes({registerData, userProfile, props}) {
               handleLoadInAppAds();
             }
           } else {
-            appOpenAd.load();
+            // appOpenAd.load();
           }
         } else {
           paywallStatus.current = 'READY';
-          appOpenAd.load();
+          // appOpenAd.load();
         }
 
         appState.current = nextAppState;
@@ -425,10 +425,10 @@ function Routes({registerData, userProfile, props}) {
     return () => {
       subscription.remove();
       Purchasely.removeEventListener();
-      listenerOpenApps();
-      listenerIAPAds();
+      // listenerOpenApps();
+      // listenerIAPAds();
       unsubscribeAppOpenAds();
-      listenerLoadApps();
+      // listenerLoadApps();
     };
   }, []);
 

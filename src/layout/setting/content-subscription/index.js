@@ -28,7 +28,7 @@ function Subscription({isVisible, onClose, userProfile}) {
           </View>
           <View style={styles.rowRight}>
             <Text style={styles.dueBold}>
-              {moment(subscriptionData?.started).format('MM/DD/YYYY')}
+              {subscriptionData?.started ? moment(subscriptionData?.started).format('MM/DD/YYYY') : 'Lifetime'}
             </Text>
           </View>
         </View>
@@ -42,7 +42,7 @@ function Subscription({isVisible, onClose, userProfile}) {
           </View>
           <View style={styles.rowRight}>
             <Text style={styles.dueBold}>
-              {moment(subscriptionData?.renewal).format('MM/DD/YYYY')}
+              {subscriptionData?.renewal ? moment(subscriptionData?.renewal).format('MM/DD/YYYY'): 'Lifetime'}
             </Text>
           </View>
         </View>
@@ -72,15 +72,15 @@ function Subscription({isVisible, onClose, userProfile}) {
               </View>
               {renderDueDate()}
               <View style={styles.ctnSeparator} />
-              <View style={styles.relativeWrap}>
+              {/* <View style={styles.relativeWrap}>
                 <Text style={styles.cttnNote}>
                   You can cancel or change your subscription plan. If you
                   cancel, you can keep using the subscription until the next
                   billing date.
                 </Text>
-              </View>
+              </View> */}
             </View>
-            <Button
+            {/* <Button
               label="Cancel or change subscription"
               onPress={() => {
                 if (isIphone) {
@@ -91,7 +91,7 @@ function Subscription({isVisible, onClose, userProfile}) {
                   );
                 }
               }}
-            />
+            /> */}
           </View>
         </View>
       </Modal>

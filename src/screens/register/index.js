@@ -70,6 +70,7 @@ import { reformatDate } from '../../helpers/user';
 import { isMoreThanThreeHoursSinceLastTime } from '../../helpers/timeHelpers';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { STATIC_ONBOARD } from '../../shared/static';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 
 const Convetti = require('../../assets/lottie/hello.json');
@@ -129,17 +130,18 @@ function Register({
     try {
       const token = await sign(
         {
-          
+          name: ''
         },
         'pEsR74eADk6PTuvcOwPtUt16f8=', // Secret Key
         {
           alg: "HS256", // Algoritma
         }
       );
+     
       setToken(token)
       return token;
     } catch (error) {
-
+     
       console.error("Error generating token:", error);
     }
   }
@@ -177,6 +179,7 @@ function Register({
     DeviceInfo.getUniqueId().then(async uniqueId => {
       try {
         const id = await Purchasely.getAnonymousUserId();
+        console.log(uniqueId)
         setMutateForm({
           ...mutateForm,
           device_id: uniqueId,
@@ -184,13 +187,13 @@ function Register({
           purchasely_id: id,
         });
       } catch (err) {
-        console.log('Err get device info:', err);
+        // console.log('Err get device info:', err);
       }
     });
     handleInitial();
     setTimeout(async () => {
       const fcmToken = await messaging().getToken();
-      console.log('Check fcmToken:', fcmToken);
+      console.log(fcmToken)
       setFcmToken(fcmToken);
     }, 3000);
   }, []);
@@ -219,6 +222,7 @@ function Register({
         token: token
       };
       const res = await postRegister(payload);
+      // console.log(' register:', JSON.stringify(res));
       handleSetProfile(res);
       fetchListQuote();
       fetchCollection();
@@ -227,7 +231,7 @@ function Register({
       }, 2000);
       AsyncStorage.setItem("isLogin", "yes");
     } catch (err) {
-     console.log('Error register:', err);
+    //  console.log('Error register:', err);
     }
   };
 
@@ -260,6 +264,7 @@ function Register({
   
 
   useEffect(() => {
+    console.log(registerStep)
     if (registerStep === 7) {
       const getDeviceID = async () => {
         try {
@@ -285,7 +290,7 @@ function Register({
           const res = await checkDeviceRegister({
             device_id: mutateForm.device_id,
           });
-
+          // console.log('DEVICE ID REGIST 1=', JSON.stringify(res))
           setHasRegister(true);
           handleSetProfile(res);
           handleSubscriptionStatus(res.data.subscription);
@@ -307,12 +312,13 @@ function Register({
           }, 2000);
           AsyncStorage.setItem("isLogin", "yes");
         } catch (err) {
-          console.log("Device id not register");
+          // console.log("Device id not register");
           handleSubmitRegist(true);
         }
       };
       getDeviceID();
     } else if (registerStep === 8) {
+ 
       const getDeviceID = async () => {
         try {
           await AsyncStorage.removeItem('afterOnboard');
@@ -338,14 +344,14 @@ function Register({
           const res = await checkDeviceRegister({
             device_id: mutateForm.device_id,
           });
-          console.log(JSON.stringify(res))
+          // console.log('DEVICE ID REGIST=', JSON.stringify(res))
           const stringifyDateTime = new Date();
           let strTanggalSekarang = stringifyDateTime.getDate().toString();
             AsyncStorage.setItem('setToday', strTanggalSekarang);
     
           setHasRegister(true);
           handleSetProfile(res);
-          handleSubscriptionStatus(res.data.subscription);
+          handleSubscriptionStatus(res.data?.subscription);
           fetchListQuote();
           fetchCollection();
           const getCurrentOpenApps = await AsyncStorage.getItem('latestOpenApps');
@@ -399,9 +405,10 @@ function Register({
           setTimeout(() => {
             reloadUserProfile();
           }, 2000);
+          reset("MainPage", { isFromOnboarding: true });
           AsyncStorage.setItem("isLogin", "yes");
         } catch (err) {
-          //console.log("Device id not register");
+          console.log("Device id not register");
           handleSubmit(true);
         }
       };
@@ -440,6 +447,8 @@ function Register({
     AsyncStorage.setItem('isLogin', 'yes');
     setLoading(false);
   };
+  
+
 
   const handleSubmit = async () => {
     try {
@@ -467,6 +476,7 @@ function Register({
       };
      
       const res = await postRegister(payload);
+      // console.log('SUKSESS REGIST', JSON.stringify(res))
       handleSetProfile(res);
       setHasRegister(true);
       handleAfterRegister();
@@ -474,7 +484,7 @@ function Register({
         reloadUserProfile();
       }, 2000);
     } catch (err) {
-     // console.log('Error register:', err);
+      // console.log('Error register:', err);
       setLoading(false);
     }
   };
